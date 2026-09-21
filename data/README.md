@@ -1,7 +1,10 @@
 # Data placement
 
-The competition dataset is not redistributed in this repository. Download the
-official AIcrowd archive and place these files in `data/raw/dataset/`:
+The competition dataset is not redistributed in this repository. Sign in with
+your EPFL account at the
+[EPFL Machine Learning Project 1 challenge on AIcrowd](https://www.aicrowd.com/challenges/epfl-machine-learning-project-1),
+download the official archive, extract it, and place these files in
+`data/raw/dataset/`:
 
 ```text
 x_train.csv
