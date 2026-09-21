@@ -1,0 +1,11 @@
+{
+  "hash_algorithm": "BLAKE2b-128 over all 321 raw feature fields; Id excluded",
+  "train_duplicate_groups": 0,
+  "train_duplicate_extra_rows": 0,
+  "train_duplicate_groups_with_conflicting_labels": 0,
+  "test_duplicate_groups": 0,
+  "test_duplicate_extra_rows": 0,
+  "unique_feature_rows_shared_by_train_and_test": 0,
+  "test_rows_matching_a_train_feature_row": 0,
+  "examples_train": []
+}

@@ -1,0 +1,10 @@
+{
+  "boosting_record_path": "results/experiments/20260920T224507334897Z_phase11-boosting-depth-feature-grid-depth5-features128-200trees.json",
+  "logistic_record_path": "results/experiments/20260920T113608936798Z_phase7-p2-codebook-clean-bphigh4-corrected-interactions-gamma-0p2-nested-4000.json",
+  "group_config_path": "configs/experiments/phase11_error_analysis_depth5_features128_200.json",
+  "additional_categorical_features": ["HAREHAB1"],
+  "inspect_split_features": ["HAREHAB1"],
+  "output_json_path": "results/eda/analysis/phase12_paired_boosting_logistic_errors.json",
+  "output_csv_path": "results/eda/analysis/phase12_paired_boosting_logistic_groups.csv",
+  "output_report_path": "results/eda/phase12_paired_boosting_logistic_summary.md"
+}

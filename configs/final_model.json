@@ -1,0 +1,25 @@
+{
+  "data": {
+    "train_features": "x_train.csv",
+    "train_labels": "y_train.csv",
+    "test_features": "x_test.csv",
+    "sample_submission": "sample_submission.csv"
+  },
+  "preprocessing": {
+    "config": "configs/experiments/phase14_codebook_corrections_only.json",
+    "variant": "phase14_codebook_corrections_only",
+    "metadata": "configs/feature_metadata.json"
+  },
+  "model": {
+    "n_estimators": 200,
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "min_samples_leaf": 200,
+    "n_bins": 64,
+    "l2_regularization": 1.0,
+    "max_features": 128,
+    "random_seed": 20260920
+  },
+  "decision_threshold": 0.21086909970855153,
+  "threshold_source": "Mean of the three Phase 14 nested-CV thresholds: 0.203056688916058, 0.22010463713275993, 0.20944597307683668"
+}

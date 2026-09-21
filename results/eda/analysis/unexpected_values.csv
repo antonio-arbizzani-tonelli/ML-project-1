@@ -1,0 +1,3 @@
+feature,semantic_type,validation_status,value,train_count,train_fraction_among_present
+WEIGHT2,continuous,checked,2099,1,3.084620391191558e-06
+WTKG3,continuous,checked,22.68,6,1.966381432115597e-05

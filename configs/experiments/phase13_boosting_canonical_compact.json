@@ -1,0 +1,37 @@
+{
+  "experiment_prefix": "phase13_boosting_canonical_compact",
+  "artifact_dir": "results/boosting_artifacts/phase13_canonical_compact",
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "preprocessing_config_path": "configs/experiments/phase13_canonical_preprocessing.json",
+  "preprocessing_variant": "phase13_canonical_compact",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "fixed_threshold": 0.5,
+  "nested_threshold": {
+    "inner_fold_count": 2,
+    "inner_seed": 20260922,
+    "model_checkpoints": [{"model": "depth5_features128", "checkpoints": [200]}]
+  },
+  "models": [
+    {
+      "name": "depth5_features128",
+      "parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920
+      },
+      "checkpoints": [200]
+    }
+  ]
+}

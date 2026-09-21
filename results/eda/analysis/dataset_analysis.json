@@ -1,0 +1,50 @@
+{
+  "method": {
+    "seed": 20260918,
+    "sample_size_train": 20000,
+    "sample_size_test": 20000,
+    "low_cardinality_cap": 256,
+    "target_statistics_scope": "development split only",
+    "cache_dtype": "float32 with NaN for blank"
+  },
+  "split": {
+    "seed": 20260918,
+    "validation_fraction": 0.2,
+    "development_rows": 262508,
+    "validation_rows": 65627,
+    "development_positive": 23180,
+    "validation_positive": 5795,
+    "development_indices_sha256": "d673c76f285cced30ceef85f10b3867102bf2b3a59278b7afc2fcaf5a825e51b",
+    "validation_indices_sha256": "e1f6534c2c5508cf151db08a4d71a713af5fa048ea2d415202a2a3b6bd1df402"
+  },
+  "duplicates": {
+    "hash_algorithm": "BLAKE2b-128 over all 321 raw feature fields; Id excluded",
+    "train_duplicate_groups": 0,
+    "train_duplicate_extra_rows": 0,
+    "train_duplicate_groups_with_conflicting_labels": 0,
+    "test_duplicate_groups": 0,
+    "test_duplicate_extra_rows": 0,
+    "unique_feature_rows_shared_by_train_and_test": 0,
+    "test_rows_matching_a_train_feature_row": 0,
+    "examples_train": []
+  },
+  "feature_count": 321,
+  "features_with_unexpected_nonblank_values": 2,
+  "figures": [
+    "01_target_distribution.png",
+    "02_missingness_overview.png",
+    "03_train_test_shift.png",
+    "04_target_association.png",
+    "05_cardinality_distribution.png",
+    "06_missingness_heatmap.png",
+    "07_top_shift_distributions.png",
+    "08_top_target_profiles.png"
+  ],
+  "cache_files": [
+    "x_train_float32.npy",
+    "x_test_float32.npy",
+    "id_train_int64.npy",
+    "id_test_int64.npy",
+    "y_train_int8.npy"
+  ]
+}

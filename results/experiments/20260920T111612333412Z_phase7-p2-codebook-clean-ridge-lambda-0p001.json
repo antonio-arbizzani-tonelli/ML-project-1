@@ -1,0 +1,317 @@
+{
+  "config": {
+    "data": {
+      "dataset_id": "project1_processed_training_arrays",
+      "features_path": "data/processed/x_train_float32.npy",
+      "labels_path": "data/processed/y_train_int8.npy"
+    },
+    "experiment_name": "phase7_p2_codebook_clean_ridge_lambda_0p001",
+    "features": {
+      "interactions": [
+        [
+          "_AGE80",
+          "_AGE80"
+        ],
+        [
+          "_AGE80",
+          "BPHIGH4"
+        ],
+        [
+          "_AGE80",
+          "DIABETE3"
+        ],
+        [
+          "_AGE80",
+          "SMOKE100"
+        ]
+      ],
+      "output_feature_count": 300,
+      "preprocessing": {
+        "auxiliary_missing_features": [
+          "_AGEG5YR"
+        ],
+        "exclude_features": [
+          "CTELNUM1",
+          "CELLFON2",
+          "_AGEG5YR",
+          "WEIGHT2",
+          "HEIGHT3",
+          "HTIN4"
+        ],
+        "exclude_semantic_types": [
+          "identifier",
+          "date",
+          "survey_design"
+        ],
+        "missing_code_overrides": {
+          "DIABETE3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "_AGEG5YR": [
+            {
+              "code": 14,
+              "reason": "blank"
+            }
+          ]
+        },
+        "name": "codebook_aware",
+        "zero_code_overrides": {
+          "MENTHLTH": [
+            88
+          ],
+          "PHYSHLTH": [
+            88
+          ]
+        }
+      },
+      "preprocessing_source": "configs/experiments/phase3_preprocessing_cv.json",
+      "preprocessing_variant": "phase3_p2_codebook_clean_cv"
+    },
+    "hypothesis": "A calibrated ridge classifier on corrected P2 plus the established age interactions may rival logistic regression under the same nested F1-threshold protocol.",
+    "missing_values": {
+      "fit_partition": "inner training fold only",
+      "indicators": "age-not-reported auxiliary flag only",
+      "method": "codebook non-responses to NaN then training-fold median fill"
+    },
+    "model": {
+      "name": "ridge_classifier_with_inner_oof_platt_calibration",
+      "parameters": {
+        "calibration": {
+          "gamma": 0.1,
+          "max_iters": 1000,
+          "method": "Platt logistic calibration of standardized ridge scores"
+        },
+        "lambda": 0.001,
+        "ridge_target": "-1/+1"
+      }
+    },
+    "seed": 20260919,
+    "split": {
+      "development_rows": 262508,
+      "fold_count": 3,
+      "fold_seed": 20260919,
+      "id": "stratified_seed_20260918_development_inner_cv",
+      "nested_inner_fold_count": 2,
+      "nested_inner_seed": 20260923,
+      "outer_partition": "saved development indices only"
+    },
+    "threshold": {
+      "selection_method": "max inner calibrated-OOF F1; accuracy breaks exact F1 ties; one frozen threshold per outer fold",
+      "value": null
+    }
+  },
+  "outcome": {
+    "confusion_counts": {
+      "false_negatives": 10588,
+      "false_positives": 24499,
+      "true_negatives": 214829,
+      "true_positives": 12592
+    },
+    "evaluation_partition": "development_only_3_fold_nested_cv",
+    "input_sha256": {
+      "feature_metadata": "28e5f94aae365c1aece9dbc7398d875ca90fbd91456115c46ecfc573723ad587",
+      "features": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+      "labels": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+      "preprocessing_config": "9505e552e684f715bfeb3419a09aa28bfe4249f15d0aa77194ad2717befb2a6a",
+      "ridge_suite_config": "f9d0762e3c3a771233e563b9b75681fd9e719dceb29dea56870518f69cfe0120",
+      "split_indices": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630"
+    },
+    "memory_estimate": {
+      "arrays_bytes": 316059632,
+      "arrays_mebibytes": 301.41795349121094,
+      "basis": "Largest retained float32 transformed train/validation matrix pair; excludes raw source arrays, float64 normal-equation matrices, and temporary solver allocations."
+    },
+    "metrics": {
+      "accuracy": 0.866339311563838,
+      "average_precision": 0.38350514505399175,
+      "balanced_accuracy": 0.7204305644386393,
+      "f1": 0.41784606195350993,
+      "log_loss": 0.22956057698279494,
+      "precision": 0.33948936399665686,
+      "recall": 0.5432269197584124,
+      "specificity": 0.8976342091188662
+    },
+    "nested_threshold_evaluation": {
+      "folds": [
+        {
+          "calibrator": {
+            "inner_oof_log_loss": 0.230065692742978,
+            "score_mean": -0.8230872038138459,
+            "score_scale": 0.23786152915979059,
+            "weights": [
+              -2.869607858622473,
+              1.1403505970296395
+            ]
+          },
+          "inner_fold_count": 2,
+          "inner_output_feature_counts": [
+            300,
+            300
+          ],
+          "inner_selection_metrics": {
+            "accuracy": 0.8665123853604183,
+            "average_precision": 0.38070625211495357,
+            "balanced_accuracy": 0.7209785134252436,
+            "f1": 0.4186058087155621,
+            "log_loss": 0.230065692742978,
+            "precision": 0.3401002911679068,
+            "recall": 0.544230893677603,
+            "specificity": 0.8977261331728841
+          },
+          "inner_threshold": 0.16269185868369532,
+          "outer_evaluation_confusion_counts": {
+            "false_negatives": 3553,
+            "false_positives": 8047,
+            "true_negatives": 71729,
+            "true_positives": 4174
+          },
+          "outer_evaluation_metrics": {
+            "accuracy": 0.8674331165788601,
+            "average_precision": 0.3842478060469898,
+            "balanced_accuracy": 0.7196569176858139,
+            "f1": 0.4184880689793463,
+            "log_loss": 0.22961526867074009,
+            "precision": 0.3415432452336143,
+            "recall": 0.5401837711919244,
+            "specificity": 0.8991300641797032
+          },
+          "outer_fold": 1,
+          "outer_ridge_mse": 0.1322210389142946,
+          "outer_training_rows": 175005,
+          "outer_validation_rows": 87503,
+          "outer_weight_l2_norm": 0.7141128062003209
+        },
+        {
+          "calibrator": {
+            "inner_oof_log_loss": 0.22998553469140895,
+            "score_mean": -0.8232123791885545,
+            "score_scale": 0.23720323693501408,
+            "weights": [
+              -2.8706034689106144,
+              1.1407692162841057
+            ]
+          },
+          "inner_fold_count": 2,
+          "inner_output_feature_counts": [
+            300,
+            300
+          ],
+          "inner_selection_metrics": {
+            "accuracy": 0.8720322276506386,
+            "average_precision": 0.38211936507386673,
+            "balanced_accuracy": 0.7130765612264136,
+            "f1": 0.41781267060077465,
+            "log_loss": 0.22998553469140895,
+            "precision": 0.34917876075432347,
+            "recall": 0.5200284734355789,
+            "specificity": 0.9061246490172483
+          },
+          "inner_threshold": 0.1738016699716038,
+          "outer_evaluation_confusion_counts": {
+            "false_negatives": 3718,
+            "false_positives": 7344,
+            "true_negatives": 72432,
+            "true_positives": 4009
+          },
+          "outer_evaluation_metrics": {
+            "accuracy": 0.8735814772064958,
+            "average_precision": 0.38159092493218444,
+            "balanced_accuracy": 0.713386157311392,
+            "f1": 0.42023060796645695,
+            "log_loss": 0.22971396691359613,
+            "precision": 0.3531225226812296,
+            "recall": 0.518830076355636,
+            "specificity": 0.907942238267148
+          },
+          "outer_fold": 2,
+          "outer_ridge_mse": 0.1322868006661231,
+          "outer_training_rows": 175005,
+          "outer_validation_rows": 87503,
+          "outer_weight_l2_norm": 0.7106146576480402
+        },
+        {
+          "calibrator": {
+            "inner_oof_log_loss": 0.2306402055787192,
+            "score_mean": -0.8231677798883408,
+            "score_scale": 0.2371825356844386,
+            "weights": [
+              -2.863849863322725,
+              1.1337016529967925
+            ]
+          },
+          "inner_fold_count": 2,
+          "inner_output_feature_counts": [
+            300,
+            300
+          ],
+          "inner_selection_metrics": {
+            "accuracy": 0.8597762362433288,
+            "average_precision": 0.37948282461406274,
+            "balanced_accuracy": 0.7297756109367131,
+            "f1": 0.4187038089823763,
+            "log_loss": 0.2306402055787192,
+            "precision": 0.3302443763545325,
+            "recall": 0.571890772615504,
+            "specificity": 0.8876604492579222
+          },
+          "inner_threshold": 0.14981834539495806,
+          "outer_evaluation_confusion_counts": {
+            "false_negatives": 3317,
+            "false_positives": 9108,
+            "true_negatives": 70668,
+            "true_positives": 4409
+          },
+          "outer_evaluation_metrics": {
+            "accuracy": 0.8580032456400997,
+            "average_precision": 0.38496490978543685,
+            "balanced_accuracy": 0.7282503941400924,
+            "f1": 0.41510144518194236,
+            "log_loss": 0.2293524929860273,
+            "precision": 0.32618184508396836,
+            "recall": 0.5706704633704375,
+            "specificity": 0.8858303249097473
+          },
+          "outer_fold": 3,
+          "outer_ridge_mse": 0.13232405868921723,
+          "outer_training_rows": 175006,
+          "outer_validation_rows": 87502,
+          "outer_weight_l2_norm": 0.7328417167317279
+        }
+      ],
+      "inner_seed": 20260923,
+      "protocol": "For each outer fold, fit preprocessing and ridge on inner training rows, calibrate inner OOF ridge scores, select an F1 threshold from those calibrated scores, then apply the frozen calibrator and threshold once to the outer fold.",
+      "threshold_summary": {
+        "maximum": 0.1738016699716038,
+        "mean": 0.1621039580167524,
+        "minimum": 0.14981834539495806,
+        "standard_deviation": 0.009799972273186245
+      }
+    },
+    "oof_predictions_artifact": {
+      "arrays": [
+        "development_indices",
+        "fold_ids",
+        "labels",
+        "raw_scores",
+        "probabilities",
+        "applied_thresholds",
+        "fold_weights",
+        "feature_names"
+      ],
+      "path": "results\\oof_predictions\\20260920T111612127599Z_phase7-p2-codebook-clean-ridge-lambda-0p001_oof.npz",
+      "sha256": "18cf85c41035d08628e6037bcf7f3d40b288cda625a5d0992649c8be3b41b16b"
+    },
+    "runtime_seconds": 31.571022399992216,
+    "status": "completed"
+  },
+  "recorded_at_utc": "2026-09-20T11:16:12+00:00",
+  "run_id": "20260920T111612333412Z_phase7-p2-codebook-clean-ridge-lambda-0p001",
+  "schema_version": 1
+}

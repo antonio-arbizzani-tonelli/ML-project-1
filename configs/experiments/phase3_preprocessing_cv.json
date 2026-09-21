@@ -1,0 +1,157 @@
+{
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "variants": [
+    {
+      "experiment_name": "phase3_p0_raw_baseline_cv",
+      "hypothesis": "The existing numeric median-and-scale representation defines the development-only CV reference.",
+      "preprocessing": {"name": "raw_median_scale", "exclude_features": []},
+      "missing_values": {"method": "raw NaN median fill", "indicators": "none", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p1_structural_exclusions_cv",
+      "hypothesis": "Removing identifiers, interview dates, survey-design fields, and raw redundant height/weight fields improves a stable numeric baseline.",
+      "preprocessing": {
+        "name": "raw_median_scale",
+        "exclude_features": ["SEQNO", "_PSU", "CTELNUM1", "CELLFON2", "IDATE", "FLSHTMY2", "HIVTSTD3", "DISPCODE", "QSTVER", "QSTLANG", "MSCODE", "_STSTR", "_STRWT", "_RAWRAKE", "_WT2RAKE", "_CHISPNC", "_CRACE1", "_CPRACE", "_CLLCPWT", "_DUALUSE", "_DUALCOR", "_LLCPWT", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"]
+      },
+      "missing_values": {"method": "raw NaN median fill", "indicators": "none", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p2_codebook_clean_cv",
+      "hypothesis": "Converting documented non-responses to missing values and documented zero-day codes to zero improves the representation without adding columns.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"]
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "age-not-reported auxiliary flag only", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p3_sparse_missing_indicators_cv",
+      "hypothesis": "One missingness indicator for each source feature missing in at least half of inner-training rows adds useful structural-skip information.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "missing_indicator_min_fraction": 0.5
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "one combined flag for source features missing at least 50% in the inner training fold", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p3b_broad_missing_indicators_cv",
+      "hypothesis": "Retaining one combined missingness flag for each source feature missing in at least one percent of inner-training rows recovers information discarded when non-response codes become NaN.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "missing_indicator_min_fraction": 0.01
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "one combined flag for source features missing at least 1% in the inner training fold", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p4_selected_categories_cv",
+      "hypothesis": "One-hot encoding state and diabetes categories, while retaining sparse missingness indicators, corrects their artificial numeric ordering.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "missing_indicator_min_fraction": 0.5,
+        "one_hot_features": ["_STATE", "DIABETE3"]
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "sparse combined flags plus explicit missing category flags for state and diabetes", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p5_detailed_missing_states_cv",
+      "hypothesis": "Separating unknown, refusal, and blank states for a small clinically relevant set improves on one combined missingness flag.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "missing_indicator_min_fraction": 0.5,
+        "one_hot_features": ["_STATE", "DIABETE3"],
+        "detailed_missing_features": ["BPMEDS", "EXERANY2", "GENHLTH", "INCOME2", "PHYSHLTH", "MENTHLTH"]
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "unknown, refusal, and blank flags for six reviewed features; combined flags for sparse remaining features", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase3_p6_broad_indicators_selected_categories_cv",
+      "hypothesis": "Broad combined missingness indicators together with one-hot state and diabetes categories improve the codebook-clean representation without using response codes as quantities.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "missing_indicator_min_fraction": 0.01,
+        "one_hot_features": ["_STATE", "DIABETE3"]
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "broad combined flags plus explicit missing category flags for state and diabetes", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
+      "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
+    },
+    {
+      "experiment_name": "phase6_p3_semantic_nonlinear_cv",
+      "hypothesis": "Categorical health, diabetes, employment, self-rated health, and income responses; their explicit non-response reasons; and fold-fitted age/BMI hinge terms improve the compact codebook-clean representation after sufficient logistic optimization.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {
+          "BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "_AGEG5YR": [{"code": 14, "reason": "blank"}]
+        },
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["BPHIGH4", "DIABETE3", "EMPLOY1", "GENHLTH", "INCOME2"],
+        "detailed_missing_features": ["BPHIGH4", "DIABETE3", "EMPLOY1", "GENHLTH", "INCOME2"],
+        "piecewise_linear_features": [
+          {"feature": "_AGE80", "quantiles": [0.5, 0.75]},
+          {"feature": "_BMI5", "quantiles": [0.5, 0.75]}
+        ]
+      },
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "unknown, refusal, and blank flags only for the five selected semantic variables", "fit_partition": "inner training fold only"},
+      "model": {"name": "logistic_classifier", "parameters": {"max_iters": 4000, "gamma": 0.2}},
+      "threshold": {"value": 0.5, "selection_method": "fixed reference; Phase 6 model CV selects F1 thresholds on development predictions"}
+    }
+  ]
+}

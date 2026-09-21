@@ -1,0 +1,194 @@
+{
+  "config": {
+    "data": {
+      "dataset_id": "project1_processed_training_arrays",
+      "features_path": "data/processed/x_train_float32.npy",
+      "labels_path": "data/processed/y_train_int8.npy"
+    },
+    "experiment_name": "phase4_p2_codebook_clean_unregularized_gamma_0p1_300",
+    "features": {
+      "output_feature_count": 296,
+      "preprocessing": {
+        "auxiliary_missing_features": [
+          "_AGEG5YR"
+        ],
+        "exclude_features": [
+          "CTELNUM1",
+          "CELLFON2",
+          "_AGEG5YR",
+          "WEIGHT2",
+          "HEIGHT3",
+          "HTIN4"
+        ],
+        "exclude_semantic_types": [
+          "identifier",
+          "date",
+          "survey_design"
+        ],
+        "missing_code_overrides": {
+          "DIABETE3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "_AGEG5YR": [
+            {
+              "code": 14,
+              "reason": "blank"
+            }
+          ]
+        },
+        "name": "codebook_aware",
+        "zero_code_overrides": {
+          "MENTHLTH": [
+            88
+          ],
+          "PHYSHLTH": [
+            88
+          ]
+        }
+      },
+      "preprocessing_source": "configs/experiments/phase3_preprocessing_cv.json",
+      "preprocessing_variant": "phase3_p2_codebook_clean_cv"
+    },
+    "hypothesis": "Test logistic convergence, L2 strength, and the development-only F1 threshold on a fixed preprocessing representation.",
+    "missing_values": {
+      "fit_partition": "inner training fold only",
+      "indicators": "age-not-reported auxiliary flag only",
+      "method": "codebook non-responses to NaN then training-fold median fill"
+    },
+    "model": {
+      "name": "logistic_classifier",
+      "parameters": {
+        "gamma": 0.1,
+        "initial_weights": "zero; warm-started between checkpoints within each fold",
+        "lambda": 0.0,
+        "max_iters": 300
+      }
+    },
+    "seed": 20260919,
+    "split": {
+      "development_rows": 262508,
+      "fold_count": 3,
+      "fold_seed": 20260919,
+      "id": "stratified_seed_20260918_development_inner_cv",
+      "outer_partition": "saved development indices only"
+    },
+    "threshold": {
+      "fixed_reference": 0.5,
+      "selection_method": "max pooled development OOF F1; accuracy breaks exact F1 ties",
+      "value": 0.19560413378645147
+    }
+  },
+  "outcome": {
+    "confusion_counts": {
+      "false_negatives": 11034,
+      "false_positives": 24792,
+      "true_negatives": 214536,
+      "true_positives": 12146
+    },
+    "evaluation_partition": "development_only_3_fold_oof",
+    "fixed_threshold_confusion_counts": {
+      "false_negatives": 21349,
+      "false_positives": 1442,
+      "true_negatives": 237886,
+      "true_positives": 1831
+    },
+    "fixed_threshold_metrics": {
+      "accuracy": 0.9131797888064364,
+      "average_precision": 0.3521406491681507,
+      "balanced_accuracy": 0.5364826525776344,
+      "f1": 0.138434204060031,
+      "log_loss": 0.22877052723029,
+      "precision": 0.559425603421937,
+      "recall": 0.07899050905953409,
+      "specificity": 0.9939747960957347
+    },
+    "folds": [
+      {
+        "fixed_threshold_metrics": {
+          "accuracy": 0.9130086968446796,
+          "average_precision": 0.3484561915687526,
+          "balanced_accuracy": 0.5352591728173167,
+          "f1": 0.1344098248806004,
+          "log_loss": 0.22951881503085955,
+          "precision": 0.5538894095595126,
+          "recall": 0.0764850524136146,
+          "specificity": 0.9940332932210189
+        },
+        "fold": 1,
+        "training_data_loss": 0.2275568950178048,
+        "training_penalized_objective": 0.2275568950178048,
+        "training_rows": 175005,
+        "validation_rows": 87503
+      },
+      {
+        "fixed_threshold_metrics": {
+          "accuracy": 0.9132829731552061,
+          "average_precision": 0.3510838995132763,
+          "balanced_accuracy": 0.5373965749757403,
+          "f1": 0.14143471373613942,
+          "log_loss": 0.2287850873842296,
+          "precision": 0.5625562556255626,
+          "recall": 0.0808852077132134,
+          "specificity": 0.9939079422382672
+        },
+        "fold": 2,
+        "training_data_loss": 0.22784920025566316,
+        "training_penalized_objective": 0.22784920025566316,
+        "training_rows": 175005,
+        "validation_rows": 87503
+      },
+      {
+        "fixed_threshold_metrics": {
+          "accuracy": 0.9132476971954927,
+          "average_precision": 0.35716302652589765,
+          "balanced_accuracy": 0.5367922494659911,
+          "f1": 0.13943997279220044,
+          "log_loss": 0.22800767055771787,
+          "precision": 0.5616438356164384,
+          "recall": 0.0796013461040642,
+          "specificity": 0.9939831528279182
+        },
+        "fold": 3,
+        "training_data_loss": 0.22826524254237848,
+        "training_penalized_objective": 0.22826524254237848,
+        "training_rows": 175006,
+        "validation_rows": 87502
+      }
+    ],
+    "input_sha256": {
+      "feature_metadata": "e111b02d03dd5e4757366eed3844e7cb9c2080ed997df955bb517e39f00115dc",
+      "features": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+      "labels": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+      "preprocessing_config": "23faeaa0817b9296665542613624ffdaec84c3b7848b1adc5ac069f833eba745",
+      "split_indices": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630"
+    },
+    "memory_estimate": {
+      "arrays_bytes": 311859504,
+      "arrays_mebibytes": 297.4123992919922,
+      "basis": "Largest retained float32 transformed train/validation matrix pair; excludes float64 optimizer copy and temporary arrays."
+    },
+    "metrics": {
+      "accuracy": 0.8635241592637177,
+      "average_precision": 0.3521406491681507,
+      "balanced_accuracy": 0.7101980714248386,
+      "f1": 0.40407199174955916,
+      "log_loss": 0.22877052723029,
+      "precision": 0.32882126807082135,
+      "recall": 0.5239861949956859,
+      "specificity": 0.8964099478539912
+    },
+    "runtime_seconds": 201.2809588999953,
+    "selection_note": "The same OOF predictions select and describe the threshold; tuned F1 is exploratory. The saved outer validation partition remains untouched.",
+    "status": "completed"
+  },
+  "recorded_at_utc": "2026-09-19T17:10:34+00:00",
+  "run_id": "20260919T171034691608Z_phase4-p2-codebook-clean-unregularized-gamma-0p1-300",
+  "schema_version": 1
+}

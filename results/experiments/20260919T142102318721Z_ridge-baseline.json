@@ -1,0 +1,80 @@
+{
+  "config": {
+    "data": {
+      "dataset_id": "project1_processed_training_arrays",
+      "features_path": "data/processed/x_train_float32.npy",
+      "label_encoding": "stored -1/+1; ridge is trained on this signed encoding",
+      "labels_path": "data/processed/y_train_int8.npy"
+    },
+    "experiment_name": "ridge_baseline",
+    "features": {
+      "description": "Initial common numeric representation for linear baselines.",
+      "included_columns": "all 321 cached predictor columns; Id was excluded when the cache was created"
+    },
+    "hypothesis": "A regularized linear score trained on the common initial feature treatment detects some positive validation respondents.",
+    "missing_values": {
+      "add_indicators": false,
+      "fit_partition": "development only",
+      "method": "development-column-median"
+    },
+    "model": {
+      "name": "ridge_classifier",
+      "parameters": {
+        "lambda": 0.01
+      }
+    },
+    "preprocessing": {
+      "intercept": "prepend a constant one column; mandatory ridge implementation regularizes every coefficient, including this intercept",
+      "standardization": "development-imputed mean and standard deviation"
+    },
+    "seed": 20260918,
+    "split": {
+      "evaluation_partition": "validation",
+      "id": "stratified_seed_20260918",
+      "indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+      "metadata_path": "results/eda/analysis/splits/stratified_seed_20260918.json"
+    },
+    "threshold": {
+      "selection_method": "fixed: signed ridge score greater than or equal to zero is positive",
+      "value": 0.0
+    }
+  },
+  "outcome": {
+    "confusion_counts": {
+      "false_negatives": 5746,
+      "false_positives": 14,
+      "true_negatives": 59818,
+      "true_positives": 49
+    },
+    "evaluation_partition": "validation",
+    "input_sha256": {
+      "features": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+      "labels": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+      "split_indices": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630"
+    },
+    "label_conversion": "stored -1/+1 labels mapped to 0/1",
+    "memory_estimate": {
+      "arrays_bytes": 425984857,
+      "arrays_mebibytes": 406.25081729888916,
+      "basis": "Retained labels, split indices, labels, predictions, probabilities where present, and transformed design matrices; excludes temporary optimizer arrays and Python/NumPy runtime overhead."
+    },
+    "metrics": {
+      "accuracy": 0.9122312462858275,
+      "balanced_accuracy": 0.5041107883206137,
+      "f1": 0.016729259132809832,
+      "precision": 0.7777777777777778,
+      "recall": 0.008455565142364107,
+      "specificity": 0.9997660114988635
+    },
+    "model_details": {
+      "score_kind": "signed linear ridge score; it is not a probability",
+      "training_loss": 0.1370867803781312,
+      "weights": 322
+    },
+    "runtime_seconds": 6.029475099989213,
+    "status": "completed"
+  },
+  "recorded_at_utc": "2026-09-19T14:21:02+00:00",
+  "run_id": "20260919T142102318721Z_ridge-baseline",
+  "schema_version": 1
+}

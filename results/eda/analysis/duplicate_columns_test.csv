@@ -1,0 +1,4 @@
+feature,duplicate_of,equal_in_test
+_PSU,SEQNO,True
+CELLFON2,CTELNUM1,False
+_CPRACE,_CRACE1,True

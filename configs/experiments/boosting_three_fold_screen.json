@@ -1,0 +1,44 @@
+{
+  "experiment_prefix": "phase10_boosting_screen",
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "preprocessing_config_path": "configs/experiments/phase3_preprocessing_cv.json",
+  "preprocessing_variant": "phase3_p2_codebook_clean_cv",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "fixed_threshold": 0.5,
+  "models": [
+    {
+      "name": "depth3",
+      "parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 64,
+        "random_seed": 20260920
+      },
+      "checkpoints": [100, 200, 400]
+    },
+    {
+      "name": "depth5",
+      "parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 64,
+        "random_seed": 20260920
+      },
+      "checkpoints": [100, 200, 400]
+    }
+  ]
+}

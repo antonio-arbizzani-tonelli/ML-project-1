@@ -1,0 +1,28 @@
+{
+  "experiment_prefix": "phase5",
+  "preprocessing_config_path": "configs/experiments/phase3_preprocessing_cv.json",
+  "preprocessing_variants": ["phase3_p2_codebook_clean_cv"],
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "fixed_threshold": 0.5,
+  "interactions": [
+    ["_AGE80", "_AGE80"],
+    ["_AGE80", "BPHIGH4"],
+    ["_AGE80", "DIABETE3"],
+    ["_AGE80", "SMOKE100"]
+  ],
+  "nested_threshold": {
+    "checkpoints": [4000],
+    "inner_fold_count": 2,
+    "inner_seed": 20260920
+  },
+  "models": [
+    {
+      "name": "age_interactions_gamma_0p2_convergence",
+      "gamma": 0.2,
+      "lambda": 0.0,
+      "checkpoints": [1000, 2000, 4000]
+    }
+  ]
+}

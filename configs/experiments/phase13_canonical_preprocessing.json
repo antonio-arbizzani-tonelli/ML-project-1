@@ -1,0 +1,88 @@
+{
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "variants": [
+    {
+      "experiment_name": "phase13_canonical_derived",
+      "hypothesis": "Keeping one codebook-standardized representation for exact raw/derived duplicates reduces redundant split candidates without discarding a valid response state.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": [
+          "CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4",
+          "ALCDAY5", "FRUITJU1", "FRUIT1", "FVBEANS", "FVGREEN", "FVORANG", "VEGETAB1",
+          "EXERANY2", "HAVARTH3", "HIVTST6", "BLOODCHO", "SMOKE100", "SMOKDAY2",
+          "ASTHMA3", "ASTHNOW", "_LTASTH1", "_CASTHM1", "_CPRACE"
+        ],
+        "missing_code_overrides": {
+          "BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "CASTHDX2": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "EXRACT11": [{"code": 77, "reason": "unknown"}, {"code": 99, "reason": "refused"}],
+          "EXRACT21": [{"code": 77, "reason": "unknown"}, {"code": 99, "reason": "refused"}],
+          "FLUSHOT6": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "HPVADVC2": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "HPVTEST": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "IMFVPLAC": [{"code": 77, "reason": "unknown"}],
+          "NUMHHOL2": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "_AGEG5YR": [{"code": 14, "reason": "blank"}]
+        },
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"]
+      },
+      "missing_values": {
+        "method": "documented nonresponses to NaN; documented no-day codes to zero; histogram trees route NaN values directly",
+        "indicators": "age-not-reported auxiliary flag only",
+        "fit_partition": "corresponding training partition only"
+      },
+      "model": {"name": "numpy_histogram_gradient_boosting", "parameters": "configured in the boosting suite"},
+      "threshold": {"selection_method": "selected from inner out-of-fold predictions for final F1 evaluation"}
+    },
+    {
+      "experiment_name": "phase13_canonical_compact",
+      "hypothesis": "Removing coarser deterministic summaries when their richer source representation remains increases the chance that sampled tree features carry distinct information.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": [
+          "CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4",
+          "ALCDAY5", "FRUITJU1", "FRUIT1", "FVBEANS", "FVGREEN", "FVORANG", "VEGETAB1",
+          "EXERANY2", "HAVARTH3", "HIVTST6", "BLOODCHO", "SMOKE100", "SMOKDAY2",
+          "ASTHMA3", "ASTHNOW", "_LTASTH1", "_CASTHM1", "_CPRACE",
+          "_RFHLTH", "_RFHYPE5", "_AGE_G", "_AGE65YR", "_BMI5CAT", "_RFBMI5",
+          "_EDUCAG", "_INCOMG", "_RFSMOK3", "_CHLDCNT"
+        ],
+        "missing_code_overrides": {
+          "BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "CASTHDX2": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "EXRACT11": [{"code": 77, "reason": "unknown"}, {"code": 99, "reason": "refused"}],
+          "EXRACT21": [{"code": 77, "reason": "unknown"}, {"code": 99, "reason": "refused"}],
+          "FLUSHOT6": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "HPVADVC2": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "HPVTEST": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "IMFVPLAC": [{"code": 77, "reason": "unknown"}],
+          "NUMHHOL2": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}],
+          "_AGEG5YR": [{"code": 14, "reason": "blank"}]
+        },
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"]
+      },
+      "missing_values": {
+        "method": "documented nonresponses to NaN; documented no-day codes to zero; histogram trees route NaN values directly",
+        "indicators": "age-not-reported auxiliary flag only",
+        "fit_partition": "corresponding training partition only"
+      },
+      "model": {"name": "numpy_histogram_gradient_boosting", "parameters": "configured in the boosting suite"},
+      "threshold": {"selection_method": "selected from inner out-of-fold predictions for final F1 evaluation"}
+    }
+  ]
+}

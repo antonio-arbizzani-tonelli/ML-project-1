@@ -1,0 +1,25 @@
+{
+  "experiment_record_path": "results/experiments/20260920T113608936798Z_phase7-p2-codebook-clean-bphigh4-corrected-interactions-gamma-0p2-nested-4000.json",
+  "features_path": "data/processed/x_train_float32.npy",
+  "x_train_csv_path": "data/raw/dataset/x_train.csv",
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "continuous_features": [
+    {"name": "_AGE80", "bins": [-1.0, 45.0, 55.0, 65.0, 100.0], "labels": ["18-44", "45-54", "55-64", "65+"]},
+    {"name": "_BMI5", "bins": [-1.0, 25.0, 30.0, 35.0, 200.0], "labels": ["<25", "25-<30", "30-<35", "35+"]},
+    {"name": "PHYSHLTH", "bins": [-1.0, 1.0, 14.0, 30.0, 100.0], "labels": ["0 days", "1-13 days", "14-29 days", "30 days"], "zero_code_values": [88]},
+    {"name": "MENTHLTH", "bins": [-1.0, 1.0, 14.0, 30.0, 100.0], "labels": ["0 days", "1-13 days", "14-29 days", "30 days"], "zero_code_values": [88]}
+  ],
+  "categorical_features": ["BPHIGH4", "DIABETE3", "SMOKE100", "GENHLTH", "EMPLOY1", "INCOME2"],
+  "cross_feature_pairs": [
+    ["_AGE80", "BPHIGH4"],
+    ["BPHIGH4", "GENHLTH"],
+    ["BPHIGH4", "DIABETE3"],
+    ["_AGE80", "GENHLTH"]
+  ],
+  "minimum_group_rows": 100,
+  "minimum_class_rows_for_priority": 500,
+  "output_json_path": "results/eda/analysis/phase8_nested_error_analysis.json",
+  "output_csv_path": "results/eda/analysis/phase8_nested_error_groups.csv",
+  "output_cross_csv_path": "results/eda/analysis/phase8_nested_error_cross_groups.csv",
+  "output_report_path": "results/eda/phase8_error_analysis_summary.md"
+}

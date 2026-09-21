@@ -1,0 +1,24 @@
+{
+  "experiment_prefix": "phase7",
+  "preprocessing_config_path": "configs/experiments/phase3_preprocessing_cv.json",
+  "preprocessing_variants": ["phase3_p2_codebook_clean_cv"],
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "interactions": [
+    ["_AGE80", "_AGE80"],
+    ["_AGE80", "BPHIGH4"],
+    ["_AGE80", "DIABETE3"],
+    ["_AGE80", "SMOKE100"]
+  ],
+  "ridge_lambdas": [0.0001, 0.001, 0.01],
+  "nested_threshold": {
+    "inner_fold_count": 2,
+    "inner_seed": 20260923
+  },
+  "calibration": {
+    "method": "Platt logistic calibration of standardized ridge scores",
+    "max_iters": 1000,
+    "gamma": 0.1
+  }
+}

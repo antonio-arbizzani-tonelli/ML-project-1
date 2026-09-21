@@ -1,0 +1,10 @@
+{
+  "seed": 20260918,
+  "validation_fraction": 0.2,
+  "development_rows": 262508,
+  "validation_rows": 65627,
+  "development_positive": 23180,
+  "validation_positive": 5795,
+  "development_indices_sha256": "d673c76f285cced30ceef85f10b3867102bf2b3a59278b7afc2fcaf5a825e51b",
+  "validation_indices_sha256": "e1f6534c2c5508cf151db08a4d71a713af5fa048ea2d415202a2a3b6bd1df402"
+}

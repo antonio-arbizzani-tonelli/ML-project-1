@@ -1,0 +1,66 @@
+{
+  "config": {
+    "data": {
+      "dataset_id": "project1_processed_training_labels",
+      "label_encoding": "stored -1/+1; the runner maps these to internal 0/1 before evaluation",
+      "labels_path": "data/processed/y_train_int8.npy"
+    },
+    "experiment_name": "all_negative_baseline",
+    "features": {
+      "description": "No predictors; the model emits the negative class for every validation row.",
+      "included_columns": []
+    },
+    "hypothesis": "The all-negative reference exposes why accuracy alone is insufficient for this imbalanced task.",
+    "missing_values": {
+      "add_indicators": false,
+      "method": "not_applicable"
+    },
+    "model": {
+      "name": "all_negative",
+      "parameters": {}
+    },
+    "seed": 20260918,
+    "split": {
+      "evaluation_partition": "validation",
+      "id": "stratified_seed_20260918",
+      "indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+      "metadata_path": "results/eda/analysis/splits/stratified_seed_20260918.json"
+    },
+    "threshold": {
+      "selection_method": "not_applicable: model emits labels directly",
+      "value": 0.5
+    }
+  },
+  "outcome": {
+    "confusion_counts": {
+      "false_negatives": 5795,
+      "false_positives": 0,
+      "true_negatives": 59832,
+      "true_positives": 0
+    },
+    "evaluation_partition": "validation",
+    "input_sha256": {
+      "labels": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+      "split_indices": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630"
+    },
+    "label_conversion": "stored -1/+1 labels mapped to 0/1",
+    "memory_estimate": {
+      "arrays_bytes": 984405,
+      "arrays_mebibytes": 0.9388017654418945,
+      "basis": "Loaded labels, validation indices, validation-label view, and prediction array; excludes Python and NumPy runtime overhead."
+    },
+    "metrics": {
+      "accuracy": 0.911697929205967,
+      "balanced_accuracy": 0.5,
+      "f1": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "specificity": 1.0
+    },
+    "runtime_seconds": 0.007126200012862682,
+    "status": "completed"
+  },
+  "recorded_at_utc": "2026-09-19T12:14:43+00:00",
+  "run_id": "20260919T121443130439Z_all-negative-baseline",
+  "schema_version": 1
+}

@@ -1,0 +1,37 @@
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Official data and generated numeric caches
+data/raw/dataset/
+data/raw/*.zip
+data/processed/
+
+# Large or reproducible model artifacts
+results/boosting_artifacts/
+results/oof_predictions/
+*.pkl
+*.pkl.tmp
+
+# Local course material; obtain it from the official course repository
+official_material/
+
+# Generated submissions and local logs
+submission*.csv
+*.log
+
+# Temporary test directories
+tests/tmp*/
+pytest-cache-files-*/
+
+# Editors and operating systems
+.local/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

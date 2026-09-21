@@ -1,0 +1,55 @@
+feature,semantic_type,code,development_rows,description,status
+IDAY,categorical,9,11047,Interview Day,codebook meaning requires manual verification
+IDAY,categorical,7,10195,Interview Day,codebook meaning requires manual verification
+HIVTST6,categorical,7,6769,Have you ever been tested for HIV? Do not count tests you may have had as part of a blood donation. Include testing fluid from your mouth.,codebook meaning requires manual verification
+BLOODCHO,categorical,7,5499,Blood cholesterol is a fatty substance found in the blood. Have you EVER had your blood cholesterol checked?,codebook meaning requires manual verification
+HPVTEST,count,7,3865,An HPV test is sometimes given with the Pap test for cervical cancer screening. Have you ever had an HPV test?,codebook meaning requires manual verification
+ALCDAY5,count,777,1869,"During the past 30 days, how many days per week or per month did you have at least one drink of any alcoholic beverage such as beer, wine, a malt beverage or liquor?",codebook meaning requires manual verification
+HIVTST6,categorical,9,1771,Have you ever been tested for HIV? Do not count tests you may have had as part of a blood donation. Include testing fluid from your mouth.,codebook meaning requires manual verification
+EXRACT21,categorical,77,1679,What other type of physical activity gave you the next most exercise during the past month?,codebook meaning requires manual verification
+ALCDAY5,count,999,1513,"During the past 30 days, how many days per week or per month did you have at least one drink of any alcoholic beverage such as beer, wine, a malt beverage or liquor?",codebook meaning requires manual verification
+FLUSHOT6,categorical,9,1227,"During the past 12 months, have you had either a flu shot or a flu vaccine that was sprayed in your nose? (A new flu shot came out in 2011 that injects vaccine into the skin with a very small needle. It is called Fluzone Intradermal vaccine. This is also considered a flu shot.)",codebook meaning requires manual verification
+CASTHDX2,categorical,9,1159,"Has a doctor, nurse or other health professional EVER said that the child has asthma?",codebook meaning requires manual verification
+SMOKE100,categorical,7,1072,Have you smoked at least 100 cigarettes in your entire life? [Note: 5 packs = 100 cigarettes],codebook meaning requires manual verification
+SMOKE100,categorical,9,872,Have you smoked at least 100 cigarettes in your entire life? [Note: 5 packs = 100 cigarettes],codebook meaning requires manual verification
+ASTHMA3,categorical,7,778,(Ever told) you had asthma?,codebook meaning requires manual verification
+HPVADVC2,categorical,7,607,"Have you ever had the HPV vaccination? (Human Papilloma Virus (Human Pap•uh•loh•muh Virus), Gardasil (Gar•duh• seel), Cervarix (Serv a rix))",codebook meaning requires manual verification
+FLUSHOT6,categorical,7,568,"During the past 12 months, have you had either a flu shot or a flu vaccine that was sprayed in your nose? (A new flu shot came out in 2011 that injects vaccine into the skin with a very small needle. It is called Fluzone Intradermal vaccine. This is also considered a flu shot.)",codebook meaning requires manual verification
+EXRACT21,categorical,99,544,What other type of physical activity gave you the next most exercise during the past month?,codebook meaning requires manual verification
+EXRACT11,categorical,77,455,What type of physical activity or exercise did you spend the most time doing during the past month?,codebook meaning requires manual verification
+NUMHHOL2,categorical,9,445,Do you have more than one telephone number in your household? Do not include cell phones or numbers that are only used by a computer or fax machine.,codebook meaning requires manual verification
+CASTHDX2,categorical,7,331,"Has a doctor, nurse or other health professional EVER said that the child has asthma?",codebook meaning requires manual verification
+IMFVPLAC,categorical,77,327,At what kind of place did you get your last flu shot/vaccine?,codebook meaning requires manual verification
+BLDSTOOL,categorical,7,263,A blood stool test is a test that may use a special kit at home to determine whether the stool contains blood. Have you ever had this test using a home kit?,codebook meaning requires manual verification
+EXRACT11,categorical,99,255,What type of physical activity or exercise did you spend the most time doing during the past month?,codebook meaning requires manual verification
+PSATEST1,categorical,7,155,Have you EVER HAD a PSA test?,codebook meaning requires manual verification
+SMOKDAY2,ordinal,9,146,"Do you now smoke cigarettes every day, some days, or not at all?",codebook meaning requires manual verification
+NUMHHOL2,categorical,7,134,Do you have more than one telephone number in your household? Do not include cell phones or numbers that are only used by a computer or fax machine.,codebook meaning requires manual verification
+CAREGIV1,categorical,7,129,"During the past 30 days, did you provide regular care or assistance to a friend or family member who has a health problem or disability?",codebook meaning requires manual verification
+HADSIGM3,categorical,7,128,Sigmoidoscopy and colonoscopy are exams in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems. Have you ever had either of these exams?,codebook meaning requires manual verification
+CIMEMLOS,categorical,9,110,"During the past 12 months, have you experienced confusion or memory loss that is happening more often or is getting worse?",codebook meaning requires manual verification
+SCNTWRK1,count,99,110,About how many hours do you work per week on all of your jobs and businesses combined?,codebook meaning requires manual verification
+STOPSMK2,categorical,7,97,"During the past 12 months, have you stopped smoking for one day or longer because you were trying to quit smoking?",codebook meaning requires manual verification
+BLOODCHO,categorical,9,93,Blood cholesterol is a fatty substance found in the blood. Have you EVER had your blood cholesterol checked?,codebook meaning requires manual verification
+WTCHSALT,categorical,7,87,Are you currently watching or reducing your sodium or salt intake?,codebook meaning requires manual verification
+ASPUNSAF,categorical,7,69,"Do you have a health problem or condition that makes taking aspirin unsafe for you? (If ""Yes,"" ask ""Is this a stomach condition?"")",codebook meaning requires manual verification
+CAREGIV1,categorical,9,69,"During the past 30 days, did you provide regular care or assistance to a friend or family member who has a health problem or disability?",codebook meaning requires manual verification
+CDASSIST,ordinal,7,69,"As a result of confusion or memory loss, how often do you need assistance with these day-to-day activities?",codebook meaning requires manual verification
+HADPAP2,categorical,7,65,A Pap test is a test for cancer of the cervix. Have you ever had a Pap test?,codebook meaning requires manual verification
+SMOKDAY2,ordinal,7,52,"Do you now smoke cigarettes every day, some days, or not at all?",codebook meaning requires manual verification
+WTCHSALT,categorical,9,45,Are you currently watching or reducing your sodium or salt intake?,codebook meaning requires manual verification
+HADSIGM3,categorical,9,36,Sigmoidoscopy and colonoscopy are exams in which a tube is inserted in the rectum to view the colon for signs of cancer or other health problems. Have you ever had either of these exams?,codebook meaning requires manual verification
+BLDSTOOL,categorical,9,34,A blood stool test is a test that may use a special kit at home to determine whether the stool contains blood. Have you ever had this test using a home kit?,codebook meaning requires manual verification
+ASTHMA3,categorical,9,29,(Ever told) you had asthma?,codebook meaning requires manual verification
+HPVTEST,count,9,29,An HPV test is sometimes given with the Pap test for cervical cancer screening. Have you ever had an HPV test?,codebook meaning requires manual verification
+STOPSMK2,categorical,9,25,"During the past 12 months, have you stopped smoking for one day or longer because you were trying to quit smoking?",codebook meaning requires manual verification
+HADMAM,categorical,9,24,A mammogram is an x-ray of each breast to look for breast cancer. Have you ever had a mammogram?,codebook meaning requires manual verification
+HADPAP2,categorical,9,24,A Pap test is a test for cancer of the cervix. Have you ever had a Pap test?,codebook meaning requires manual verification
+CDASSIST,ordinal,9,20,"As a result of confusion or memory loss, how often do you need assistance with these day-to-day activities?",codebook meaning requires manual verification
+HADMAM,categorical,7,18,A mammogram is an x-ray of each breast to look for breast cancer. Have you ever had a mammogram?,codebook meaning requires manual verification
+PSATEST1,categorical,9,18,Have you EVER HAD a PSA test?,codebook meaning requires manual verification
+HPVADVC2,categorical,9,16,"Have you ever had the HPV vaccination? (Human Papilloma Virus (Human Pap•uh•loh•muh Virus), Gardasil (Gar•duh• seel), Cervarix (Serv a rix))",codebook meaning requires manual verification
+ASPUNSAF,categorical,9,9,"Do you have a health problem or condition that makes taking aspirin unsafe for you? (If ""Yes,"" ask ""Is this a stomach condition?"")",codebook meaning requires manual verification
+ASATTACK,categorical,7,6,"During the past 12 months, have you had an episode of asthma or an asthma attack?",codebook meaning requires manual verification
+PROFEXAM,categorical,7,6,"A clinical breast exam is when a doctor, nurse, or other health professional feels the breast for lumps. Have you ever had a clinical breast exam?",codebook meaning requires manual verification
+PROFEXAM,categorical,9,4,"A clinical breast exam is when a doctor, nurse, or other health professional feels the breast for lumps. Have you ever had a clinical breast exam?",codebook meaning requires manual verification

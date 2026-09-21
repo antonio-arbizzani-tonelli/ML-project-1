@@ -1,0 +1,83 @@
+{
+  "config": {
+    "data": {
+      "dataset_id": "project1_processed_training_arrays",
+      "features_path": "data/processed/x_train_float32.npy",
+      "label_encoding": "stored -1/+1; the runner maps these to 0/1 before logistic training",
+      "labels_path": "data/processed/y_train_int8.npy"
+    },
+    "experiment_name": "logistic_baseline",
+    "features": {
+      "description": "Initial common numeric representation for linear baselines.",
+      "included_columns": "all 321 cached predictor columns; Id was excluded when the cache was created"
+    },
+    "hypothesis": "An unregularized logistic model on the common initial feature treatment produces finite probabilities and a non-trivial positive-class F1 at the fixed 0.5 threshold.",
+    "missing_values": {
+      "add_indicators": false,
+      "fit_partition": "development only",
+      "method": "development-column-median"
+    },
+    "model": {
+      "name": "logistic_classifier",
+      "parameters": {
+        "gamma": 0.1,
+        "initial_weights": "zeros",
+        "max_iters": 50
+      }
+    },
+    "preprocessing": {
+      "intercept": "prepend a constant one column",
+      "standardization": "development-imputed mean and standard deviation"
+    },
+    "seed": 20260918,
+    "split": {
+      "evaluation_partition": "validation",
+      "id": "stratified_seed_20260918",
+      "indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+      "metadata_path": "results/eda/analysis/splits/stratified_seed_20260918.json"
+    },
+    "threshold": {
+      "selection_method": "fixed initial probability threshold; no validation threshold tuning",
+      "value": 0.5
+    }
+  },
+  "outcome": {
+    "confusion_counts": {
+      "false_negatives": 5229,
+      "false_positives": 513,
+      "true_negatives": 59319,
+      "true_positives": 566
+    },
+    "evaluation_partition": "validation",
+    "input_sha256": {
+      "features": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+      "labels": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+      "split_indices": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630"
+    },
+    "label_conversion": "stored -1/+1 labels mapped to 0/1",
+    "memory_estimate": {
+      "arrays_bytes": 426509873,
+      "arrays_mebibytes": 406.7515115737915,
+      "basis": "Retained labels, split indices, labels, predictions, probabilities where present, and transformed design matrices; excludes temporary optimizer arrays and Python/NumPy runtime overhead."
+    },
+    "metrics": {
+      "accuracy": 0.9125055236411843,
+      "balanced_accuracy": 0.5445481991508926,
+      "f1": 0.16467849869071866,
+      "log_loss": 0.33112921757644204,
+      "precision": 0.5245597775718258,
+      "recall": 0.09767040552200172,
+      "specificity": 0.9914259927797834
+    },
+    "model_details": {
+      "score_kind": "positive-class probability",
+      "training_loss": 0.331676056772889,
+      "weights": 322
+    },
+    "runtime_seconds": 6.948668600001838,
+    "status": "completed"
+  },
+  "recorded_at_utc": "2026-09-19T14:21:18+00:00",
+  "run_id": "20260919T142118411295Z_logistic-baseline",
+  "schema_version": 1
+}

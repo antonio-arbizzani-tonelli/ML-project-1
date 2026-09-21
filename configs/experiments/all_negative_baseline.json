@@ -1,0 +1,32 @@
+{
+  "experiment_name": "all_negative_baseline",
+  "hypothesis": "The all-negative reference exposes why accuracy alone is insufficient for this imbalanced task.",
+  "data": {
+    "dataset_id": "project1_processed_training_labels",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "label_encoding": "stored -1/+1; the runner maps these to internal 0/1 before evaluation"
+  },
+  "features": {
+    "included_columns": [],
+    "description": "No predictors; the model emits the negative class for every validation row."
+  },
+  "missing_values": {
+    "method": "not_applicable",
+    "add_indicators": false
+  },
+  "split": {
+    "id": "stratified_seed_20260918",
+    "indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "metadata_path": "results/eda/analysis/splits/stratified_seed_20260918.json",
+    "evaluation_partition": "validation"
+  },
+  "model": {
+    "name": "all_negative",
+    "parameters": {}
+  },
+  "threshold": {
+    "value": 0.5,
+    "selection_method": "not_applicable: model emits labels directly"
+  },
+  "seed": 20260918
+}

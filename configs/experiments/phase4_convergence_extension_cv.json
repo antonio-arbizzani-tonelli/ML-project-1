@@ -1,0 +1,14 @@
+{
+  "preprocessing_config_path": "configs/experiments/phase3_preprocessing_cv.json",
+  "preprocessing_variants": [
+    "phase3_p1_structural_exclusions_cv",
+    "phase3_p2_codebook_clean_cv"
+  ],
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "fixed_threshold": 0.5,
+  "models": [
+    {"name": "unregularized_gamma_0p1_extension", "gamma": 0.1, "lambda": 0.0, "checkpoints": [600]}
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "experiment_prefix": "phase6",
+  "preprocessing_config_path": "configs/experiments/phase3_preprocessing_cv.json",
+  "preprocessing_variants": ["phase6_p3_semantic_nonlinear_cv"],
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "fixed_threshold": 0.5,
+  "interactions": [
+    ["_AGE80", "_AGE80"],
+    ["_AGE80", "SMOKE100"],
+    ["_AGE80", "BPHIGH4__is_2"],
+    ["_AGE80", "BPHIGH4__is_3"],
+    ["_AGE80", "BPHIGH4__is_4"],
+    ["_AGE80", "DIABETE3__is_2"],
+    ["_AGE80", "DIABETE3__is_3"],
+    ["_AGE80", "DIABETE3__is_4"]
+  ],
+  "models": [
+    {
+      "name": "semantic_nonlinear_gamma_0p2",
+      "gamma": 0.2,
+      "lambda": 0.0,
+      "checkpoints": [4000]
+    }
+  ]
+}

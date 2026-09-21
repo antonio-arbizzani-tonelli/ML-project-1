@@ -1,0 +1,40 @@
+{
+  "experiment_name": "ridge_baseline",
+  "hypothesis": "A regularized linear score trained on the common initial feature treatment detects some positive validation respondents.",
+  "data": {
+    "dataset_id": "project1_processed_training_arrays",
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "label_encoding": "stored -1/+1; ridge is trained on this signed encoding"
+  },
+  "features": {
+    "included_columns": "all 321 cached predictor columns; Id was excluded when the cache was created",
+    "description": "Initial common numeric representation for linear baselines."
+  },
+  "missing_values": {
+    "method": "development-column-median",
+    "add_indicators": false,
+    "fit_partition": "development only"
+  },
+  "preprocessing": {
+    "standardization": "development-imputed mean and standard deviation",
+    "intercept": "prepend a constant one column; mandatory ridge implementation regularizes every coefficient, including this intercept"
+  },
+  "split": {
+    "id": "stratified_seed_20260918",
+    "indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "metadata_path": "results/eda/analysis/splits/stratified_seed_20260918.json",
+    "evaluation_partition": "validation"
+  },
+  "model": {
+    "name": "ridge_classifier",
+    "parameters": {
+      "lambda": 0.01
+    }
+  },
+  "threshold": {
+    "value": 0.0,
+    "selection_method": "fixed: signed ridge score greater than or equal to zero is positive"
+  },
+  "seed": 20260918
+}

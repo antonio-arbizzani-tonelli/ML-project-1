@@ -1,0 +1,42 @@
+{
+  "experiment_name": "logistic_baseline",
+  "hypothesis": "An unregularized logistic model on the common initial feature treatment produces finite probabilities and a non-trivial positive-class F1 at the fixed 0.5 threshold.",
+  "data": {
+    "dataset_id": "project1_processed_training_arrays",
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "label_encoding": "stored -1/+1; the runner maps these to 0/1 before logistic training"
+  },
+  "features": {
+    "included_columns": "all 321 cached predictor columns; Id was excluded when the cache was created",
+    "description": "Initial common numeric representation for linear baselines."
+  },
+  "missing_values": {
+    "method": "development-column-median",
+    "add_indicators": false,
+    "fit_partition": "development only"
+  },
+  "preprocessing": {
+    "standardization": "development-imputed mean and standard deviation",
+    "intercept": "prepend a constant one column"
+  },
+  "split": {
+    "id": "stratified_seed_20260918",
+    "indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "metadata_path": "results/eda/analysis/splits/stratified_seed_20260918.json",
+    "evaluation_partition": "validation"
+  },
+  "model": {
+    "name": "logistic_classifier",
+    "parameters": {
+      "initial_weights": "zeros",
+      "max_iters": 50,
+      "gamma": 0.1
+    }
+  },
+  "threshold": {
+    "value": 0.5,
+    "selection_method": "fixed initial probability threshold; no validation threshold tuning"
+  },
+  "seed": 20260918
+}

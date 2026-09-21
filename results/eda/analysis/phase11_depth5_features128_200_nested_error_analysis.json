@@ -1,0 +1,4849 @@
+{
+  "cross_group_rows": [
+    {
+      "false_negative": 336,
+      "false_negative_rate": 0.7466666666666667,
+      "false_positive": 253,
+      "false_positive_rate": 0.026592390161866722,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 110,
+          "false_negative_rate": 0.7534246575342466,
+          "false_positive": 84,
+          "false_positive_rate": 0.026802807913209957,
+          "fold": 1,
+          "negative_rows": 3134,
+          "positive_rows": 146,
+          "rows": 3280
+        },
+        {
+          "false_negative": 122,
+          "false_negative_rate": 0.8079470198675497,
+          "false_positive": 71,
+          "false_positive_rate": 0.02262587635436584,
+          "fold": 2,
+          "negative_rows": 3138,
+          "positive_rows": 151,
+          "rows": 3289
+        },
+        {
+          "false_negative": 104,
+          "false_negative_rate": 0.6797385620915033,
+          "false_positive": 98,
+          "false_positive_rate": 0.030228254164096236,
+          "fold": 3,
+          "negative_rows": 3242,
+          "positive_rows": 153,
+          "rows": 3395
+        }
+      ],
+      "group": "18-44 | 1: Yes",
+      "negative_rows": 9514,
+      "positive_rows": 450,
+      "rows": 9964,
+      "true_negative": 9261,
+      "true_positive": 114
+    },
+    {
+      "false_negative": 14,
+      "false_negative_rate": 0.9333333333333333,
+      "false_positive": 0,
+      "false_positive_rate": 0.0,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.8571428571428571,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 406,
+          "positive_rows": 7,
+          "rows": 413
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 417,
+          "positive_rows": 2,
+          "rows": 419
+        },
+        {
+          "false_negative": 6,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 393,
+          "positive_rows": 6,
+          "rows": 399
+        }
+      ],
+      "group": "18-44 | 2: Yes, but female told only during pregnancy",
+      "negative_rows": 1216,
+      "positive_rows": 15,
+      "rows": 1231,
+      "true_negative": 1216,
+      "true_positive": 1
+    },
+    {
+      "false_negative": 384,
+      "false_negative_rate": 0.964824120603015,
+      "false_positive": 32,
+      "false_positive_rate": 0.0005520191826665976,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 143,
+          "false_negative_rate": 0.9794520547945206,
+          "false_positive": 7,
+          "false_positive_rate": 0.00036177580236704737,
+          "fold": 1,
+          "negative_rows": 19349,
+          "positive_rows": 146,
+          "rows": 19495
+        },
+        {
+          "false_negative": 117,
+          "false_negative_rate": 0.9590163934426229,
+          "false_positive": 13,
+          "false_positive_rate": 0.0006782136894824708,
+          "fold": 2,
+          "negative_rows": 19168,
+          "positive_rows": 122,
+          "rows": 19290
+        },
+        {
+          "false_negative": 124,
+          "false_negative_rate": 0.9538461538461539,
+          "false_positive": 12,
+          "false_positive_rate": 0.0006169031462060457,
+          "fold": 3,
+          "negative_rows": 19452,
+          "positive_rows": 130,
+          "rows": 19582
+        }
+      ],
+      "group": "18-44 | 3: No",
+      "negative_rows": 57969,
+      "positive_rows": 398,
+      "rows": 58367,
+      "true_negative": 57937,
+      "true_positive": 14
+    },
+    {
+      "false_negative": 10,
+      "false_negative_rate": 0.9090909090909091,
+      "false_positive": 0,
+      "false_positive_rate": 0.0,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.75,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 166,
+          "positive_rows": 4,
+          "rows": 170
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 138,
+          "positive_rows": 3,
+          "rows": 141
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 145,
+          "positive_rows": 4,
+          "rows": 149
+        }
+      ],
+      "group": "18-44 | 4: Told borderline high or pre-hypertensive",
+      "negative_rows": 449,
+      "positive_rows": 11,
+      "rows": 460,
+      "true_negative": 449,
+      "true_positive": 1
+    },
+    {
+      "false_negative": 1,
+      "false_negative_rate": 0.5,
+      "false_positive": 0,
+      "false_positive_rate": 0.0,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 0,
+          "false_negative_rate": null,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 46,
+          "positive_rows": 0,
+          "rows": 46
+        },
+        {
+          "false_negative": 0,
+          "false_negative_rate": 0.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 41,
+          "positive_rows": 1,
+          "rows": 42
+        },
+        {
+          "false_negative": 1,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 32,
+          "positive_rows": 1,
+          "rows": 33
+        }
+      ],
+      "group": "18-44 | 7: Don't know/Not Sure",
+      "negative_rows": 119,
+      "positive_rows": 2,
+      "rows": 121,
+      "true_negative": 119,
+      "true_positive": 1
+    },
+    {
+      "false_negative": 732,
+      "false_negative_rate": 0.5308194343727338,
+      "false_positive": 1132,
+      "false_positive_rate": 0.09059623849539816,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 262,
+          "false_negative_rate": 0.5504201680672269,
+          "false_positive": 331,
+          "false_positive_rate": 0.08085002442598925,
+          "fold": 1,
+          "negative_rows": 4094,
+          "positive_rows": 476,
+          "rows": 4570
+        },
+        {
+          "false_negative": 236,
+          "false_negative_rate": 0.5164113785557987,
+          "false_positive": 359,
+          "false_positive_rate": 0.0851316101493953,
+          "fold": 2,
+          "negative_rows": 4217,
+          "positive_rows": 457,
+          "rows": 4674
+        },
+        {
+          "false_negative": 234,
+          "false_negative_rate": 0.5246636771300448,
+          "false_positive": 442,
+          "false_positive_rate": 0.10564053537284895,
+          "fold": 3,
+          "negative_rows": 4184,
+          "positive_rows": 446,
+          "rows": 4630
+        }
+      ],
+      "group": "45-54 | 1: Yes",
+      "negative_rows": 12495,
+      "positive_rows": 1379,
+      "rows": 13874,
+      "true_negative": 11363,
+      "true_positive": 647
+    },
+    {
+      "false_negative": 11,
+      "false_negative_rate": 0.9166666666666666,
+      "false_positive": 2,
+      "false_positive_rate": 0.00784313725490196,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 4,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.010638297872340425,
+          "fold": 1,
+          "negative_rows": 94,
+          "positive_rows": 4,
+          "rows": 98
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.6666666666666666,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 84,
+          "positive_rows": 3,
+          "rows": 87
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.012987012987012988,
+          "fold": 3,
+          "negative_rows": 77,
+          "positive_rows": 5,
+          "rows": 82
+        }
+      ],
+      "group": "45-54 | 2: Yes, but female told only during pregnancy",
+      "negative_rows": 255,
+      "positive_rows": 12,
+      "rows": 267,
+      "true_negative": 253,
+      "true_positive": 1
+    },
+    {
+      "false_negative": 524,
+      "false_negative_rate": 0.8438003220611916,
+      "false_positive": 161,
+      "false_positive_rate": 0.005855397148676171,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 167,
+          "false_negative_rate": 0.8434343434343434,
+          "false_positive": 51,
+          "false_positive_rate": 0.005521273140630075,
+          "fold": 1,
+          "negative_rows": 9237,
+          "positive_rows": 198,
+          "rows": 9435
+        },
+        {
+          "false_negative": 191,
+          "false_negative_rate": 0.8565022421524664,
+          "false_positive": 54,
+          "false_positive_rate": 0.005833423355298693,
+          "fold": 2,
+          "negative_rows": 9257,
+          "positive_rows": 223,
+          "rows": 9480
+        },
+        {
+          "false_negative": 166,
+          "false_negative_rate": 0.83,
+          "false_positive": 56,
+          "false_positive_rate": 0.006220839813374806,
+          "fold": 3,
+          "negative_rows": 9002,
+          "positive_rows": 200,
+          "rows": 9202
+        }
+      ],
+      "group": "45-54 | 3: No",
+      "negative_rows": 27496,
+      "positive_rows": 621,
+      "rows": 28117,
+      "true_negative": 27335,
+      "true_positive": 97
+    },
+    {
+      "false_negative": 18,
+      "false_negative_rate": 0.9,
+      "false_positive": 7,
+      "false_positive_rate": 0.01569506726457399,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 8,
+          "false_negative_rate": 0.8888888888888888,
+          "false_positive": 4,
+          "false_positive_rate": 0.02702702702702703,
+          "fold": 1,
+          "negative_rows": 148,
+          "positive_rows": 9,
+          "rows": 157
+        },
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.875,
+          "false_positive": 2,
+          "false_positive_rate": 0.013513513513513514,
+          "fold": 2,
+          "negative_rows": 148,
+          "positive_rows": 8,
+          "rows": 156
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.006666666666666667,
+          "fold": 3,
+          "negative_rows": 150,
+          "positive_rows": 3,
+          "rows": 153
+        }
+      ],
+      "group": "45-54 | 4: Told borderline high or pre-hypertensive",
+      "negative_rows": 446,
+      "positive_rows": 20,
+      "rows": 466,
+      "true_negative": 439,
+      "true_positive": 2
+    },
+    {
+      "false_negative": 1663,
+      "false_negative_rate": 0.45067750677506774,
+      "false_positive": 3450,
+      "false_positive_rate": 0.14846372321198037,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 568,
+          "false_negative_rate": 0.45549318364073776,
+          "false_positive": 1143,
+          "false_positive_rate": 0.14754098360655737,
+          "fold": 1,
+          "negative_rows": 7747,
+          "positive_rows": 1247,
+          "rows": 8994
+        },
+        {
+          "false_negative": 608,
+          "false_negative_rate": 0.4810126582278481,
+          "false_positive": 1057,
+          "false_positive_rate": 0.13716584479626265,
+          "fold": 2,
+          "negative_rows": 7706,
+          "positive_rows": 1264,
+          "rows": 8970
+        },
+        {
+          "false_negative": 487,
+          "false_negative_rate": 0.41306191687871074,
+          "false_positive": 1250,
+          "false_positive_rate": 0.16056518946692358,
+          "fold": 3,
+          "negative_rows": 7785,
+          "positive_rows": 1179,
+          "rows": 8964
+        }
+      ],
+      "group": "55-64 | 1: Yes",
+      "negative_rows": 23238,
+      "positive_rows": 3690,
+      "rows": 26928,
+      "true_negative": 19788,
+      "true_positive": 2027
+    },
+    {
+      "false_negative": 4,
+      "false_negative_rate": 0.4,
+      "false_positive": 6,
+      "false_positive_rate": 0.029411764705882353,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 0,
+          "false_negative_rate": 0.0,
+          "false_positive": 4,
+          "false_positive_rate": 0.056338028169014086,
+          "fold": 1,
+          "negative_rows": 71,
+          "positive_rows": 4,
+          "rows": 75
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.012195121951219513,
+          "fold": 2,
+          "negative_rows": 82,
+          "positive_rows": 4,
+          "rows": 86
+        },
+        {
+          "false_negative": 0,
+          "false_negative_rate": 0.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.0196078431372549,
+          "fold": 3,
+          "negative_rows": 51,
+          "positive_rows": 2,
+          "rows": 53
+        }
+      ],
+      "group": "55-64 | 2: Yes, but female told only during pregnancy",
+      "negative_rows": 204,
+      "positive_rows": 10,
+      "rows": 214,
+      "true_negative": 198,
+      "true_positive": 6
+    },
+    {
+      "false_negative": 988,
+      "false_negative_rate": 0.7797947908445146,
+      "false_positive": 533,
+      "false_positive_rate": 0.018043331076506432,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 313,
+          "false_negative_rate": 0.7382075471698113,
+          "false_positive": 175,
+          "false_positive_rate": 0.017784552845528455,
+          "fold": 1,
+          "negative_rows": 9840,
+          "positive_rows": 424,
+          "rows": 10264
+        },
+        {
+          "false_negative": 355,
+          "false_negative_rate": 0.8198614318706697,
+          "false_positive": 161,
+          "false_positive_rate": 0.016391773569537773,
+          "fold": 2,
+          "negative_rows": 9822,
+          "positive_rows": 433,
+          "rows": 10255
+        },
+        {
+          "false_negative": 320,
+          "false_negative_rate": 0.7804878048780488,
+          "false_positive": 197,
+          "false_positive_rate": 0.019943308362016604,
+          "fold": 3,
+          "negative_rows": 9878,
+          "positive_rows": 410,
+          "rows": 10288
+        }
+      ],
+      "group": "55-64 | 3: No",
+      "negative_rows": 29540,
+      "positive_rows": 1267,
+      "rows": 30807,
+      "true_negative": 29007,
+      "true_positive": 279
+    },
+    {
+      "false_negative": 22,
+      "false_negative_rate": 0.7096774193548387,
+      "false_positive": 20,
+      "false_positive_rate": 0.030211480362537766,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.5,
+          "false_positive": 5,
+          "false_positive_rate": 0.021834061135371178,
+          "fold": 1,
+          "negative_rows": 229,
+          "positive_rows": 10,
+          "rows": 239
+        },
+        {
+          "false_negative": 8,
+          "false_negative_rate": 0.7272727272727273,
+          "false_positive": 8,
+          "false_positive_rate": 0.03619909502262444,
+          "fold": 2,
+          "negative_rows": 221,
+          "positive_rows": 11,
+          "rows": 232
+        },
+        {
+          "false_negative": 9,
+          "false_negative_rate": 0.9,
+          "false_positive": 7,
+          "false_positive_rate": 0.0330188679245283,
+          "fold": 3,
+          "negative_rows": 212,
+          "positive_rows": 10,
+          "rows": 222
+        }
+      ],
+      "group": "55-64 | 4: Told borderline high or pre-hypertensive",
+      "negative_rows": 662,
+      "positive_rows": 31,
+      "rows": 693,
+      "true_negative": 642,
+      "true_positive": 9
+    },
+    {
+      "false_negative": 3629,
+      "false_negative_rate": 0.3111549344079568,
+      "false_positive": 13287,
+      "false_positive_rate": 0.3086267769209328,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 1237,
+          "false_negative_rate": 0.31963824289405685,
+          "false_positive": 4459,
+          "false_positive_rate": 0.309009009009009,
+          "fold": 1,
+          "negative_rows": 14430,
+          "positive_rows": 3870,
+          "rows": 18300
+        },
+        {
+          "false_negative": 1219,
+          "false_negative_rate": 0.31547619047619047,
+          "false_positive": 4305,
+          "false_positive_rate": 0.2996033126870346,
+          "fold": 2,
+          "negative_rows": 14369,
+          "positive_rows": 3864,
+          "rows": 18233
+        },
+        {
+          "false_negative": 1173,
+          "false_negative_rate": 0.2985492491728175,
+          "false_positive": 4523,
+          "false_positive_rate": 0.31733670104539397,
+          "fold": 3,
+          "negative_rows": 14253,
+          "positive_rows": 3929,
+          "rows": 18182
+        }
+      ],
+      "group": "65+ | 1: Yes",
+      "negative_rows": 43052,
+      "positive_rows": 11663,
+      "rows": 54715,
+      "true_negative": 29765,
+      "true_positive": 8034
+    },
+    {
+      "false_negative": 15,
+      "false_negative_rate": 0.7142857142857143,
+      "false_positive": 11,
+      "false_positive_rate": 0.05314009661835749,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.6,
+          "false_positive": 4,
+          "false_positive_rate": 0.05714285714285714,
+          "fold": 1,
+          "negative_rows": 70,
+          "positive_rows": 5,
+          "rows": 75
+        },
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.7777777777777778,
+          "false_positive": 1,
+          "false_positive_rate": 0.017543859649122806,
+          "fold": 2,
+          "negative_rows": 57,
+          "positive_rows": 9,
+          "rows": 66
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.7142857142857143,
+          "false_positive": 6,
+          "false_positive_rate": 0.075,
+          "fold": 3,
+          "negative_rows": 80,
+          "positive_rows": 7,
+          "rows": 87
+        }
+      ],
+      "group": "65+ | 2: Yes, but female told only during pregnancy",
+      "negative_rows": 207,
+      "positive_rows": 21,
+      "rows": 228,
+      "true_negative": 196,
+      "true_positive": 6
+    },
+    {
+      "false_negative": 1969,
+      "false_negative_rate": 0.5786071113723186,
+      "false_positive": 2786,
+      "false_positive_rate": 0.08979854955680902,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 659,
+          "false_negative_rate": 0.5894454382826476,
+          "false_positive": 978,
+          "false_positive_rate": 0.09564792176039119,
+          "fold": 1,
+          "negative_rows": 10225,
+          "positive_rows": 1118,
+          "rows": 11343
+        },
+        {
+          "false_negative": 637,
+          "false_negative_rate": 0.5692582663092046,
+          "false_positive": 908,
+          "false_positive_rate": 0.08748434338568263,
+          "fold": 2,
+          "negative_rows": 10379,
+          "positive_rows": 1119,
+          "rows": 11498
+        },
+        {
+          "false_negative": 673,
+          "false_negative_rate": 0.5771869639794168,
+          "false_positive": 900,
+          "false_positive_rate": 0.08636407254582094,
+          "fold": 3,
+          "negative_rows": 10421,
+          "positive_rows": 1166,
+          "rows": 11587
+        }
+      ],
+      "group": "65+ | 3: No",
+      "negative_rows": 31025,
+      "positive_rows": 3403,
+      "rows": 34428,
+      "true_negative": 28239,
+      "true_positive": 1434
+    },
+    {
+      "false_negative": 65,
+      "false_negative_rate": 0.6074766355140186,
+      "false_positive": 101,
+      "false_positive_rate": 0.11412429378531073,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 19,
+          "false_negative_rate": 0.5588235294117647,
+          "false_positive": 33,
+          "false_positive_rate": 0.11418685121107267,
+          "fold": 1,
+          "negative_rows": 289,
+          "positive_rows": 34,
+          "rows": 323
+        },
+        {
+          "false_negative": 21,
+          "false_negative_rate": 0.7777777777777778,
+          "false_positive": 32,
+          "false_positive_rate": 0.09846153846153846,
+          "fold": 2,
+          "negative_rows": 325,
+          "positive_rows": 27,
+          "rows": 352
+        },
+        {
+          "false_negative": 25,
+          "false_negative_rate": 0.5434782608695652,
+          "false_positive": 36,
+          "false_positive_rate": 0.13284132841328414,
+          "fold": 3,
+          "negative_rows": 271,
+          "positive_rows": 46,
+          "rows": 317
+        }
+      ],
+      "group": "65+ | 4: Told borderline high or pre-hypertensive",
+      "negative_rows": 885,
+      "positive_rows": 107,
+      "rows": 992,
+      "true_negative": 784,
+      "true_positive": 42
+    },
+    {
+      "false_negative": 19,
+      "false_negative_rate": 0.3392857142857143,
+      "false_positive": 35,
+      "false_positive_rate": 0.18518518518518517,
+      "feature_pair": "_AGE80 \u00d7 BPHIGH4",
+      "folds": [
+        {
+          "false_negative": 8,
+          "false_negative_rate": 0.47058823529411764,
+          "false_positive": 13,
+          "false_positive_rate": 0.2,
+          "fold": 1,
+          "negative_rows": 65,
+          "positive_rows": 17,
+          "rows": 82
+        },
+        {
+          "false_negative": 8,
+          "false_negative_rate": 0.4,
+          "false_positive": 9,
+          "false_positive_rate": 0.1267605633802817,
+          "fold": 2,
+          "negative_rows": 71,
+          "positive_rows": 20,
+          "rows": 91
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.15789473684210525,
+          "false_positive": 13,
+          "false_positive_rate": 0.24528301886792453,
+          "fold": 3,
+          "negative_rows": 53,
+          "positive_rows": 19,
+          "rows": 72
+        }
+      ],
+      "group": "65+ | 7: Don't know/Not Sure",
+      "negative_rows": 189,
+      "positive_rows": 56,
+      "rows": 245,
+      "true_negative": 154,
+      "true_positive": 37
+    },
+    {
+      "false_negative": 417,
+      "false_negative_rate": 0.8306772908366534,
+      "false_positive": 137,
+      "false_positive_rate": 0.017267456516259137,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 121,
+          "false_negative_rate": 0.7908496732026143,
+          "false_positive": 53,
+          "false_positive_rate": 0.019842755522276302,
+          "fold": 1,
+          "negative_rows": 2671,
+          "positive_rows": 153,
+          "rows": 2824
+        },
+        {
+          "false_negative": 153,
+          "false_negative_rate": 0.8138297872340425,
+          "false_positive": 43,
+          "false_positive_rate": 0.016405951926745516,
+          "fold": 2,
+          "negative_rows": 2621,
+          "positive_rows": 188,
+          "rows": 2809
+        },
+        {
+          "false_negative": 143,
+          "false_negative_rate": 0.8881987577639752,
+          "false_positive": 41,
+          "false_positive_rate": 0.015518546555639667,
+          "fold": 3,
+          "negative_rows": 2642,
+          "positive_rows": 161,
+          "rows": 2803
+        }
+      ],
+      "group": "1: Yes | 1: Excellent",
+      "negative_rows": 7934,
+      "positive_rows": 502,
+      "rows": 8436,
+      "true_negative": 7797,
+      "true_positive": 85
+    },
+    {
+      "false_negative": 1732,
+      "false_negative_rate": 0.7342094107672743,
+      "false_positive": 1440,
+      "false_positive_rate": 0.05480286192723398,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 571,
+          "false_negative_rate": 0.7358247422680413,
+          "false_positive": 548,
+          "false_positive_rate": 0.061788251212087045,
+          "fold": 1,
+          "negative_rows": 8869,
+          "positive_rows": 776,
+          "rows": 9645
+        },
+        {
+          "false_negative": 593,
+          "false_negative_rate": 0.7468513853904282,
+          "false_positive": 445,
+          "false_positive_rate": 0.05078169576629008,
+          "fold": 2,
+          "negative_rows": 8763,
+          "positive_rows": 794,
+          "rows": 9557
+        },
+        {
+          "false_negative": 568,
+          "false_negative_rate": 0.7198986058301647,
+          "false_positive": 447,
+          "false_positive_rate": 0.051712170291531696,
+          "fold": 3,
+          "negative_rows": 8644,
+          "positive_rows": 789,
+          "rows": 9433
+        }
+      ],
+      "group": "1: Yes | 2: Very good",
+      "negative_rows": 26276,
+      "positive_rows": 2359,
+      "rows": 28635,
+      "true_negative": 24836,
+      "true_positive": 627
+    },
+    {
+      "false_negative": 2690,
+      "false_negative_rate": 0.4835520402660435,
+      "false_positive": 5554,
+      "false_positive_rate": 0.17169000587344277,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 972,
+          "false_negative_rate": 0.5118483412322274,
+          "false_positive": 1825,
+          "false_positive_rate": 0.16998882265275708,
+          "fold": 1,
+          "negative_rows": 10736,
+          "positive_rows": 1899,
+          "rows": 12635
+        },
+        {
+          "false_negative": 896,
+          "false_negative_rate": 0.4856368563685637,
+          "false_positive": 1694,
+          "false_positive_rate": 0.1580666231221424,
+          "fold": 2,
+          "negative_rows": 10717,
+          "positive_rows": 1845,
+          "rows": 12562
+        },
+        {
+          "false_negative": 822,
+          "false_negative_rate": 0.4518966465090709,
+          "false_positive": 2035,
+          "false_positive_rate": 0.18676578560939794,
+          "fold": 3,
+          "negative_rows": 10896,
+          "positive_rows": 1819,
+          "rows": 12715
+        }
+      ],
+      "group": "1: Yes | 3: Good",
+      "negative_rows": 32349,
+      "positive_rows": 5563,
+      "rows": 37912,
+      "true_negative": 26795,
+      "true_positive": 2873
+    },
+    {
+      "false_negative": 1201,
+      "false_negative_rate": 0.23096153846153847,
+      "false_positive": 7033,
+      "false_positive_rate": 0.4443672205724395,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 420,
+          "false_negative_rate": 0.24013722126929674,
+          "false_positive": 2336,
+          "false_positive_rate": 0.4452067848294263,
+          "fold": 1,
+          "negative_rows": 5247,
+          "positive_rows": 1749,
+          "rows": 6996
+        },
+        {
+          "false_negative": 419,
+          "false_negative_rate": 0.2456037514654162,
+          "false_positive": 2310,
+          "false_positive_rate": 0.4320179539928932,
+          "fold": 2,
+          "negative_rows": 5347,
+          "positive_rows": 1706,
+          "rows": 7053
+        },
+        {
+          "false_negative": 362,
+          "false_negative_rate": 0.20744985673352437,
+          "false_positive": 2387,
+          "false_positive_rate": 0.4561437034206,
+          "fold": 3,
+          "negative_rows": 5233,
+          "positive_rows": 1745,
+          "rows": 6978
+        }
+      ],
+      "group": "1: Yes | 4: Fair",
+      "negative_rows": 15827,
+      "positive_rows": 5200,
+      "rows": 21027,
+      "true_negative": 8794,
+      "true_positive": 3999
+    },
+    {
+      "false_negative": 297,
+      "false_negative_rate": 0.08522238163558106,
+      "false_positive": 3854,
+      "false_positive_rate": 0.6844255016870894,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 83,
+          "false_negative_rate": 0.07319223985890652,
+          "false_positive": 1227,
+          "false_positive_rate": 0.6847098214285714,
+          "fold": 1,
+          "negative_rows": 1792,
+          "positive_rows": 1134,
+          "rows": 2926
+        },
+        {
+          "false_negative": 118,
+          "false_negative_rate": 0.09974640743871513,
+          "false_positive": 1260,
+          "false_positive_rate": 0.6684350132625995,
+          "fold": 2,
+          "negative_rows": 1885,
+          "positive_rows": 1183,
+          "rows": 3068
+        },
+        {
+          "false_negative": 96,
+          "false_negative_rate": 0.0821917808219178,
+          "false_positive": 1367,
+          "false_positive_rate": 0.6995905834186285,
+          "fold": 3,
+          "negative_rows": 1954,
+          "positive_rows": 1168,
+          "rows": 3122
+        }
+      ],
+      "group": "1: Yes | 5: Poor",
+      "negative_rows": 5631,
+      "positive_rows": 3485,
+      "rows": 9116,
+      "true_negative": 1777,
+      "true_positive": 3188
+    },
+    {
+      "false_negative": 13,
+      "false_negative_rate": 0.2653061224489796,
+      "false_positive": 70,
+      "false_positive_rate": 0.37433155080213903,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.23529411764705882,
+          "false_positive": 16,
+          "false_positive_rate": 0.2909090909090909,
+          "fold": 1,
+          "negative_rows": 55,
+          "positive_rows": 17,
+          "rows": 72
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.3333333333333333,
+          "false_positive": 31,
+          "false_positive_rate": 0.4492753623188406,
+          "fold": 2,
+          "negative_rows": 69,
+          "positive_rows": 12,
+          "rows": 81
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.25,
+          "false_positive": 23,
+          "false_positive_rate": 0.36507936507936506,
+          "fold": 3,
+          "negative_rows": 63,
+          "positive_rows": 20,
+          "rows": 83
+        }
+      ],
+      "group": "1: Yes | 7: Don\u2019t know/Not Sure",
+      "negative_rows": 187,
+      "positive_rows": 49,
+      "rows": 236,
+      "true_negative": 117,
+      "true_positive": 36
+    },
+    {
+      "false_negative": 10,
+      "false_negative_rate": 0.4166666666666667,
+      "false_positive": 34,
+      "false_positive_rate": 0.35789473684210527,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.5454545454545454,
+          "false_positive": 12,
+          "false_positive_rate": 0.34285714285714286,
+          "fold": 1,
+          "negative_rows": 35,
+          "positive_rows": 11,
+          "rows": 46
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.25,
+          "false_positive": 9,
+          "false_positive_rate": 0.32142857142857145,
+          "fold": 2,
+          "negative_rows": 28,
+          "positive_rows": 8,
+          "rows": 36
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.4,
+          "false_positive": 13,
+          "false_positive_rate": 0.40625,
+          "fold": 3,
+          "negative_rows": 32,
+          "positive_rows": 5,
+          "rows": 37
+        }
+      ],
+      "group": "1: Yes | 9: Refused",
+      "negative_rows": 95,
+      "positive_rows": 24,
+      "rows": 119,
+      "true_negative": 61,
+      "true_positive": 14
+    },
+    {
+      "false_negative": 9,
+      "false_negative_rate": 1.0,
+      "false_positive": 0,
+      "false_positive_rate": 0.0,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 110,
+          "positive_rows": 3,
+          "rows": 113
+        },
+        {
+          "false_negative": 1,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 94,
+          "positive_rows": 1,
+          "rows": 95
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 109,
+          "positive_rows": 5,
+          "rows": 114
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 1: Excellent",
+      "negative_rows": 313,
+      "positive_rows": 9,
+      "rows": 322,
+      "true_negative": 313,
+      "true_positive": 0
+    },
+    {
+      "false_negative": 7,
+      "false_negative_rate": 1.0,
+      "false_positive": 0,
+      "false_positive_rate": 0.0,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 1,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 253,
+          "positive_rows": 1,
+          "rows": 254
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 251,
+          "positive_rows": 3,
+          "rows": 254
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 204,
+          "positive_rows": 3,
+          "rows": 207
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 2: Very good",
+      "negative_rows": 708,
+      "positive_rows": 7,
+      "rows": 715,
+      "true_negative": 708,
+      "true_positive": 0
+    },
+    {
+      "false_negative": 15,
+      "false_negative_rate": 0.7894736842105263,
+      "false_positive": 4,
+      "false_positive_rate": 0.006329113924050633,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.75,
+          "false_positive": 2,
+          "false_positive_rate": 0.009900990099009901,
+          "fold": 1,
+          "negative_rows": 202,
+          "positive_rows": 4,
+          "rows": 206
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.8333333333333334,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 219,
+          "positive_rows": 6,
+          "rows": 225
+        },
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.7777777777777778,
+          "false_positive": 2,
+          "false_positive_rate": 0.009478672985781991,
+          "fold": 3,
+          "negative_rows": 211,
+          "positive_rows": 9,
+          "rows": 220
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 3: Good",
+      "negative_rows": 632,
+      "positive_rows": 19,
+      "rows": 651,
+      "true_negative": 628,
+      "true_positive": 4
+    },
+    {
+      "false_negative": 9,
+      "false_negative_rate": 0.6923076923076923,
+      "false_positive": 7,
+      "false_positive_rate": 0.036458333333333336,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.5,
+          "false_positive": 2,
+          "false_positive_rate": 0.031746031746031744,
+          "fold": 1,
+          "negative_rows": 63,
+          "positive_rows": 8,
+          "rows": 71
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.015384615384615385,
+          "fold": 2,
+          "negative_rows": 65,
+          "positive_rows": 4,
+          "rows": 69
+        },
+        {
+          "false_negative": 1,
+          "false_negative_rate": 1.0,
+          "false_positive": 4,
+          "false_positive_rate": 0.0625,
+          "fold": 3,
+          "negative_rows": 64,
+          "positive_rows": 1,
+          "rows": 65
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 4: Fair",
+      "negative_rows": 192,
+      "positive_rows": 13,
+      "rows": 205,
+      "true_negative": 185,
+      "true_positive": 4
+    },
+    {
+      "false_negative": 366,
+      "false_negative_rate": 0.9457364341085271,
+      "false_positive": 15,
+      "false_positive_rate": 0.00041824670979254965,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 129,
+          "false_negative_rate": 0.9555555555555556,
+          "false_positive": 4,
+          "false_positive_rate": 0.00032997855139415937,
+          "fold": 1,
+          "negative_rows": 12122,
+          "positive_rows": 135,
+          "rows": 12257
+        },
+        {
+          "false_negative": 113,
+          "false_negative_rate": 0.9262295081967213,
+          "false_positive": 5,
+          "false_positive_rate": 0.00042048608191068876,
+          "fold": 2,
+          "negative_rows": 11891,
+          "positive_rows": 122,
+          "rows": 12013
+        },
+        {
+          "false_negative": 124,
+          "false_negative_rate": 0.9538461538461539,
+          "false_positive": 6,
+          "false_positive_rate": 0.0005062863893342334,
+          "fold": 3,
+          "negative_rows": 11851,
+          "positive_rows": 130,
+          "rows": 11981
+        }
+      ],
+      "group": "3: No | 1: Excellent",
+      "negative_rows": 35864,
+      "positive_rows": 387,
+      "rows": 36251,
+      "true_negative": 35849,
+      "true_positive": 21
+    },
+    {
+      "false_negative": 1128,
+      "false_negative_rate": 0.9067524115755627,
+      "false_positive": 266,
+      "false_positive_rate": 0.004857382856725467,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 372,
+          "false_negative_rate": 0.916256157635468,
+          "false_positive": 107,
+          "false_positive_rate": 0.005916505391208184,
+          "fold": 1,
+          "negative_rows": 18085,
+          "positive_rows": 406,
+          "rows": 18491
+        },
+        {
+          "false_negative": 397,
+          "false_negative_rate": 0.906392694063927,
+          "false_positive": 73,
+          "false_positive_rate": 0.00398449866273675,
+          "fold": 2,
+          "negative_rows": 18321,
+          "positive_rows": 438,
+          "rows": 18759
+        },
+        {
+          "false_negative": 359,
+          "false_negative_rate": 0.8975,
+          "false_positive": 86,
+          "false_positive_rate": 0.00468511658313358,
+          "fold": 3,
+          "negative_rows": 18356,
+          "positive_rows": 400,
+          "rows": 18756
+        }
+      ],
+      "group": "3: No | 2: Very good",
+      "negative_rows": 54762,
+      "positive_rows": 1244,
+      "rows": 56006,
+      "true_negative": 54496,
+      "true_positive": 116
+    },
+    {
+      "false_negative": 1383,
+      "false_negative_rate": 0.7379935965848452,
+      "false_positive": 1053,
+      "false_positive_rate": 0.026318420394901273,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 443,
+          "false_negative_rate": 0.7099358974358975,
+          "false_positive": 407,
+          "false_positive_rate": 0.030532633158289572,
+          "fold": 1,
+          "negative_rows": 13330,
+          "positive_rows": 624,
+          "rows": 13954
+        },
+        {
+          "false_negative": 456,
+          "false_negative_rate": 0.75,
+          "false_positive": 360,
+          "false_positive_rate": 0.027096191479753125,
+          "fold": 2,
+          "negative_rows": 13286,
+          "positive_rows": 608,
+          "rows": 13894
+        },
+        {
+          "false_negative": 484,
+          "false_negative_rate": 0.7538940809968847,
+          "false_positive": 286,
+          "false_positive_rate": 0.021352844557264446,
+          "fold": 3,
+          "negative_rows": 13394,
+          "positive_rows": 642,
+          "rows": 14036
+        }
+      ],
+      "group": "3: No | 3: Good",
+      "negative_rows": 40010,
+      "positive_rows": 1874,
+      "rows": 41884,
+      "true_negative": 38957,
+      "true_positive": 491
+    },
+    {
+      "false_negative": 709,
+      "false_negative_rate": 0.513768115942029,
+      "false_positive": 1309,
+      "false_positive_rate": 0.11252471417519126,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 255,
+          "false_negative_rate": 0.5368421052631579,
+          "false_positive": 437,
+          "false_positive_rate": 0.11216632443531828,
+          "fold": 1,
+          "negative_rows": 3896,
+          "positive_rows": 475,
+          "rows": 4371
+        },
+        {
+          "false_negative": 236,
+          "false_negative_rate": 0.5152838427947598,
+          "false_positive": 398,
+          "false_positive_rate": 0.10364583333333334,
+          "fold": 2,
+          "negative_rows": 3840,
+          "positive_rows": 458,
+          "rows": 4298
+        },
+        {
+          "false_negative": 218,
+          "false_negative_rate": 0.48769574944071586,
+          "false_positive": 474,
+          "false_positive_rate": 0.1216320246343341,
+          "fold": 3,
+          "negative_rows": 3897,
+          "positive_rows": 447,
+          "rows": 4344
+        }
+      ],
+      "group": "3: No | 4: Fair",
+      "negative_rows": 11633,
+      "positive_rows": 1380,
+      "rows": 13013,
+      "true_negative": 10324,
+      "true_positive": 671
+    },
+    {
+      "false_negative": 264,
+      "false_negative_rate": 0.33889602053915274,
+      "false_positive": 846,
+      "false_positive_rate": 0.24479166666666666,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 82,
+          "false_negative_rate": 0.33884297520661155,
+          "false_positive": 250,
+          "false_positive_rate": 0.2226179875333927,
+          "fold": 1,
+          "negative_rows": 1123,
+          "positive_rows": 242,
+          "rows": 1365
+        },
+        {
+          "false_negative": 90,
+          "false_negative_rate": 0.34615384615384615,
+          "false_positive": 295,
+          "false_positive_rate": 0.2489451476793249,
+          "fold": 2,
+          "negative_rows": 1185,
+          "positive_rows": 260,
+          "rows": 1445
+        },
+        {
+          "false_negative": 92,
+          "false_negative_rate": 0.33212996389891697,
+          "false_positive": 301,
+          "false_positive_rate": 0.2621951219512195,
+          "fold": 3,
+          "negative_rows": 1148,
+          "positive_rows": 277,
+          "rows": 1425
+        }
+      ],
+      "group": "3: No | 5: Poor",
+      "negative_rows": 3456,
+      "positive_rows": 779,
+      "rows": 4235,
+      "true_negative": 2610,
+      "true_positive": 515
+    },
+    {
+      "false_negative": 9,
+      "false_negative_rate": 0.5625,
+      "false_positive": 19,
+      "false_positive_rate": 0.10160427807486631,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.25,
+          "false_positive": 4,
+          "false_positive_rate": 0.06896551724137931,
+          "fold": 1,
+          "negative_rows": 58,
+          "positive_rows": 4,
+          "rows": 62
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.7142857142857143,
+          "false_positive": 4,
+          "false_positive_rate": 0.06153846153846154,
+          "fold": 2,
+          "negative_rows": 65,
+          "positive_rows": 7,
+          "rows": 72
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.6,
+          "false_positive": 11,
+          "false_positive_rate": 0.171875,
+          "fold": 3,
+          "negative_rows": 64,
+          "positive_rows": 5,
+          "rows": 69
+        }
+      ],
+      "group": "3: No | 7: Don\u2019t know/Not Sure",
+      "negative_rows": 187,
+      "positive_rows": 16,
+      "rows": 203,
+      "true_negative": 168,
+      "true_positive": 7
+    },
+    {
+      "false_negative": 6,
+      "false_negative_rate": 0.6666666666666666,
+      "false_positive": 4,
+      "false_positive_rate": 0.034482758620689655,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 0,
+          "false_negative_rate": null,
+          "false_positive": 2,
+          "false_positive_rate": 0.05714285714285714,
+          "fold": 1,
+          "negative_rows": 35,
+          "positive_rows": 0,
+          "rows": 35
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.75,
+          "false_positive": 1,
+          "false_positive_rate": 0.02631578947368421,
+          "fold": 2,
+          "negative_rows": 38,
+          "positive_rows": 4,
+          "rows": 42
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.6,
+          "false_positive": 1,
+          "false_positive_rate": 0.023255813953488372,
+          "fold": 3,
+          "negative_rows": 43,
+          "positive_rows": 5,
+          "rows": 48
+        }
+      ],
+      "group": "3: No | 9: Refused",
+      "negative_rows": 116,
+      "positive_rows": 9,
+      "rows": 125,
+      "true_negative": 112,
+      "true_positive": 3
+    },
+    {
+      "false_negative": 13,
+      "false_negative_rate": 0.8125,
+      "false_positive": 0,
+      "false_positive_rate": 0.0,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.6666666666666666,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 119,
+          "positive_rows": 6,
+          "rows": 125
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 128,
+          "positive_rows": 3,
+          "rows": 131
+        },
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.8571428571428571,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 99,
+          "positive_rows": 7,
+          "rows": 106
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 1: Excellent",
+      "negative_rows": 346,
+      "positive_rows": 16,
+      "rows": 362,
+      "true_negative": 346,
+      "true_positive": 3
+    },
+    {
+      "false_negative": 30,
+      "false_negative_rate": 0.8823529411764706,
+      "false_positive": 14,
+      "false_positive_rate": 0.014242115971515769,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.7777777777777778,
+          "false_positive": 2,
+          "false_positive_rate": 0.006097560975609756,
+          "fold": 1,
+          "negative_rows": 328,
+          "positive_rows": 9,
+          "rows": 337
+        },
+        {
+          "false_negative": 11,
+          "false_negative_rate": 0.9166666666666666,
+          "false_positive": 5,
+          "false_positive_rate": 0.015015015015015015,
+          "fold": 2,
+          "negative_rows": 333,
+          "positive_rows": 12,
+          "rows": 345
+        },
+        {
+          "false_negative": 12,
+          "false_negative_rate": 0.9230769230769231,
+          "false_positive": 7,
+          "false_positive_rate": 0.021739130434782608,
+          "fold": 3,
+          "negative_rows": 322,
+          "positive_rows": 13,
+          "rows": 335
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 2: Very good",
+      "negative_rows": 983,
+      "positive_rows": 34,
+      "rows": 1017,
+      "true_negative": 969,
+      "true_positive": 4
+    },
+    {
+      "false_negative": 39,
+      "false_negative_rate": 0.7358490566037735,
+      "false_positive": 44,
+      "false_positive_rate": 0.05605095541401274,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 13,
+          "false_negative_rate": 0.7647058823529411,
+          "false_positive": 15,
+          "false_positive_rate": 0.05474452554744526,
+          "fold": 1,
+          "negative_rows": 274,
+          "positive_rows": 17,
+          "rows": 291
+        },
+        {
+          "false_negative": 13,
+          "false_negative_rate": 0.8125,
+          "false_positive": 14,
+          "false_positive_rate": 0.05426356589147287,
+          "fold": 2,
+          "negative_rows": 258,
+          "positive_rows": 16,
+          "rows": 274
+        },
+        {
+          "false_negative": 13,
+          "false_negative_rate": 0.65,
+          "false_positive": 15,
+          "false_positive_rate": 0.05928853754940711,
+          "fold": 3,
+          "negative_rows": 253,
+          "positive_rows": 20,
+          "rows": 273
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 3: Good",
+      "negative_rows": 785,
+      "positive_rows": 53,
+      "rows": 838,
+      "true_negative": 741,
+      "true_positive": 14
+    },
+    {
+      "false_negative": 21,
+      "false_negative_rate": 0.4772727272727273,
+      "false_positive": 42,
+      "false_positive_rate": 0.168,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 9,
+          "false_negative_rate": 0.47368421052631576,
+          "false_positive": 15,
+          "false_positive_rate": 0.18072289156626506,
+          "fold": 1,
+          "negative_rows": 83,
+          "positive_rows": 19,
+          "rows": 102
+        },
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.6,
+          "false_positive": 14,
+          "false_positive_rate": 0.16279069767441862,
+          "fold": 2,
+          "negative_rows": 86,
+          "positive_rows": 10,
+          "rows": 96
+        },
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.4,
+          "false_positive": 13,
+          "false_positive_rate": 0.16049382716049382,
+          "fold": 3,
+          "negative_rows": 81,
+          "positive_rows": 15,
+          "rows": 96
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 4: Fair",
+      "negative_rows": 250,
+      "positive_rows": 44,
+      "rows": 294,
+      "true_negative": 208,
+      "true_positive": 23
+    },
+    {
+      "false_negative": 10,
+      "false_negative_rate": 0.8333333333333334,
+      "false_positive": 3,
+      "false_positive_rate": 0.02608695652173913,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 5,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.02702702702702703,
+          "fold": 1,
+          "negative_rows": 37,
+          "positive_rows": 5,
+          "rows": 42
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.02040816326530612,
+          "fold": 2,
+          "negative_rows": 49,
+          "positive_rows": 2,
+          "rows": 51
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.6,
+          "false_positive": 1,
+          "false_positive_rate": 0.034482758620689655,
+          "fold": 3,
+          "negative_rows": 29,
+          "positive_rows": 5,
+          "rows": 34
+        }
+      ],
+      "group": "7: Don't know/Not Sure | 2: Very good",
+      "negative_rows": 115,
+      "positive_rows": 12,
+      "rows": 127,
+      "true_negative": 112,
+      "true_positive": 2
+    },
+    {
+      "false_negative": 9,
+      "false_negative_rate": 0.5,
+      "false_positive": 14,
+      "false_positive_rate": 0.08974358974358974,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.42857142857142855,
+          "false_positive": 5,
+          "false_positive_rate": 0.09433962264150944,
+          "fold": 1,
+          "negative_rows": 53,
+          "positive_rows": 7,
+          "rows": 60
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.8,
+          "false_positive": 2,
+          "false_positive_rate": 0.03333333333333333,
+          "fold": 2,
+          "negative_rows": 60,
+          "positive_rows": 5,
+          "rows": 65
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.3333333333333333,
+          "false_positive": 7,
+          "false_positive_rate": 0.16279069767441862,
+          "fold": 3,
+          "negative_rows": 43,
+          "positive_rows": 6,
+          "rows": 49
+        }
+      ],
+      "group": "7: Don't know/Not Sure | 3: Good",
+      "negative_rows": 156,
+      "positive_rows": 18,
+      "rows": 174,
+      "true_negative": 142,
+      "true_positive": 9
+    },
+    {
+      "false_negative": 7,
+      "false_negative_rate": 0.2916666666666667,
+      "false_positive": 19,
+      "false_positive_rate": 0.2289156626506024,
+      "feature_pair": "BPHIGH4 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 0,
+          "false_negative_rate": 0.0,
+          "false_positive": 8,
+          "false_positive_rate": 0.25806451612903225,
+          "fold": 1,
+          "negative_rows": 31,
+          "positive_rows": 3,
+          "rows": 34
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.4166666666666667,
+          "false_positive": 7,
+          "false_positive_rate": 0.28,
+          "fold": 2,
+          "negative_rows": 25,
+          "positive_rows": 12,
+          "rows": 37
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.2222222222222222,
+          "false_positive": 4,
+          "false_positive_rate": 0.14814814814814814,
+          "fold": 3,
+          "negative_rows": 27,
+          "positive_rows": 9,
+          "rows": 36
+        }
+      ],
+      "group": "7: Don't know/Not Sure | 4: Fair",
+      "negative_rows": 83,
+      "positive_rows": 24,
+      "rows": 107,
+      "true_negative": 64,
+      "true_positive": 17
+    },
+    {
+      "false_negative": 1481,
+      "false_negative_rate": 0.23601593625498007,
+      "false_positive": 7219,
+      "false_positive_rate": 0.3825649178590355,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 528,
+          "false_negative_rate": 0.2508313539192399,
+          "false_positive": 2408,
+          "false_positive_rate": 0.3796310893898786,
+          "fold": 1,
+          "negative_rows": 6343,
+          "positive_rows": 2105,
+          "rows": 8448
+        },
+        {
+          "false_negative": 539,
+          "false_negative_rate": 0.2561787072243346,
+          "false_positive": 2345,
+          "false_positive_rate": 0.3731699554423934,
+          "fold": 2,
+          "negative_rows": 6284,
+          "positive_rows": 2104,
+          "rows": 8388
+        },
+        {
+          "false_negative": 414,
+          "false_negative_rate": 0.20038722168441434,
+          "false_positive": 2466,
+          "false_positive_rate": 0.39500240269101394,
+          "fold": 3,
+          "negative_rows": 6243,
+          "positive_rows": 2066,
+          "rows": 8309
+        }
+      ],
+      "group": "1: Yes | 1: Yes",
+      "negative_rows": 18870,
+      "positive_rows": 6275,
+      "rows": 25145,
+      "true_negative": 11651,
+      "true_positive": 4794
+    },
+    {
+      "false_negative": 29,
+      "false_negative_rate": 0.4603174603174603,
+      "false_positive": 36,
+      "false_positive_rate": 0.06196213425129088,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 12,
+          "false_negative_rate": 0.631578947368421,
+          "false_positive": 10,
+          "false_positive_rate": 0.04950495049504951,
+          "fold": 1,
+          "negative_rows": 202,
+          "positive_rows": 19,
+          "rows": 221
+        },
+        {
+          "false_negative": 11,
+          "false_negative_rate": 0.4583333333333333,
+          "false_positive": 10,
+          "false_positive_rate": 0.05434782608695652,
+          "fold": 2,
+          "negative_rows": 184,
+          "positive_rows": 24,
+          "rows": 208
+        },
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.3,
+          "false_positive": 16,
+          "false_positive_rate": 0.08205128205128205,
+          "fold": 3,
+          "negative_rows": 195,
+          "positive_rows": 20,
+          "rows": 215
+        }
+      ],
+      "group": "1: Yes | 2: Documented value (label omitted)",
+      "negative_rows": 581,
+      "positive_rows": 63,
+      "rows": 644,
+      "true_negative": 545,
+      "true_positive": 34
+    },
+    {
+      "false_negative": 4646,
+      "false_negative_rate": 0.45150631681243925,
+      "false_positive": 10253,
+      "false_positive_rate": 0.15443590902244314,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 1573,
+          "false_negative_rate": 0.45806639487478157,
+          "false_positive": 3408,
+          "false_positive_rate": 0.1546770752961467,
+          "fold": 1,
+          "negative_rows": 22033,
+          "positive_rows": 3434,
+          "rows": 25467
+        },
+        {
+          "false_negative": 1561,
+          "false_negative_rate": 0.45723491505565317,
+          "false_positive": 3225,
+          "false_positive_rate": 0.1455981941309255,
+          "fold": 2,
+          "negative_rows": 22150,
+          "positive_rows": 3414,
+          "rows": 25564
+        },
+        {
+          "false_negative": 1512,
+          "false_negative_rate": 0.43927948866937827,
+          "false_positive": 3620,
+          "false_positive_rate": 0.16301166298914757,
+          "fold": 3,
+          "negative_rows": 22207,
+          "positive_rows": 3442,
+          "rows": 25649
+        }
+      ],
+      "group": "1: Yes | 3: Documented value (label omitted)",
+      "negative_rows": 66390,
+      "positive_rows": 10290,
+      "rows": 76680,
+      "true_negative": 56137,
+      "true_positive": 5644
+    },
+    {
+      "false_negative": 193,
+      "false_negative_rate": 0.371868978805395,
+      "false_positive": 576,
+      "false_positive_rate": 0.24989154013015186,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 61,
+          "false_negative_rate": 0.3630952380952381,
+          "false_positive": 182,
+          "false_positive_rate": 0.23243933588761176,
+          "fold": 1,
+          "negative_rows": 783,
+          "positive_rows": 168,
+          "rows": 951
+        },
+        {
+          "false_negative": 69,
+          "false_negative_rate": 0.3791208791208791,
+          "false_positive": 197,
+          "false_positive_rate": 0.2595520421607378,
+          "fold": 2,
+          "negative_rows": 759,
+          "positive_rows": 182,
+          "rows": 941
+        },
+        {
+          "false_negative": 63,
+          "false_negative_rate": 0.3727810650887574,
+          "false_positive": 197,
+          "false_positive_rate": 0.2581913499344692,
+          "fold": 3,
+          "negative_rows": 763,
+          "positive_rows": 169,
+          "rows": 932
+        }
+      ],
+      "group": "1: Yes | 4: Documented value (label omitted)",
+      "negative_rows": 2305,
+      "positive_rows": 519,
+      "rows": 2824,
+      "true_negative": 1729,
+      "true_positive": 326
+    },
+    {
+      "false_negative": 10,
+      "false_negative_rate": 0.3225806451612903,
+      "false_positive": 37,
+      "false_positive_rate": 0.26811594202898553,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.23076923076923078,
+          "false_positive": 9,
+          "false_positive_rate": 0.24324324324324326,
+          "fold": 1,
+          "negative_rows": 37,
+          "positive_rows": 13,
+          "rows": 50
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.45454545454545453,
+          "false_positive": 14,
+          "false_positive_rate": 0.28,
+          "fold": 2,
+          "negative_rows": 50,
+          "positive_rows": 11,
+          "rows": 61
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.2857142857142857,
+          "false_positive": 14,
+          "false_positive_rate": 0.27450980392156865,
+          "fold": 3,
+          "negative_rows": 51,
+          "positive_rows": 7,
+          "rows": 58
+        }
+      ],
+      "group": "1: Yes | 7: Documented value (label omitted)",
+      "negative_rows": 138,
+      "positive_rows": 31,
+      "rows": 169,
+      "true_negative": 101,
+      "true_positive": 21
+    },
+    {
+      "false_negative": 9,
+      "false_negative_rate": 0.75,
+      "false_positive": 10,
+      "false_positive_rate": 0.08849557522123894,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.6666666666666666,
+          "false_positive": 5,
+          "false_positive_rate": 0.11904761904761904,
+          "fold": 1,
+          "negative_rows": 42,
+          "positive_rows": 6,
+          "rows": 48
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.03225806451612903,
+          "fold": 2,
+          "negative_rows": 31,
+          "positive_rows": 3,
+          "rows": 34
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.6666666666666666,
+          "false_positive": 4,
+          "false_positive_rate": 0.1,
+          "fold": 3,
+          "negative_rows": 40,
+          "positive_rows": 3,
+          "rows": 43
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 1: Yes",
+      "negative_rows": 113,
+      "positive_rows": 12,
+      "rows": 125,
+      "true_negative": 103,
+      "true_positive": 3
+    },
+    {
+      "false_negative": 3,
+      "false_negative_rate": 0.5,
+      "false_positive": 2,
+      "false_positive_rate": 0.013793103448275862,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.5,
+          "false_positive": 1,
+          "false_positive_rate": 0.019230769230769232,
+          "fold": 1,
+          "negative_rows": 52,
+          "positive_rows": 2,
+          "rows": 54
+        },
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.5,
+          "false_positive": 1,
+          "false_positive_rate": 0.024390243902439025,
+          "fold": 2,
+          "negative_rows": 41,
+          "positive_rows": 2,
+          "rows": 43
+        },
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.5,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 3,
+          "negative_rows": 52,
+          "positive_rows": 2,
+          "rows": 54
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 2: Documented value (label omitted)",
+      "negative_rows": 145,
+      "positive_rows": 6,
+      "rows": 151,
+      "true_negative": 143,
+      "true_positive": 3
+    },
+    {
+      "false_negative": 31,
+      "false_negative_rate": 0.8157894736842105,
+      "false_positive": 7,
+      "false_positive_rate": 0.004380475594493116,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.6363636363636364,
+          "false_positive": 3,
+          "false_positive_rate": 0.0055147058823529415,
+          "fold": 1,
+          "negative_rows": 544,
+          "positive_rows": 11,
+          "rows": 555
+        },
+        {
+          "false_negative": 11,
+          "false_negative_rate": 0.8461538461538461,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 553,
+          "positive_rows": 13,
+          "rows": 566
+        },
+        {
+          "false_negative": 13,
+          "false_negative_rate": 0.9285714285714286,
+          "false_positive": 4,
+          "false_positive_rate": 0.007984031936127744,
+          "fold": 3,
+          "negative_rows": 501,
+          "positive_rows": 14,
+          "rows": 515
+        }
+      ],
+      "group": "2: Yes, but female told only during pregnancy | 3: Documented value (label omitted)",
+      "negative_rows": 1598,
+      "positive_rows": 38,
+      "rows": 1636,
+      "true_negative": 1591,
+      "true_positive": 7
+    },
+    {
+      "false_negative": 549,
+      "false_negative_rate": 0.4854111405835544,
+      "false_positive": 1041,
+      "false_positive_rate": 0.14533016892363534,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 181,
+          "false_negative_rate": 0.5013850415512465,
+          "false_positive": 365,
+          "false_positive_rate": 0.15565031982942432,
+          "fold": 1,
+          "negative_rows": 2345,
+          "positive_rows": 361,
+          "rows": 2706
+        },
+        {
+          "false_negative": 200,
+          "false_negative_rate": 0.5115089514066496,
+          "false_positive": 331,
+          "false_positive_rate": 0.13526767470371884,
+          "fold": 2,
+          "negative_rows": 2447,
+          "positive_rows": 391,
+          "rows": 2838
+        },
+        {
+          "false_negative": 168,
+          "false_negative_rate": 0.44327176781002636,
+          "false_positive": 345,
+          "false_positive_rate": 0.14550822437789962,
+          "fold": 3,
+          "negative_rows": 2371,
+          "positive_rows": 379,
+          "rows": 2750
+        }
+      ],
+      "group": "3: No | 1: Yes",
+      "negative_rows": 7163,
+      "positive_rows": 1131,
+      "rows": 8294,
+      "true_negative": 6122,
+      "true_positive": 582
+    },
+    {
+      "false_negative": 18,
+      "false_negative_rate": 0.9,
+      "false_positive": 6,
+      "false_positive_rate": 0.004705882352941176,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 7,
+          "false_negative_rate": 1.0,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 399,
+          "positive_rows": 7,
+          "rows": 406
+        },
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.875,
+          "false_positive": 5,
+          "false_positive_rate": 0.011764705882352941,
+          "fold": 2,
+          "negative_rows": 425,
+          "positive_rows": 8,
+          "rows": 433
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.8,
+          "false_positive": 1,
+          "false_positive_rate": 0.0022172949002217295,
+          "fold": 3,
+          "negative_rows": 451,
+          "positive_rows": 5,
+          "rows": 456
+        }
+      ],
+      "group": "3: No | 2: Documented value (label omitted)",
+      "negative_rows": 1275,
+      "positive_rows": 20,
+      "rows": 1295,
+      "true_negative": 1269,
+      "true_positive": 2
+    },
+    {
+      "false_negative": 3210,
+      "false_negative_rate": 0.7307079444570909,
+      "false_positive": 2377,
+      "false_positive_rate": 0.017469591739242275,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 1060,
+          "false_negative_rate": 0.7240437158469946,
+          "false_positive": 814,
+          "false_positive_rate": 0.0179271461921332,
+          "fold": 1,
+          "negative_rows": 45406,
+          "positive_rows": 1464,
+          "rows": 46870
+        },
+        {
+          "false_negative": 1069,
+          "false_negative_rate": 0.7342032967032966,
+          "false_positive": 774,
+          "false_positive_rate": 0.01709892634648522,
+          "fold": 2,
+          "negative_rows": 45266,
+          "positive_rows": 1456,
+          "rows": 46722
+        },
+        {
+          "false_negative": 1081,
+          "false_negative_rate": 0.7338764426340801,
+          "false_positive": 789,
+          "false_positive_rate": 0.017381534597845482,
+          "fold": 3,
+          "negative_rows": 45393,
+          "positive_rows": 1473,
+          "rows": 46866
+        }
+      ],
+      "group": "3: No | 3: Documented value (label omitted)",
+      "negative_rows": 136065,
+      "positive_rows": 4393,
+      "rows": 140458,
+      "true_negative": 133688,
+      "true_positive": 1183
+    },
+    {
+      "false_negative": 78,
+      "false_negative_rate": 0.5909090909090909,
+      "false_positive": 76,
+      "false_positive_rate": 0.054636951833213515,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 30,
+          "false_negative_rate": 0.6122448979591837,
+          "false_positive": 28,
+          "false_positive_rate": 0.061269146608315096,
+          "fold": 1,
+          "negative_rows": 457,
+          "positive_rows": 49,
+          "rows": 506
+        },
+        {
+          "false_negative": 23,
+          "false_negative_rate": 0.575,
+          "false_positive": 24,
+          "false_positive_rate": 0.05309734513274336,
+          "fold": 2,
+          "negative_rows": 452,
+          "positive_rows": 40,
+          "rows": 492
+        },
+        {
+          "false_negative": 25,
+          "false_negative_rate": 0.5813953488372093,
+          "false_positive": 24,
+          "false_positive_rate": 0.04979253112033195,
+          "fold": 3,
+          "negative_rows": 482,
+          "positive_rows": 43,
+          "rows": 525
+        }
+      ],
+      "group": "3: No | 4: Documented value (label omitted)",
+      "negative_rows": 1391,
+      "positive_rows": 132,
+      "rows": 1523,
+      "true_negative": 1315,
+      "true_positive": 54
+    },
+    {
+      "false_negative": 9,
+      "false_negative_rate": 0.75,
+      "false_positive": 11,
+      "false_positive_rate": 0.09482758620689655,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.75,
+          "false_positive": 4,
+          "false_positive_rate": 0.10810810810810811,
+          "fold": 1,
+          "negative_rows": 37,
+          "positive_rows": 4,
+          "rows": 41
+        },
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.5,
+          "false_positive": 2,
+          "false_positive_rate": 0.0625,
+          "fold": 2,
+          "negative_rows": 32,
+          "positive_rows": 2,
+          "rows": 34
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.8333333333333334,
+          "false_positive": 5,
+          "false_positive_rate": 0.10638297872340426,
+          "fold": 3,
+          "negative_rows": 47,
+          "positive_rows": 6,
+          "rows": 53
+        }
+      ],
+      "group": "3: No | 7: Documented value (label omitted)",
+      "negative_rows": 116,
+      "positive_rows": 12,
+      "rows": 128,
+      "true_negative": 105,
+      "true_positive": 3
+    },
+    {
+      "false_negative": 11,
+      "false_negative_rate": 0.4230769230769231,
+      "false_positive": 34,
+      "false_positive_rate": 0.19428571428571428,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.16666666666666666,
+          "false_positive": 15,
+          "false_positive_rate": 0.23809523809523808,
+          "fold": 1,
+          "negative_rows": 63,
+          "positive_rows": 6,
+          "rows": 69
+        },
+        {
+          "false_negative": 6,
+          "false_negative_rate": 0.75,
+          "false_positive": 10,
+          "false_positive_rate": 0.17543859649122806,
+          "fold": 2,
+          "negative_rows": 57,
+          "positive_rows": 8,
+          "rows": 65
+        },
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.3333333333333333,
+          "false_positive": 9,
+          "false_positive_rate": 0.16363636363636364,
+          "fold": 3,
+          "negative_rows": 55,
+          "positive_rows": 12,
+          "rows": 67
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 1: Yes",
+      "negative_rows": 175,
+      "positive_rows": 26,
+      "rows": 201,
+      "true_negative": 141,
+      "true_positive": 15
+    },
+    {
+      "false_negative": 90,
+      "false_negative_rate": 0.7317073170731707,
+      "false_positive": 80,
+      "false_positive_rate": 0.0380952380952381,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 30,
+          "false_negative_rate": 0.6818181818181818,
+          "false_positive": 20,
+          "false_positive_rate": 0.028409090909090908,
+          "fold": 1,
+          "negative_rows": 704,
+          "positive_rows": 44,
+          "rows": 748
+        },
+        {
+          "false_negative": 28,
+          "false_negative_rate": 0.7777777777777778,
+          "false_positive": 31,
+          "false_positive_rate": 0.04252400548696845,
+          "fold": 2,
+          "negative_rows": 729,
+          "positive_rows": 36,
+          "rows": 765
+        },
+        {
+          "false_negative": 32,
+          "false_negative_rate": 0.7441860465116279,
+          "false_positive": 29,
+          "false_positive_rate": 0.043478260869565216,
+          "fold": 3,
+          "negative_rows": 667,
+          "positive_rows": 43,
+          "rows": 710
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 3: Documented value (label omitted)",
+      "negative_rows": 2100,
+      "positive_rows": 123,
+      "rows": 2223,
+      "true_negative": 2020,
+      "true_positive": 33
+    },
+    {
+      "false_negative": 14,
+      "false_negative_rate": 0.7,
+      "false_positive": 14,
+      "false_positive_rate": 0.09395973154362416,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 4,
+          "false_negative_rate": 0.5714285714285714,
+          "false_positive": 7,
+          "false_positive_rate": 0.1206896551724138,
+          "fold": 1,
+          "negative_rows": 58,
+          "positive_rows": 7,
+          "rows": 65
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.023255813953488372,
+          "fold": 2,
+          "negative_rows": 43,
+          "positive_rows": 5,
+          "rows": 48
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.625,
+          "false_positive": 6,
+          "false_positive_rate": 0.125,
+          "fold": 3,
+          "negative_rows": 48,
+          "positive_rows": 8,
+          "rows": 56
+        }
+      ],
+      "group": "4: Told borderline high or pre-hypertensive | 4: Documented value (label omitted)",
+      "negative_rows": 149,
+      "positive_rows": 20,
+      "rows": 169,
+      "true_negative": 135,
+      "true_positive": 6
+    },
+    {
+      "false_negative": 22,
+      "false_negative_rate": 0.43137254901960786,
+      "false_positive": 22,
+      "false_positive_rate": 0.06060606060606061,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 8,
+          "false_negative_rate": 0.5714285714285714,
+          "false_positive": 8,
+          "false_positive_rate": 0.06299212598425197,
+          "fold": 1,
+          "negative_rows": 127,
+          "positive_rows": 14,
+          "rows": 141
+        },
+        {
+          "false_negative": 9,
+          "false_negative_rate": 0.5625,
+          "false_positive": 6,
+          "false_positive_rate": 0.04411764705882353,
+          "fold": 2,
+          "negative_rows": 136,
+          "positive_rows": 16,
+          "rows": 152
+        },
+        {
+          "false_negative": 5,
+          "false_negative_rate": 0.23809523809523808,
+          "false_positive": 8,
+          "false_positive_rate": 0.08,
+          "fold": 3,
+          "negative_rows": 100,
+          "positive_rows": 21,
+          "rows": 121
+        }
+      ],
+      "group": "7: Don't know/Not Sure | 3: Documented value (label omitted)",
+      "negative_rows": 363,
+      "positive_rows": 51,
+      "rows": 414,
+      "true_negative": 341,
+      "true_positive": 29
+    },
+    {
+      "false_negative": 3,
+      "false_negative_rate": 0.75,
+      "false_positive": 6,
+      "false_positive_rate": 0.031914893617021274,
+      "feature_pair": "BPHIGH4 \u00d7 DIABETE3",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.75,
+          "false_positive": 2,
+          "false_positive_rate": 0.028169014084507043,
+          "fold": 1,
+          "negative_rows": 71,
+          "positive_rows": 4,
+          "rows": 75
+        },
+        {
+          "false_negative": 0,
+          "false_negative_rate": null,
+          "false_positive": 2,
+          "false_positive_rate": 0.02857142857142857,
+          "fold": 2,
+          "negative_rows": 70,
+          "positive_rows": 0,
+          "rows": 70
+        },
+        {
+          "false_negative": 0,
+          "false_negative_rate": null,
+          "false_positive": 2,
+          "false_positive_rate": 0.0425531914893617,
+          "fold": 3,
+          "negative_rows": 47,
+          "positive_rows": 0,
+          "rows": 47
+        }
+      ],
+      "group": "9: Refused | 3: Documented value (label omitted)",
+      "negative_rows": 188,
+      "positive_rows": 4,
+      "rows": 192,
+      "true_negative": 182,
+      "true_positive": 1
+    },
+    {
+      "false_negative": 62,
+      "false_negative_rate": 0.9253731343283582,
+      "false_positive": 1,
+      "false_positive_rate": 6.195019204559534e-05,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 20,
+          "false_negative_rate": 0.8695652173913043,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 5502,
+          "positive_rows": 23,
+          "rows": 5525
+        },
+        {
+          "false_negative": 19,
+          "false_negative_rate": 0.9047619047619048,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 5254,
+          "positive_rows": 21,
+          "rows": 5275
+        },
+        {
+          "false_negative": 23,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.0001856665428889714,
+          "fold": 3,
+          "negative_rows": 5386,
+          "positive_rows": 23,
+          "rows": 5409
+        }
+      ],
+      "group": "18-44 | 1: Excellent",
+      "negative_rows": 16142,
+      "positive_rows": 67,
+      "rows": 16209,
+      "true_negative": 16141,
+      "true_positive": 5
+    },
+    {
+      "false_negative": 133,
+      "false_negative_rate": 0.9925373134328358,
+      "false_positive": 3,
+      "false_positive_rate": 0.00011840858856962425,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 38,
+          "false_negative_rate": 1.0,
+          "false_positive": 1,
+          "false_positive_rate": 0.00011899095668729176,
+          "fold": 1,
+          "negative_rows": 8404,
+          "positive_rows": 38,
+          "rows": 8442
+        },
+        {
+          "false_negative": 44,
+          "false_negative_rate": 0.9777777777777777,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 8464,
+          "positive_rows": 45,
+          "rows": 8509
+        },
+        {
+          "false_negative": 51,
+          "false_negative_rate": 1.0,
+          "false_positive": 2,
+          "false_positive_rate": 0.00023618327822390176,
+          "fold": 3,
+          "negative_rows": 8468,
+          "positive_rows": 51,
+          "rows": 8519
+        }
+      ],
+      "group": "18-44 | 2: Very good",
+      "negative_rows": 25336,
+      "positive_rows": 134,
+      "rows": 25470,
+      "true_negative": 25333,
+      "true_positive": 1
+    },
+    {
+      "false_negative": 264,
+      "false_negative_rate": 0.9428571428571428,
+      "false_positive": 24,
+      "false_positive_rate": 0.0011556796841142197,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 99,
+          "false_negative_rate": 0.9519230769230769,
+          "false_positive": 9,
+          "false_positive_rate": 0.0013020833333333333,
+          "fold": 1,
+          "negative_rows": 6912,
+          "positive_rows": 104,
+          "rows": 7016
+        },
+        {
+          "false_negative": 86,
+          "false_negative_rate": 0.9772727272727273,
+          "false_positive": 4,
+          "false_positive_rate": 0.0005840268652358008,
+          "fold": 2,
+          "negative_rows": 6849,
+          "positive_rows": 88,
+          "rows": 6937
+        },
+        {
+          "false_negative": 79,
+          "false_negative_rate": 0.8977272727272727,
+          "false_positive": 11,
+          "false_positive_rate": 0.0015700827861832715,
+          "fold": 3,
+          "negative_rows": 7006,
+          "positive_rows": 88,
+          "rows": 7094
+        }
+      ],
+      "group": "18-44 | 3: Good",
+      "negative_rows": 20767,
+      "positive_rows": 280,
+      "rows": 21047,
+      "true_negative": 20743,
+      "true_positive": 16
+    },
+    {
+      "false_negative": 194,
+      "false_negative_rate": 0.8117154811715481,
+      "false_positive": 118,
+      "false_positive_rate": 0.020679985979670523,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 79,
+          "false_negative_rate": 0.8586956521739131,
+          "false_positive": 42,
+          "false_positive_rate": 0.022520107238605896,
+          "fold": 1,
+          "negative_rows": 1865,
+          "positive_rows": 92,
+          "rows": 1957
+        },
+        {
+          "false_negative": 54,
+          "false_negative_rate": 0.8181818181818182,
+          "false_positive": 43,
+          "false_positive_rate": 0.02260778128286015,
+          "fold": 2,
+          "negative_rows": 1902,
+          "positive_rows": 66,
+          "rows": 1968
+        },
+        {
+          "false_negative": 61,
+          "false_negative_rate": 0.7530864197530864,
+          "false_positive": 33,
+          "false_positive_rate": 0.01701908200103146,
+          "fold": 3,
+          "negative_rows": 1939,
+          "positive_rows": 81,
+          "rows": 2020
+        }
+      ],
+      "group": "18-44 | 4: Fair",
+      "negative_rows": 5706,
+      "positive_rows": 239,
+      "rows": 5945,
+      "true_negative": 5588,
+      "true_positive": 45
+    },
+    {
+      "false_negative": 90,
+      "false_negative_rate": 0.5844155844155844,
+      "false_positive": 138,
+      "false_positive_rate": 0.1126530612244898,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 26,
+          "false_negative_rate": 0.5652173913043478,
+          "false_positive": 39,
+          "false_positive_rate": 0.1,
+          "fold": 1,
+          "negative_rows": 390,
+          "positive_rows": 46,
+          "rows": 436
+        },
+        {
+          "false_negative": 41,
+          "false_negative_rate": 0.6949152542372882,
+          "false_positive": 36,
+          "false_positive_rate": 0.08977556109725686,
+          "fold": 2,
+          "negative_rows": 401,
+          "positive_rows": 59,
+          "rows": 460
+        },
+        {
+          "false_negative": 23,
+          "false_negative_rate": 0.46938775510204084,
+          "false_positive": 63,
+          "false_positive_rate": 0.14516129032258066,
+          "fold": 3,
+          "negative_rows": 434,
+          "positive_rows": 49,
+          "rows": 483
+        }
+      ],
+      "group": "18-44 | 5: Poor",
+      "negative_rows": 1225,
+      "positive_rows": 154,
+      "rows": 1379,
+      "true_negative": 1087,
+      "true_positive": 64
+    },
+    {
+      "false_negative": 67,
+      "false_negative_rate": 0.8589743589743589,
+      "false_positive": 1,
+      "false_positive_rate": 0.00012627857052658164,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 23,
+          "false_negative_rate": 0.8846153846153846,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 1,
+          "negative_rows": 2790,
+          "positive_rows": 26,
+          "rows": 2816
+        },
+        {
+          "false_negative": 26,
+          "false_negative_rate": 0.8125,
+          "false_positive": 0,
+          "false_positive_rate": 0.0,
+          "fold": 2,
+          "negative_rows": 2600,
+          "positive_rows": 32,
+          "rows": 2632
+        },
+        {
+          "false_negative": 18,
+          "false_negative_rate": 0.9,
+          "false_positive": 1,
+          "false_positive_rate": 0.00039541320680110717,
+          "fold": 3,
+          "negative_rows": 2529,
+          "positive_rows": 20,
+          "rows": 2549
+        }
+      ],
+      "group": "45-54 | 1: Excellent",
+      "negative_rows": 7919,
+      "positive_rows": 78,
+      "rows": 7997,
+      "true_negative": 7918,
+      "true_positive": 11
+    },
+    {
+      "false_negative": 247,
+      "false_negative_rate": 0.9080882352941176,
+      "false_positive": 11,
+      "false_positive_rate": 0.0007797547316934855,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 90,
+          "false_negative_rate": 0.9,
+          "false_positive": 4,
+          "false_positive_rate": 0.0008600301010535369,
+          "fold": 1,
+          "negative_rows": 4651,
+          "positive_rows": 100,
+          "rows": 4751
+        },
+        {
+          "false_negative": 80,
+          "false_negative_rate": 0.8888888888888888,
+          "false_positive": 2,
+          "false_positive_rate": 0.00041194644696189496,
+          "fold": 2,
+          "negative_rows": 4855,
+          "positive_rows": 90,
+          "rows": 4945
+        },
+        {
+          "false_negative": 77,
+          "false_negative_rate": 0.9390243902439024,
+          "false_positive": 5,
+          "false_positive_rate": 0.0010867202782003911,
+          "fold": 3,
+          "negative_rows": 4601,
+          "positive_rows": 82,
+          "rows": 4683
+        }
+      ],
+      "group": "45-54 | 2: Very good",
+      "negative_rows": 14107,
+      "positive_rows": 272,
+      "rows": 14379,
+      "true_negative": 14096,
+      "true_positive": 25
+    },
+    {
+      "false_negative": 464,
+      "false_negative_rate": 0.8738229755178908,
+      "false_positive": 129,
+      "false_positive_rate": 0.010572903860339317,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 158,
+          "false_negative_rate": 0.9028571428571428,
+          "false_positive": 47,
+          "false_positive_rate": 0.01171193620732619,
+          "fold": 1,
+          "negative_rows": 4013,
+          "positive_rows": 175,
+          "rows": 4188
+        },
+        {
+          "false_negative": 164,
+          "false_negative_rate": 0.8723404255319149,
+          "false_positive": 31,
+          "false_positive_rate": 0.007588739290085679,
+          "fold": 2,
+          "negative_rows": 4085,
+          "positive_rows": 188,
+          "rows": 4273
+        },
+        {
+          "false_negative": 142,
+          "false_negative_rate": 0.8452380952380952,
+          "false_positive": 51,
+          "false_positive_rate": 0.012429929320009749,
+          "fold": 3,
+          "negative_rows": 4103,
+          "positive_rows": 168,
+          "rows": 4271
+        }
+      ],
+      "group": "45-54 | 3: Good",
+      "negative_rows": 12201,
+      "positive_rows": 531,
+      "rows": 12732,
+      "true_negative": 12072,
+      "true_positive": 67
+    },
+    {
+      "false_negative": 370,
+      "false_negative_rate": 0.592,
+      "false_positive": 573,
+      "false_positive_rate": 0.12086057793714407,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 133,
+          "false_negative_rate": 0.59375,
+          "false_positive": 169,
+          "false_positive_rate": 0.10750636132315522,
+          "fold": 1,
+          "negative_rows": 1572,
+          "positive_rows": 224,
+          "rows": 1796
+        },
+        {
+          "false_negative": 118,
+          "false_negative_rate": 0.6082474226804123,
+          "false_positive": 194,
+          "false_positive_rate": 0.12102308172177167,
+          "fold": 2,
+          "negative_rows": 1603,
+          "positive_rows": 194,
+          "rows": 1797
+        },
+        {
+          "false_negative": 119,
+          "false_negative_rate": 0.5748792270531401,
+          "false_positive": 210,
+          "false_positive_rate": 0.13409961685823754,
+          "fold": 3,
+          "negative_rows": 1566,
+          "positive_rows": 207,
+          "rows": 1773
+        }
+      ],
+      "group": "45-54 | 4: Fair",
+      "negative_rows": 4741,
+      "positive_rows": 625,
+      "rows": 5366,
+      "true_negative": 4168,
+      "true_positive": 255
+    },
+    {
+      "false_negative": 137,
+      "false_negative_rate": 0.26145038167938933,
+      "false_positive": 581,
+      "false_positive_rate": 0.33276059564719357,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 36,
+          "false_negative_rate": 0.2236024844720497,
+          "false_positive": 166,
+          "false_positive_rate": 0.3018181818181818,
+          "fold": 1,
+          "negative_rows": 550,
+          "positive_rows": 161,
+          "rows": 711
+        },
+        {
+          "false_negative": 49,
+          "false_negative_rate": 0.2620320855614973,
+          "false_positive": 184,
+          "false_positive_rate": 0.3150684931506849,
+          "fold": 2,
+          "negative_rows": 584,
+          "positive_rows": 187,
+          "rows": 771
+        },
+        {
+          "false_negative": 52,
+          "false_negative_rate": 0.29545454545454547,
+          "false_positive": 231,
+          "false_positive_rate": 0.37745098039215685,
+          "fold": 3,
+          "negative_rows": 612,
+          "positive_rows": 176,
+          "rows": 788
+        }
+      ],
+      "group": "45-54 | 5: Poor",
+      "negative_rows": 1746,
+      "positive_rows": 524,
+      "rows": 2270,
+      "true_negative": 1165,
+      "true_positive": 387
+    },
+    {
+      "false_negative": 157,
+      "false_negative_rate": 0.9457831325301205,
+      "false_positive": 5,
+      "false_positive_rate": 0.0005348737697903295,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 45,
+          "false_negative_rate": 0.9375,
+          "false_positive": 1,
+          "false_positive_rate": 0.000321853878339234,
+          "fold": 1,
+          "negative_rows": 3107,
+          "positive_rows": 48,
+          "rows": 3155
+        },
+        {
+          "false_negative": 58,
+          "false_negative_rate": 0.9206349206349206,
+          "false_positive": 1,
+          "false_positive_rate": 0.00031665611146295124,
+          "fold": 2,
+          "negative_rows": 3158,
+          "positive_rows": 63,
+          "rows": 3221
+        },
+        {
+          "false_negative": 54,
+          "false_negative_rate": 0.9818181818181818,
+          "false_positive": 3,
+          "false_positive_rate": 0.0009730781706130393,
+          "fold": 3,
+          "negative_rows": 3083,
+          "positive_rows": 55,
+          "rows": 3138
+        }
+      ],
+      "group": "55-64 | 1: Excellent",
+      "negative_rows": 9348,
+      "positive_rows": 166,
+      "rows": 9514,
+      "true_negative": 9343,
+      "true_positive": 9
+    },
+    {
+      "false_negative": 597,
+      "false_negative_rate": 0.9328125,
+      "false_positive": 48,
+      "false_positive_rate": 0.0026060046690916986,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 193,
+          "false_negative_rate": 0.9234449760765551,
+          "false_positive": 14,
+          "false_positive_rate": 0.002274573517465475,
+          "fold": 1,
+          "negative_rows": 6155,
+          "positive_rows": 209,
+          "rows": 6364
+        },
+        {
+          "false_negative": 217,
+          "false_negative_rate": 0.9353448275862069,
+          "false_positive": 16,
+          "false_positive_rate": 0.0026476915439351315,
+          "fold": 2,
+          "negative_rows": 6043,
+          "positive_rows": 232,
+          "rows": 6275
+        },
+        {
+          "false_negative": 187,
+          "false_negative_rate": 0.9396984924623115,
+          "false_positive": 18,
+          "false_positive_rate": 0.0028934254942935217,
+          "fold": 3,
+          "negative_rows": 6221,
+          "positive_rows": 199,
+          "rows": 6420
+        }
+      ],
+      "group": "55-64 | 2: Very good",
+      "negative_rows": 18419,
+      "positive_rows": 640,
+      "rows": 19059,
+      "true_negative": 18371,
+      "true_positive": 43
+    },
+    {
+      "false_negative": 1094,
+      "false_negative_rate": 0.7629009762900977,
+      "false_positive": 679,
+      "false_positive_rate": 0.04177433247200689,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 368,
+          "false_negative_rate": 0.7698744769874477,
+          "false_positive": 254,
+          "false_positive_rate": 0.04674273095325727,
+          "fold": 1,
+          "negative_rows": 5434,
+          "positive_rows": 478,
+          "rows": 5912
+        },
+        {
+          "false_negative": 391,
+          "false_negative_rate": 0.7963340122199593,
+          "false_positive": 180,
+          "false_positive_rate": 0.03340137316756356,
+          "fold": 2,
+          "negative_rows": 5389,
+          "positive_rows": 491,
+          "rows": 5880
+        },
+        {
+          "false_negative": 335,
+          "false_negative_rate": 0.7204301075268817,
+          "false_positive": 245,
+          "false_positive_rate": 0.04511139753268275,
+          "fold": 3,
+          "negative_rows": 5431,
+          "positive_rows": 465,
+          "rows": 5896
+        }
+      ],
+      "group": "55-64 | 3: Good",
+      "negative_rows": 16254,
+      "positive_rows": 1434,
+      "rows": 17688,
+      "true_negative": 15575,
+      "true_positive": 340
+    },
+    {
+      "false_negative": 620,
+      "false_negative_rate": 0.386052303860523,
+      "false_positive": 1908,
+      "false_positive_rate": 0.2748487467588591,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 215,
+          "false_negative_rate": 0.388086642599278,
+          "false_positive": 609,
+          "false_positive_rate": 0.26605504587155965,
+          "fold": 1,
+          "negative_rows": 2289,
+          "positive_rows": 554,
+          "rows": 2843
+        },
+        {
+          "false_negative": 231,
+          "false_negative_rate": 0.4269870609981516,
+          "false_positive": 583,
+          "false_positive_rate": 0.24925181701581872,
+          "fold": 2,
+          "negative_rows": 2339,
+          "positive_rows": 541,
+          "rows": 2880
+        },
+        {
+          "false_negative": 174,
+          "false_negative_rate": 0.3405088062622309,
+          "false_positive": 716,
+          "false_positive_rate": 0.3094209161624892,
+          "fold": 3,
+          "negative_rows": 2314,
+          "positive_rows": 511,
+          "rows": 2825
+        }
+      ],
+      "group": "55-64 | 4: Fair",
+      "negative_rows": 6942,
+      "positive_rows": 1606,
+      "rows": 8548,
+      "true_negative": 5034,
+      "true_positive": 986
+    },
+    {
+      "false_negative": 204,
+      "false_negative_rate": 0.1784776902887139,
+      "false_positive": 1356,
+      "false_positive_rate": 0.5014792899408284,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 63,
+          "false_negative_rate": 0.16153846153846155,
+          "false_positive": 443,
+          "false_positive_rate": 0.4884233737596472,
+          "fold": 1,
+          "negative_rows": 907,
+          "positive_rows": 390,
+          "rows": 1297
+        },
+        {
+          "false_negative": 77,
+          "false_negative_rate": 0.2010443864229765,
+          "false_positive": 442,
+          "false_positive_rate": 0.4857142857142857,
+          "fold": 2,
+          "negative_rows": 910,
+          "positive_rows": 383,
+          "rows": 1293
+        },
+        {
+          "false_negative": 64,
+          "false_negative_rate": 0.17297297297297298,
+          "false_positive": 471,
+          "false_positive_rate": 0.5310033821871477,
+          "fold": 3,
+          "negative_rows": 887,
+          "positive_rows": 370,
+          "rows": 1257
+        }
+      ],
+      "group": "55-64 | 5: Poor",
+      "negative_rows": 2704,
+      "positive_rows": 1143,
+      "rows": 3847,
+      "true_negative": 1348,
+      "true_positive": 939
+    },
+    {
+      "false_negative": 520,
+      "false_negative_rate": 0.8552631578947368,
+      "false_positive": 146,
+      "false_positive_rate": 0.013110632183908046,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 169,
+          "false_negative_rate": 0.8407960199004975,
+          "false_positive": 56,
+          "false_positive_rate": 0.015329865863673693,
+          "fold": 1,
+          "negative_rows": 3653,
+          "positive_rows": 201,
+          "rows": 3854
+        },
+        {
+          "false_negative": 168,
+          "false_negative_rate": 0.8442211055276382,
+          "false_positive": 48,
+          "false_positive_rate": 0.012779552715654952,
+          "fold": 2,
+          "negative_rows": 3756,
+          "positive_rows": 199,
+          "rows": 3955
+        },
+        {
+          "false_negative": 183,
+          "false_negative_rate": 0.8798076923076923,
+          "false_positive": 42,
+          "false_positive_rate": 0.011269117252481888,
+          "fold": 3,
+          "negative_rows": 3727,
+          "positive_rows": 208,
+          "rows": 3935
+        }
+      ],
+      "group": "65+ | 1: Excellent",
+      "negative_rows": 11136,
+      "positive_rows": 608,
+      "rows": 11744,
+      "true_negative": 10990,
+      "true_positive": 88
+    },
+    {
+      "false_negative": 1931,
+      "false_negative_rate": 0.7395633856759862,
+      "false_positive": 1661,
+      "false_positive_rate": 0.06628357077297578,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 635,
+          "false_negative_rate": 0.7470588235294118,
+          "false_positive": 639,
+          "false_positive_rate": 0.07618025751072961,
+          "fold": 1,
+          "negative_rows": 8388,
+          "positive_rows": 850,
+          "rows": 9238
+        },
+        {
+          "false_negative": 665,
+          "false_negative_rate": 0.753968253968254,
+          "false_positive": 506,
+          "false_positive_rate": 0.060353053435114504,
+          "fold": 2,
+          "negative_rows": 8384,
+          "positive_rows": 882,
+          "rows": 9266
+        },
+        {
+          "false_negative": 631,
+          "false_negative_rate": 0.7178612059158134,
+          "false_positive": 516,
+          "false_positive_rate": 0.06226620007240256,
+          "fold": 3,
+          "negative_rows": 8287,
+          "positive_rows": 879,
+          "rows": 9166
+        }
+      ],
+      "group": "65+ | 2: Very good",
+      "negative_rows": 25059,
+      "positive_rows": 2611,
+      "rows": 27670,
+      "true_negative": 23398,
+      "true_positive": 680
+    },
+    {
+      "false_negative": 2317,
+      "false_negative_rate": 0.43832765796443435,
+      "false_positive": 5842,
+      "false_positive_rate": 0.2357261025703103,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 812,
+          "false_negative_rate": 0.45161290322580644,
+          "false_positive": 1945,
+          "false_positive_rate": 0.2352727712592234,
+          "fold": 1,
+          "negative_rows": 8267,
+          "positive_rows": 1798,
+          "rows": 10065
+        },
+        {
+          "false_negative": 733,
+          "false_negative_rate": 0.42790426152948047,
+          "false_positive": 1856,
+          "false_positive_rate": 0.22518806115020626,
+          "fold": 2,
+          "negative_rows": 8242,
+          "positive_rows": 1713,
+          "rows": 9955
+        },
+        {
+          "false_negative": 772,
+          "false_negative_rate": 0.4349295774647887,
+          "false_positive": 2041,
+          "false_positive_rate": 0.2466763355088228,
+          "fold": 3,
+          "negative_rows": 8274,
+          "positive_rows": 1775,
+          "rows": 10049
+        }
+      ],
+      "group": "65+ | 3: Good",
+      "negative_rows": 24783,
+      "positive_rows": 5286,
+      "rows": 30069,
+      "true_negative": 18941,
+      "true_positive": 2969
+    },
+    {
+      "false_negative": 763,
+      "false_negative_rate": 0.18201335877862596,
+      "false_positive": 5814,
+      "false_positive_rate": 0.5472,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 261,
+          "false_negative_rate": 0.1884476534296029,
+          "false_positive": 1980,
+          "false_positive_rate": 0.5490848585690515,
+          "fold": 1,
+          "negative_rows": 3606,
+          "positive_rows": 1385,
+          "rows": 4991
+        },
+        {
+          "false_negative": 267,
+          "false_negative_rate": 0.19222462203023757,
+          "false_positive": 1911,
+          "false_positive_rate": 0.5418202438332861,
+          "fold": 2,
+          "negative_rows": 3527,
+          "positive_rows": 1389,
+          "rows": 4916
+        },
+        {
+          "false_negative": 235,
+          "false_negative_rate": 0.16572637517630465,
+          "false_positive": 1923,
+          "false_positive_rate": 0.5506872852233677,
+          "fold": 3,
+          "negative_rows": 3492,
+          "positive_rows": 1418,
+          "rows": 4910
+        }
+      ],
+      "group": "65+ | 4: Fair",
+      "negative_rows": 10625,
+      "positive_rows": 4192,
+      "rows": 14817,
+      "true_negative": 4811,
+      "true_positive": 3429
+    },
+    {
+      "false_negative": 149,
+      "false_negative_rate": 0.05988745980707395,
+      "false_positive": 2670,
+      "false_positive_rate": 0.7502107333520652,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 46,
+          "false_negative_rate": 0.05815423514538559,
+          "false_positive": 847,
+          "false_positive_rate": 0.750886524822695,
+          "fold": 1,
+          "negative_rows": 1128,
+          "positive_rows": 791,
+          "rows": 1919
+        },
+        {
+          "false_negative": 49,
+          "false_negative_rate": 0.05889423076923077,
+          "false_positive": 905,
+          "false_positive_rate": 0.7405891980360065,
+          "fold": 2,
+          "negative_rows": 1222,
+          "positive_rows": 832,
+          "rows": 2054
+        },
+        {
+          "false_negative": 54,
+          "false_negative_rate": 0.06242774566473988,
+          "false_positive": 918,
+          "false_positive_rate": 0.7593052109181141,
+          "fold": 3,
+          "negative_rows": 1209,
+          "positive_rows": 865,
+          "rows": 2074
+        }
+      ],
+      "group": "65+ | 5: Poor",
+      "negative_rows": 3559,
+      "positive_rows": 2488,
+      "rows": 6047,
+      "true_negative": 889,
+      "true_positive": 2339
+    },
+    {
+      "false_negative": 11,
+      "false_negative_rate": 0.22,
+      "false_positive": 68,
+      "false_positive_rate": 0.35789473684210527,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 1,
+          "false_negative_rate": 0.0625,
+          "false_positive": 13,
+          "false_positive_rate": 0.2549019607843137,
+          "fold": 1,
+          "negative_rows": 51,
+          "positive_rows": 16,
+          "rows": 67
+        },
+        {
+          "false_negative": 7,
+          "false_negative_rate": 0.4117647058823529,
+          "false_positive": 25,
+          "false_positive_rate": 0.35714285714285715,
+          "fold": 2,
+          "negative_rows": 70,
+          "positive_rows": 17,
+          "rows": 87
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.17647058823529413,
+          "false_positive": 30,
+          "false_positive_rate": 0.43478260869565216,
+          "fold": 3,
+          "negative_rows": 69,
+          "positive_rows": 17,
+          "rows": 86
+        }
+      ],
+      "group": "65+ | 7: Don\u2019t know/Not Sure",
+      "negative_rows": 190,
+      "positive_rows": 50,
+      "rows": 240,
+      "true_negative": 122,
+      "true_positive": 39
+    },
+    {
+      "false_negative": 8,
+      "false_negative_rate": 0.4,
+      "false_positive": 28,
+      "false_positive_rate": 0.3076923076923077,
+      "feature_pair": "_AGE80 \u00d7 GENHLTH",
+      "folds": [
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.5,
+          "false_positive": 10,
+          "false_positive_rate": 0.4166666666666667,
+          "fold": 1,
+          "negative_rows": 24,
+          "positive_rows": 6,
+          "rows": 30
+        },
+        {
+          "false_negative": 3,
+          "false_negative_rate": 0.375,
+          "false_positive": 7,
+          "false_positive_rate": 0.25925925925925924,
+          "fold": 2,
+          "negative_rows": 27,
+          "positive_rows": 8,
+          "rows": 35
+        },
+        {
+          "false_negative": 2,
+          "false_negative_rate": 0.3333333333333333,
+          "false_positive": 11,
+          "false_positive_rate": 0.275,
+          "fold": 3,
+          "negative_rows": 40,
+          "positive_rows": 6,
+          "rows": 46
+        }
+      ],
+      "group": "65+ | 9: Refused",
+      "negative_rows": 91,
+      "positive_rows": 20,
+      "rows": 111,
+      "true_negative": 63,
+      "true_positive": 12
+    }
+  ],
+  "error_counts": {
+    "false_negative": 10419,
+    "false_positive": 21835,
+    "true_negative": 217493,
+    "true_positive": 12761
+  },
+  "group_rows": [
+    {
+      "false_negative": 745,
+      "false_negative_rate": 0.8504566210045662,
+      "false_positive": 285,
+      "false_positive_rate": 0.00411350383927025,
+      "feature": "_AGE80",
+      "group": "18-44",
+      "negative_rows": 69284,
+      "positive_rows": 876,
+      "rows": 70160,
+      "true_negative": 68999,
+      "true_positive": 131
+    },
+    {
+      "false_negative": 1289,
+      "false_negative_rate": 0.632793323514973,
+      "false_positive": 1303,
+      "false_positive_rate": 0.0319378400902005,
+      "feature": "_AGE80",
+      "group": "45-54",
+      "negative_rows": 40798,
+      "positive_rows": 2037,
+      "rows": 42835,
+      "true_negative": 39495,
+      "true_positive": 748
+    },
+    {
+      "false_negative": 2686,
+      "false_negative_rate": 0.5359138068635275,
+      "false_positive": 4018,
+      "false_positive_rate": 0.07468123861566485,
+      "feature": "_AGE80",
+      "group": "55-64",
+      "negative_rows": 53802,
+      "positive_rows": 5012,
+      "rows": 58814,
+      "true_negative": 49784,
+      "true_positive": 2326
+    },
+    {
+      "false_negative": 5699,
+      "false_negative_rate": 0.37358243198951163,
+      "false_positive": 16229,
+      "false_positive_rate": 0.21511319654313132,
+      "feature": "_AGE80",
+      "group": "65+",
+      "negative_rows": 75444,
+      "positive_rows": 15255,
+      "rows": 90699,
+      "true_negative": 59215,
+      "true_positive": 9556
+    },
+    {
+      "false_negative": 3589,
+      "false_negative_rate": 0.44172307692307694,
+      "false_positive": 7631,
+      "false_positive_rate": 0.09605387374913463,
+      "feature": "_BMI5",
+      "group": "25-<30",
+      "negative_rows": 79445,
+      "positive_rows": 8125,
+      "rows": 87570,
+      "true_negative": 71814,
+      "true_positive": 4536
+    },
+    {
+      "false_negative": 1994,
+      "false_negative_rate": 0.4148117328895361,
+      "false_positive": 4652,
+      "false_positive_rate": 0.120225357936631,
+      "feature": "_BMI5",
+      "group": "30-<35",
+      "negative_rows": 38694,
+      "positive_rows": 4807,
+      "rows": 43501,
+      "true_negative": 34042,
+      "true_positive": 2813
+    },
+    {
+      "false_negative": 1303,
+      "false_negative_rate": 0.3946093276801938,
+      "false_positive": 3466,
+      "false_positive_rate": 0.1426748446054419,
+      "feature": "_BMI5",
+      "group": "35+",
+      "negative_rows": 24293,
+      "positive_rows": 3302,
+      "rows": 27595,
+      "true_negative": 20827,
+      "true_positive": 1999
+    },
+    {
+      "false_negative": 2774,
+      "false_negative_rate": 0.4923677671281505,
+      "false_positive": 5067,
+      "false_positive_rate": 0.06618943738325082,
+      "feature": "_BMI5",
+      "group": "<25",
+      "negative_rows": 76553,
+      "positive_rows": 5634,
+      "rows": 82187,
+      "true_negative": 71486,
+      "true_positive": 2860
+    },
+    {
+      "false_negative": 759,
+      "false_negative_rate": 0.5785060975609756,
+      "false_positive": 1019,
+      "false_positive_rate": 0.05009094037260974,
+      "feature": "_BMI5",
+      "group": "missing",
+      "negative_rows": 20343,
+      "positive_rows": 1312,
+      "rows": 21655,
+      "true_negative": 19324,
+      "true_positive": 553
+    },
+    {
+      "false_negative": 5869,
+      "false_negative_rate": 0.6091965953913224,
+      "false_positive": 7542,
+      "false_positive_rate": 0.04901476551939274,
+      "feature": "PHYSHLTH",
+      "group": "0 days",
+      "negative_rows": 153872,
+      "positive_rows": 9634,
+      "rows": 163506,
+      "true_negative": 146330,
+      "true_positive": 3765
+    },
+    {
+      "false_negative": 2493,
+      "false_negative_rate": 0.4597934341571376,
+      "false_positive": 4908,
+      "false_positive_rate": 0.09194627100545158,
+      "feature": "PHYSHLTH",
+      "group": "1-13 days",
+      "negative_rows": 53379,
+      "positive_rows": 5422,
+      "rows": 58801,
+      "true_negative": 48471,
+      "true_positive": 2929
+    },
+    {
+      "false_negative": 741,
+      "false_negative_rate": 0.2877669902912621,
+      "false_positive": 2832,
+      "false_positive_rate": 0.24026469839653855,
+      "feature": "PHYSHLTH",
+      "group": "14-29 days",
+      "negative_rows": 11787,
+      "positive_rows": 2575,
+      "rows": 14362,
+      "true_negative": 8955,
+      "true_positive": 1834
+    },
+    {
+      "false_negative": 1316,
+      "false_negative_rate": 0.2371598486213732,
+      "false_positive": 6553,
+      "false_positive_rate": 0.32298289713637934,
+      "feature": "PHYSHLTH",
+      "group": "30 days",
+      "negative_rows": 20289,
+      "positive_rows": 5549,
+      "rows": 25838,
+      "true_negative": 13736,
+      "true_positive": 4233
+    },
+    {
+      "false_negative": 7221,
+      "false_negative_rate": 0.48063099041533547,
+      "false_positive": 13666,
+      "false_positive_rate": 0.08306992802956623,
+      "feature": "MENTHLTH",
+      "group": "0 days",
+      "negative_rows": 164512,
+      "positive_rows": 15024,
+      "rows": 179536,
+      "true_negative": 150846,
+      "true_positive": 7803
+    },
+    {
+      "false_negative": 1761,
+      "false_negative_rate": 0.44650101419878296,
+      "false_positive": 3702,
+      "false_positive_rate": 0.07622930565851248,
+      "feature": "MENTHLTH",
+      "group": "1-13 days",
+      "negative_rows": 48564,
+      "positive_rows": 3944,
+      "rows": 52508,
+      "true_negative": 44862,
+      "true_positive": 2183
+    },
+    {
+      "false_negative": 561,
+      "false_negative_rate": 0.3537200504413619,
+      "false_positive": 1602,
+      "false_positive_rate": 0.13884555382215288,
+      "feature": "MENTHLTH",
+      "group": "14-29 days",
+      "negative_rows": 11538,
+      "positive_rows": 1586,
+      "rows": 13124,
+      "true_negative": 9936,
+      "true_positive": 1025
+    },
+    {
+      "false_negative": 876,
+      "false_negative_rate": 0.3335872048743336,
+      "false_positive": 2865,
+      "false_positive_rate": 0.19471251868968328,
+      "feature": "MENTHLTH",
+      "group": "30 days",
+      "negative_rows": 14714,
+      "positive_rows": 2626,
+      "rows": 17340,
+      "true_negative": 11849,
+      "true_positive": 1750
+    },
+    {
+      "false_negative": 6360,
+      "false_negative_rate": 0.37015481317658017,
+      "false_positive": 18122,
+      "false_positive_rate": 0.20523448736678784,
+      "feature": "BPHIGH4",
+      "group": "1: Yes",
+      "negative_rows": 88299,
+      "positive_rows": 17182,
+      "rows": 105481,
+      "true_negative": 70177,
+      "true_positive": 10822
+    },
+    {
+      "false_negative": 44,
+      "false_negative_rate": 0.7586206896551724,
+      "false_positive": 19,
+      "false_positive_rate": 0.010095642933049946,
+      "feature": "BPHIGH4",
+      "group": "2: Yes, but female told only during pregnancy",
+      "negative_rows": 1882,
+      "positive_rows": 58,
+      "rows": 1940,
+      "true_negative": 1863,
+      "true_positive": 14
+    },
+    {
+      "false_negative": 3865,
+      "false_negative_rate": 0.6793812620847249,
+      "false_positive": 3512,
+      "false_positive_rate": 0.024049852769978772,
+      "feature": "BPHIGH4",
+      "group": "3: No",
+      "negative_rows": 146030,
+      "positive_rows": 5689,
+      "rows": 151719,
+      "true_negative": 142518,
+      "true_positive": 1824
+    },
+    {
+      "false_negative": 115,
+      "false_negative_rate": 0.6804733727810651,
+      "false_positive": 128,
+      "false_positive_rate": 0.05241605241605242,
+      "feature": "BPHIGH4",
+      "group": "4: Told borderline high or pre-hypertensive",
+      "negative_rows": 2442,
+      "positive_rows": 169,
+      "rows": 2611,
+      "true_negative": 2314,
+      "true_positive": 54
+    },
+    {
+      "false_negative": 29,
+      "false_negative_rate": 0.3972602739726027,
+      "false_positive": 45,
+      "false_positive_rate": 0.10227272727272728,
+      "feature": "BPHIGH4",
+      "group": "7: Don't know/Not Sure",
+      "negative_rows": 440,
+      "positive_rows": 73,
+      "rows": 513,
+      "true_negative": 395,
+      "true_positive": 44
+    },
+    {
+      "false_negative": 6,
+      "false_negative_rate": 0.6666666666666666,
+      "false_positive": 9,
+      "false_positive_rate": 0.03829787234042553,
+      "feature": "BPHIGH4",
+      "group": "9: Refused",
+      "negative_rows": 235,
+      "positive_rows": 9,
+      "rows": 244,
+      "true_negative": 226,
+      "true_positive": 3
+    },
+    {
+      "false_negative": 2058,
+      "false_negative_rate": 0.2757234726688103,
+      "false_positive": 8327,
+      "false_positive_rate": 0.3153211148136928,
+      "feature": "DIABETE3",
+      "group": "1: Yes",
+      "negative_rows": 26408,
+      "positive_rows": 7464,
+      "rows": 33872,
+      "true_negative": 18081,
+      "true_positive": 5406
+    },
+    {
+      "false_negative": 51,
+      "false_negative_rate": 0.5666666666666667,
+      "false_positive": 44,
+      "false_positive_rate": 0.021825396825396824,
+      "feature": "DIABETE3",
+      "group": "2: Documented value (label omitted)",
+      "negative_rows": 2016,
+      "positive_rows": 90,
+      "rows": 2106,
+      "true_negative": 1972,
+      "true_positive": 39
+    },
+    {
+      "false_negative": 8002,
+      "false_negative_rate": 0.5370830257064233,
+      "false_positive": 12745,
+      "false_positive_rate": 0.06165821658023067,
+      "feature": "DIABETE3",
+      "group": "3: Documented value (label omitted)",
+      "negative_rows": 206704,
+      "positive_rows": 14899,
+      "rows": 221603,
+      "true_negative": 193959,
+      "true_positive": 6897
+    },
+    {
+      "false_negative": 286,
+      "false_negative_rate": 0.4224519940915805,
+      "false_positive": 668,
+      "false_positive_rate": 0.17203193407159412,
+      "feature": "DIABETE3",
+      "group": "4: Documented value (label omitted)",
+      "negative_rows": 3883,
+      "positive_rows": 677,
+      "rows": 4560,
+      "true_negative": 3215,
+      "true_positive": 391
+    },
+    {
+      "false_negative": 19,
+      "false_negative_rate": 0.4318181818181818,
+      "false_positive": 48,
+      "false_positive_rate": 0.183206106870229,
+      "feature": "DIABETE3",
+      "group": "7: Documented value (label omitted)",
+      "negative_rows": 262,
+      "positive_rows": 44,
+      "rows": 306,
+      "true_negative": 214,
+      "true_positive": 25
+    },
+    {
+      "false_negative": 5094,
+      "false_negative_rate": 0.37764104084809846,
+      "false_positive": 13923,
+      "false_positive_rate": 0.1452915640522603,
+      "feature": "SMOKE100",
+      "group": "1: Yes",
+      "negative_rows": 95828,
+      "positive_rows": 13489,
+      "rows": 109317,
+      "true_negative": 81905,
+      "true_positive": 8395
+    },
+    {
+      "false_negative": 4934,
+      "false_negative_rate": 0.5550056242969629,
+      "false_positive": 7241,
+      "false_positive_rate": 0.05409342526949597,
+      "feature": "SMOKE100",
+      "group": "2: Documented value (label omitted)",
+      "negative_rows": 133861,
+      "positive_rows": 8890,
+      "rows": 142751,
+      "true_negative": 126620,
+      "true_positive": 3956
+    },
+    {
+      "false_negative": 42,
+      "false_negative_rate": 0.38181818181818183,
+      "false_positive": 108,
+      "false_positive_rate": 0.11226611226611227,
+      "feature": "SMOKE100",
+      "group": "7: Documented value (label omitted)",
+      "negative_rows": 962,
+      "positive_rows": 110,
+      "rows": 1072,
+      "true_negative": 854,
+      "true_positive": 68
+    },
+    {
+      "false_negative": 33,
+      "false_negative_rate": 0.6,
+      "false_positive": 47,
+      "false_positive_rate": 0.05752753977968176,
+      "feature": "SMOKE100",
+      "group": "9: Documented value (label omitted)",
+      "negative_rows": 817,
+      "positive_rows": 55,
+      "rows": 872,
+      "true_negative": 770,
+      "true_positive": 22
+    },
+    {
+      "false_negative": 316,
+      "false_negative_rate": 0.4968553459119497,
+      "false_positive": 516,
+      "false_positive_rate": 0.06564885496183206,
+      "feature": "SMOKE100",
+      "group": "missing",
+      "negative_rows": 7860,
+      "positive_rows": 636,
+      "rows": 8496,
+      "true_negative": 7344,
+      "true_positive": 320
+    },
+    {
+      "false_negative": 806,
+      "false_negative_rate": 0.8770402611534276,
+      "false_positive": 153,
+      "false_positive_rate": 0.0034347289258053653,
+      "feature": "GENHLTH",
+      "group": "1: Excellent",
+      "negative_rows": 44545,
+      "positive_rows": 919,
+      "rows": 45464,
+      "true_negative": 44392,
+      "true_positive": 113
+    },
+    {
+      "false_negative": 2908,
+      "false_negative_rate": 0.7951873120043752,
+      "false_positive": 1723,
+      "false_positive_rate": 0.020778813569542094,
+      "feature": "GENHLTH",
+      "group": "2: Very good",
+      "negative_rows": 82921,
+      "positive_rows": 3657,
+      "rows": 86578,
+      "true_negative": 81198,
+      "true_positive": 749
+    },
+    {
+      "false_negative": 4139,
+      "false_negative_rate": 0.549595007303147,
+      "false_positive": 6674,
+      "false_positive_rate": 0.09018309573677455,
+      "feature": "GENHLTH",
+      "group": "3: Good",
+      "negative_rows": 74005,
+      "positive_rows": 7531,
+      "rows": 81536,
+      "true_negative": 67331,
+      "true_positive": 3392
+    },
+    {
+      "false_negative": 1947,
+      "false_negative_rate": 0.2922545782047433,
+      "false_positive": 8413,
+      "false_positive_rate": 0.3003141286499607,
+      "feature": "GENHLTH",
+      "group": "4: Fair",
+      "negative_rows": 28014,
+      "positive_rows": 6662,
+      "rows": 34676,
+      "true_negative": 19601,
+      "true_positive": 4715
+    },
+    {
+      "false_negative": 580,
+      "false_negative_rate": 0.1346019958226967,
+      "false_positive": 4745,
+      "false_positive_rate": 0.5138618150314057,
+      "feature": "GENHLTH",
+      "group": "5: Poor",
+      "negative_rows": 9234,
+      "positive_rows": 4309,
+      "rows": 13543,
+      "true_negative": 4489,
+      "true_positive": 3729
+    },
+    {
+      "false_negative": 23,
+      "false_negative_rate": 0.3333333333333333,
+      "false_positive": 89,
+      "false_positive_rate": 0.22938144329896906,
+      "feature": "GENHLTH",
+      "group": "7: Don\u2019t know/Not Sure",
+      "negative_rows": 388,
+      "positive_rows": 69,
+      "rows": 457,
+      "true_negative": 299,
+      "true_positive": 46
+    },
+    {
+      "false_negative": 16,
+      "false_negative_rate": 0.48484848484848486,
+      "false_positive": 38,
+      "false_positive_rate": 0.1735159817351598,
+      "feature": "GENHLTH",
+      "group": "9: Refused",
+      "negative_rows": 219,
+      "positive_rows": 33,
+      "rows": 252,
+      "true_negative": 181,
+      "true_positive": 17
+    },
+    {
+      "false_negative": 2603,
+      "false_negative_rate": 0.7676201710409909,
+      "false_positive": 1554,
+      "false_positive_rate": 0.014979468296350561,
+      "feature": "EMPLOY1",
+      "group": "1: Employed for wages",
+      "negative_rows": 103742,
+      "positive_rows": 3391,
+      "rows": 107133,
+      "true_negative": 102188,
+      "true_positive": 788
+    },
+    {
+      "false_negative": 790,
+      "false_negative_rate": 0.6572379367720466,
+      "false_positive": 738,
+      "false_positive_rate": 0.03578181818181818,
+      "feature": "EMPLOY1",
+      "group": "2: Self-employed",
+      "negative_rows": 20625,
+      "positive_rows": 1202,
+      "rows": 21827,
+      "true_negative": 19887,
+      "true_positive": 412
+    },
+    {
+      "false_negative": 283,
+      "false_negative_rate": 0.5740365111561866,
+      "false_positive": 347,
+      "false_positive_rate": 0.06781317178034005,
+      "feature": "EMPLOY1",
+      "group": "3: Out of work for 1 year or more",
+      "negative_rows": 5117,
+      "positive_rows": 493,
+      "rows": 5610,
+      "true_negative": 4770,
+      "true_positive": 210
+    },
+    {
+      "false_negative": 186,
+      "false_negative_rate": 0.7237354085603113,
+      "false_positive": 137,
+      "false_positive_rate": 0.02662261951029926,
+      "feature": "EMPLOY1",
+      "group": "4: Out of work for less than 1 year",
+      "negative_rows": 5146,
+      "positive_rows": 257,
+      "rows": 5403,
+      "true_negative": 5009,
+      "true_positive": 71
+    },
+    {
+      "false_negative": 608,
+      "false_negative_rate": 0.5897187196896218,
+      "false_positive": 748,
+      "false_positive_rate": 0.04960212201591512,
+      "feature": "EMPLOY1",
+      "group": "5: A homemaker",
+      "negative_rows": 15080,
+      "positive_rows": 1031,
+      "rows": 16111,
+      "true_negative": 14332,
+      "true_positive": 423
+    },
+    {
+      "false_negative": 46,
+      "false_negative_rate": 0.9019607843137255,
+      "false_positive": 17,
+      "false_positive_rate": 0.002472008143085648,
+      "feature": "EMPLOY1",
+      "group": "6: A student",
+      "negative_rows": 6877,
+      "positive_rows": 51,
+      "rows": 6928,
+      "true_negative": 6860,
+      "true_positive": 5
+    },
+    {
+      "false_negative": 4752,
+      "false_negative_rate": 0.3747929647448537,
+      "false_positive": 13715,
+      "false_positive_rate": 0.20842514778961446,
+      "feature": "EMPLOY1",
+      "group": "7: Retired",
+      "negative_rows": 65803,
+      "positive_rows": 12679,
+      "rows": 78482,
+      "true_negative": 52088,
+      "true_positive": 7927
+    },
+    {
+      "false_negative": 1075,
+      "false_negative_rate": 0.2736761710794297,
+      "false_positive": 4470,
+      "false_positive_rate": 0.301294149366406,
+      "feature": "EMPLOY1",
+      "group": "8: Unable to work",
+      "negative_rows": 14836,
+      "positive_rows": 3928,
+      "rows": 18764,
+      "true_negative": 10366,
+      "true_positive": 2853
+    },
+    {
+      "false_negative": 76,
+      "false_negative_rate": 0.5135135135135135,
+      "false_positive": 109,
+      "false_positive_rate": 0.051855375832540435,
+      "feature": "EMPLOY1",
+      "group": "9: Refused",
+      "negative_rows": 2102,
+      "positive_rows": 148,
+      "rows": 2250,
+      "true_negative": 1993,
+      "true_positive": 72
+    },
+    {
+      "false_negative": 498,
+      "false_negative_rate": 0.3477653631284916,
+      "false_positive": 1381,
+      "false_positive_rate": 0.14646303955880793,
+      "feature": "INCOME2",
+      "group": "1: Less than $10,000",
+      "negative_rows": 9429,
+      "positive_rows": 1432,
+      "rows": 10861,
+      "true_negative": 8048,
+      "true_positive": 934
+    },
+    {
+      "false_negative": 588,
+      "false_negative_rate": 0.3107822410147992,
+      "false_positive": 1969,
+      "false_positive_rate": 0.20357733664185276,
+      "feature": "INCOME2",
+      "group": "2: Less than $15,000 ($10,000 to less than $15,000)",
+      "negative_rows": 9672,
+      "positive_rows": 1892,
+      "rows": 11564,
+      "true_negative": 7703,
+      "true_positive": 1304
+    },
+    {
+      "false_negative": 746,
+      "false_negative_rate": 0.3598649300530632,
+      "false_positive": 2161,
+      "false_positive_rate": 0.15759918319719954,
+      "feature": "INCOME2",
+      "group": "3: Less than $20,000 ($15,000 to less than $20,000)",
+      "negative_rows": 13712,
+      "positive_rows": 2073,
+      "rows": 15785,
+      "true_negative": 11551,
+      "true_positive": 1327
+    },
+    {
+      "false_negative": 925,
+      "false_negative_rate": 0.4014756944444444,
+      "false_positive": 2339,
+      "false_positive_rate": 0.13853352286188106,
+      "feature": "INCOME2",
+      "group": "4: Less than $25,000 ($20,000 to less than $25,000)",
+      "negative_rows": 16884,
+      "positive_rows": 2304,
+      "rows": 19188,
+      "true_negative": 14545,
+      "true_positive": 1379
+    },
+    {
+      "false_negative": 1076,
+      "false_negative_rate": 0.4274930472785062,
+      "false_positive": 2510,
+      "false_positive_rate": 0.12045879925133177,
+      "feature": "INCOME2",
+      "group": "5: Less than $35,000 ($25,000 to less than $35,000)",
+      "negative_rows": 20837,
+      "positive_rows": 2517,
+      "rows": 23354,
+      "true_negative": 18327,
+      "true_positive": 1441
+    },
+    {
+      "false_negative": 1248,
+      "false_negative_rate": 0.45447924253459576,
+      "false_positive": 2594,
+      "false_positive_rate": 0.09164782362916903,
+      "feature": "INCOME2",
+      "group": "6: Less than $50,000 ($35,000 to less than $50,000)",
+      "negative_rows": 28304,
+      "positive_rows": 2746,
+      "rows": 31050,
+      "true_negative": 25710,
+      "true_positive": 1498
+    },
+    {
+      "false_negative": 903,
+      "false_negative_rate": 0.41805555555555557,
+      "false_positive": 2188,
+      "false_positive_rate": 0.11797056127675636,
+      "feature": "INCOME2",
+      "group": "77: Don\u2019t know/Not sure",
+      "negative_rows": 18547,
+      "positive_rows": 2160,
+      "rows": 20707,
+      "true_negative": 16359,
+      "true_positive": 1257
+    },
+    {
+      "false_negative": 1238,
+      "false_negative_rate": 0.5096747632770687,
+      "false_positive": 2141,
+      "false_positive_rate": 0.06632178923238957,
+      "feature": "INCOME2",
+      "group": "7: Less than $75,000 ($50,000 to less than $75,000)",
+      "negative_rows": 32282,
+      "positive_rows": 2429,
+      "rows": 34711,
+      "true_negative": 30141,
+      "true_positive": 1191
+    },
+    {
+      "false_negative": 2049,
+      "false_negative_rate": 0.6142086330935251,
+      "false_positive": 2454,
+      "false_positive_rate": 0.03738630996815917,
+      "feature": "INCOME2",
+      "group": "8: $75,000 or more",
+      "negative_rows": 65639,
+      "positive_rows": 3336,
+      "rows": 68975,
+      "true_negative": 63185,
+      "true_positive": 1287
+    },
+    {
+      "false_negative": 1083,
+      "false_negative_rate": 0.49930843706777317,
+      "false_positive": 1987,
+      "false_positive_rate": 0.08951660134252376,
+      "feature": "INCOME2",
+      "group": "99: Refused",
+      "negative_rows": 22197,
+      "positive_rows": 2169,
+      "rows": 24366,
+      "true_negative": 20210,
+      "true_positive": 1086
+    },
+    {
+      "false_negative": 65,
+      "false_negative_rate": 0.5327868852459017,
+      "false_positive": 111,
+      "false_positive_rate": 0.060821917808219175,
+      "feature": "INCOME2",
+      "group": "missing",
+      "negative_rows": 1825,
+      "positive_rows": 122,
+      "rows": 1947,
+      "true_negative": 1714,
+      "true_positive": 57
+    }
+  ],
+  "input_sha256": {
+    "config": "a39bfa5012ab4d2f7d1bd1b12aeb23096c644006e9fc86f01a36b4f506eff438",
+    "experiment_record": "3388170d99c344fc081441bc56214fcb836cd300feb6e57354d6c6036dede76a",
+    "feature_metadata": "28e5f94aae365c1aece9dbc7398d875ca90fbd91456115c46ecfc573723ad587",
+    "features": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+    "oof_artifact": "d98b9c7696fc79cb25c3e27eec67200ee4ab1e5734c3745452d9df8ae6bb5fff"
+  },
+  "nested_metrics_recomputed": {
+    "accuracy": 0.8771313636155851,
+    "balanced_accuracy": 0.7296415320244976,
+    "f1": 0.4417405150927721,
+    "precision": 0.3688576714070991,
+    "recall": 0.5505176876617774,
+    "specificity": 0.9087653763872175
+  },
+  "priority_group_minimum_class_rows": 500,
+  "priority_groups": {
+    "false_negative_rate": [
+      {
+        "false_negative": 806,
+        "false_negative_rate": 0.8770402611534276,
+        "false_positive": 153,
+        "false_positive_rate": 0.0034347289258053653,
+        "feature": "GENHLTH",
+        "group": "1: Excellent",
+        "negative_rows": 44545,
+        "positive_rows": 919,
+        "rows": 45464,
+        "true_negative": 44392,
+        "true_positive": 113
+      },
+      {
+        "false_negative": 745,
+        "false_negative_rate": 0.8504566210045662,
+        "false_positive": 285,
+        "false_positive_rate": 0.00411350383927025,
+        "feature": "_AGE80",
+        "group": "18-44",
+        "negative_rows": 69284,
+        "positive_rows": 876,
+        "rows": 70160,
+        "true_negative": 68999,
+        "true_positive": 131
+      },
+      {
+        "false_negative": 2908,
+        "false_negative_rate": 0.7951873120043752,
+        "false_positive": 1723,
+        "false_positive_rate": 0.020778813569542094,
+        "feature": "GENHLTH",
+        "group": "2: Very good",
+        "negative_rows": 82921,
+        "positive_rows": 3657,
+        "rows": 86578,
+        "true_negative": 81198,
+        "true_positive": 749
+      },
+      {
+        "false_negative": 2603,
+        "false_negative_rate": 0.7676201710409909,
+        "false_positive": 1554,
+        "false_positive_rate": 0.014979468296350561,
+        "feature": "EMPLOY1",
+        "group": "1: Employed for wages",
+        "negative_rows": 103742,
+        "positive_rows": 3391,
+        "rows": 107133,
+        "true_negative": 102188,
+        "true_positive": 788
+      },
+      {
+        "false_negative": 3865,
+        "false_negative_rate": 0.6793812620847249,
+        "false_positive": 3512,
+        "false_positive_rate": 0.024049852769978772,
+        "feature": "BPHIGH4",
+        "group": "3: No",
+        "negative_rows": 146030,
+        "positive_rows": 5689,
+        "rows": 151719,
+        "true_negative": 142518,
+        "true_positive": 1824
+      },
+      {
+        "false_negative": 790,
+        "false_negative_rate": 0.6572379367720466,
+        "false_positive": 738,
+        "false_positive_rate": 0.03578181818181818,
+        "feature": "EMPLOY1",
+        "group": "2: Self-employed",
+        "negative_rows": 20625,
+        "positive_rows": 1202,
+        "rows": 21827,
+        "true_negative": 19887,
+        "true_positive": 412
+      },
+      {
+        "false_negative": 1289,
+        "false_negative_rate": 0.632793323514973,
+        "false_positive": 1303,
+        "false_positive_rate": 0.0319378400902005,
+        "feature": "_AGE80",
+        "group": "45-54",
+        "negative_rows": 40798,
+        "positive_rows": 2037,
+        "rows": 42835,
+        "true_negative": 39495,
+        "true_positive": 748
+      },
+      {
+        "false_negative": 2049,
+        "false_negative_rate": 0.6142086330935251,
+        "false_positive": 2454,
+        "false_positive_rate": 0.03738630996815917,
+        "feature": "INCOME2",
+        "group": "8: $75,000 or more",
+        "negative_rows": 65639,
+        "positive_rows": 3336,
+        "rows": 68975,
+        "true_negative": 63185,
+        "true_positive": 1287
+      },
+      {
+        "false_negative": 5869,
+        "false_negative_rate": 0.6091965953913224,
+        "false_positive": 7542,
+        "false_positive_rate": 0.04901476551939274,
+        "feature": "PHYSHLTH",
+        "group": "0 days",
+        "negative_rows": 153872,
+        "positive_rows": 9634,
+        "rows": 163506,
+        "true_negative": 146330,
+        "true_positive": 3765
+      },
+      {
+        "false_negative": 608,
+        "false_negative_rate": 0.5897187196896218,
+        "false_positive": 748,
+        "false_positive_rate": 0.04960212201591512,
+        "feature": "EMPLOY1",
+        "group": "5: A homemaker",
+        "negative_rows": 15080,
+        "positive_rows": 1031,
+        "rows": 16111,
+        "true_negative": 14332,
+        "true_positive": 423
+      }
+    ],
+    "false_positive_rate": [
+      {
+        "false_negative": 580,
+        "false_negative_rate": 0.1346019958226967,
+        "false_positive": 4745,
+        "false_positive_rate": 0.5138618150314057,
+        "feature": "GENHLTH",
+        "group": "5: Poor",
+        "negative_rows": 9234,
+        "positive_rows": 4309,
+        "rows": 13543,
+        "true_negative": 4489,
+        "true_positive": 3729
+      },
+      {
+        "false_negative": 1316,
+        "false_negative_rate": 0.2371598486213732,
+        "false_positive": 6553,
+        "false_positive_rate": 0.32298289713637934,
+        "feature": "PHYSHLTH",
+        "group": "30 days",
+        "negative_rows": 20289,
+        "positive_rows": 5549,
+        "rows": 25838,
+        "true_negative": 13736,
+        "true_positive": 4233
+      },
+      {
+        "false_negative": 2058,
+        "false_negative_rate": 0.2757234726688103,
+        "false_positive": 8327,
+        "false_positive_rate": 0.3153211148136928,
+        "feature": "DIABETE3",
+        "group": "1: Yes",
+        "negative_rows": 26408,
+        "positive_rows": 7464,
+        "rows": 33872,
+        "true_negative": 18081,
+        "true_positive": 5406
+      },
+      {
+        "false_negative": 1075,
+        "false_negative_rate": 0.2736761710794297,
+        "false_positive": 4470,
+        "false_positive_rate": 0.301294149366406,
+        "feature": "EMPLOY1",
+        "group": "8: Unable to work",
+        "negative_rows": 14836,
+        "positive_rows": 3928,
+        "rows": 18764,
+        "true_negative": 10366,
+        "true_positive": 2853
+      },
+      {
+        "false_negative": 1947,
+        "false_negative_rate": 0.2922545782047433,
+        "false_positive": 8413,
+        "false_positive_rate": 0.3003141286499607,
+        "feature": "GENHLTH",
+        "group": "4: Fair",
+        "negative_rows": 28014,
+        "positive_rows": 6662,
+        "rows": 34676,
+        "true_negative": 19601,
+        "true_positive": 4715
+      },
+      {
+        "false_negative": 741,
+        "false_negative_rate": 0.2877669902912621,
+        "false_positive": 2832,
+        "false_positive_rate": 0.24026469839653855,
+        "feature": "PHYSHLTH",
+        "group": "14-29 days",
+        "negative_rows": 11787,
+        "positive_rows": 2575,
+        "rows": 14362,
+        "true_negative": 8955,
+        "true_positive": 1834
+      },
+      {
+        "false_negative": 5699,
+        "false_negative_rate": 0.37358243198951163,
+        "false_positive": 16229,
+        "false_positive_rate": 0.21511319654313132,
+        "feature": "_AGE80",
+        "group": "65+",
+        "negative_rows": 75444,
+        "positive_rows": 15255,
+        "rows": 90699,
+        "true_negative": 59215,
+        "true_positive": 9556
+      },
+      {
+        "false_negative": 4752,
+        "false_negative_rate": 0.3747929647448537,
+        "false_positive": 13715,
+        "false_positive_rate": 0.20842514778961446,
+        "feature": "EMPLOY1",
+        "group": "7: Retired",
+        "negative_rows": 65803,
+        "positive_rows": 12679,
+        "rows": 78482,
+        "true_negative": 52088,
+        "true_positive": 7927
+      },
+      {
+        "false_negative": 6360,
+        "false_negative_rate": 0.37015481317658017,
+        "false_positive": 18122,
+        "false_positive_rate": 0.20523448736678784,
+        "feature": "BPHIGH4",
+        "group": "1: Yes",
+        "negative_rows": 88299,
+        "positive_rows": 17182,
+        "rows": 105481,
+        "true_negative": 70177,
+        "true_positive": 10822
+      },
+      {
+        "false_negative": 588,
+        "false_negative_rate": 0.3107822410147992,
+        "false_positive": 1969,
+        "false_positive_rate": 0.20357733664185276,
+        "feature": "INCOME2",
+        "group": "2: Less than $15,000 ($10,000 to less than $15,000)",
+        "negative_rows": 9672,
+        "positive_rows": 1892,
+        "rows": 11564,
+        "true_negative": 7703,
+        "true_positive": 1304
+      }
+    ]
+  },
+  "protocol": "Nested OOF error analysis. Each row uses the threshold selected by its own outer fold's inner OOF predictions.",
+  "score_by_outcome": [
+    {
+      "mean": 0.0431345448740036,
+      "median": 0.019942041205951735,
+      "outcome": "true_negative",
+      "q25": 0.006780282748255894,
+      "q75": 0.06209469589622352,
+      "rows": 217493
+    },
+    {
+      "mean": 0.33065930691523243,
+      "median": 0.29954002525203616,
+      "outcome": "false_positive",
+      "q25": 0.2489758280024565,
+      "q75": 0.3826637085650127,
+      "rows": 21835
+    },
+    {
+      "mean": 0.10976030026827303,
+      "median": 0.11097495523466465,
+      "outcome": "false_negative",
+      "q25": 0.060704006783478245,
+      "q75": 0.15934165049159366,
+      "rows": 10419
+    },
+    {
+      "mean": 0.42271577749412337,
+      "median": 0.37406865114036997,
+      "outcome": "true_positive",
+      "q25": 0.28397240745772545,
+      "q75": 0.5032768777186136,
+      "rows": 12761
+    }
+  ],
+  "thresholds": {
+    "maximum": 0.21833504376169138,
+    "mean": 0.21248825377082664,
+    "minimum": 0.2069906360564518
+  }
+}

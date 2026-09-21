@@ -1,0 +1,101 @@
+{
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "variants": [
+    {
+      "experiment_name": "phase9_p2_genhlth_categories_cv",
+      "hypothesis": "Treating the five substantive self-rated health answers as separate categories improves the compact P2 representation.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["GENHLTH"]
+      },
+      "missing_values": {"method": "P2 codebook cleaning and a combined GENHLTH missing flag", "indicators": "age auxiliary plus GENHLTH missing", "fit_partition": "outer training fold only"},
+      "interactions": [["_AGE80", "_AGE80"], ["_AGE80", "BPHIGH4"], ["_AGE80", "DIABETE3"], ["_AGE80", "SMOKE100"]]
+    },
+    {
+      "experiment_name": "phase9_p2_bphigh4_categories_cv",
+      "hypothesis": "Replacing BPHIGH4's numeric code and age-by-code product with response-category indicators improves discrimination.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["BPHIGH4"]
+      },
+      "missing_values": {"method": "P2 codebook cleaning and a combined BPHIGH4 missing flag", "indicators": "age auxiliary plus BPHIGH4 missing", "fit_partition": "outer training fold only"},
+      "interactions": [["_AGE80", "_AGE80"], ["_AGE80", "DIABETE3"], ["_AGE80", "SMOKE100"]]
+    },
+    {
+      "experiment_name": "phase9_p2_bphigh4_categories_age_cv",
+      "hypothesis": "Age-by-BPHIGH4-category interactions address the stable BPHIGH4 error pattern beyond category indicators alone.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["BPHIGH4"]
+      },
+      "missing_values": {"method": "P2 codebook cleaning and a combined BPHIGH4 missing flag", "indicators": "age auxiliary plus BPHIGH4 missing", "fit_partition": "outer training fold only"},
+      "interactions": [["_AGE80", "_AGE80"], ["_AGE80", "DIABETE3"], ["_AGE80", "SMOKE100"], ["_AGE80", "BPHIGH4__is_2"], ["_AGE80", "BPHIGH4__is_3"], ["_AGE80", "BPHIGH4__is_4"]]
+    },
+    {
+      "experiment_name": "phase9_p2_diabete3_categories_cv",
+      "hypothesis": "Replacing DIABETE3's numeric code and age-by-code product with response-category indicators improves discrimination.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["DIABETE3"]
+      },
+      "missing_values": {"method": "P2 codebook cleaning and a combined DIABETE3 missing flag", "indicators": "age auxiliary plus DIABETE3 missing", "fit_partition": "outer training fold only"},
+      "interactions": [["_AGE80", "_AGE80"], ["_AGE80", "BPHIGH4"], ["_AGE80", "SMOKE100"]]
+    },
+    {
+      "experiment_name": "phase9_p2_diabete3_categories_age_cv",
+      "hypothesis": "Age-by-DIABETE3-category interactions improve on diabetes category indicators alone.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["DIABETE3"]
+      },
+      "missing_values": {"method": "P2 codebook cleaning and a combined DIABETE3 missing flag", "indicators": "age auxiliary plus DIABETE3 missing", "fit_partition": "outer training fold only"},
+      "interactions": [["_AGE80", "_AGE80"], ["_AGE80", "BPHIGH4"], ["_AGE80", "SMOKE100"], ["_AGE80", "DIABETE3__is_2"], ["_AGE80", "DIABETE3__is_3"], ["_AGE80", "DIABETE3__is_4"]]
+    },
+    {
+      "experiment_name": "phase9_p2_genhlth_categories_age_cv",
+      "hypothesis": "Age-by-GENHLTH-category interactions address the stable young-and-good-health false-negative pattern beyond health categories alone.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": ["identifier", "date", "survey_design"],
+        "exclude_features": ["CTELNUM1", "CELLFON2", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"],
+        "missing_code_overrides": {"BPHIGH4": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "DIABETE3": [{"code": 7, "reason": "unknown"}, {"code": 9, "reason": "refused"}], "_AGEG5YR": [{"code": 14, "reason": "blank"}]},
+        "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
+        "auxiliary_missing_features": ["_AGEG5YR"],
+        "one_hot_features": ["GENHLTH"]
+      },
+      "missing_values": {"method": "P2 codebook cleaning and a combined GENHLTH missing flag", "indicators": "age auxiliary plus GENHLTH missing", "fit_partition": "outer training fold only"},
+      "interactions": [["_AGE80", "_AGE80"], ["_AGE80", "BPHIGH4"], ["_AGE80", "DIABETE3"], ["_AGE80", "SMOKE100"], ["_AGE80", "GENHLTH__is_2"], ["_AGE80", "GENHLTH__is_3"], ["_AGE80", "GENHLTH__is_4"], ["_AGE80", "GENHLTH__is_5"]]
+    }
+  ]
+}
