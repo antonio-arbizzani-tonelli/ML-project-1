@@ -18,8 +18,12 @@ results/oof_predictions/
 *.pkl
 *.pkl.tmp
 
-# Local course material; obtain it from the official course repository
-official_material/
+# Keep the text codebook required by the parser tests, but exclude all other
+# course material (PDFs, copied grading tests, and generated caches).
+official_material/*
+!official_material/project1/
+official_material/project1/*
+!official_material/project1/brfss_2015_codebook.txt
 
 # Generated submissions and local logs
 submission*.csv

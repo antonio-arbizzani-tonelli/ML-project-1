@@ -35,6 +35,7 @@ src/                      NumPy models, preprocessing, evaluation, and runners
 tests/                    local unit and integration tests
 docs/                     data handling and experiment decisions
 data/README.md            dataset placement and verified schema
+official_material/        text codebook required by parser tests
 results/eda/              compact analyses and figures
 results/experiments/      machine-readable experiment ledger
 ```
@@ -51,8 +52,12 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-Download the official AIcrowd dataset and place its four CSV files as described
-in [data/README.md](data/README.md). No external dataset or ML library is used.
+Sign in to the
+[EPFL Machine Learning Project 1 challenge on AIcrowd](https://www.aicrowd.com/challenges/epfl-machine-learning-project-1)
+with your EPFL account, download the official dataset, and place its four CSV
+files as described in [data/README.md](data/README.md). No external dataset or
+ML library is used. The BRFSS text codebook needed by the tests is included in
+the repository; the larger source PDF is not required.
 
 ## Create a submission
 
