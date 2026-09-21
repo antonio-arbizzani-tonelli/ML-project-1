@@ -1,0 +1,225 @@
+{
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "variants": [
+    {
+      "experiment_name": "phase15_ablate_harehab1",
+      "hypothesis": "Ablation: identical to phase14_codebook_corrections_only except that HAREHAB1 is excluded, to quantify the leakage risk documented in docs/DATA.md.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": [
+          "identifier",
+          "date",
+          "survey_design"
+        ],
+        "exclude_features": [
+          "CTELNUM1",
+          "CELLFON2",
+          "_AGEG5YR",
+          "WEIGHT2",
+          "HEIGHT3",
+          "HTIN4",
+          "HAREHAB1"
+        ],
+        "missing_code_overrides": {
+          "ALCDAY5": [
+            {
+              "code": 777,
+              "reason": "unknown"
+            },
+            {
+              "code": 999,
+              "reason": "refused"
+            }
+          ],
+          "ASTHMA3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "BLOODCHO": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "BPHIGH4": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "CASTHDX2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "DIABETE3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "EXRACT11": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            },
+            {
+              "code": 99,
+              "reason": "refused"
+            }
+          ],
+          "EXRACT21": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            },
+            {
+              "code": 99,
+              "reason": "refused"
+            }
+          ],
+          "FLUSHOT6": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HIVTST6": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HPVADVC2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HPVTEST": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "IMFVPLAC": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            }
+          ],
+          "NUMHHOL2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "SMOKDAY2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "SMOKE100": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "_AGEG5YR": [
+            {
+              "code": 14,
+              "reason": "blank"
+            }
+          ]
+        },
+        "zero_code_overrides": {
+          "ALCDAY5": [
+            888
+          ],
+          "PHYSHLTH": [
+            88
+          ],
+          "MENTHLTH": [
+            88
+          ]
+        },
+        "auxiliary_missing_features": [
+          "_AGEG5YR"
+        ]
+      },
+      "missing_values": {
+        "method": "documented nonresponses to NaN; ALCDAY5=888 and documented no-day codes to zero; histogram trees route NaN values directly",
+        "indicators": "age-not-reported auxiliary flag only",
+        "fit_partition": "corresponding training partition only"
+      },
+      "model": {
+        "name": "numpy_histogram_gradient_boosting",
+        "parameters": "configured in the boosting suite"
+      },
+      "threshold": {
+        "selection_method": "selected from inner out-of-fold predictions for final F1 evaluation"
+      }
+    }
+  ]
+}
