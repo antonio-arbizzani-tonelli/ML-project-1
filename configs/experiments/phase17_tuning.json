@@ -1,0 +1,65 @@
+{
+  "experiment_prefix": "phase17_tuning",
+  "artifact_dir": "results/boosting_artifacts/phase17_tuning",
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "preprocessing_config_path": "configs/experiments/phase16_target_features.json",
+  "preprocessing_variant": "phase16_target_features",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "fixed_threshold": 0.5,
+  "nested_threshold": {
+    "inner_fold_count": 2,
+    "inner_seed": 20260922,
+    "model_checkpoints": [
+      { "model": "base_lr05_leaf200", "checkpoints": [ 200 ] },
+      { "model": "low_lr03_leaf200", "checkpoints": [ 200 ] },
+      { "model": "high_lr07_leaf200", "checkpoints": [ 200 ] },
+      { "model": "base_lr05_leaf150", "checkpoints": [ 200 ] },
+      { "model": "base_lr05_leaf250", "checkpoints": [ 200 ] }
+    ]
+  },
+  "models": [
+    {
+      "name": "base_lr05_leaf200",
+      "parameters": {
+        "learning_rate": 0.05, "max_depth": 5, "min_samples_leaf": 200, "n_bins": 64, "l2_regularization": 1.0, "max_features": 128, "random_seed": 20260920
+      },
+      "checkpoints": [ 200 ]
+    },
+    {
+      "name": "low_lr03_leaf200",
+      "parameters": {
+        "learning_rate": 0.03, "max_depth": 5, "min_samples_leaf": 200, "n_bins": 64, "l2_regularization": 1.0, "max_features": 128, "random_seed": 20260920
+      },
+      "checkpoints": [ 200 ]
+    },
+    {
+      "name": "high_lr07_leaf200",
+      "parameters": {
+        "learning_rate": 0.07, "max_depth": 5, "min_samples_leaf": 200, "n_bins": 64, "l2_regularization": 1.0, "max_features": 128, "random_seed": 20260920
+      },
+      "checkpoints": [ 200 ]
+    },
+    {
+      "name": "base_lr05_leaf150",
+      "parameters": {
+        "learning_rate": 0.05, "max_depth": 5, "min_samples_leaf": 150, "n_bins": 64, "l2_regularization": 1.0, "max_features": 128, "random_seed": 20260920
+      },
+      "checkpoints": [ 200 ]
+    },
+    {
+      "name": "base_lr05_leaf250",
+      "parameters": {
+        "learning_rate": 0.05, "max_depth": 5, "min_samples_leaf": 250, "n_bins": 64, "l2_regularization": 1.0, "max_features": 128, "random_seed": 20260920
+      },
+      "checkpoints": [ 200 ]
+    }
+  ]
+}

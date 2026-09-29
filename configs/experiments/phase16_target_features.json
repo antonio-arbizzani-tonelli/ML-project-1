@@ -1,0 +1,68 @@
+{
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "variants": [
+    {
+      "experiment_name": "phase16_target_features",
+      "hypothesis": "Feature engineering targeting shared false negatives in 65+ and overweight populations (identified in Phase 12) by creating explicit interactions.",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": [
+          "identifier",
+          "date",
+          "survey_design"
+        ],
+        "exclude_features": [
+          "CTELNUM1",
+          "CELLFON2",
+          "WEIGHT2",
+          "HEIGHT3",
+          "HTIN4",
+          "HAREHAB1"
+        ],
+        "interactions": [
+          ["_AGE80", "DIABETE3"],
+          ["_AGE80", "_BMI5"],
+          ["_AGE80", "BPHIGH4"],
+          ["BPHIGH4", "DIABETE3"],
+          ["_AGE80", "GENHLTH"]
+        ],
+        "missing_code_overrides": {
+          "ALCDAY5": [
+            { "code": 777, "reason": "unknown" },
+            { "code": 999, "reason": "refused" }
+          ],
+          "_AGEG5YR": [
+            { "code": 14, "reason": "blank" }
+          ]
+        },
+        "zero_code_overrides": {
+          "ALCDAY5": [888]
+        },
+        "auxiliary_missing_features": [
+          "_AGEG5YR"
+        ]
+      },
+      "missing_values": {
+        "method": "documented nonresponses to NaN; ALCDAY5=888 and documented no-day codes to zero; histogram trees route NaN values directly",
+        "indicators": "age-not-reported auxiliary flag only",
+        "fit_partition": "corresponding training partition only"
+      },
+      "model": {
+        "name": "numpy_histogram_gradient_boosting",
+        "parameters": "configured in the boosting suite"
+      },
+      "threshold": {
+        "selection_method": "selected from inner out-of-fold predictions for final F1 evaluation"
+      }
+    }
+  ]
+}
