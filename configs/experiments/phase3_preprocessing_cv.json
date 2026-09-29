@@ -12,9 +12,9 @@
   "variants": [
     {
       "experiment_name": "phase3_p0_raw_baseline_cv",
-      "hypothesis": "The existing numeric median-and-scale representation defines the development-only CV reference.",
+      "hypothesis": "The existing development-only CV reference uses mode fills for categorical values and median fills for numeric values.",
       "preprocessing": {"name": "raw_median_scale", "exclude_features": []},
-      "missing_values": {"method": "raw NaN median fill", "indicators": "none", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "raw NaN mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "none", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -25,7 +25,7 @@
         "name": "raw_median_scale",
         "exclude_features": ["SEQNO", "_PSU", "CTELNUM1", "CELLFON2", "IDATE", "FLSHTMY2", "HIVTSTD3", "DISPCODE", "QSTVER", "QSTLANG", "MSCODE", "_STSTR", "_STRWT", "_RAWRAKE", "_WT2RAKE", "_CHISPNC", "_CRACE1", "_CPRACE", "_CLLCPWT", "_DUALUSE", "_DUALCOR", "_LLCPWT", "_AGEG5YR", "WEIGHT2", "HEIGHT3", "HTIN4"]
       },
-      "missing_values": {"method": "raw NaN median fill", "indicators": "none", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "raw NaN mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "none", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -40,7 +40,7 @@
         "zero_code_overrides": {"PHYSHLTH": [88], "MENTHLTH": [88]},
         "auxiliary_missing_features": ["_AGEG5YR"]
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "age-not-reported auxiliary flag only", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "age-not-reported auxiliary flag only", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -56,7 +56,7 @@
         "auxiliary_missing_features": ["_AGEG5YR"],
         "missing_indicator_min_fraction": 0.5
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "one combined flag for source features missing at least 50% in the inner training fold", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "one combined flag for source features missing at least 50% in the inner training fold", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -72,7 +72,7 @@
         "auxiliary_missing_features": ["_AGEG5YR"],
         "missing_indicator_min_fraction": 0.01
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "one combined flag for source features missing at least 1% in the inner training fold", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "one combined flag for source features missing at least 1% in the inner training fold", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -89,7 +89,7 @@
         "missing_indicator_min_fraction": 0.5,
         "one_hot_features": ["_STATE", "DIABETE3"]
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "sparse combined flags plus explicit missing category flags for state and diabetes", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "sparse combined flags plus explicit missing category flags for state and diabetes", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -107,7 +107,7 @@
         "one_hot_features": ["_STATE", "DIABETE3"],
         "detailed_missing_features": ["BPMEDS", "EXERANY2", "GENHLTH", "INCOME2", "PHYSHLTH", "MENTHLTH"]
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "unknown, refusal, and blank flags for six reviewed features; combined flags for sparse remaining features", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "unknown, refusal, and blank flags for six reviewed features; combined flags for sparse remaining features", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -124,7 +124,7 @@
         "missing_indicator_min_fraction": 0.01,
         "one_hot_features": ["_STATE", "DIABETE3"]
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "broad combined flags plus explicit missing category flags for state and diabetes", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "broad combined flags plus explicit missing category flags for state and diabetes", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 50, "gamma": 0.1}},
       "threshold": {"value": 0.5, "selection_method": "fixed initial probability threshold"}
     },
@@ -149,7 +149,7 @@
           {"feature": "_BMI5", "quantiles": [0.5, 0.75]}
         ]
       },
-      "missing_values": {"method": "codebook non-responses to NaN then training-fold median fill", "indicators": "unknown, refusal, and blank flags only for the five selected semantic variables", "fit_partition": "inner training fold only"},
+      "missing_values": {"method": "codebook non-responses to NaN then training-fold mode fill for binary/categorical/ordinal columns and median fill for continuous/count columns", "indicators": "unknown, refusal, and blank flags only for the five selected semantic variables", "fit_partition": "inner training fold only"},
       "model": {"name": "logistic_classifier", "parameters": {"max_iters": 4000, "gamma": 0.2}},
       "threshold": {"value": 0.5, "selection_method": "fixed reference; Phase 6 model CV selects F1 thresholds on development predictions"}
     }

@@ -33,6 +33,14 @@ regularization, category encoding, and selected interaction screens. Four age
 interactions produced a small repeatable improvement, but the best nested F1
 remained 0.42563.
 
+The linear baseline preprocessing now fills `binary`, `categorical`, and
+`ordinal` feature gaps with the training-fold mode, and continuous/count gaps
+with the training-fold median. Fill statistics remain fold-local. Previously
+recorded logistic and ridge metrics were produced with median fills for every
+numeric-coded column; they are historical results and have not been rerun with
+this correction. Recompute the linear comparisons before treating them as
+results for the updated preprocessing.
+
 The NumPy histogram booster fits quantile bins once per training partition,
 stores binned features as `uint8`, routes missing values explicitly, and fits
 shallow Newton trees. Depth 5 consistently improved ranking and log loss over
@@ -72,20 +80,45 @@ inside the outer training folds: 0.2030567, 0.2201046, and 0.2094460.
 Large checkpoints and row-level OOF arrays are reproducible and excluded from
 Git.
 
+## Results integrated after Phase 14
+
+The Phase 15–18 configurations and nested results are now present alongside
+the local Phase 16 imputation screening. They use the saved development split;
+the Phase 16 imputation F1 values below use a different, optimistic threshold
+protocol and must not be ranked against the nested values.
+
+| Experiment | F1 | Interpretation |
+| --- | ---: | --- |
+| Phase 14, with `HAREHAB1` | **0.442155** nested | Current submission reference. |
+| Phase 15, ablate only `HAREHAB1` | 0.431039 nested | About 0.01112 lower; the feature's task validity still needs a decision. |
+| Phase 16, targeted interactions without `HAREHAB1` | 0.431370 nested | The preprocessing also differs from Phase 15, so this does not isolate the five interactions. |
+| Phase 17, learning rate 0.07 on Phase 16 | 0.432225 nested | Better than that branch's 0.431370 control. |
+| Phase 17, minimum leaf rows 150 on Phase 16 | **0.432606** nested | Best F1 among the recorded Phase 17 candidates; the commit title emphasizes 0.07, but leaf size 150 scores higher. |
+| Phase 18, replace six raw diet frequencies with daily derivatives | 0.441862 nested | Below the matched Phase 14 result by about 0.00029. |
+| Local Phase 16, restricted imputation | 0.442674 exploratory | Threshold selected on the same pooled outer OOF labels being scored. |
+| Local Phase 16, expanded imputation | 0.441989 exploratory | Same optimistic protocol; weaker than the restricted variant. |
+
+The Phase 17 comparisons belong to the Phase 16 representation without
+`HAREHAB1`. Do not transfer their gain to the Phase 14 configuration without a
+new paired test. The full record list is in `results/experiments/index.csv`;
+the imputation caveats and follow-up are in [IMPUTATION.md](IMPUTATION.md).
+
 ## Highest-priority next tests
 
-1. **Ablate `HAREHAB1` →** quantify suspected target-conditioned leakage →
-   exclude it for scientific interpretation unless its availability at test
-   time and meaning are confirmed.
-2. **Correct frequency families →** harmonize food and exercise unit codes in
-   isolated groups → keep a group only if nested F1 improves or remains tied
-   without worsening AP/log loss across folds.
-3. **Tune leaf size and learning rate →** test a small grid around 200 leaves
-   and 0.05 → keep settings only for a repeatable nested F1 gain; do not reopen
-   the already screened tree-count grid.
-4. **Inspect confident shared errors →** target feature work at cases missed by
-   both boosting and logistic → retain a change only when it reduces false
-   negatives without an excessive false-positive increase.
-5. **Run the frozen pipeline once on AIcrowd →** check train-to-test transfer →
-   use the submission only after local artifacts and the immutable Git commit
-   are recorded.
+1. **Resolve the role of `HAREHAB1` →** use the completed Phase 15 ablation to
+   decide which feature set defines the intended task; keep results from the
+   two feature sets separate.
+2. **Isolate remaining representation questions →** ablate only `ALCDAY5`,
+   test nominal treatment of `EXRACT11`/`EXRACT21`, and investigate exercise
+   frequency units. The six diet frequencies were already tested in Phase 18.
+3. **Separate missing-state indicators from imputation →** compare Phase 14,
+   matching indicators only, and restricted Phase 16 imputation using nested
+   threshold selection.
+4. **Test promising tree settings on the chosen feature set →** Phase 17
+   suggests leaf size 150 and learning rate 0.07 on its branch. Confirm them
+   against the selected baseline before combining changes.
+5. **Check train-to-test transfer →** after a final configuration is frozen,
+   record local artifacts and the immutable Git commit before submission.
+
+The detailed experiment order and decision criteria are in
+[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).

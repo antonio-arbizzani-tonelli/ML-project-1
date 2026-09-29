@@ -15,6 +15,8 @@ data/processed/
 # Large or reproducible model artifacts
 results/boosting_artifacts/
 results/oof_predictions/
+results/experiments/*_oof_predictions.npz
+results/linear_imputation_artifacts/**/*.npz
 *.pkl
 *.pkl.tmp
 

@@ -19,8 +19,10 @@ expected files and verified sizes.
   differ in test, so duplicate removal must use semantics as well as train
   equality.
 - `HAREHAB1` is a leakage risk: every development row with a recorded response
-  is positive and the selected booster uses it frequently. Its ablation is
-  required before interpreting the model scientifically.
+  is positive and the selected booster uses it frequently. The Phase 15
+  ablation is complete: nested F1 fell from 0.44216 to 0.43104 when this
+  feature alone was removed. Its admissibility still needs a task-level
+  decision before interpreting the model scientifically.
 
 Detailed measured outputs remain under `results/eda/`; the machine-readable
 feature registry is `configs/feature_metadata.json`.

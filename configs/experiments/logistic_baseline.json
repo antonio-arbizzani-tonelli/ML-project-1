@@ -5,6 +5,8 @@
     "dataset_id": "project1_processed_training_arrays",
     "features_path": "data/processed/x_train_float32.npy",
     "labels_path": "data/processed/y_train_int8.npy",
+    "feature_metadata_path": "configs/feature_metadata.json",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv",
     "label_encoding": "stored -1/+1; the runner maps these to 0/1 before logistic training"
   },
   "features": {
@@ -12,7 +14,7 @@
     "description": "Initial common numeric representation for linear baselines."
   },
   "missing_values": {
-    "method": "development-column-median",
+    "method": "development-partition mode for binary/categorical/ordinal columns; median for continuous/count columns",
     "add_indicators": false,
     "fit_partition": "development only"
   },

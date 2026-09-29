@@ -1,0 +1,205 @@
+{
+  "protocol": "3-fold OOF inference using saved Phase 7 logistic weights and Phase 14 tree checkpoints; no disease classifier retraining",
+  "models": {
+    "linear": {
+      "source_experiment": "phase7_p2_codebook_clean_bphigh4_corrected_interactions_gamma_0p2_nested_4000",
+      "saved_oof_reproduction_verified": true,
+      "original_oof": {
+        "nested_threshold_f1": {
+          "f1": 0.42562841244090915,
+          "precision": 0.35727882390839605,
+          "recall": 0.5263157894736842,
+          "average_precision": 0.3877451806152685,
+          "true_positive": 12200,
+          "false_positive": 21947,
+          "false_negative": 10980,
+          "true_negative": 217381
+        },
+        "best_threshold_on_same_oof_f1_optimistic": {
+          "threshold": 0.19491214403946133,
+          "metrics": {
+            "f1": 0.4263211637288873,
+            "precision": 0.34831368472879454,
+            "recall": 0.5493528904227782,
+            "average_precision": 0.3877451806152685,
+            "true_positive": 12734,
+            "false_positive": 23825,
+            "false_negative": 10446,
+            "true_negative": 215503
+          }
+        }
+      }
+    },
+    "tree_depth5_200": {
+      "source_experiment": "phase14_boosting_codebook_corrections_only_depth5_features128_200trees",
+      "saved_oof": {
+        "nested_threshold_f1": {
+          "f1": 0.4421552272688187,
+          "precision": 0.36763233906254467,
+          "recall": 0.5545729076790337,
+          "average_precision": 0.4286092503721835,
+          "true_positive": 12855,
+          "false_positive": 22112,
+          "false_negative": 10325,
+          "true_negative": 217216
+        },
+        "best_threshold_on_same_oof_f1_optimistic": {
+          "threshold": 0.2063122738273742,
+          "metrics": {
+            "f1": 0.44207786060821214,
+            "precision": 0.3634544292186675,
+            "recall": 0.564106988783434,
+            "average_precision": 0.4286092503721835,
+            "true_positive": 13076,
+            "false_positive": 22901,
+            "false_negative": 10104,
+            "true_negative": 216427
+          }
+        }
+      }
+    }
+  },
+  "variants": {
+    "phase16_imputation_restricted": {
+      "imputed_features": [
+        "INCOME2",
+        "PNEUVAC3",
+        "EMPLOY1",
+        "HTM4",
+        "WTKG3",
+        "_BMI5"
+      ],
+      "linear": {
+        "nested_threshold_f1": {
+          "f1": 0.4252398651568848,
+          "precision": 0.35479590364921393,
+          "recall": 0.5305867126833477,
+          "average_precision": 0.38707169575380224,
+          "true_positive": 12299,
+          "false_positive": 22366,
+          "false_negative": 10881,
+          "true_negative": 216962
+        },
+        "best_threshold_on_same_oof_f1_optimistic": {
+          "threshold": 0.19491533368365851,
+          "metrics": {
+            "f1": 0.4260924383688908,
+            "precision": 0.34616421370424283,
+            "recall": 0.5540120793787748,
+            "average_precision": 0.38707169575380224,
+            "true_positive": 12842,
+            "false_positive": 24256,
+            "false_negative": 10338,
+            "true_negative": 215072
+          }
+        }
+      },
+      "tree": {
+        "nested_threshold_f1": {
+          "f1": 0.44194397893224807,
+          "precision": 0.36608306419627173,
+          "recall": 0.5574633304572908,
+          "average_precision": 0.4282090164182409,
+          "true_positive": 12922,
+          "false_positive": 22376,
+          "false_negative": 10258,
+          "true_negative": 216952
+        },
+        "best_threshold_on_same_oof_f1_optimistic": {
+          "threshold": 0.2222422052165378,
+          "metrics": {
+            "f1": 0.44157560174273264,
+            "precision": 0.3767060687301974,
+            "recall": 0.5334339948231234,
+            "average_precision": 0.4282090164182409,
+            "true_positive": 12365,
+            "false_positive": 20459,
+            "false_negative": 10815,
+            "true_negative": 218869
+          }
+        }
+      }
+    },
+    "phase16_imputation_expanded": {
+      "imputed_features": [
+        "INCOME2",
+        "PNEUVAC3",
+        "EMPLOY1",
+        "ARTHDIS2",
+        "BPHIGH4",
+        "EDUCA",
+        "FLUSHOT6",
+        "GENHLTH",
+        "HAVARTH3",
+        "HPVTEST",
+        "JOINPAIN",
+        "LMTJOIN3",
+        "MARITAL",
+        "PDIABTST",
+        "QLACTLM2",
+        "RCSRLTN2",
+        "RENTHOM1",
+        "SMOKE100",
+        "TOLDHI2",
+        "HTM4",
+        "WTKG3",
+        "_BMI5"
+      ],
+      "linear": {
+        "nested_threshold_f1": {
+          "f1": 0.42488864429807216,
+          "precision": 0.35327594589184086,
+          "recall": 0.532916307161346,
+          "average_precision": 0.3874891561411114,
+          "true_positive": 12353,
+          "false_positive": 22614,
+          "false_negative": 10827,
+          "true_negative": 216714
+        },
+        "best_threshold_on_same_oof_f1_optimistic": {
+          "threshold": 0.19491533368365851,
+          "metrics": {
+            "f1": 0.4260108928866149,
+            "precision": 0.3449879711307137,
+            "recall": 0.5567730802415876,
+            "average_precision": 0.3874891561411114,
+            "true_positive": 12906,
+            "false_positive": 24504,
+            "false_negative": 10274,
+            "true_negative": 214824
+          }
+        }
+      },
+      "tree": {
+        "nested_threshold_f1": {
+          "f1": 0.4419290499650534,
+          "precision": 0.36532228516670895,
+          "recall": 0.5591889559965487,
+          "average_precision": 0.4281956027288056,
+          "true_positive": 12962,
+          "false_positive": 22519,
+          "false_negative": 10218,
+          "true_negative": 216809
+        },
+        "best_threshold_on_same_oof_f1_optimistic": {
+          "threshold": 0.22213732644570833,
+          "metrics": {
+            "f1": 0.44180750756093223,
+            "precision": 0.3759309718437784,
+            "recall": 0.5356773080241588,
+            "average_precision": 0.4281956027288056,
+            "true_positive": 12417,
+            "false_positive": 20613,
+            "false_negative": 10763,
+            "true_negative": 218715
+          }
+        }
+      }
+    }
+  },
+  "interpretation": {
+    "nested_threshold_f1": "Uses the threshold selected inside each corresponding outer training fold.",
+    "best_threshold_on_same_oof_f1_optimistic": "Chooses a threshold on all OOF labels being scored; exploratory and optimistic, not an unbiased validation estimate.",
+    "scope": "Only validation feature values are imputed using the corresponding outer training fold. Saved disease model parameters and original feature layouts are fixed. Imputation flags are not added because these models were not trained with them."
+  }
+}

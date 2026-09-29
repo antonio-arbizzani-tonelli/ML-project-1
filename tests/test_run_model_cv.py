@@ -93,7 +93,10 @@ class TestModelCV(unittest.TestCase):
             np.arange(labels.size),
             labels,
             ["first", "second"],
-            [],
+            [
+                {"name": "first", "semantic_type": "continuous"},
+                {"name": "second", "semantic_type": "continuous"},
+            ],
             {"lambda": 0.0, "gamma": 0.1, "checkpoints": [3]},
             3,
             [],

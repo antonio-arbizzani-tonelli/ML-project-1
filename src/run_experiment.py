@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import time
@@ -18,6 +19,7 @@ from src.baseline_preprocessing import (
 )
 from src.evaluation import binary_log_loss, classification_metrics, labels_from_scores
 from src.experiment_logger import save_experiment, validate_config
+from src.feature_preprocessing import load_feature_metadata
 
 
 def _load_config(path: Path) -> dict[str, Any]:
@@ -132,9 +134,39 @@ def _load_common_design_matrices(
     features = np.load(features_path, mmap_mode="r")
     if features.ndim != 2 or features.shape[0] != label_count:
         raise ValueError("Configured feature rows must match the configured labels.")
+    semantic_types = None
+    data = config["data"]
+    if "feature_metadata_path" in data or "x_train_csv_path" in data:
+        if "feature_metadata_path" not in data or "x_train_csv_path" not in data:
+            raise ValueError(
+                "Type-aware linear imputation requires both feature_metadata_path "
+                "and x_train_csv_path."
+            )
+        header_path = _resolve(project_root, data["x_train_csv_path"])
+        with header_path.open(encoding="utf-8", newline="") as handle:
+            header = next(csv.reader(handle))
+        if not header or header[0] != "Id":
+            raise ValueError("x_train.csv must start with Id followed by predictors.")
+        feature_names = header[1:]
+        if len(feature_names) != features.shape[1]:
+            raise ValueError("CSV header and cached feature matrix disagree on columns.")
+        metadata_path = _resolve(project_root, data["feature_metadata_path"])
+        metadata = load_feature_metadata(metadata_path)
+        metadata_by_name = {entry["name"]: entry for entry in metadata}
+        missing = [name for name in feature_names if name not in metadata_by_name]
+        if missing:
+            raise ValueError(
+                "Feature metadata is missing: " + ", ".join(missing[:10])
+            )
+        semantic_types = [
+            str(metadata_by_name[name].get("semantic_type", ""))
+            for name in feature_names
+        ]
     development_features = features[development_indices]
     validation_features = features[validation_indices]
-    preprocessor = fit_baseline_preprocessor(development_features)
+    preprocessor = fit_baseline_preprocessor(
+        development_features, semantic_types=semantic_types
+    )
     return (
         transform_baseline_features(development_features, preprocessor),
         transform_baseline_features(validation_features, preprocessor),
@@ -292,6 +324,10 @@ def run_config(config_path: Path, project_root: Path, output_dir: Path) -> Path:
     }
     if features_path is not None:
         outcome["input_sha256"]["features"] = _sha256_file(features_path)
+    for key in ("feature_metadata_path", "x_train_csv_path"):
+        if key in config["data"]:
+            path = _resolve(project_root, config["data"][key])
+            outcome["input_sha256"][key] = _sha256_file(path)
     return save_experiment(config, outcome, output_dir)
 
 

@@ -1,0 +1,95 @@
+{
+  "variant": "phase16_imputation_expanded",
+  "model": {
+    "name": "logistic_gamma_0p2_4000",
+    "gamma": 0.2,
+    "lambda": 0.0,
+    "checkpoints": [
+      4000
+    ]
+  },
+  "evaluation_mode": "outer_oof_same_labels_best_threshold_optimistic",
+  "outer_fold_count": 3,
+  "folds": [
+    {
+      "outer_fold": 1,
+      "outer_training_rows": 175005,
+      "outer_validation_rows": 87503,
+      "metrics_at_same_oof_best_threshold_optimistic": {
+        "accuracy": 0.8730557809446533,
+        "precision": 0.35453059117115565,
+        "recall": 0.5331952892455027,
+        "f1": 0.42588381228033906,
+        "specificity": 0.9059742278379462,
+        "balanced_accuracy": 0.7195847585417245,
+        "average_precision": 0.3875344389424121,
+        "log_loss": 0.22234218989439897,
+        "true_positive": 4120,
+        "false_positive": 7501,
+        "true_negative": 72275,
+        "false_negative": 3607
+      }
+    },
+    {
+      "outer_fold": 2,
+      "outer_training_rows": 175005,
+      "outer_validation_rows": 87503,
+      "metrics_at_same_oof_best_threshold_optimistic": {
+        "accuracy": 0.8719815320617579,
+        "precision": 0.352190557209698,
+        "recall": 0.5357836158923256,
+        "f1": 0.42500769941484445,
+        "specificity": 0.9045452266345768,
+        "balanced_accuracy": 0.7201644212634513,
+        "average_precision": 0.3859823353949741,
+        "log_loss": 0.22227945386109507,
+        "true_positive": 4140,
+        "false_positive": 7615,
+        "true_negative": 72161,
+        "false_negative": 3587
+      }
+    },
+    {
+      "outer_fold": 3,
+      "outer_training_rows": 175006,
+      "outer_validation_rows": 87502,
+      "metrics_at_same_oof_best_threshold_optimistic": {
+        "accuracy": 0.8718772142351032,
+        "precision": 0.35259284324507234,
+        "recall": 0.539477090344292,
+        "f1": 0.4264593032178851,
+        "specificity": 0.9040688929001204,
+        "balanced_accuracy": 0.7217729916222062,
+        "average_precision": 0.3921560605858497,
+        "log_loss": 0.22090992146568933,
+        "true_positive": 4168,
+        "false_positive": 7653,
+        "true_negative": 72123,
+        "false_negative": 3558
+      }
+    }
+  ],
+  "same_oof_best_threshold": 0.2017220869721981,
+  "same_oof_best_threshold_metrics_optimistic": {
+    "accuracy": 0.8723048440428482,
+    "precision": 0.35309827542120065,
+    "recall": 0.5361518550474547,
+    "f1": 0.4257841273104133,
+    "specificity": 0.9048627824575478,
+    "balanced_accuracy": 0.7205073187525013,
+    "average_precision": 0.38840572158423275,
+    "log_loss": 0.2218438586314617,
+    "true_positive": 12428,
+    "false_positive": 22769,
+    "true_negative": 216559,
+    "false_negative": 10752
+  },
+  "oof_artifact": "results\\linear_imputation_artifacts\\phase16_imputation_expanded_optimistic\\oof_predictions.npz",
+  "fold_artifacts": [
+    "results\\linear_imputation_artifacts\\phase16_imputation_expanded_optimistic\\fold1_outputs.npz",
+    "results\\linear_imputation_artifacts\\phase16_imputation_expanded_optimistic\\fold2_outputs.npz",
+    "results\\linear_imputation_artifacts\\phase16_imputation_expanded_optimistic\\fold3_outputs.npz"
+  ],
+  "elapsed_seconds": 958.947583500063,
+  "interpretation": "The threshold is selected on the same outer OOF labels used for the reported F1; this F1 is optimistic."
+}

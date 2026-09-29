@@ -105,8 +105,9 @@ def _raw_baseline_designs(
     validation_features: np.ndarray,
     feature_names: list[str],
     excluded_features: list[str],
+    metadata: list[dict[str, Any]],
 ) -> tuple[np.ndarray, np.ndarray, list[str]]:
-    """Fit the original numeric baseline after an explicit column exclusion."""
+    """Fit the original baseline with feature-type-aware missing-value fills."""
 
     excluded = set(excluded_features)
     unknown = excluded - set(feature_names)
@@ -117,7 +118,23 @@ def _raw_baseline_designs(
     kept_indices = [
         index for index, name in enumerate(feature_names) if name not in excluded
     ]
-    fitted = fit_baseline_preprocessor(train_features[:, kept_indices])
+    metadata_by_name = {entry["name"]: entry for entry in metadata}
+    missing_metadata = [
+        feature_names[index]
+        for index in kept_indices
+        if feature_names[index] not in metadata_by_name
+    ]
+    if missing_metadata:
+        raise ValueError(
+            "Feature metadata is missing: " + ", ".join(missing_metadata[:10])
+        )
+    semantic_types = [
+        str(metadata_by_name[feature_names[index]].get("semantic_type", ""))
+        for index in kept_indices
+    ]
+    fitted = fit_baseline_preprocessor(
+        train_features[:, kept_indices], semantic_types=semantic_types
+    )
     return (
         transform_baseline_features(train_features[:, kept_indices], fitted),
         transform_baseline_features(validation_features[:, kept_indices], fitted),
@@ -142,6 +159,7 @@ def _designs_for_variant(
             validation_features,
             feature_names,
             list(preprocessing.get("exclude_features", [])),
+            metadata,
         )
     if name == "codebook_aware":
         processor = FeaturePreprocessor(feature_names, metadata, preprocessing)

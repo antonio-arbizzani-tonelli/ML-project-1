@@ -123,13 +123,16 @@ logic, scalar losses, and no unfinished markers in Python files.
 
 ## Limitations and next work
 
-- `HAREHAB1` may encode target-conditioned survey eligibility and requires a
-  controlled ablation before scientific interpretation.
-- Several food and exercise variables mix daily, weekly, and monthly codes;
-  their standardized representation is not yet a finalist.
+- `HAREHAB1` may encode target-conditioned survey eligibility. Its completed
+  ablation lowers nested F1 from 0.44216 to 0.43104; task validity remains to
+  be resolved before scientific interpretation.
+- Replacing six raw food-frequency columns with their daily derivatives was
+  tested and reached nested F1 0.44186. Exercise-frequency representation and
+  isolated `ALCDAY5` ablation remain open.
 - The current threshold is transferred from nested development folds. A final
   AIcrowd submission has not yet been frozen in the experiment ledger.
 
 The next experiments and their decision criteria are listed in
-[docs/EXPERIMENTS.md](docs/EXPERIMENTS.md#highest-priority-next-tests). Dataset
-semantics and known preprocessing gaps are in [docs/DATA.md](docs/DATA.md).
+[docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md). The experiment history
+is in [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md); dataset semantics and known
+preprocessing gaps are in [docs/DATA.md](docs/DATA.md).

@@ -102,6 +102,19 @@ def tree_feature_matrices(
                 clean_validation[clean_validation == code] = mapped
         output_train[:, output_index] = clean_train
         output_validation[:, output_index] = clean_validation
+    imputation = plan.get("imputation")
+    if imputation is not None:
+        from src.conditional_imputation import impute_tree_pair
+
+        return impute_tree_pair(
+            training_features,
+            validation_features,
+            output_train,
+            output_validation,
+            output_names,
+            processor,
+            imputation,
+        )
     return output_train, output_validation, output_names
 
 
@@ -238,9 +251,10 @@ class _PiecewiseLinearState:
 class FeaturePreprocessor:
     """Fit and apply one codebook-aware, explicit feature transformation.
 
-    The ``plan`` is an ordinary JSON-compatible mapping.  It specifies only
-    feature-policy choices; medians, scales, binary mappings, and categories
-    are learned from the training array during ``fit``.
+    The ``plan`` is an ordinary JSON-compatible mapping. It specifies feature
+    policy choices; fill values, scales, binary mappings, and categories are
+    learned from the training array during ``fit``. Categorical, binary, and
+    ordinal columns use their observed mode when a numeric fill is needed.
     """
 
     def __init__(
@@ -424,7 +438,12 @@ class FeaturePreprocessor:
                 for code, mapped in binary_map.items():
                     converted[values == code] = mapped
                 values = converted
-            fill_value = float(np.nanmedian(values))
+            observed_values = values[~missing]
+            if semantic_type in {"binary", "categorical", "ordinal"}:
+                categories, counts = np.unique(observed_values, return_counts=True)
+                fill_value = float(categories[np.argmax(counts)])
+            else:
+                fill_value = float(np.median(observed_values))
             imputed = np.where(missing, fill_value, values)
             if semantic_type == "binary" and binary_map:
                 mean, scale = 0.0, 1.0
