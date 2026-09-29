@@ -91,17 +91,49 @@ protocol and must not be ranked against the nested values.
 | --- | ---: | --- |
 | Phase 14, with `HAREHAB1` | **0.442155** nested | Current submission reference. |
 | Phase 15, ablate only `HAREHAB1` | 0.431039 nested | About 0.01112 lower; the feature's task validity still needs a decision. |
-| Phase 16, targeted interactions without `HAREHAB1` | 0.431370 nested | The preprocessing also differs from Phase 15, so this does not isolate the five interactions. |
+| Phase 16, target-feature configuration without `HAREHAB1` | 0.431370 nested | Its five configured interactions are not applied by the versioned tree preprocessor; other preprocessing also differs from Phase 15. |
 | Phase 17, learning rate 0.07 on Phase 16 | 0.432225 nested | Better than that branch's 0.431370 control. |
 | Phase 17, minimum leaf rows 150 on Phase 16 | **0.432606** nested | Best F1 among the recorded Phase 17 candidates; the commit title emphasizes 0.07, but leaf size 150 scores higher. |
 | Phase 18, replace six raw diet frequencies with daily derivatives | 0.441862 nested | Below the matched Phase 14 result by about 0.00029. |
+| Phase 19, minimum leaf rows 150 on unchanged Phase 14 | 0.439991 nested | Below Phase 14 by 0.002165; all three folds lower. |
+| Phase 19, learning rate 0.07 on unchanged Phase 14 | 0.440700 nested | Below Phase 14 by 0.001455; all three folds lower. |
 | Local Phase 16, restricted imputation | 0.442674 exploratory | Threshold selected on the same pooled outer OOF labels being scored. |
 | Local Phase 16, expanded imputation | 0.441989 exploratory | Same optimistic protocol; weaker than the restricted variant. |
 
 The Phase 17 comparisons belong to the Phase 16 representation without
-`HAREHAB1`. Do not transfer their gain to the Phase 14 configuration without a
-new paired test. The full record list is in `results/experiments/index.csv`;
+`HAREHAB1`. Phase 19 completed the paired transfer tests on Phase 14 and neither
+candidate improved F1. The full record list is in `results/experiments/index.csv`;
 the imputation caveats and follow-up are in [IMPUTATION.md](IMPUTATION.md).
+
+The Phase 19 source audit also corrects the interpretation of the remote
+Phase 16 experiment. Its configuration lists five interactions, but
+`tree_feature_matrices` does not read `interactions`. The retained source count
+and recorded output count are both 295. The stored result does not demonstrate
+an effective interaction experiment; implementing and validating these
+features remains open.
+
+## Phase 19 conformity and transfer decision
+
+The baseline audit passed all 35 checks without fitting models. Data, labels,
+metadata, preprocessing configuration and saved split hashes match the Phase 14
+record; current checkpoint inference reproduces every saved outer-fold
+probability exactly. Final model settings and the frozen threshold also match.
+The focused food/exercise nonresponse-code checks pass.
+
+Both Phase 19 suites retain the Phase 14 representation with `HAREHAB1`, 295
+features and the original seeds. Each changes one parameter and selects its
+thresholds using two inner folds inside each of three outer folds. Leaf size
+150 adds 185 true positives but 942 false positives; learning rate 0.07 removes
+360 false positives but loses 156 true positives. Their small AP improvements
+do not compensate for the lower primary F1 metric. Keep leaf size 200 and
+learning rate 0.05; move next to the isolated `ALCDAY5` ablation.
+
+The two validations ran in parallel, taking 59.20 and 59.45 minutes respectively
+in Python 3.14.3 / NumPy 2.4.2. The local suite passes 86 tests. Official-version
+compatibility remains a separate check. Details, fold metrics, thresholds,
+confusion matrices and conditional paired-bootstrap intervals are in
+[the Phase 19 report](../results/eda/phase19_transfer_summary.md); the baseline
+audit is in [the conformity report](../results/eda/phase19_phase14_conformity.md).
 
 ## Highest-priority next tests
 
@@ -114,9 +146,10 @@ the imputation caveats and follow-up are in [IMPUTATION.md](IMPUTATION.md).
 3. **Separate missing-state indicators from imputation →** compare Phase 14,
    matching indicators only, and restricted Phase 16 imputation using nested
    threshold selection.
-4. **Test promising tree settings on the chosen feature set →** Phase 17
-   suggests leaf size 150 and learning rate 0.07 on its branch. Confirm them
-   against the selected baseline before combining changes.
+4. **Tune after confirmed representation changes →** leaf size 150 and learning
+   rate 0.07 were already transferred to Phase 14 in Phase 19 and both reduced
+   F1. Do not repeat them on that unchanged branch or treat their combination
+   as a combination of confirmed gains.
 5. **Check train-to-test transfer →** after a final configuration is frozen,
    record local artifacts and the immutable Git commit before submission.
 

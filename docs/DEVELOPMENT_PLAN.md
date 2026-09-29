@@ -3,7 +3,7 @@
 **Progetto:** classificazione binaria di `_MICHD` con logica NumPy-only.
 **Metrica principale:** F1 della classe positiva.
 **Ambiente ufficiale:** Python 3.9 e NumPy 1.23.1.
-**Stato:** piano aggiornato dopo l'integrazione delle prove Phase 15–18 da `origin/main` e degli esperimenti locali di imputazione.
+**Stato:** verifica Phase 14 e Phase 19 completate. I due trasferimenti T1–T2 peggiorano l'F1; il riferimento resta Phase 14.
 
 Questo documento è la base operativa per i prossimi esperimenti. Se un risultato è già disponibile, va riutilizzato dopo averne verificato configurazione e protocollo. Ogni nuova prova deve lasciare un record con ipotesi, controllo, metriche, costo e decisione.
 
@@ -36,8 +36,9 @@ Artefatti principali: [configurazione finale](../configs/final_model.json), [pro
 - La Phase 13 ha rimosso più feature insieme e ottenuto F1 annidato `0,44029`. Non isola l'effetto di `ALCDAY5`.
 - La Phase 16 ha riaddestrato varianti con imputazione ristretta ed estesa. I loro F1 disponibili scelgono la soglia sulle stesse predizioni OOF valutate e sono quindi **esplorativi**, non direttamente confrontabili con lo `0,44216` annidato. Si veda il [confronto Phase 16](../results/experiments/phase16_retrained_comparison.json).
 - La [Phase 15](../configs/experiments/phase15_boosting_ablate_harehab1.json) ha già completato l'ablazione di `HAREHAB1`: F1 annidato `0,43104`, contro `0,44216` di Phase 14.
-- La Phase 16 remota ha provato cinque interazioni mirate e la Phase 17 ha confrontato learning rate `0,03/0,05/0,07` e minimo foglia `150/200/250`. Questi risultati appartengono al ramo senza `HAREHAB1`; la configurazione delle interazioni cambia anche altre scelte di preprocessing, quindi il piccolo scarto dalla Phase 15 non isola il contributo delle sole interazioni.
+- La Phase 16 remota contiene cinque interazioni mirate nella configurazione, ma il preprocessing ad alberi versionato non legge il campo `interactions`: conserva le 295 colonne sorgente di quel ramo e il record dichiara 295 colonne in uscita. Il risultato non documenta una prova effettiva delle cinque interazioni. La Phase 17 ha invece confrontato realmente learning rate `0,03/0,05/0,07` e minimo foglia `150/200/250` su quel ramo senza `HAREHAB1`, con altre differenze di preprocessing rispetto alla Phase 15.
 - La [Phase 18](../configs/experiments/phase18_boosting_diet_frequency_features.json) ha sostituito sei codici grezzi delle frequenze alimentari con i derivati giornalieri già presenti: F1 annidato `0,44186`, contro `0,44216` di Phase 14. La sostituzione completa non migliora il riferimento.
+- La [Phase 19](../results/eda/phase19_transfer_summary.md) ha trasferito i due segnali Phase 17 alla Phase 14 con `HAREHAB1`, cambiando un solo parametro alla volta. Minimo foglia 150: F1 annidato `0,43999`; learning rate 0,07: `0,44070`. Entrambi peggiorano tutti e tre i fold rispetto a Phase 14 (`0,44216`). Non ripetere queste due configurazioni sullo stesso ramo.
 - L'analisi degli errori condivisi fra logistica e boosting esiste già. Recuperarla prima di progettare un ensemble.
 
 ## 2. Prima fase: correttezza e preprocessing
@@ -45,6 +46,8 @@ Artefatti principali: [configurazione finale](../configs/final_model.json), [pro
 ### C0 — Consolidare la baseline
 
 Prima dei nuovi training, verificare che configurazione, codice, split e artefatti Phase 14 descrivano lo stesso modello. Riutilizzare le predizioni salvate solo quando coincidono righe, ordine, preprocessing e parametri.
+
+Verifica completata il 29 settembre 2026: tutti i 35 controlli sono passati, compresi gli hash degli input, gli split, il percorso effettivo del preprocessing e le predizioni dei tre checkpoint ricalcolate su tutte le righe di validazione. La differenza massima dalle predizioni salvate è zero in ogni fold. Il controllo mirato dei codici `777` delle dieci frequenze/durate alimentari e di esercizio conferma la conversione a `NaN`. Nessun modello è stato addestrato nella verifica. Il [rapporto di conformità](../results/eda/phase19_phase14_conformity.json) riporta anche l'ambiente effettivo: Python 3.14.3 e NumPy 2.4.2; l'ambiente ufficiale Python 3.9 / NumPy 1.23.1 resta un controllo distinto.
 
 Rivedere le variabili di alimentazione e attività fisica per individuare **eventuali** codici speciali non ancora corretti dalle 14 conversioni Phase 14. Codici come `555` o `888` possono indicare «mai» in specifiche domande: il loro significato va verificato **per variabile** nel codebook. Distinguere zero reale, non risposta e domanda non applicabile; non applicare conversioni globali per valore numerico.
 
@@ -97,10 +100,12 @@ La Phase 17 ha già eseguito cinque confronti **sul ramo Phase 16 senza `HAREHAB
 
 Fissare la migliore rappresentazione confermata e confrontare inizialmente le configurazioni seguenti **una per volta** sullo stesso ramo. Se si mantiene la baseline Phase 14, i primi due candidati trasferiscono su quel ramo i segnali della Phase 17. Se `HAREHAB1` va esclusa, i risultati Phase 17 sono riutilizzabili solo adottando esattamente la rappresentazione Phase 16; con la rappresentazione Phase 15 o una nuova variante, ripetere i confronti sul controllo corrispondente.
 
+Il trasferimento dei primi due candidati è ora **completato** in Phase 19: T1 perde `0,002165` F1 e T2 perde `0,001455`, con zero fold favorevoli su tre per entrambi. Conservare minimo foglia 200 e learning rate 0,05 sul ramo Phase 14. Tornare al preprocessing P1–P4 prima di altri tuning; una nuova rappresentazione richiede un controllo corrispondente.
+
 | ID | Modifica rispetto ai parametri Phase 14 | Ipotesi |
 | --- | --- | --- |
-| **T1** | `min_samples_leaf=150` | Verificare sul ramo scelto il miglior risultato della Phase 17. |
-| **T2** | `learning_rate=0.07` | Verificare sul ramo scelto il segnale positivo della Phase 17. |
+| **T1** | `min_samples_leaf=150` | Completato su Phase 14: F1 `0,43999`; mantenere 200 sul ramo attuale. |
+| **T2** | `learning_rate=0.07` | Completato su Phase 14: F1 `0,44070`; mantenere 0,05 sul ramo attuale. |
 | **T3** | `learning_rate=0.025`, `n_estimators=400` | Distribuire l'apprendimento su aggiornamenti più piccoli. |
 | **T4** | `l2_regularization=5` | Regolarizzare maggiormente le stime delle foglie. |
 | **T5** | `max_depth=7` | Catturare interazioni non accessibili a profondità 5. |
@@ -166,7 +171,7 @@ Aggiornare questa tabella quando una prova termina. I risultati numerici vanno c
 
 | ID | Stato iniziale | Prossima azione | Risultato e decisione |
 | --- | --- | --- | --- |
-| C0 | Da verificare | Consolidare artefatti e controllare codici residui | — |
+| C0 | Verifica di conformità completata | Mantenere il riferimento verificato per i confronti isolati | 35/35 controlli; predizioni identiche in tutti i fold; controllo mirato dei codici superato. |
 | V1 | Completato | Decidere l'ammissibilità della feature, senza ripetere il training | Phase 15: F1 annidato `0,43104` senza `HAREHAB1`; Phase 14: `0,44216` con la feature. |
 | P1 | Da eseguire | Ablazione isolata `ALCDAY5` | — |
 | P2 | Da eseguire | One-hot delle due attività | — |
@@ -174,7 +179,7 @@ Aggiornare questa tabella quando una prova termina. I risultati numerici vanno c
 | P4 | Screening esplorativo svolto | Conferma annidata con controllo P3 | — |
 | P5 | Completato per sei frequenze alimentari | Conservare come riferimento; nuove varianti richiedono ipotesi precise | Phase 18: F1 annidato `0,44186`, sotto Phase 14. |
 | P6–P7 | Da eseguire dopo P1–P4 | Frequenze di esercizio e mancanti per modulo | — |
-| T1–T2 | Provati sul ramo Phase 16 senza `HAREHAB1` | Riutilizzare Phase 17 solo con identica rappresentazione; altrimenti verificare sul ramo scelto | Phase 17: foglia 150 `0,43261`; learning rate 0,07 `0,43222`; controllo `0,43137`. |
+| T1–T2 | Completati in Phase 19 sul ramo Phase 14 con `HAREHAB1` | Conservare i parametri Phase 14; procedere al preprocessing P1–P4 | T1: F1 `0,43999` (delta `−0,002165`); T2: `0,44070` (delta `−0,001455`); entrambi inferiori nei tre fold. |
 | T3–T5 | Da eseguire dopo preprocessing | Tuning contenuto del booster | — |
 | M1–M3 | Fase successiva | Pesi e ensemble | — |
 
