@@ -1,0 +1,255 @@
+{
+  "development_cutoff_importances": {
+    "100": {
+      "feature": "CPDEMO1",
+      "mean_f1_drop": 0.00034743211117014655,
+      "std_f1_drop": 0.00012028700148845497,
+      "mean_ap_drop": 6.558757119810392e-05
+    },
+    "60": {
+      "feature": "PDIABTST",
+      "mean_f1_drop": 0.0008276340201236465,
+      "std_f1_drop": 0.0007114471027105712,
+      "mean_ap_drop": -0.000128135177411041
+    }
+  },
+  "rare_feature_support": [
+    {
+      "partition": "development",
+      "parent_training_known_rows": 607,
+      "selector_fit_known_rows": 488,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 106,
+      "rank": 4,
+      "selected100": true,
+      "selected60": true
+    },
+    {
+      "partition": "outer_1",
+      "parent_training_known_rows": 384,
+      "selector_fit_known_rows": 302,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 90,
+      "rank": 3,
+      "selected100": true,
+      "selected60": true
+    },
+    {
+      "partition": "outer_1_inner_1",
+      "parent_training_known_rows": 188,
+      "selector_fit_known_rows": 153,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 0,
+      "rank": 170,
+      "selected100": false,
+      "selected60": false
+    },
+    {
+      "partition": "outer_1_inner_2",
+      "parent_training_known_rows": 196,
+      "selector_fit_known_rows": 163,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 0,
+      "rank": 165,
+      "selected100": false,
+      "selected60": false
+    },
+    {
+      "partition": "outer_2",
+      "parent_training_known_rows": 405,
+      "selector_fit_known_rows": 331,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 94,
+      "rank": 3,
+      "selected100": true,
+      "selected60": true
+    },
+    {
+      "partition": "outer_2_inner_1",
+      "parent_training_known_rows": 196,
+      "selector_fit_known_rows": 154,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 0,
+      "rank": 197,
+      "selected100": false,
+      "selected60": false
+    },
+    {
+      "partition": "outer_2_inner_2",
+      "parent_training_known_rows": 209,
+      "selector_fit_known_rows": 165,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 0,
+      "rank": 193,
+      "selected100": false,
+      "selected60": false
+    },
+    {
+      "partition": "outer_3",
+      "parent_training_known_rows": 425,
+      "selector_fit_known_rows": 334,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 92,
+      "rank": 3,
+      "selected100": true,
+      "selected60": true
+    },
+    {
+      "partition": "outer_3_inner_1",
+      "parent_training_known_rows": 206,
+      "selector_fit_known_rows": 163,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 0,
+      "rank": 160,
+      "selected100": false,
+      "selected60": false
+    },
+    {
+      "partition": "outer_3_inner_2",
+      "parent_training_known_rows": 219,
+      "selector_fit_known_rows": 167,
+      "selector_min_samples_leaf": 200,
+      "selector_split_count": 0,
+      "rank": 191,
+      "selected100": false,
+      "selected60": false
+    }
+  ],
+  "development_groups": [
+    {
+      "group": "age",
+      "mean_f1_drop": 0.02110698567521772,
+      "std_f1_drop": 0.0071603723959782544,
+      "members": [
+        "_AGE80",
+        "_AGE_G",
+        "_AGE65YR"
+      ]
+    },
+    {
+      "group": "hypertension",
+      "mean_f1_drop": 0.0076235815052828615,
+      "std_f1_drop": 0.0011537710882615548,
+      "members": [
+        "BPHIGH4",
+        "BPMEDS",
+        "_RFHYPE5"
+      ]
+    },
+    {
+      "group": "diabetes",
+      "mean_f1_drop": 0.005925855768901441,
+      "std_f1_drop": 0.0012348374692717624,
+      "members": [
+        "DIABETE3",
+        "DIABAGE2",
+        "INSULIN",
+        "BLDSUGAR",
+        "FEETCHK2",
+        "DOCTDIAB",
+        "CHKHEMO3",
+        "FEETCHK",
+        "EYEEXAM",
+        "DIABEYE",
+        "DIABEDU"
+      ]
+    },
+    {
+      "group": "smoking",
+      "mean_f1_drop": 0.005868698309888935,
+      "std_f1_drop": 0.0015877208735449126,
+      "members": [
+        "SMOKE100",
+        "SMOKDAY2",
+        "STOPSMK2",
+        "LASTSMK2",
+        "_SMOKER3",
+        "_RFSMOK3"
+      ]
+    },
+    {
+      "group": "body_size",
+      "mean_f1_drop": 0.0015106882377235453,
+      "std_f1_drop": 0.0005666413758409775,
+      "members": [
+        "HTM4",
+        "WTKG3",
+        "_BMI5",
+        "_BMI5CAT",
+        "_RFBMI5"
+      ]
+    },
+    {
+      "group": "exercise_frequency_1",
+      "mean_f1_drop": 0.00122601129244491,
+      "std_f1_drop": 0.0015000970928511657,
+      "members": [
+        "EXEROFT1",
+        "PAFREQ1_",
+        "EXERHMM1",
+        "EXRACT11"
+      ]
+    },
+    {
+      "group": "exercise_summary",
+      "mean_f1_drop": 0.0003850057873567292,
+      "std_f1_drop": 0.0008031243128379603,
+      "members": [
+        "EXERANY2",
+        "_TOTINDA",
+        "_PA150R2",
+        "_PA300R2",
+        "_PA30021",
+        "_PAREC1",
+        "_PASTAE1"
+      ]
+    },
+    {
+      "group": "exercise_frequency_2",
+      "mean_f1_drop": 0.000309580883528134,
+      "std_f1_drop": 0.00037058281911041393,
+      "members": [
+        "EXEROFT2",
+        "PAFREQ2_",
+        "EXERHMM2",
+        "EXRACT21"
+      ]
+    },
+    {
+      "group": "alcohol",
+      "mean_f1_drop": 5.3645213379397795e-05,
+      "std_f1_drop": 0.0031369854606371136,
+      "members": [
+        "ALCDAY5",
+        "DROCDY3_",
+        "AVEDRNK2",
+        "MAXDRNKS",
+        "DRNK3GE5",
+        "_DRNKWEK",
+        "_RFDRHV5",
+        "_RFBING5"
+      ]
+    },
+    {
+      "group": "diet",
+      "mean_f1_drop": -0.0003119720196462043,
+      "std_f1_drop": 0.0036624660936902297,
+      "members": [
+        "FRUITJU1",
+        "FRUIT1",
+        "FVBEANS",
+        "FVGREEN",
+        "FVORANG",
+        "VEGETAB1",
+        "FTJUDA1_",
+        "FRUTDA1_",
+        "BEANDAY_",
+        "GRENDAY_",
+        "ORNGDAY_",
+        "VEGEDA1_",
+        "_FRUTSUM",
+        "_VEGESUM"
+      ]
+    }
+  ]
+}

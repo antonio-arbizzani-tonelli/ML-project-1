@@ -1,3 +1,5 @@
 # Experiment records are hashed byte-for-byte in results/experiments/index.csv.
 results/experiments/*.json text eol=lf
 results/experiments/index.csv text eol=lf
+results/experiments/**/*.json text eol=lf
+results/experiments/**/index.csv text eol=lf

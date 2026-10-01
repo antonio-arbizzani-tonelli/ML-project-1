@@ -219,6 +219,81 @@ def _save_oof_predictions(
     return path, _sha256(path)
 
 
+def _save_inner_oof_predictions(
+    artifact_dir: Path,
+    experiment_name: str,
+    outer_fold: int,
+    inner_seed: int,
+    training_rows: np.ndarray,
+    validation_rows: np.ndarray,
+    fold_ids: np.ndarray,
+    labels: np.ndarray,
+    probabilities: np.ndarray,
+) -> dict:
+    """Persist threshold-selection scores with their exact training boundary."""
+
+    arrays = {
+        "training_row_indices": np.asarray(training_rows, dtype=np.int64),
+        "outer_validation_row_indices": np.asarray(validation_rows, dtype=np.int64),
+        "fold_ids": np.asarray(fold_ids, dtype=np.int8),
+        "labels": np.asarray(labels, dtype=np.int8),
+        "probabilities": np.asarray(probabilities, dtype=np.float64),
+        "outer_fold": np.asarray([outer_fold], dtype=np.int64),
+        "inner_seed": np.asarray([inner_seed], dtype=np.int64),
+    }
+    rows = arrays["training_row_indices"]
+    held_out = arrays["outer_validation_row_indices"]
+    if (rows.ndim != 1 or held_out.ndim != 1 or not rows.size
+            or not held_out.size or np.unique(rows).size != rows.size
+            or np.unique(held_out).size != held_out.size
+            or np.intersect1d(rows, held_out).size):
+        raise ValueError("Inner OOF rows must be unique and exclude outer validation.")
+    if any(arrays[key].shape != rows.shape
+           for key in ("fold_ids", "labels", "probabilities")):
+        raise ValueError("Inner OOF row, fold, label and probability arrays must align.")
+    folds = np.unique(arrays["fold_ids"])
+    if folds.size < 2 or not np.array_equal(folds, np.arange(1, folds.size + 1)):
+        raise ValueError("Every inner OOF row must belong to a completed inner fold.")
+    if (not np.all(np.isin(arrays["labels"], [0, 1]))
+            or not np.all(np.isfinite(arrays["probabilities"]))
+            or np.any((arrays["probabilities"] < 0) | (arrays["probabilities"] > 1))):
+        raise ValueError("Inner OOF labels and probabilities are invalid.")
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+    path = artifact_dir / f"{experiment_name}_outer{outer_fold}_inner_oof.npz"
+    temporary = path.with_suffix(".tmp.npz")
+    np.savez_compressed(temporary, **arrays)
+    os.replace(temporary, path)
+    return {
+        "path": str(path),
+        "sha256": _sha256(path),
+        "training_rows": int(rows.size),
+        "inner_fold_count": int(folds.size),
+        "array_sha256": {key: _array_sha256(value) for key, value in arrays.items()},
+        "arrays": list(arrays),
+    }
+
+
+def _resolved_parameters(parameters: dict, output_names: list[str]) -> dict:
+    """Resolve configured feature names independently within each fitted fold."""
+    resolved = dict(parameters)
+    names = resolved.pop("exact_feature_names", [])
+    prefixes = resolved.pop("exact_feature_prefixes", [])
+    if not names and not prefixes:
+        return resolved
+    if (not isinstance(names, list) or not isinstance(prefixes, list)
+            or any(not isinstance(n, str) or not n for n in names + prefixes)):
+        raise ValueError("Exact feature names and prefixes must contain strings.")
+    if set(names) - set(output_names):
+        raise ValueError("An exact feature name is absent from the fitted representation.")
+    if any(not any(n.startswith(p) for n in output_names) for p in prefixes):
+        raise ValueError("An exact feature prefix matches no fitted output.")
+    if "exact_feature_indices" in resolved:
+        raise ValueError("Configure exact features by names or indices, not both.")
+    resolved["exact_feature_indices"] = [i for i, name in enumerate(output_names)
+        if name in names or any(name.startswith(prefix) for prefix in prefixes)]
+    return resolved
+
+
 def _nested_evaluations(
     selected: dict[str, list[int]],
     models: dict[str, dict],
@@ -232,6 +307,9 @@ def _nested_evaluations(
     outer_probabilities: dict[tuple[str, int], np.ndarray],
     inner_fold_count: int,
     inner_seed: int,
+    inner_oof_dir: Path | None = None,
+    experiment_prefix: str = "boosting",
+    project_root: Path | None = None,
 ) -> tuple[dict[tuple[str, int], dict], dict[tuple[str, int], np.ndarray]]:
     """Select every threshold from inner OOF predictions, never outer labels."""
 
@@ -259,9 +337,11 @@ def _nested_evaluations(
                 step: np.empty(outer_training_positions.size, dtype=np.float64)
                 for step in checkpoints
             }
-            for inner_train, inner_validation in _stratified_folds(
+            inner_fold_ids = np.zeros(outer_training_positions.size, dtype=np.int8)
+            for inner_fold, (inner_train, inner_validation) in enumerate(_stratified_folds(
                 outer_training_labels, inner_fold_count, inner_seed + outer_fold
-            ):
+            ), start=1):
+                inner_fold_ids[inner_validation] = inner_fold
                 train_rows = development_indices[outer_training_positions[inner_train]]
                 validation_rows = development_indices[
                     outer_training_positions[inner_validation]
@@ -270,7 +350,7 @@ def _nested_evaluations(
                 validation_source = np.asarray(
                     features[validation_rows], dtype=np.float32
                 )
-                train_matrix, validation_matrix, _ = tree_feature_matrices(
+                train_matrix, validation_matrix, output_names = tree_feature_matrices(
                     train_source,
                     validation_source,
                     feature_names,
@@ -281,7 +361,7 @@ def _nested_evaluations(
                     train_matrix,
                     outer_training_labels[inner_train],
                     validation_matrix,
-                    model["parameters"],
+                    _resolved_parameters(model["parameters"], output_names),
                     checkpoints,
                 )
                 for step in checkpoints:
@@ -295,6 +375,23 @@ def _nested_evaluations(
                 )
                 gc.collect()
             for step in checkpoints:
+                inner_artifact = None
+                if inner_oof_dir is not None:
+                    inner_artifact = _save_inner_oof_predictions(
+                        inner_oof_dir,
+                        f"{experiment_prefix}_{name}_{step}trees",
+                        outer_fold,
+                        inner_seed + outer_fold,
+                        development_indices[outer_training_positions],
+                        development_indices[outer_validation_positions],
+                        inner_fold_ids,
+                        outer_training_labels,
+                        inner_probabilities[step],
+                    )
+                    if project_root is not None:
+                        inner_artifact["path"] = str(
+                            Path(inner_artifact["path"]).relative_to(project_root)
+                        )
                 choice = best_f1_threshold(
                     outer_training_labels, inner_probabilities[step]
                 )
@@ -321,6 +418,7 @@ def _nested_evaluations(
                         )[0],
                         "outer_evaluation_metrics": metrics,
                         "outer_evaluation_confusion_counts": counts,
+                        "inner_oof_predictions_artifact": inner_artifact,
                     }
                 )
         for step in checkpoints:
@@ -460,6 +558,8 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                             development_labels[train_positions]
                         ),
                         "input_sha256": fingerprints,
+                        "output_feature_names": output_names,
+                        "resolved_model_parameters": _resolved_parameters(model["parameters"], output_names),
                     },
                 )
                 checkpoint_artifacts[key].append(
@@ -475,7 +575,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                 train_matrix,
                 development_labels[train_positions],
                 validation_matrix,
-                model["parameters"],
+                _resolved_parameters(model["parameters"], output_names),
                 checkpoints,
                 save_model_checkpoint,
             )
@@ -492,6 +592,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                         "fold": fold,
                         "training_rows": int(train_positions.size),
                         "validation_rows": int(validation_positions.size),
+                        "output_feature_count": len(output_names),
                         "fixed_threshold_metrics": metrics,
                         "tree_fit_profile": profile,
                     }
@@ -526,6 +627,9 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
             predictions,
             nested["inner_fold_count"],
             nested["inner_seed"],
+            artifact_root / "inner_oof_predictions",
+            suite.get("experiment_prefix", "boosting"),
+            project_root,
         )
     runtime = time.perf_counter() - started
     records = []

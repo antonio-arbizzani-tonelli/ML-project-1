@@ -1,0 +1,2337 @@
+{
+  "config": {
+    "data": {
+      "features_path": "data/processed/x_train_float32.npy",
+      "labels_path": "data/processed/y_train_int8.npy",
+      "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+      "x_train_csv_path": "data/raw/dataset/x_train.csv"
+    },
+    "experiment_name": "phase32_mlp_mlp64_32",
+    "features": {
+      "cleaning_plan": {
+        "auxiliary_missing_features": [
+          "_AGEG5YR"
+        ],
+        "exclude_features": [
+          "CTELNUM1",
+          "CELLFON2",
+          "_AGEG5YR",
+          "WEIGHT2",
+          "HEIGHT3",
+          "HTIN4"
+        ],
+        "exclude_semantic_types": [
+          "identifier",
+          "date",
+          "survey_design"
+        ],
+        "missing_code_overrides": {
+          "ALCDAY5": [
+            {
+              "code": 777,
+              "reason": "unknown"
+            },
+            {
+              "code": 999,
+              "reason": "refused"
+            }
+          ],
+          "ASTHMA3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "BLOODCHO": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "BPHIGH4": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "CASTHDX2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "DIABETE3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "EXRACT11": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            },
+            {
+              "code": 99,
+              "reason": "refused"
+            }
+          ],
+          "EXRACT21": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            },
+            {
+              "code": 99,
+              "reason": "refused"
+            }
+          ],
+          "FLUSHOT6": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HIVTST6": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HPVADVC2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HPVTEST": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "IMFVPLAC": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            }
+          ],
+          "NUMHHOL2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "SMOKDAY2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "SMOKE100": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "_AGEG5YR": [
+            {
+              "code": 14,
+              "reason": "blank"
+            }
+          ]
+        },
+        "name": "codebook_aware",
+        "zero_code_overrides": {
+          "ALCDAY5": [
+            888
+          ],
+          "MENTHLTH": [
+            88
+          ],
+          "PHYSHLTH": [
+            88
+          ]
+        }
+      },
+      "mlp_preprocessing": {
+        "early_stopping_fraction": 0.1,
+        "early_stopping_seed": 20261001,
+        "frequency_features": [
+          "ALCDAY5",
+          "EXEROFT1",
+          "EXEROFT2",
+          "FRUITJU1",
+          "FRUIT1",
+          "FVBEANS",
+          "FVGREEN",
+          "FVORANG",
+          "VEGETAB1"
+        ]
+      }
+    },
+    "hypothesis": "A fold-safe NumPy ReLU MLP with model-specific finite inputs improves the Phase 14 binary F1 baseline.",
+    "missing_values": {
+      "nominal": "full one-hot plus missing and unseen flags",
+      "numeric": "training median/mode plus missing flag"
+    },
+    "model": {
+      "name": "numpy_mlp",
+      "parameters": {
+        "batch_size": 512,
+        "hidden_layer_sizes": [
+          64,
+          32
+        ],
+        "l2": 0.0001,
+        "learning_rate": 0.001,
+        "max_epochs": 80,
+        "min_delta": 0.0001,
+        "patience": 8,
+        "random_seed": 20261001
+      }
+    },
+    "split": {
+      "id": "stratified_seed_20260918_development_inner_cv",
+      "inner_folds": 2,
+      "inner_seed": 20260922,
+      "outer_folds": 3,
+      "outer_seed": 20260919
+    },
+    "threshold": {
+      "selection_method": "inner OOF F1 threshold separately for each outer training fold"
+    }
+  },
+  "outcome": {
+    "confusion_counts": {
+      "false_negatives": 11230,
+      "false_positives": 21178,
+      "true_negatives": 218150,
+      "true_positives": 11950
+    },
+    "development_rows": 262508,
+    "environment": {
+      "numpy": "2.4.2",
+      "openblas_num_threads": "1",
+      "python": "3.14.3"
+    },
+    "evaluation_limitations": "Many configurations have already been compared on these development folds. This is development validation, not an untouched final test.",
+    "fingerprints": {
+      "cleaning_config": "3c6188166857fbf9b22b5896dfbaea9025b70e1004a44769b7cba4ee8dec41fb",
+      "evaluation.py": "b887e906f31993fe5a349dbcd0ba2e28f5d28568d7c133fe3b61358ae9520c1c",
+      "feature_metadata": "28e5f94aae365c1aece9dbc7398d875ca90fbd91456115c46ecfc573723ad587",
+      "feature_preprocessing.py": "152bde126dd89ced41a17ae4066b798d08b1343061d2d0f8b8577a77d3b25baf",
+      "features_path": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+      "labels_path": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+      "mlp_preprocessing.py": "f6d4026232b11a2208bded70e7e075bf5e14899f12ec6e4c108d367f4889144c",
+      "numpy_mlp.py": "f2d979a3e2ec78e441ddd2de81d5d41d055ce54237dec781cf0d1214c48daa92",
+      "run_boosting_cv.py": "33b3ecc61b797f7d197f495f2c3aa2fae8c3e4a1b3155772bdcdfb3e79447b4b",
+      "run_mlp_cv.py": "8c1a09a84ca6e3237322917dd103d905989abcebbe7abb43706880330d14a5e7",
+      "run_preprocessing_cv.py": "806812764b15c208dbe74d7e05e9a29f52177fdcfd1949c033aa7708d180af5b",
+      "split_indices_path": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630",
+      "suite_config": "ab18e31648a6ca0d126a07f426c66e8ac91a8c4f75f3dace34bbcaa57f4c77ea",
+      "x_train_csv_path": "bfa447edece27d45b54f8f1486f6351a381885968d71c9eb1574fd1dbf0fa14a"
+    },
+    "metrics": {
+      "accuracy": 0.8765447148277385,
+      "average_precision": 0.3877821137819869,
+      "balanced_accuracy": 0.7135205963814009,
+      "f1": 0.42445123250692623,
+      "log_loss": 0.22167438622387117,
+      "precision": 0.36072204781453754,
+      "recall": 0.5155306298533219,
+      "specificity": 0.9115105629094798
+    },
+    "nested_threshold_evaluation": {
+      "folds": [
+        {
+          "inner_fits": [
+            {
+              "models": {
+                "mlp128_64": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer1_inner1_mlp128_64.pkl",
+                    "sha256": "d0adc6a0371de965b78e689ad14360e7e5d8a4d16835e1f1d3c3d2952607c134"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 13,
+                  "parameter_count": 158721,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.7358854999765754,
+                      "training_bce": 0.22582320711763323,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.601291700033471,
+                      "training_bce": 0.22721275782298625,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.6123725001234561,
+                      "training_bce": 0.21489062192754144,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.6663676998578012,
+                      "training_bce": 0.2122156064706602,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.549127999925986,
+                      "training_bce": 0.21312657588877962,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 8.865486199967563,
+                  "selected_epochs": 5,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.2672410998493433,
+                      "training_bce": 0.22150484182495958,
+                      "validation_bce": 0.22632903317886735
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.2832979999948293,
+                      "training_bce": 0.21778683284045716,
+                      "validation_bce": 0.22633653222748393
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.2449472001753747,
+                      "training_bce": 0.21540435582983675,
+                      "validation_bce": 0.22646016930217408
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.278627400053665,
+                      "training_bce": 0.21190937695391251,
+                      "validation_bce": 0.2251875492886036
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.3342625999357551,
+                      "training_bce": 0.20745241417722024,
+                      "validation_bce": 0.22499447317677684
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 1.3088581000920385,
+                      "training_bce": 0.20345262634206637,
+                      "validation_bce": 0.22501786552546021
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 1.3223484000191092,
+                      "training_bce": 0.20105564538327733,
+                      "validation_bce": 0.22724841133562076
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 1.3738009000662714,
+                      "training_bce": 0.19738916251169397,
+                      "validation_bce": 0.2291575510433437
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 1.3174932999536395,
+                      "training_bce": 0.19305455331354787,
+                      "validation_bce": 0.23404863051296934
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 1.6261632998939604,
+                      "training_bce": 0.18538410796640714,
+                      "validation_bce": 0.23787309184305455
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 1.4414014997892082,
+                      "training_bce": 0.1828430279047339,
+                      "validation_bce": 0.2409223247942146
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 1.4685327999759465,
+                      "training_bce": 0.17671360660507227,
+                      "validation_bce": 0.24550954571735042
+                    },
+                    {
+                      "epoch": 13,
+                      "seconds": 1.5501222000457346,
+                      "training_bce": 0.17141939417114957,
+                      "validation_bce": 0.24940009802221572
+                    }
+                  ],
+                  "selection_seconds": 18.0662879999727
+                },
+                "mlp64_32": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer1_inner1_mlp64_32.pkl",
+                    "sha256": "90d00571f0293aa2e574bd6614192ad70a836d9832fa0709a0dbcd1f100148ed"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 11,
+                  "parameter_count": 77313,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.8337894000578672,
+                      "training_bce": 0.2228596660240734,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.816981399897486,
+                      "training_bce": 0.21979790004376487,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.8796248000580817,
+                      "training_bce": 0.21647360231618692,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 3.192916000029072,
+                  "selected_epochs": 3,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.7996881001163274,
+                      "training_bce": 0.22678644979258256,
+                      "validation_bce": 0.23040927807370676
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7313397999387234,
+                      "training_bce": 0.21992495045294608,
+                      "validation_bce": 0.22669540792339257
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.6572453000117093,
+                      "training_bce": 0.21577426366354097,
+                      "validation_bce": 0.22472138179129175
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7162965999450535,
+                      "training_bce": 0.21407210924597506,
+                      "validation_bce": 0.22549780148501256
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.662935100030154,
+                      "training_bce": 0.211550661213515,
+                      "validation_bce": 0.22617658831750764
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.6549877000506967,
+                      "training_bce": 0.21417544193746038,
+                      "validation_bce": 0.22947670938220174
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 0.6792112998664379,
+                      "training_bce": 0.20645728631564184,
+                      "validation_bce": 0.22581044112919307
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 0.6833097999915481,
+                      "training_bce": 0.20655971533138975,
+                      "validation_bce": 0.232750886176624
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 0.6502062999643385,
+                      "training_bce": 0.1985825246656923,
+                      "validation_bce": 0.22907421499349231
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 0.6626476000528783,
+                      "training_bce": 0.1973224802434203,
+                      "validation_bce": 0.2346798389582058
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 0.6645345999859273,
+                      "training_bce": 0.20520539011634362,
+                      "validation_bce": 0.242016566731298
+                    }
+                  ],
+                  "selection_seconds": 7.839572000084445
+                }
+              },
+              "runtime_seconds": 42.77208280004561,
+              "tag": "outer1_inner1"
+            },
+            {
+              "models": {
+                "mlp128_64": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer1_inner2_mlp128_64.pkl",
+                    "sha256": "c52cd9a9f39a316e27b314d34252e86e5f7f0eee7c4e8cea23b249f1ff05c33d"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 12,
+                  "parameter_count": 158849,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.343784699914977,
+                      "training_bce": 0.21975688660338794,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.371254799887538,
+                      "training_bce": 0.22036755271779124,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.3774500999134034,
+                      "training_bce": 0.21297936345136304,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.4971859999932349,
+                      "training_bce": 0.21190934651463142,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 6.272700300207362,
+                  "selected_epochs": 4,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.6135178999975324,
+                      "training_bce": 0.21899638401973343,
+                      "validation_bce": 0.22787465771106855
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.352615299867466,
+                      "training_bce": 0.2141231655761036,
+                      "validation_bce": 0.22401320440032063
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.2283055998850614,
+                      "training_bce": 0.21187936488814543,
+                      "validation_bce": 0.22402852224558484
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.2728343999478966,
+                      "training_bce": 0.20882998954541465,
+                      "validation_bce": 0.22261209666307752
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.2913057999685407,
+                      "training_bce": 0.21291633047984052,
+                      "validation_bce": 0.23070198139144477
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 1.325197899946943,
+                      "training_bce": 0.20423805417522775,
+                      "validation_bce": 0.2260297401062826
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 1.2372791999951005,
+                      "training_bce": 0.20140664977070888,
+                      "validation_bce": 0.22724654455036225
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 1.286252899793908,
+                      "training_bce": 0.20005639747217535,
+                      "validation_bce": 0.22484129961358792
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 1.2434294000267982,
+                      "training_bce": 0.1940228618028949,
+                      "validation_bce": 0.22706260538609066
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 1.2800604000221938,
+                      "training_bce": 0.19188249409903646,
+                      "validation_bce": 0.23212413336547294
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 1.3326743999496102,
+                      "training_bce": 0.18882231608510822,
+                      "validation_bce": 0.23259779004197587
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 1.323494000127539,
+                      "training_bce": 0.1838062292348454,
+                      "validation_bce": 0.2366126832685451
+                    }
+                  ],
+                  "selection_seconds": 16.084847199963406
+                },
+                "mlp64_32": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer1_inner2_mlp64_32.pkl",
+                    "sha256": "c42aa542f6cb5ea1dc48ce6bf08cf23eeb0733adec23f147a43e2c744a7ea9eb"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 14,
+                  "parameter_count": 77377,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.6953382000792772,
+                      "training_bce": 0.22270234474297482,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7002413000445813,
+                      "training_bce": 0.21862288766979746,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.6965491001028568,
+                      "training_bce": 0.21358667990744196,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7142455999273807,
+                      "training_bce": 0.21230109068576067,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.7507366999052465,
+                      "training_bce": 0.21548549477159762,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.712844500085339,
+                      "training_bce": 0.20886550545346286,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 4.775687100132927,
+                  "selected_epochs": 6,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.6826949999667704,
+                      "training_bce": 0.2201200138346389,
+                      "validation_bce": 0.22678685081312686
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.749351300066337,
+                      "training_bce": 0.21807828458128314,
+                      "validation_bce": 0.22632385495098656
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.677697999868542,
+                      "training_bce": 0.21295168580038626,
+                      "validation_bce": 0.22330325024926473
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.648645699955523,
+                      "training_bce": 0.21100023684814975,
+                      "validation_bce": 0.22303311400291928
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.6462908000685275,
+                      "training_bce": 0.215715825322109,
+                      "validation_bce": 0.22772645862837773
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.6439569999929518,
+                      "training_bce": 0.20837654290648663,
+                      "validation_bce": 0.22237464404627313
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 0.6648570999968797,
+                      "training_bce": 0.20729371350096332,
+                      "validation_bce": 0.22610175005915448
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 0.6740639999043196,
+                      "training_bce": 0.203072088379139,
+                      "validation_bce": 0.2236085776305858
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 0.6605547000654042,
+                      "training_bce": 0.20379515970849846,
+                      "validation_bce": 0.2262193881276092
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 0.6653588998597115,
+                      "training_bce": 0.19951287809408105,
+                      "validation_bce": 0.2266141439248209
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 0.6603055999148637,
+                      "training_bce": 0.1959398177539666,
+                      "validation_bce": 0.22700135411259298
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 0.6633423999883235,
+                      "training_bce": 0.20027456115032324,
+                      "validation_bce": 0.23578596556621306
+                    },
+                    {
+                      "epoch": 13,
+                      "seconds": 0.7078496001195163,
+                      "training_bce": 0.1907512836640519,
+                      "validation_bce": 0.2310584097454804
+                    },
+                    {
+                      "epoch": 14,
+                      "seconds": 0.7708199999760836,
+                      "training_bce": 0.18816070017998987,
+                      "validation_bce": 0.23489415093807892
+                    }
+                  ],
+                  "selection_seconds": 9.774682200048119
+                }
+              },
+              "runtime_seconds": 40.83786340011284,
+              "tag": "outer1_inner2"
+            }
+          ],
+          "inner_oof_predictions_artifact": {
+            "array_sha256": {
+              "fold_ids": "139d85b57c1024be5af5e808b34db8cb95e92bc307245371e63079c0a2eac341",
+              "inner_seed": "3398546b8cd92a96eb8b165c89423d58c0204eda168cde6d09d1b2724d1cc540",
+              "labels": "3c36216b966b8dd62fb67b51a305ba5eaf2bfb2e002a94f2fa6318a07a74a71a",
+              "outer_fold": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+              "outer_validation_row_indices": "0920323c9ba8db41517c3c448b25b28701ba815f09c35667eb1f88ae45eda70b",
+              "probabilities": "49c42ad576bfd418d0f2235ddc0ec17167d4203dc120d5f5385adc90265142ad",
+              "training_row_indices": "b6b0f1d02674beb38bf908d6fffaf874ec1dafc937bd66d5475cca5368568352"
+            },
+            "arrays": [
+              "training_row_indices",
+              "outer_validation_row_indices",
+              "fold_ids",
+              "labels",
+              "probabilities",
+              "outer_fold",
+              "inner_seed"
+            ],
+            "inner_fold_count": 2,
+            "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\phase32_mlp_mlp64_32_outer1_inner_oof.npz",
+            "sha256": "f89623c0104124b797b574e337e1a098f0a0d773c8dfb37da85887648786b7e5",
+            "training_rows": 175005
+          },
+          "inner_selection_metrics": {
+            "accuracy": 0.8657752635638982,
+            "average_precision": 0.3757358265511501,
+            "balanced_accuracy": 0.7219477094104612,
+            "f1": 0.41862191862191866,
+            "log_loss": 0.2251342935534033,
+            "precision": 0.33894433088854153,
+            "recall": 0.5472723742962532,
+            "specificity": 0.8966230445246691
+          },
+          "inner_threshold": 0.21635746955871582,
+          "outer_evaluation_confusion_counts": {
+            "false_negatives": 4485,
+            "false_positives": 4782,
+            "true_negatives": 74994,
+            "true_positives": 3242
+          },
+          "outer_evaluation_metrics": {
+            "accuracy": 0.8940950595979567,
+            "average_precision": 0.390054626957045,
+            "balanced_accuracy": 0.6798124547490577,
+            "f1": 0.41165640276807824,
+            "log_loss": 0.2242634657121374,
+            "precision": 0.4040378863409771,
+            "recall": 0.4195677494499806,
+            "specificity": 0.9400571600481348
+          },
+          "outer_fit": {
+            "checkpoint": {
+              "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer1_mlp64_32.pkl",
+              "sha256": "e2c9da85e5baca692710ae72039ff0e4a410b8bcc6b3dc73ed4ccb955decf042"
+            },
+            "epoch_limit_reached": false,
+            "epochs_attempted": 15,
+            "parameter_count": 77569,
+            "refit_history": [
+              {
+                "epoch": 1,
+                "seconds": 1.5541124001611024,
+                "training_bce": 0.22043625589612575,
+                "validation_bce": null
+              },
+              {
+                "epoch": 2,
+                "seconds": 1.5965209000278264,
+                "training_bce": 0.22158443072279643,
+                "validation_bce": null
+              },
+              {
+                "epoch": 3,
+                "seconds": 1.5793357000220567,
+                "training_bce": 0.2163658822043857,
+                "validation_bce": null
+              },
+              {
+                "epoch": 4,
+                "seconds": 1.5557275000028312,
+                "training_bce": 0.21457770920497507,
+                "validation_bce": null
+              },
+              {
+                "epoch": 5,
+                "seconds": 1.6213754999917,
+                "training_bce": 0.21431196502640923,
+                "validation_bce": null
+              },
+              {
+                "epoch": 6,
+                "seconds": 1.5981606000568718,
+                "training_bce": 0.2139908155157802,
+                "validation_bce": null
+              },
+              {
+                "epoch": 7,
+                "seconds": 1.6637181998230517,
+                "training_bce": 0.2158547833441477,
+                "validation_bce": null
+              }
+            ],
+            "refit_seconds": 12.044677400030196,
+            "selected_epochs": 7,
+            "selection_history": [
+              {
+                "epoch": 1,
+                "seconds": 1.5411835999693722,
+                "training_bce": 0.22211998578162073,
+                "validation_bce": 0.22950601646888535
+              },
+              {
+                "epoch": 2,
+                "seconds": 1.4696989997755736,
+                "training_bce": 0.22745856588718463,
+                "validation_bce": 0.2347518921618749
+              },
+              {
+                "epoch": 3,
+                "seconds": 1.4807092999108136,
+                "training_bce": 0.21601932376631072,
+                "validation_bce": 0.22567757667939045
+              },
+              {
+                "epoch": 4,
+                "seconds": 1.4586891999933869,
+                "training_bce": 0.21601579660542417,
+                "validation_bce": 0.22672448598802022
+              },
+              {
+                "epoch": 5,
+                "seconds": 1.4851194000802934,
+                "training_bce": 0.21663320877739756,
+                "validation_bce": 0.228788789451869
+              },
+              {
+                "epoch": 6,
+                "seconds": 1.5091589000076056,
+                "training_bce": 0.21272826401740602,
+                "validation_bce": 0.2258965444200165
+              },
+              {
+                "epoch": 7,
+                "seconds": 1.4869901000056416,
+                "training_bce": 0.21150758444554693,
+                "validation_bce": 0.22450194877855248
+              },
+              {
+                "epoch": 8,
+                "seconds": 1.5293128001503646,
+                "training_bce": 0.2105681495616174,
+                "validation_bce": 0.22504809188885763
+              },
+              {
+                "epoch": 9,
+                "seconds": 1.5724671001080424,
+                "training_bce": 0.21380112996114112,
+                "validation_bce": 0.22758419696065996
+              },
+              {
+                "epoch": 10,
+                "seconds": 1.624937100103125,
+                "training_bce": 0.2101622701240658,
+                "validation_bce": 0.22760827218596158
+              },
+              {
+                "epoch": 11,
+                "seconds": 1.7904343998525292,
+                "training_bce": 0.2135946071043701,
+                "validation_bce": 0.22830754787069413
+              },
+              {
+                "epoch": 12,
+                "seconds": 1.8210646000225097,
+                "training_bce": 0.20609091338432922,
+                "validation_bce": 0.2262022487353071
+              },
+              {
+                "epoch": 13,
+                "seconds": 1.9051483999937773,
+                "training_bce": 0.2039591827582215,
+                "validation_bce": 0.22820247022646487
+              },
+              {
+                "epoch": 14,
+                "seconds": 1.8834418000187725,
+                "training_bce": 0.20491622753935856,
+                "validation_bce": 0.22657427316947185
+              },
+              {
+                "epoch": 15,
+                "seconds": 2.2170889999251813,
+                "training_bce": 0.20114966393718758,
+                "validation_bce": 0.22822278355814588
+              }
+            ],
+            "selection_seconds": 25.331528699956834
+          },
+          "outer_fold": 1,
+          "output_features": 1178
+        },
+        {
+          "inner_fits": [
+            {
+              "models": {
+                "mlp128_64": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer2_inner1_mlp128_64.pkl",
+                    "sha256": "422c1c1dea9e9d2dcb52f3ab755882ac5afc8f1430a471f714b8967681a81e82"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 12,
+                  "parameter_count": 158977,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.5594240999780595,
+                      "training_bce": 0.22155565774745195,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.545280999969691,
+                      "training_bce": 0.2278340843207026,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.8343346000183374,
+                      "training_bce": 0.21487804832182933,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.7594773999881,
+                      "training_bce": 0.21429110628565137,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 7.478523600148037,
+                  "selected_epochs": 4,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.8622644001152366,
+                      "training_bce": 0.22302689494460493,
+                      "validation_bce": 0.22740634835062898
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.4825355999637395,
+                      "training_bce": 0.21560104161620597,
+                      "validation_bce": 0.2222972218894797
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.4132375998888165,
+                      "training_bce": 0.21472444717400674,
+                      "validation_bce": 0.22151664937196905
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.5395245000254363,
+                      "training_bce": 0.20931761392312176,
+                      "validation_bce": 0.22078994255198842
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.4874644000083208,
+                      "training_bce": 0.2099487566241743,
+                      "validation_bce": 0.22258309383726482
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 1.4104412999004126,
+                      "training_bce": 0.20615706268412679,
+                      "validation_bce": 0.22374949330547675
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 1.4225473999977112,
+                      "training_bce": 0.20744047237539406,
+                      "validation_bce": 0.22925974733304075
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 1.3898402999620885,
+                      "training_bce": 0.19977515378496377,
+                      "validation_bce": 0.22909473178326928
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 1.322043300140649,
+                      "training_bce": 0.19460156662319272,
+                      "validation_bce": 0.2256172525261553
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 1.3761219000443816,
+                      "training_bce": 0.18915665691421701,
+                      "validation_bce": 0.23403921566040192
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 1.3555392001289874,
+                      "training_bce": 0.18521759439184893,
+                      "validation_bce": 0.23110526765144837
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 1.3527584001421928,
+                      "training_bce": 0.18128571859556047,
+                      "validation_bce": 0.23572427178466987
+                    }
+                  ],
+                  "selection_seconds": 17.710823399946094
+                },
+                "mlp64_32": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer2_inner1_mlp64_32.pkl",
+                    "sha256": "0340f69bca8680ede85749c925c7686549cb87d778a5e71f4635fd55ed33e285"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 14,
+                  "parameter_count": 77441,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.7559073001611978,
+                      "training_bce": 0.22082687912404717,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7646470998879522,
+                      "training_bce": 0.2183382890559775,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.7817145001608878,
+                      "training_bce": 0.21458803745255017,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7606647999491543,
+                      "training_bce": 0.21793343298451875,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.7922639001626521,
+                      "training_bce": 0.21187857847104577,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.8601562001276761,
+                      "training_bce": 0.21221662642494135,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 5.252130099805072,
+                  "selected_epochs": 6,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.6752532999962568,
+                      "training_bce": 0.2242830314876347,
+                      "validation_bce": 0.2292618014354555
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7083529999945313,
+                      "training_bce": 0.21709349937589825,
+                      "validation_bce": 0.22297543904361572
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.7304463998880237,
+                      "training_bce": 0.22570048538021262,
+                      "validation_bce": 0.23304278579162915
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.6949233000632375,
+                      "training_bce": 0.21661800560960276,
+                      "validation_bce": 0.2232137514641294
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.7371531000826508,
+                      "training_bce": 0.2115482802602385,
+                      "validation_bce": 0.22152907309076714
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.7584528001025319,
+                      "training_bce": 0.2094006745654629,
+                      "validation_bce": 0.2214124356663722
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 0.7559068999253213,
+                      "training_bce": 0.20818813560789168,
+                      "validation_bce": 0.22490850102380278
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 0.7495190999470651,
+                      "training_bce": 0.20452475212785878,
+                      "validation_bce": 0.2247722628492583
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 0.7639953999314457,
+                      "training_bce": 0.2067117001950794,
+                      "validation_bce": 0.22857197804094345
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 0.7334427000023425,
+                      "training_bce": 0.20024163116578209,
+                      "validation_bce": 0.2274822966972603
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 0.7251675000879914,
+                      "training_bce": 0.19819352314035765,
+                      "validation_bce": 0.22791683206142943
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 0.7194441000465304,
+                      "training_bce": 0.19471529505859167,
+                      "validation_bce": 0.22901471141152466
+                    },
+                    {
+                      "epoch": 13,
+                      "seconds": 0.7292388000059873,
+                      "training_bce": 0.19199263530022798,
+                      "validation_bce": 0.22873672494024513
+                    },
+                    {
+                      "epoch": 14,
+                      "seconds": 0.7828406000044197,
+                      "training_bce": 0.18785177301231729,
+                      "validation_bce": 0.22858044891618362
+                    }
+                  ],
+                  "selection_seconds": 10.523681199876592
+                }
+              },
+              "runtime_seconds": 44.96639550011605,
+              "tag": "outer2_inner1"
+            },
+            {
+              "models": {
+                "mlp128_64": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer2_inner2_mlp128_64.pkl",
+                    "sha256": "d6884b4cc3534cb9e29614ef90dfdc47db7fde44a2f9c17439d88bd89e9a6610"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 12,
+                  "parameter_count": 159233,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.463854700094089,
+                      "training_bce": 0.22310564125556187,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.447963299928233,
+                      "training_bce": 0.21624005489657142,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.4658876000903547,
+                      "training_bce": 0.21423509843975574,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.4731389998923987,
+                      "training_bce": 0.2104347885765129,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 6.553302299929783,
+                  "selected_epochs": 4,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.364470100030303,
+                      "training_bce": 0.22208528727285803,
+                      "validation_bce": 0.22748946139054488
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.358817699830979,
+                      "training_bce": 0.22080321857369734,
+                      "validation_bce": 0.22926610009798556
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.3669690999668092,
+                      "training_bce": 0.21455870379715186,
+                      "validation_bce": 0.2241863267988973
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.3767440000083297,
+                      "training_bce": 0.21120455897576682,
+                      "validation_bce": 0.22210353135968283
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.3466731999069452,
+                      "training_bce": 0.20818448973086956,
+                      "validation_bce": 0.22532901005254036
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 1.3641111000906676,
+                      "training_bce": 0.20512195090698776,
+                      "validation_bce": 0.22467893347194187
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 1.377450699917972,
+                      "training_bce": 0.20165923032456884,
+                      "validation_bce": 0.22505740394357698
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 1.4488769001327455,
+                      "training_bce": 0.19909444956159864,
+                      "validation_bce": 0.226747025385623
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 1.767755099805072,
+                      "training_bce": 0.19559351332419542,
+                      "validation_bce": 0.22994540474663666
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 1.5376072998624295,
+                      "training_bce": 0.18675371539476682,
+                      "validation_bce": 0.2280182766533628
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 1.3809963001403958,
+                      "training_bce": 0.18558936850988544,
+                      "validation_bce": 0.2360278719283404
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 1.6472387998364866,
+                      "training_bce": 0.17807098663007928,
+                      "validation_bce": 0.23858681550410316
+                    }
+                  ],
+                  "selection_seconds": 17.60930070001632
+                },
+                "mlp64_32": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer2_inner2_mlp64_32.pkl",
+                    "sha256": "05dd84b63f402825e6b1c484c0abbace8fac41d17b505b0a413bdb2f9db377d8"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 13,
+                  "parameter_count": 77569,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.9621653000358492,
+                      "training_bce": 0.2293928785185338,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.9149374000262469,
+                      "training_bce": 0.2202937011324797,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.7857498999219388,
+                      "training_bce": 0.21613993693630726,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7538317998405546,
+                      "training_bce": 0.21655622837693037,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.7443976001814008,
+                      "training_bce": 0.21202175346548613,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 4.773744200123474,
+                  "selected_epochs": 5,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.7736041999887675,
+                      "training_bce": 0.222590222590447,
+                      "validation_bce": 0.2274536651722749
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7517002001404762,
+                      "training_bce": 0.22047821529710757,
+                      "validation_bce": 0.22753293865296384
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.7580703999847174,
+                      "training_bce": 0.21503758807300244,
+                      "validation_bce": 0.2231706337546157
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7971310999710113,
+                      "training_bce": 0.21382454589523822,
+                      "validation_bce": 0.22481028464128294
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.790858400054276,
+                      "training_bce": 0.2118145141006024,
+                      "validation_bce": 0.22222359747752773
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.7210649999324232,
+                      "training_bce": 0.20890026006754475,
+                      "validation_bce": 0.2231757436488028
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 0.6995981000363827,
+                      "training_bce": 0.20961571111692812,
+                      "validation_bce": 0.22524629933538873
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 0.7037508001085371,
+                      "training_bce": 0.20515395536007597,
+                      "validation_bce": 0.22431560261193795
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 0.7219652999192476,
+                      "training_bce": 0.203005594305754,
+                      "validation_bce": 0.22483786335678085
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 0.7372625998686999,
+                      "training_bce": 0.2002394313925641,
+                      "validation_bce": 0.2256452046650419
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 0.716327500063926,
+                      "training_bce": 0.19616803723381998,
+                      "validation_bce": 0.22653719840395903
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 0.7367260998580605,
+                      "training_bce": 0.19312239182131347,
+                      "validation_bce": 0.22644545430541108
+                    },
+                    {
+                      "epoch": 13,
+                      "seconds": 0.7299406998790801,
+                      "training_bce": 0.1904517322598327,
+                      "validation_bce": 0.2307451441436733
+                    }
+                  ],
+                  "selection_seconds": 9.934406999964267
+                }
+              },
+              "runtime_seconds": 43.247898700181395,
+              "tag": "outer2_inner2"
+            }
+          ],
+          "inner_oof_predictions_artifact": {
+            "array_sha256": {
+              "fold_ids": "29c49e79d2ba99b167252f5b7bc91eaa1a3eaaa6e66c05b14b7185acb5803866",
+              "inner_seed": "41cca688ed838a505665b771e13084dd5ccd2fc01fad46ffeaa70fbda8775a91",
+              "labels": "90d026f5fb225516b0ba3cb03c2d739d22859ff265ccc6338d09d6002a52f2d9",
+              "outer_fold": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4",
+              "outer_validation_row_indices": "47bd67b5c357c1bc9392b14a67e07f706bfb8736e8925e73cddcd7ddbd81b717",
+              "probabilities": "e3c7a35364895f767f2f42dd98dcb0373483fc7964577373de3dd4ffe1502411",
+              "training_row_indices": "06d2d6309d67c6aae4ddf142d456bc647c5e0f3f751962b628c8d803c1db5df0"
+            },
+            "arrays": [
+              "training_row_indices",
+              "outer_validation_row_indices",
+              "fold_ids",
+              "labels",
+              "probabilities",
+              "outer_fold",
+              "inner_seed"
+            ],
+            "inner_fold_count": 2,
+            "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\phase32_mlp_mlp64_32_outer2_inner_oof.npz",
+            "sha256": "736b1359e7b9650f5ab42286c27357c56658cd292f0f655f407247334fe4fbac",
+            "training_rows": 175005
+          },
+          "inner_selection_metrics": {
+            "accuracy": 0.8645524413588184,
+            "average_precision": 0.37592513630987096,
+            "balanced_accuracy": 0.7253389955620642,
+            "f1": 0.42038341158059467,
+            "log_loss": 0.22405329010682756,
+            "precision": 0.33785324057697597,
+            "recall": 0.5562673914450269,
+            "specificity": 0.8944105996791015
+          },
+          "inner_threshold": 0.21722254157066345,
+          "outer_evaluation_confusion_counts": {
+            "false_negatives": 3666,
+            "false_positives": 7135,
+            "true_negatives": 72641,
+            "true_positives": 4061
+          },
+          "outer_evaluation_metrics": {
+            "accuracy": 0.8765642320834715,
+            "average_precision": 0.3918802626415626,
+            "balanced_accuracy": 0.718060899722017,
+            "f1": 0.4292131268826296,
+            "log_loss": 0.22075477262883206,
+            "precision": 0.36271882815291173,
+            "recall": 0.5255597256373754,
+            "specificity": 0.9105620738066587
+          },
+          "outer_fit": {
+            "checkpoint": {
+              "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer2_mlp64_32.pkl",
+              "sha256": "68c043b0a50a93b7c510057c56963a83bbcee59129771ccbd3d72d5d20228510"
+            },
+            "epoch_limit_reached": false,
+            "epochs_attempted": 15,
+            "parameter_count": 77697,
+            "refit_history": [
+              {
+                "epoch": 1,
+                "seconds": 1.4740958998445421,
+                "training_bce": 0.2211573349372552,
+                "validation_bce": null
+              },
+              {
+                "epoch": 2,
+                "seconds": 1.5283194999210536,
+                "training_bce": 0.21737341547501038,
+                "validation_bce": null
+              },
+              {
+                "epoch": 3,
+                "seconds": 1.5564557001926005,
+                "training_bce": 0.21614111204241498,
+                "validation_bce": null
+              },
+              {
+                "epoch": 4,
+                "seconds": 1.5361011000350118,
+                "training_bce": 0.21664804677837812,
+                "validation_bce": null
+              },
+              {
+                "epoch": 5,
+                "seconds": 1.550826899940148,
+                "training_bce": 0.21459304150790848,
+                "validation_bce": null
+              },
+              {
+                "epoch": 6,
+                "seconds": 1.531771699897945,
+                "training_bce": 0.21510507654116556,
+                "validation_bce": null
+              },
+              {
+                "epoch": 7,
+                "seconds": 1.5500264998991042,
+                "training_bce": 0.2114187078379516,
+                "validation_bce": null
+              }
+            ],
+            "refit_seconds": 11.555877899983898,
+            "selected_epochs": 7,
+            "selection_history": [
+              {
+                "epoch": 1,
+                "seconds": 1.7060101998504251,
+                "training_bce": 0.2208620957766254,
+                "validation_bce": 0.22418048987181058
+              },
+              {
+                "epoch": 2,
+                "seconds": 1.6352358998265117,
+                "training_bce": 0.21927236402193762,
+                "validation_bce": 0.2235965744628837
+              },
+              {
+                "epoch": 3,
+                "seconds": 1.6528387998696417,
+                "training_bce": 0.21844827829916177,
+                "validation_bce": 0.2243302824716383
+              },
+              {
+                "epoch": 4,
+                "seconds": 1.6062602999154478,
+                "training_bce": 0.21566587760583245,
+                "validation_bce": 0.22206120049128575
+              },
+              {
+                "epoch": 5,
+                "seconds": 1.640023099957034,
+                "training_bce": 0.22035746577429408,
+                "validation_bce": 0.22796990573019554
+              },
+              {
+                "epoch": 6,
+                "seconds": 1.653398800175637,
+                "training_bce": 0.21357156742969266,
+                "validation_bce": 0.22286863212420804
+              },
+              {
+                "epoch": 7,
+                "seconds": 1.6609078000765294,
+                "training_bce": 0.21192728773892588,
+                "validation_bce": 0.2214781491232587
+              },
+              {
+                "epoch": 8,
+                "seconds": 1.8415193997789174,
+                "training_bce": 0.21467462542998964,
+                "validation_bce": 0.22583154976770747
+              },
+              {
+                "epoch": 9,
+                "seconds": 1.7048595000524074,
+                "training_bce": 0.21297595442298228,
+                "validation_bce": 0.2262092088660666
+              },
+              {
+                "epoch": 10,
+                "seconds": 1.6466198000125587,
+                "training_bce": 0.20958869293133536,
+                "validation_bce": 0.22454891750409733
+              },
+              {
+                "epoch": 11,
+                "seconds": 1.6811770000495017,
+                "training_bce": 0.20782821029747836,
+                "validation_bce": 0.22352356155445616
+              },
+              {
+                "epoch": 12,
+                "seconds": 1.9066604999825358,
+                "training_bce": 0.20590322124764077,
+                "validation_bce": 0.2236303730184279
+              },
+              {
+                "epoch": 13,
+                "seconds": 1.8228269000537694,
+                "training_bce": 0.20397571128755262,
+                "validation_bce": 0.22345332172329987
+              },
+              {
+                "epoch": 14,
+                "seconds": 1.896968200104311,
+                "training_bce": 0.2025776235466535,
+                "validation_bce": 0.22384268897704274
+              },
+              {
+                "epoch": 15,
+                "seconds": 2.4320948000531644,
+                "training_bce": 0.20201945920808922,
+                "validation_bce": 0.22609475731131773
+              }
+            ],
+            "selection_seconds": 27.19759640004486
+          },
+          "outer_fold": 2,
+          "output_features": 1180
+        },
+        {
+          "inner_fits": [
+            {
+              "models": {
+                "mlp128_64": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer3_inner1_mlp128_64.pkl",
+                    "sha256": "856fc2b87a016592dd82c01bc136d1120c05b39b66cb624e05b6c67d67356c6f"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 11,
+                  "parameter_count": 158849,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.4418806000612676,
+                      "training_bce": 0.2221363432154368,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.4813695000484586,
+                      "training_bce": 0.21786790952251026,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.4603971000760794,
+                      "training_bce": 0.2139709840281412,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 5.06622330006212,
+                  "selected_epochs": 3,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.3265609999652952,
+                      "training_bce": 0.22062057336222232,
+                      "validation_bce": 0.22836198698857624
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.3795762001536787,
+                      "training_bce": 0.22074769209391643,
+                      "validation_bce": 0.22728541206825414
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.3497506999410689,
+                      "training_bce": 0.2137931964226824,
+                      "validation_bce": 0.2252081655590007
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.3288837000727654,
+                      "training_bce": 0.21085615743795955,
+                      "validation_bce": 0.22643033770874027
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.3417686999309808,
+                      "training_bce": 0.212234883972988,
+                      "validation_bce": 0.23053266383253482
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 1.3130018000956625,
+                      "training_bce": 0.20762056301645324,
+                      "validation_bce": 0.22866808607206482
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 1.3140737998764962,
+                      "training_bce": 0.20496246898215478,
+                      "validation_bce": 0.22906341115538978
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 1.540354800177738,
+                      "training_bce": 0.20307224305348215,
+                      "validation_bce": 0.23413920618532721
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 1.3634691000916064,
+                      "training_bce": 0.19491012614576791,
+                      "validation_bce": 0.2338915610267753
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 1.363267700187862,
+                      "training_bce": 0.1907670487008682,
+                      "validation_bce": 0.23472133516276855
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 1.351342299953103,
+                      "training_bce": 0.18652404803662886,
+                      "validation_bce": 0.23433630232324235
+                    }
+                  ],
+                  "selection_seconds": 15.240439399844036
+                },
+                "mlp64_32": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer3_inner1_mlp64_32.pkl",
+                    "sha256": "c77084d6c0011fb9e36691a66df54d049ce6a69b9c7ad2b8882246c41c363437"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 13,
+                  "parameter_count": 77377,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.7659863999579102,
+                      "training_bce": 0.22429078192586516,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7472204999066889,
+                      "training_bce": 0.21774992615832914,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.7660095000173897,
+                      "training_bce": 0.21598632012330626,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7677613999694586,
+                      "training_bce": 0.22001410557133524,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.7467942000366747,
+                      "training_bce": 0.2132547502532898,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 4.327824699925259,
+                  "selected_epochs": 5,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.6774998002219945,
+                      "training_bce": 0.2223411480360406,
+                      "validation_bce": 0.22824634041456207
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.711735500022769,
+                      "training_bce": 0.2198749905044539,
+                      "validation_bce": 0.22796259732642268
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.6885955000761896,
+                      "training_bce": 0.21506988097813187,
+                      "validation_bce": 0.2252566818998271
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7215255999471992,
+                      "training_bce": 0.21499332624528608,
+                      "validation_bce": 0.22645117376791382
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.6950713999103755,
+                      "training_bce": 0.21087394269928783,
+                      "validation_bce": 0.22450351244075645
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.6929178000427783,
+                      "training_bce": 0.20913936652684528,
+                      "validation_bce": 0.22551366539881726
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 0.6948375999927521,
+                      "training_bce": 0.21261358920718673,
+                      "validation_bce": 0.23086777388233726
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 0.6856136999558657,
+                      "training_bce": 0.20567666101091653,
+                      "validation_bce": 0.22832666347475442
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 0.6979185999371111,
+                      "training_bce": 0.20348731820963128,
+                      "validation_bce": 0.2295751810557916
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 0.7445141999050975,
+                      "training_bce": 0.19952649416342724,
+                      "validation_bce": 0.22729101286743486
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 0.7569830000866205,
+                      "training_bce": 0.19768718592961484,
+                      "validation_bce": 0.22748848017329087
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 0.7466142999473959,
+                      "training_bce": 0.19552099605934137,
+                      "validation_bce": 0.23327271124742555
+                    },
+                    {
+                      "epoch": 13,
+                      "seconds": 0.7246177000924945,
+                      "training_bce": 0.19033153882356843,
+                      "validation_bce": 0.23494092379124112
+                    }
+                  ],
+                  "selection_seconds": 9.498131899861619
+                }
+              },
+              "runtime_seconds": 38.317881299881265,
+              "tag": "outer3_inner1"
+            },
+            {
+              "models": {
+                "mlp128_64": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer3_inner2_mlp128_64.pkl",
+                    "sha256": "4f959a3795ed9340296aa9b2b2b2ac26bc6c326b404d5df21936d82ec37a472a"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 10,
+                  "parameter_count": 158977,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.443887900095433,
+                      "training_bce": 0.23314406168105073,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.4838483999483287,
+                      "training_bce": 0.21882437897292822,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 3.606374999973923,
+                  "selected_epochs": 2,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 1.3352069999091327,
+                      "training_bce": 0.22073233466702327,
+                      "validation_bce": 0.22402604749836225
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 1.355889800004661,
+                      "training_bce": 0.21832907281436018,
+                      "validation_bce": 0.2229313736498285
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 1.6274095999542624,
+                      "training_bce": 0.21780692899109097,
+                      "validation_bce": 0.22626400615251135
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 1.5242220999207348,
+                      "training_bce": 0.21289667223748357,
+                      "validation_bce": 0.2249834913125973
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 1.4251085999421775,
+                      "training_bce": 0.21021674006372199,
+                      "validation_bce": 0.2233687099802607
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 1.3740137999411672,
+                      "training_bce": 0.20491511529641832,
+                      "validation_bce": 0.2239470188332928
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 1.332050999859348,
+                      "training_bce": 0.20129952976907878,
+                      "validation_bce": 0.22452523348598427
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 1.3705097001511604,
+                      "training_bce": 0.1981222271137242,
+                      "validation_bce": 0.22799875543584514
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 1.4729287999216467,
+                      "training_bce": 0.19537014439423916,
+                      "validation_bce": 0.2311334600175998
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 1.4143832998815924,
+                      "training_bce": 0.19345674550587946,
+                      "validation_bce": 0.23743177220511538
+                    }
+                  ],
+                  "selection_seconds": 14.495547999860719
+                },
+                "mlp64_32": {
+                  "checkpoint": {
+                    "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer3_inner2_mlp64_32.pkl",
+                    "sha256": "332ada0b47178395abdd50b78e7338026d7376b1dc7e1c7f9ba82812408e391d"
+                  },
+                  "epoch_limit_reached": false,
+                  "epochs_attempted": 13,
+                  "parameter_count": 77441,
+                  "refit_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.7456187000498176,
+                      "training_bce": 0.2263566878425192,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.7849074001424015,
+                      "training_bce": 0.21774587087312622,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.7458820000756532,
+                      "training_bce": 0.21528596060299857,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7398293002042919,
+                      "training_bce": 0.21436175308270305,
+                      "validation_bce": null
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.7379086001310498,
+                      "training_bce": 0.2119540051559829,
+                      "validation_bce": null
+                    }
+                  ],
+                  "refit_seconds": 4.268471899908036,
+                  "selected_epochs": 5,
+                  "selection_history": [
+                    {
+                      "epoch": 1,
+                      "seconds": 0.6634561000391841,
+                      "training_bce": 0.22498929011960184,
+                      "validation_bce": 0.22748206383378958
+                    },
+                    {
+                      "epoch": 2,
+                      "seconds": 0.6770721001084894,
+                      "training_bce": 0.21751682267129618,
+                      "validation_bce": 0.22346376402549997
+                    },
+                    {
+                      "epoch": 3,
+                      "seconds": 0.6930998000316322,
+                      "training_bce": 0.21711155554874417,
+                      "validation_bce": 0.22422995849371122
+                    },
+                    {
+                      "epoch": 4,
+                      "seconds": 0.7051193001680076,
+                      "training_bce": 0.21678279334002912,
+                      "validation_bce": 0.22580648391626673
+                    },
+                    {
+                      "epoch": 5,
+                      "seconds": 0.6919214001391083,
+                      "training_bce": 0.2105635455264168,
+                      "validation_bce": 0.22292589470783844
+                    },
+                    {
+                      "epoch": 6,
+                      "seconds": 0.6919873999431729,
+                      "training_bce": 0.2081568844130471,
+                      "validation_bce": 0.22409987202795062
+                    },
+                    {
+                      "epoch": 7,
+                      "seconds": 0.6862985999323428,
+                      "training_bce": 0.2060730740740768,
+                      "validation_bce": 0.22294058521517734
+                    },
+                    {
+                      "epoch": 8,
+                      "seconds": 0.6876270000357181,
+                      "training_bce": 0.20493810793008693,
+                      "validation_bce": 0.22563730537708013
+                    },
+                    {
+                      "epoch": 9,
+                      "seconds": 0.6977258999831975,
+                      "training_bce": 0.21052470456892838,
+                      "validation_bce": 0.23362159637234176
+                    },
+                    {
+                      "epoch": 10,
+                      "seconds": 0.6991827997844666,
+                      "training_bce": 0.2021611330068326,
+                      "validation_bce": 0.23148670904020782
+                    },
+                    {
+                      "epoch": 11,
+                      "seconds": 0.7125975999515504,
+                      "training_bce": 0.19690804502717352,
+                      "validation_bce": 0.23219296558963085
+                    },
+                    {
+                      "epoch": 12,
+                      "seconds": 0.6969147000927478,
+                      "training_bce": 0.19216329466274262,
+                      "validation_bce": 0.23279541289869912
+                    },
+                    {
+                      "epoch": 13,
+                      "seconds": 0.6968204998411238,
+                      "training_bce": 0.19338117060725973,
+                      "validation_bce": 0.23647043938588055
+                    }
+                  ],
+                  "selection_seconds": 9.25797319994308
+                }
+              },
+              "runtime_seconds": 35.476919800043106,
+              "tag": "outer3_inner2"
+            }
+          ],
+          "inner_oof_predictions_artifact": {
+            "array_sha256": {
+              "fold_ids": "456075e9d9d652aa55f4c341fe857cdd531c3e3555c83b1d99bb9d4bd7f65f94",
+              "inner_seed": "fb3e728c2d6a3c8ed3593a640cb225f5287595226c0f34589306b347ed5e3672",
+              "labels": "3ea6ad0e4785b4f277819b85a2daf074c622501c3eb83eef3816620c22dfa4cc",
+              "outer_fold": "35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b",
+              "outer_validation_row_indices": "f3f67565e4ad383d5db8afe89fa962c65a11ac031fa376ef9d9f5171812615a5",
+              "probabilities": "38bf128ff48345ae95bd332f337bcf7d507d478430a3ba90ad64666b0eef9c6b",
+              "training_row_indices": "7a8335f2b932c5205acc6a1f8a5280a175ab41f8c72e1bdc4f5b106b7c337e68"
+            },
+            "arrays": [
+              "training_row_indices",
+              "outer_validation_row_indices",
+              "fold_ids",
+              "labels",
+              "probabilities",
+              "outer_fold",
+              "inner_seed"
+            ],
+            "inner_fold_count": 2,
+            "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\phase32_mlp_mlp64_32_outer3_inner_oof.npz",
+            "sha256": "558af83cfc33e56cebb5ffd0e8aef214f2166cbebb44dc20f603504e55a992bb",
+            "training_rows": 175006
+          },
+          "inner_selection_metrics": {
+            "accuracy": 0.8610961909877376,
+            "average_precision": 0.3776044890010798,
+            "balanced_accuracy": 0.7321066298305113,
+            "f1": 0.42252048936928377,
+            "log_loss": 0.2231765557824745,
+            "precision": 0.33380879096130023,
+            "recall": 0.5754497217548855,
+            "specificity": 0.8887635379061372
+          },
+          "inner_threshold": 0.2028203308582306,
+          "outer_evaluation_confusion_counts": {
+            "false_negatives": 3079,
+            "false_positives": 9261,
+            "true_negatives": 70515,
+            "true_positives": 4647
+          },
+          "outer_evaluation_metrics": {
+            "accuracy": 0.8589746520079541,
+            "average_precision": 0.395320587662833,
+            "balanced_accuracy": 0.7426939960104706,
+            "f1": 0.429601553110844,
+            "log_loss": 0.22000490125147,
+            "precision": 0.3341242450388266,
+            "recall": 0.6014755371472948,
+            "specificity": 0.8839124548736462
+          },
+          "outer_fit": {
+            "checkpoint": {
+              "path": "C:\\Users\\anton\\Desktop\\EPFL\\1\\Machine Learning\\WORKSPACE\\03_PROJECT\\results\\mlp_artifacts\\phase32\\outer3_mlp64_32.pkl",
+              "sha256": "90ebdd371ef835a228ee4450f1bb36700922cef1a958ce9988e9e32c2b431df6"
+            },
+            "epoch_limit_reached": false,
+            "epochs_attempted": 13,
+            "parameter_count": 77633,
+            "refit_history": [
+              {
+                "epoch": 1,
+                "seconds": 1.6363709000870585,
+                "training_bce": 0.22317453986002903,
+                "validation_bce": null
+              },
+              {
+                "epoch": 2,
+                "seconds": 1.556265200022608,
+                "training_bce": 0.22004753250300885,
+                "validation_bce": null
+              },
+              {
+                "epoch": 3,
+                "seconds": 1.5703795000445098,
+                "training_bce": 0.2175385050008138,
+                "validation_bce": null
+              },
+              {
+                "epoch": 4,
+                "seconds": 1.6503739999607205,
+                "training_bce": 0.2156441180177428,
+                "validation_bce": null
+              },
+              {
+                "epoch": 5,
+                "seconds": 1.6047942999284714,
+                "training_bce": 0.21414549789782644,
+                "validation_bce": null
+              }
+            ],
+            "refit_seconds": 8.912704500136897,
+            "selected_epochs": 5,
+            "selection_history": [
+              {
+                "epoch": 1,
+                "seconds": 1.358855600003153,
+                "training_bce": 0.22269608498098648,
+                "validation_bce": 0.22902596560431246
+              },
+              {
+                "epoch": 2,
+                "seconds": 1.3936914999503642,
+                "training_bce": 0.2200515470601537,
+                "validation_bce": 0.22985924337218666
+              },
+              {
+                "epoch": 3,
+                "seconds": 1.411304600071162,
+                "training_bce": 0.21709268283193126,
+                "validation_bce": 0.22859894241239387
+              },
+              {
+                "epoch": 4,
+                "seconds": 1.5297491000965238,
+                "training_bce": 0.215062248923518,
+                "validation_bce": 0.22650302002385225
+              },
+              {
+                "epoch": 5,
+                "seconds": 1.407480699941516,
+                "training_bce": 0.21396365830715292,
+                "validation_bce": 0.22566526135578985
+              },
+              {
+                "epoch": 6,
+                "seconds": 1.4669418998528272,
+                "training_bce": 0.2152093337098352,
+                "validation_bce": 0.2296102632132688
+              },
+              {
+                "epoch": 7,
+                "seconds": 1.4403258000966161,
+                "training_bce": 0.21190404392037085,
+                "validation_bce": 0.22578929711600224
+              },
+              {
+                "epoch": 8,
+                "seconds": 1.6843694001436234,
+                "training_bce": 0.21362971625076949,
+                "validation_bce": 0.22789906815084568
+              },
+              {
+                "epoch": 9,
+                "seconds": 2.0678997999057174,
+                "training_bce": 0.21039896851534076,
+                "validation_bce": 0.22746414582957003
+              },
+              {
+                "epoch": 10,
+                "seconds": 2.015459200134501,
+                "training_bce": 0.208137362751785,
+                "validation_bce": 0.2297464029006083
+              },
+              {
+                "epoch": 11,
+                "seconds": 1.4852383001707494,
+                "training_bce": 0.20726384737388218,
+                "validation_bce": 0.22762613382155972
+              },
+              {
+                "epoch": 12,
+                "seconds": 1.4850342001300305,
+                "training_bce": 0.20432241959426597,
+                "validation_bce": 0.22712782250861033
+              },
+              {
+                "epoch": 13,
+                "seconds": 1.478154300013557,
+                "training_bce": 0.2030519289628992,
+                "validation_bce": 0.22882929371100827
+              }
+            ],
+            "selection_seconds": 20.728889500023797
+          },
+          "outer_fold": 3,
+          "output_features": 1179
+        }
+      ],
+      "pooled_metrics": {
+        "accuracy": 0.8765447148277385,
+        "average_precision": 0.3877821137819869,
+        "balanced_accuracy": 0.7135205963814009,
+        "f1": 0.42445123250692623,
+        "log_loss": 0.22167438622387117,
+        "precision": 0.36072204781453754,
+        "recall": 0.5155306298533219,
+        "specificity": 0.9115105629094798
+      }
+    },
+    "oof_predictions_artifact": {
+      "path": "results\\mlp_artifacts\\phase32\\phase32_mlp_mlp64_32_oof.npz",
+      "sha256": "e22f821429d87552d6e97588ae07e0e6f14fbae8ed4f84d939ee71aaab247ef1"
+    },
+    "runtime_basis": "Complete shared suite, including preprocessing, epoch selection and full refits for both candidates.",
+    "runtime_seconds": 531.4661903998349,
+    "status": "completed"
+  },
+  "recorded_at_utc": "2026-10-01T01:44:55+00:00",
+  "run_id": "20261001T014455026674Z_phase32-mlp-mlp64-32",
+  "schema_version": 1
+}

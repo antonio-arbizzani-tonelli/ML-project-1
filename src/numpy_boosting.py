@@ -64,40 +64,81 @@ def _sigmoid(scores: np.ndarray) -> np.ndarray:
 
 
 class HistogramBinner:
-    """Learn train-only quantile bins and encode missing values distinctly.
+    """Learn train-only bins and encode missing values distinctly.
 
     The returned matrix uses ``uint8``.  Bin 255 is reserved for missing input,
     so ``n_bins`` can be at most 255.  The learned edges must be fitted within
-    each training fold before transforming validation or test data.
+    each training fold before transforming validation or test data. The default
+    uses quantiles. ``exact_low_cardinality`` preserves all observed finite
+    states when their count is at most ``n_bins``, then falls back to quantiles.
+    ``exact_selected`` preserves only explicitly selected columns and rejects
+    selected columns with more than ``n_bins`` states.
     """
 
-    def __init__(self, n_bins: int = 64) -> None:
+    def __init__(self, n_bins: int = 64, binning_strategy: str = "quantile",
+                 exact_feature_indices: Sequence[int] | None = None) -> None:
         if type(n_bins) is not int or not 2 <= n_bins <= int(_MISSING_BIN):
             raise ValueError("n_bins must be an integer between 2 and 255.")
+        if binning_strategy not in {"quantile", "exact_low_cardinality", "exact_selected"}:
+            raise ValueError("Unknown binning_strategy.")
+        if exact_feature_indices is not None:
+            if binning_strategy != "exact_selected":
+                raise ValueError("exact_feature_indices requires exact_selected.")
+            indices = tuple(exact_feature_indices)
+            if (not indices or any(type(i) is not int or i < 0 for i in indices)
+                    or len(set(indices)) != len(indices)):
+                raise ValueError("Exact feature indices must be unique nonnegative integers.")
+        else:
+            indices = ()
+        if binning_strategy == "exact_selected" and not indices:
+            raise ValueError("exact_selected requires exact_feature_indices.")
         self.n_bins = n_bins
+        self.binning_strategy = binning_strategy
+        self.exact_feature_indices = indices
         self.edges_: tuple[np.ndarray, ...] | None = None
         self.bin_counts_: np.ndarray | None = None
+        self.exact_columns_: np.ndarray | None = None
 
     def fit(self, features: np.ndarray) -> "HistogramBinner":
-        """Fit quantile edges from finite values in each training column."""
+        """Fit boundaries from finite values in each training column."""
 
         features = _as_features(features, "features")
+        selected = set(self.exact_feature_indices)
+        if selected and max(selected) >= features.shape[1]:
+            raise ValueError("An exact feature index exceeds the matrix width.")
         quantiles = np.linspace(0.0, 1.0, self.n_bins + 1, dtype=np.float64)[1:-1]
         edges = []
         bin_counts = np.empty(features.shape[1], dtype=np.int16)
+        exact_columns = np.zeros(features.shape[1], dtype=bool)
         for column_index in range(features.shape[1]):
             values = features[:, column_index]
             known = values[~np.isnan(values)]
             if known.size == 0:
                 column_edges = np.empty(0, dtype=np.float32)
             else:
-                column_edges = np.asarray(
-                    np.unique(np.quantile(known, quantiles)), dtype=np.float32
+                unique = (
+                    np.unique(known)
+                    if (self.binning_strategy == "exact_low_cardinality"
+                        or column_index in selected)
+                    else None
                 )
+                if column_index in selected and unique.size > self.n_bins:
+                    raise ValueError("A selected exact feature exceeds n_bins states.")
+                if unique is not None and unique.size <= self.n_bins:
+                    # Upper-value boundaries preserve every observed state.
+                    # Unseen numeric values follow the lower adjacent state;
+                    # values beyond the training range use the endpoint bin.
+                    column_edges = unique[1:]
+                    exact_columns[column_index] = True
+                else:
+                    column_edges = np.asarray(
+                        np.unique(np.quantile(known, quantiles)), dtype=np.float32
+                    )
             edges.append(column_edges)
             bin_counts[column_index] = column_edges.size + 1
         self.edges_ = tuple(edges)
         self.bin_counts_ = bin_counts
+        self.exact_columns_ = exact_columns
         return self
 
     def transform(self, features: np.ndarray) -> np.ndarray:
@@ -174,6 +215,7 @@ class _NewtonTree:
         max_features: int | float | None,
         random_generator: np.random.Generator,
         histogram_strategy: str,
+        missing_only_features: np.ndarray | None = None,
     ) -> None:
         self.max_depth = max_depth
         self.min_samples_leaf = min_samples_leaf
@@ -182,6 +224,7 @@ class _NewtonTree:
         self.max_features = max_features
         self.random_generator = random_generator
         self.histogram_strategy = histogram_strategy
+        self.missing_only_features = missing_only_features
         self.root_: _TreeNode | None = None
         self.feature_indices_: np.ndarray | None = None
 
@@ -291,7 +334,16 @@ class _NewtonTree:
             missing_count = int(rows.size - known_values.size)
             missing_gradient = gradient_sum - float(cumulative_gradients[-1])
             missing_hessian = hessian_sum - float(cumulative_hessians[-1])
-            split_bins = range(count - 1) if count >= 2 else (0,)
+            # Exact bins have no empty leading bucket. Include the final
+            # boundary to retain a pure observed-versus-missing split.
+            missing_only = (
+                self.missing_only_features is not None
+                and self.missing_only_features[feature]
+            )
+            if missing_only:
+                split_bins = range(count)
+            else:
+                split_bins = range(count - 1) if count >= 2 else (0,)
             for split_bin in split_bins:
                 known_left_count = int(cumulative_counts[split_bin])
                 known_left_gradient = float(cumulative_gradients[split_bin])
@@ -430,7 +482,14 @@ class _NewtonTree:
                     parent_score = self._score(
                         node.gradient_sum, node.hessian_sum, self.l2_regularization
                     )
-                    split_bins = range(count - 1) if count >= 2 else (0,)
+                    missing_only = (
+                        self.missing_only_features is not None
+                        and self.missing_only_features[feature]
+                    )
+                    if missing_only:
+                        split_bins = range(count)
+                    else:
+                        split_bins = range(count - 1) if count >= 2 else (0,)
                     for split_bin in split_bins:
                         known_left_count = int(cumulative_counts[split_bin])
                         known_left_gradient = float(cumulative_gradients[split_bin])
@@ -572,6 +631,9 @@ class HistogramGradientBoostingClassifier:
     all features, an integer, or a fraction in ``(0, 1]`` sampled at each node
     with the default recursive strategy. The optional levelwise strategy
     samples once per tree and builds shared histograms for a performance study.
+    ``positive_class_weight`` multiplies positive-row logistic loss, gradient
+    and curvature; negative rows keep weight one. Bin quantiles and minimum
+    leaf sizes remain based on the original rows.
     """
 
     def __init__(
@@ -586,6 +648,9 @@ class HistogramGradientBoostingClassifier:
         max_features: int | float | None = None,
         random_seed: int = 0,
         histogram_strategy: str = "recursive",
+        binning_strategy: str = "quantile",
+        exact_feature_indices: Sequence[int] | None = None,
+        positive_class_weight: float = 1.0,
     ) -> None:
         if type(n_estimators) is not int or n_estimators <= 0:
             raise ValueError("n_estimators must be a positive integer.")
@@ -610,8 +675,11 @@ class HistogramGradientBoostingClassifier:
                 )
         if type(random_seed) is not int:
             raise ValueError("random_seed must be an integer.")
+        if not np.isfinite(positive_class_weight) or positive_class_weight <= 0.0:
+            raise ValueError("positive_class_weight must be finite and strictly positive.")
         if histogram_strategy not in {"recursive", "levelwise"}:
             raise ValueError("histogram_strategy must be 'recursive' or 'levelwise'.")
+        validated_binner = HistogramBinner(n_bins, binning_strategy, exact_feature_indices)
         self.n_estimators = n_estimators
         self.learning_rate = float(learning_rate)
         self.max_depth = max_depth
@@ -621,7 +689,10 @@ class HistogramGradientBoostingClassifier:
         self.min_gain = float(min_gain)
         self.max_features = max_features
         self.random_seed = random_seed
+        self.positive_class_weight = float(positive_class_weight)
         self.histogram_strategy = histogram_strategy
+        self.binning_strategy = binning_strategy
+        self.exact_feature_indices = validated_binner.exact_feature_indices
         self.binner_: HistogramBinner | None = None
         self.trees_: list[_NewtonTree] = []
         self.tree_fit_seconds_: list[float] = []
@@ -661,10 +732,16 @@ class HistogramGradientBoostingClassifier:
                 "Training scores must be initialized before fitting trees."
             )
         checkpoint_set = set(checkpoints)
+        weights = None
+        if self.positive_class_weight != 1.0:
+            weights = np.where(labels == 1, self.positive_class_weight, 1.0)
         for _ in range(tree_count):
             probabilities = _sigmoid(self.training_scores_)
             gradients = probabilities - labels
             hessians = np.maximum(probabilities * (1.0 - probabilities), 1e-12)
+            if weights is not None:
+                gradients *= weights
+                hessians *= weights
             started = time.perf_counter()
             tree = _NewtonTree(
                 self.max_depth,
@@ -674,6 +751,7 @@ class HistogramGradientBoostingClassifier:
                 self.max_features,
                 generator,
                 self.histogram_strategy,
+                getattr(self.binner_, "exact_columns_", None),
             ).fit(binned_features, self.binner_.bin_counts_, gradients, hessians)
             self.training_scores_ += self.learning_rate * tree.predict(binned_features)
             self.tree_fit_seconds_.append(time.perf_counter() - started)
@@ -699,9 +777,14 @@ class HistogramGradientBoostingClassifier:
         checkpoint_steps = self._checkpoint_steps(checkpoints, self.n_estimators)
         if checkpoint_callback is not None and not callable(checkpoint_callback):
             raise ValueError("checkpoint_callback must be callable when supplied.")
-        binner = HistogramBinner(self.n_bins)
+        binner = HistogramBinner(self.n_bins, self.binning_strategy, self.exact_feature_indices or None)
         binned_features = binner.fit_transform(features)
-        prevalence = float(np.clip(np.mean(labels), 1e-12, 1.0 - 1e-12))
+        if self.positive_class_weight == 1.0:
+            prevalence = float(np.clip(np.mean(labels), 1e-12, 1.0 - 1e-12))
+        else:
+            positive_mass = self.positive_class_weight * float(np.sum(labels))
+            negative_mass = float(labels.size - np.sum(labels))
+            prevalence = float(np.clip(positive_mass / (positive_mass + negative_mass), 1e-12, 1.0 - 1e-12))
         self.base_score_ = float(np.log(prevalence / (1.0 - prevalence)))
         self.binner_ = binner
         self.trees_ = []
@@ -823,6 +906,12 @@ class HistogramGradientBoostingClassifier:
             or model.random_generator_state_ is None
         ):
             raise ValueError("Checkpoint lacks fitted continuation state.")
+        if not hasattr(model, "binning_strategy"):
+            model.binning_strategy = "quantile"
+        if not hasattr(model, "exact_feature_indices"):
+            model.exact_feature_indices = ()
+        if not hasattr(model, "positive_class_weight"):
+            model.positive_class_weight = 1.0
         return model, metadata
 
     def _binned_for_prediction(self, features: np.ndarray) -> np.ndarray:

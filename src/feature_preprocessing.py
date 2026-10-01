@@ -52,6 +52,9 @@ def tree_feature_matrices(
     Histogram trees route missing values themselves, so replacing them with a
     median would discard a useful state. Binary mappings are fitted from the
     training rows and applied unchanged to validation rows.
+    ``tree_one_hot_features`` optionally replaces named sources with a vocabulary
+    learned only from cleaned training rows and an unknown-category indicator.
+    Missing sources remain NaN throughout their encoded block.
     """
 
     training_features = np.asarray(training_features, dtype=np.float32)
@@ -102,6 +105,42 @@ def tree_feature_matrices(
                 clean_validation[clean_validation == code] = mapped
         output_train[:, output_index] = clean_train
         output_validation[:, output_index] = clean_validation
+    one_hot = plan.get("tree_one_hot_features", [])
+    if (not isinstance(one_hot, list) or any(not isinstance(n, str) for n in one_hot)
+            or len(set(one_hot)) != len(one_hot)):
+        raise ValueError("tree_one_hot_features must be a list of unique feature names.")
+    if set(one_hot) - set(output_names):
+        raise ValueError("Tree one-hot features must be retained source features.")
+    if one_hot and plan.get("imputation") is not None:
+        raise ValueError("Tree one-hot and conditional imputation cannot be combined yet.")
+    if one_hot:
+        train_columns, validation_columns, expanded_names = [], [], []
+        for index, name in enumerate(output_names):
+            train_values, valid_values = output_train[:, index], output_validation[:, index]
+            if name not in one_hot:
+                train_columns.append(train_values)
+                validation_columns.append(valid_values)
+                expanded_names.append(name)
+                continue
+            # Fit the vocabulary only on cleaned training values. Every category
+            # gets a column; NaN is retained across the whole activity block.
+            categories = np.unique(train_values[np.isfinite(train_values)])
+            for category in categories:
+                train_flag = (train_values == category).astype(np.float32)
+                valid_flag = (valid_values == category).astype(np.float32)
+                train_flag[np.isnan(train_values)] = np.nan
+                valid_flag[np.isnan(valid_values)] = np.nan
+                train_columns.append(train_flag)
+                validation_columns.append(valid_flag)
+                expanded_names.append(f"{name}__is_{float(category):g}")
+            for values, columns in ((train_values, train_columns), (valid_values, validation_columns)):
+                unknown = (~np.isin(values, categories)).astype(np.float32)
+                unknown[np.isnan(values)] = np.nan
+                columns.append(unknown)
+            expanded_names.append(f"{name}__unknown")
+        output_train = np.column_stack(train_columns).astype(np.float32, copy=False)
+        output_validation = np.column_stack(validation_columns).astype(np.float32, copy=False)
+        output_names = expanded_names
     imputation = plan.get("imputation")
     if imputation is not None:
         from src.conditional_imputation import impute_tree_pair

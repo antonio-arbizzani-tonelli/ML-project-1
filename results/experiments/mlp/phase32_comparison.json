@@ -1,0 +1,112 @@
+{
+  "baseline": {
+    "name": "Phase 14",
+    "metrics": {
+      "accuracy": 0.8764342420040532,
+      "average_precision": 0.4286092503721835,
+      "balanced_accuracy": 0.7310904383294219,
+      "f1": 0.4421552272688187,
+      "log_loss": 0.21522507121178044,
+      "precision": 0.36763233906254467,
+      "recall": 0.5545729076790337,
+      "specificity": 0.9076079689798101
+    }
+  },
+  "candidates": [
+    {
+      "name": "mlp64_32",
+      "record": "results\\experiments\\mlp\\20261001T014455026674Z_phase32-mlp-mlp64-32.json",
+      "metrics": {
+        "accuracy": 0.8765447148277385,
+        "precision": 0.36072204781453754,
+        "recall": 0.5155306298533219,
+        "f1": 0.42445123250692623,
+        "specificity": 0.9115105629094798,
+        "balanced_accuracy": 0.7135205963814009,
+        "average_precision": 0.3877821137819869,
+        "log_loss": 0.22167438622387117
+      },
+      "delta_f1": -0.01770399476189244,
+      "folds": [
+        {
+          "fold": 1,
+          "f1": 0.41165640276807824,
+          "delta_f1": -0.027370444559781493,
+          "threshold": 0.21635746955871582,
+          "selected_epochs": 7,
+          "output_features": 1178
+        },
+        {
+          "fold": 2,
+          "f1": 0.4292131268826296,
+          "delta_f1": -0.014840394093968257,
+          "threshold": 0.21722254157066345,
+          "selected_epochs": 7,
+          "output_features": 1180
+        },
+        {
+          "fold": 3,
+          "f1": 0.429601553110844,
+          "delta_f1": -0.013910092653169337,
+          "threshold": 0.2028203308582306,
+          "selected_epochs": 5,
+          "output_features": 1179
+        }
+      ],
+      "favorable_folds": 0,
+      "checkpoints_replayed": 9,
+      "maximum_replay_error": 0.0,
+      "operational_promotion_criterion_met": false
+    },
+    {
+      "name": "mlp128_64",
+      "record": "results\\experiments\\mlp\\20261001T014455269281Z_phase32-mlp-mlp128-64.json",
+      "metrics": {
+        "accuracy": 0.8662631234095722,
+        "precision": 0.34000482923295683,
+        "recall": 0.5467213114754098,
+        "f1": 0.4192678609829123,
+        "specificity": 0.8972121941436021,
+        "balanced_accuracy": 0.721966752809506,
+        "average_precision": 0.37938028877628655,
+        "log_loss": 0.2227104181960239
+      },
+      "delta_f1": -0.022887366285906374,
+      "folds": [
+        {
+          "fold": 1,
+          "f1": 0.4171294808830954,
+          "delta_f1": -0.02189736644476431,
+          "threshold": 0.20853641629219055,
+          "selected_epochs": 2,
+          "output_features": 1178
+        },
+        {
+          "fold": 2,
+          "f1": 0.4226333167488353,
+          "delta_f1": -0.02142020422776253,
+          "threshold": 0.19032129645347595,
+          "selected_epochs": 4,
+          "output_features": 1180
+        },
+        {
+          "fold": 3,
+          "f1": 0.4175877272452739,
+          "delta_f1": -0.025923918518739486,
+          "threshold": 0.22764475643634796,
+          "selected_epochs": 5,
+          "output_features": 1179
+        }
+      ],
+      "favorable_folds": 0,
+      "checkpoints_replayed": 9,
+      "maximum_replay_error": 0.0,
+      "operational_promotion_criterion_met": false
+    }
+  ],
+  "development_rows": 262508,
+  "runtime_seconds": 531.4661903998349,
+  "protected_files_unchanged": true,
+  "verification": "All nine refit checkpoints per candidate, inner thresholds and every OOF label/classification replayed.",
+  "limitations": "Development CV after repeated model selection; one initialization seed. No untouched test result or automatic promotion."
+}

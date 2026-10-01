@@ -1,0 +1,640 @@
+{
+  "phase": 26,
+  "baseline_record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json",
+  "baseline_nested": {
+    "folds": [
+      {
+        "inner_selection_metrics": {
+          "accuracy": 0.8694208736893232,
+          "average_precision": 0.39393181980611336,
+          "balanced_accuracy": 0.7306974324994083,
+          "f1": 0.4319379536641145,
+          "log_loss": 0.21953868458330428,
+          "precision": 0.35067608476286577,
+          "recall": 0.5622209279751504,
+          "specificity": 0.8991739370236662
+        },
+        "inner_threshold": 0.203056688916058,
+        "outer_evaluation_confusion_counts": {
+          "false_negatives": 3369,
+          "false_positives": 7768,
+          "true_negatives": 72008,
+          "true_positives": 4358
+        },
+        "outer_evaluation_metrics": {
+          "accuracy": 0.8727243637361005,
+          "average_precision": 0.4290283494790698,
+          "balanced_accuracy": 0.7333118664705851,
+          "f1": 0.43902684732785974,
+          "log_loss": 0.2159400054600161,
+          "precision": 0.35939303974929904,
+          "recall": 0.5639963763426944,
+          "specificity": 0.9026273565984757
+        },
+        "outer_fold": 1
+      },
+      {
+        "inner_selection_metrics": {
+          "accuracy": 0.8794377303505614,
+          "average_precision": 0.41081751374671216,
+          "balanced_accuracy": 0.7203816197145836,
+          "f1": 0.4357500066857434,
+          "log_loss": 0.21792378069462792,
+          "precision": 0.371330902461258,
+          "recall": 0.5272115446838802,
+          "specificity": 0.9135516947452869
+        },
+        "inner_threshold": 0.22010463713275993,
+        "outer_evaluation_confusion_counts": {
+          "false_negatives": 3562,
+          "false_positives": 6867,
+          "true_negatives": 72909,
+          "true_positives": 4165
+        },
+        "outer_evaluation_metrics": {
+          "accuracy": 0.8808155148966321,
+          "average_precision": 0.42836860553790096,
+          "balanced_accuracy": 0.7264702521726292,
+          "f1": 0.44405352097659784,
+          "log_loss": 0.2152112721971137,
+          "precision": 0.37753807106598986,
+          "recall": 0.5390190242008541,
+          "specificity": 0.9139214801444043
+        },
+        "outer_fold": 2
+      },
+      {
+        "inner_selection_metrics": {
+          "accuracy": 0.8758385426785368,
+          "average_precision": 0.42425916149897785,
+          "balanced_accuracy": 0.7271010700026075,
+          "f1": 0.4373494911830964,
+          "log_loss": 0.2165429150557967,
+          "precision": 0.36455860133822576,
+          "recall": 0.5464604633104698,
+          "specificity": 0.9077416766947453
+        },
+        "inner_threshold": 0.20944597307683668,
+        "outer_evaluation_confusion_counts": {
+          "false_negatives": 3394,
+          "false_positives": 7477,
+          "true_negatives": 72299,
+          "true_positives": 4332
+        },
+        "outer_evaluation_metrics": {
+          "accuracy": 0.875762839706521,
+          "average_precision": 0.4284264243672038,
+          "balanced_accuracy": 0.7334895930842964,
+          "f1": 0.44351164576401336,
+          "log_loss": 0.2145239279654205,
+          "precision": 0.3668388517232619,
+          "recall": 0.5607041159720425,
+          "specificity": 0.9062750701965503
+        },
+        "outer_fold": 3
+      }
+    ],
+    "pooled_confusion_counts": {
+      "false_negatives": 10325,
+      "false_positives": 22112,
+      "true_negatives": 217216,
+      "true_positives": 12855
+    },
+    "pooled_metrics": {
+      "accuracy": 0.8764342420040532,
+      "average_precision": 0.4286092503721835,
+      "balanced_accuracy": 0.7310904383294219,
+      "f1": 0.4421552272688187,
+      "log_loss": 0.21522507121178044,
+      "precision": 0.36763233906254467,
+      "recall": 0.5545729076790337,
+      "specificity": 0.9076079689798101
+    },
+    "protocol": "Each outer-fold threshold is selected from inner OOF probabilities fitted and preprocessed only on that outer fold's training rows.",
+    "threshold_summary": {
+      "maximum": 0.22010463713275993,
+      "mean": 0.21086909970855153,
+      "minimum": 0.203056688916058
+    }
+  },
+  "candidates": [
+    {
+      "name": "Secondo seed",
+      "record": "results\\experiments\\20260930T180910156200Z_phase26-phase14-seed20260921-depth5-features128-200trees.json",
+      "nested": {
+        "folds": [
+          {
+            "inner_oof_predictions_artifact": {
+              "array_sha256": {
+                "fold_ids": "139d85b57c1024be5af5e808b34db8cb95e92bc307245371e63079c0a2eac341",
+                "inner_seed": "3398546b8cd92a96eb8b165c89423d58c0204eda168cde6d09d1b2724d1cc540",
+                "labels": "3c36216b966b8dd62fb67b51a305ba5eaf2bfb2e002a94f2fa6318a07a74a71a",
+                "outer_fold": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+                "outer_validation_row_indices": "0920323c9ba8db41517c3c448b25b28701ba815f09c35667eb1f88ae45eda70b",
+                "probabilities": "c949301070c93080e5caaa3c528b78e2f353c1d065cc067743bf42b731114669",
+                "training_row_indices": "b6b0f1d02674beb38bf908d6fffaf874ec1dafc937bd66d5475cca5368568352"
+              },
+              "arrays": [
+                "training_row_indices",
+                "outer_validation_row_indices",
+                "fold_ids",
+                "labels",
+                "probabilities",
+                "outer_fold",
+                "inner_seed"
+              ],
+              "inner_fold_count": 2,
+              "path": "results\\boosting_artifacts\\phase26_two_seeds\\second_seed\\inner_oof_predictions\\phase26_phase14_seed20260921_depth5_features128_200trees_outer1_inner_oof.npz",
+              "sha256": "d2444695472e1bf51ce493eb9348dd688b451d53c20f40bb63a12b62de23eb86",
+              "training_rows": 175005
+            },
+            "inner_selection_metrics": {
+              "accuracy": 0.8811348247192937,
+              "average_precision": 0.3934032781047448,
+              "balanced_accuracy": 0.7156139823275702,
+              "f1": 0.433280662561979,
+              "log_loss": 0.21946381029793413,
+              "precision": 0.37415894226697405,
+              "recall": 0.5145926357341617,
+              "specificity": 0.9166353289209788
+            },
+            "inner_threshold": 0.22745323250324764,
+            "outer_evaluation_confusion_counts": {
+              "false_negatives": 3773,
+              "false_positives": 6486,
+              "true_negatives": 73290,
+              "true_positives": 3954
+            },
+            "outer_evaluation_metrics": {
+              "accuracy": 0.8827583054295282,
+              "average_precision": 0.4293843420402341,
+              "balanced_accuracy": 0.7152047653320588,
+              "f1": 0.43529476523366545,
+              "log_loss": 0.21593823959277497,
+              "precision": 0.37873563218390804,
+              "recall": 0.5117121780768733,
+              "specificity": 0.9186973525872443
+            },
+            "outer_fold": 1
+          },
+          {
+            "inner_oof_predictions_artifact": {
+              "array_sha256": {
+                "fold_ids": "29c49e79d2ba99b167252f5b7bc91eaa1a3eaaa6e66c05b14b7185acb5803866",
+                "inner_seed": "41cca688ed838a505665b771e13084dd5ccd2fc01fad46ffeaa70fbda8775a91",
+                "labels": "90d026f5fb225516b0ba3cb03c2d739d22859ff265ccc6338d09d6002a52f2d9",
+                "outer_fold": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4",
+                "outer_validation_row_indices": "47bd67b5c357c1bc9392b14a67e07f706bfb8736e8925e73cddcd7ddbd81b717",
+                "probabilities": "ea91495ae2f42fbf6757651897e71ed7c6d2e9190e829c8925f1e2342579fc45",
+                "training_row_indices": "06d2d6309d67c6aae4ddf142d456bc647c5e0f3f751962b628c8d803c1db5df0"
+              },
+              "arrays": [
+                "training_row_indices",
+                "outer_validation_row_indices",
+                "fold_ids",
+                "labels",
+                "probabilities",
+                "outer_fold",
+                "inner_seed"
+              ],
+              "inner_fold_count": 2,
+              "path": "results\\boosting_artifacts\\phase26_two_seeds\\second_seed\\inner_oof_predictions\\phase26_phase14_seed20260921_depth5_features128_200trees_outer2_inner_oof.npz",
+              "sha256": "f11b3cafb209231c48be76e846d6d421f7240adabff530fdd4297ccd2233a7c5",
+              "training_rows": 175005
+            },
+            "inner_selection_metrics": {
+              "accuracy": 0.8774435016142396,
+              "average_precision": 0.4099304934327743,
+              "balanced_accuracy": 0.7224147294281881,
+              "f1": 0.434924649594267,
+              "log_loss": 0.2181417145779598,
+              "precision": 0.36679553837266143,
+              "recall": 0.5341357665178282,
+              "specificity": 0.9106936923385479
+            },
+            "inner_threshold": 0.21586444761795223,
+            "outer_evaluation_confusion_counts": {
+              "false_negatives": 3524,
+              "false_positives": 7067,
+              "true_negatives": 72709,
+              "true_positives": 4203
+            },
+            "outer_evaluation_metrics": {
+              "accuracy": 0.8789641498005782,
+              "average_precision": 0.4284339820575643,
+              "balanced_accuracy": 0.7276756526595939,
+              "f1": 0.4424909196188872,
+              "log_loss": 0.21505900623080135,
+              "precision": 0.37293700088731147,
+              "recall": 0.5439368448298175,
+              "specificity": 0.9114144604893702
+            },
+            "outer_fold": 2
+          },
+          {
+            "inner_oof_predictions_artifact": {
+              "array_sha256": {
+                "fold_ids": "456075e9d9d652aa55f4c341fe857cdd531c3e3555c83b1d99bb9d4bd7f65f94",
+                "inner_seed": "fb3e728c2d6a3c8ed3593a640cb225f5287595226c0f34589306b347ed5e3672",
+                "labels": "3ea6ad0e4785b4f277819b85a2daf074c622501c3eb83eef3816620c22dfa4cc",
+                "outer_fold": "35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b",
+                "outer_validation_row_indices": "f3f67565e4ad383d5db8afe89fa962c65a11ac031fa376ef9d9f5171812615a5",
+                "probabilities": "b60d9d5815f313ac84365792a265d3c51ca52979e62ad6225865604f34165d43",
+                "training_row_indices": "7a8335f2b932c5205acc6a1f8a5280a175ab41f8c72e1bdc4f5b106b7c337e68"
+              },
+              "arrays": [
+                "training_row_indices",
+                "outer_validation_row_indices",
+                "fold_ids",
+                "labels",
+                "probabilities",
+                "outer_fold",
+                "inner_seed"
+              ],
+              "inner_fold_count": 2,
+              "path": "results\\boosting_artifacts\\phase26_two_seeds\\second_seed\\inner_oof_predictions\\phase26_phase14_seed20260921_depth5_features128_200trees_outer3_inner_oof.npz",
+              "sha256": "13e0b81e89ea7fc647b2b39c236b1bb855c1e99cb15df15bf9d5bb8e7aeeabe1",
+              "training_rows": 175006
+            },
+            "inner_selection_metrics": {
+              "accuracy": 0.8797184096545261,
+              "average_precision": 0.42528565395236084,
+              "balanced_accuracy": 0.7218653851886616,
+              "f1": 0.4377070199807672,
+              "log_loss": 0.2164076128669175,
+              "precision": 0.3727140387589846,
+              "recall": 0.530154005435486,
+              "specificity": 0.9135767649418371
+            },
+            "inner_threshold": 0.2168382852150799,
+            "outer_evaluation_confusion_counts": {
+              "false_negatives": 3557,
+              "false_positives": 6978,
+              "true_negatives": 72798,
+              "true_positives": 4169
+            },
+            "outer_evaluation_metrics": {
+              "accuracy": 0.8796027519370986,
+              "average_precision": 0.42850218874259005,
+              "balanced_accuracy": 0.7260683038316242,
+              "f1": 0.44179515710273937,
+              "log_loss": 0.21466814939687048,
+              "precision": 0.3740019736251906,
+              "recall": 0.539606523427388,
+              "specificity": 0.9125300842358605
+            },
+            "outer_fold": 3
+          }
+        ],
+        "pooled_confusion_counts": {
+          "false_negatives": 10854,
+          "false_positives": 20531,
+          "true_negatives": 218797,
+          "true_positives": 12326
+        },
+        "pooled_metrics": {
+          "accuracy": 0.8804417389184329,
+          "average_precision": 0.4287601109377673,
+          "balanced_accuracy": 0.7229827378465858,
+          "f1": 0.43992362189267814,
+          "log_loss": 0.2152218005158904,
+          "precision": 0.37514076148157166,
+          "recall": 0.5317515099223469,
+          "specificity": 0.9142139657708249
+        },
+        "protocol": "Each outer-fold threshold is selected from inner OOF probabilities fitted and preprocessed only on that outer fold's training rows.",
+        "threshold_summary": {
+          "maximum": 0.22745323250324764,
+          "mean": 0.2200519884454266,
+          "minimum": 0.21586444761795223
+        }
+      },
+      "metric_deltas": {
+        "accuracy": 0.004007496914379738,
+        "precision": 0.007508422419026994,
+        "recall": -0.02282139775668679,
+        "f1": -0.002231605376140533,
+        "specificity": 0.006605996791014812,
+        "balanced_accuracy": -0.008107700482836044,
+        "log_loss": -3.2706958900396987e-06,
+        "average_precision": 0.00015086056558377692
+      },
+      "fold_f1_deltas": [
+        -0.003732082094194289,
+        -0.0015626013577106357,
+        -0.001716488661273996
+      ],
+      "positive_fold_count": 0,
+      "meets_plan_promotion_rule": false,
+      "paired_conditional_f1_delta_interval_95": [
+        -0.004167597786945995,
+        -0.0002923639390930447
+      ],
+      "decision_changes": {
+        "recovered_false_negatives": 254,
+        "lost_true_positives": 783,
+        "added_false_positives": 920,
+        "removed_false_positives": 2501
+      }
+    },
+    {
+      "name": "Media uniforme",
+      "record": "results\\experiments\\20260930T181509840904Z_phase26-phase14-uniform-mean-two-seeds.json",
+      "nested": {
+        "folds": [
+          {
+            "inner_oof_predictions_artifact": {
+              "array_sha256": {
+                "fold_ids": "139d85b57c1024be5af5e808b34db8cb95e92bc307245371e63079c0a2eac341",
+                "inner_seed": "3398546b8cd92a96eb8b165c89423d58c0204eda168cde6d09d1b2724d1cc540",
+                "labels": "3c36216b966b8dd62fb67b51a305ba5eaf2bfb2e002a94f2fa6318a07a74a71a",
+                "outer_fold": "7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8",
+                "outer_validation_row_indices": "0920323c9ba8db41517c3c448b25b28701ba815f09c35667eb1f88ae45eda70b",
+                "probabilities": "52701cb00ce03ff781624682259cccd989a5425fe629b8ad992dfa5b4b57f205",
+                "training_row_indices": "b6b0f1d02674beb38bf908d6fffaf874ec1dafc937bd66d5475cca5368568352"
+              },
+              "arrays": [
+                "training_row_indices",
+                "outer_validation_row_indices",
+                "fold_ids",
+                "labels",
+                "probabilities",
+                "outer_fold",
+                "inner_seed"
+              ],
+              "inner_fold_count": 2,
+              "path": "results\\boosting_artifacts\\phase26_two_seeds\\mean\\inner_oof_predictions\\phase26_uniform_mean_outer1_inner_oof.npz",
+              "sha256": "45c92f5b7769241daf1c8999f4d816042c937c13ff3f986320b916950c33af1d",
+              "training_rows": 175005
+            },
+            "inner_selection_metrics": {
+              "accuracy": 0.866855232707637,
+              "average_precision": 0.3946704895159849,
+              "balanced_accuracy": 0.735222515369768,
+              "f1": 0.43283109802107933,
+              "log_loss": 0.21930389754647606,
+              "precision": 0.34689816621147096,
+              "recall": 0.5753575357535754,
+              "specificity": 0.8950874949859607
+            },
+            "inner_threshold": 0.19749801672808193,
+            "outer_evaluation_confusion_counts": {
+              "false_negatives": 3286,
+              "false_positives": 8167,
+              "true_negatives": 71609,
+              "true_positives": 4441
+            },
+            "outer_evaluation_metrics": {
+              "accuracy": 0.8691130589808349,
+              "average_precision": 0.42994682079354746,
+              "balanced_accuracy": 0.7361818921568459,
+              "f1": 0.4367838701745759,
+              "log_loss": 0.21579920370829522,
+              "precision": 0.35223667512690354,
+              "recall": 0.5747379319270092,
+              "specificity": 0.8976258523866827
+            },
+            "outer_fold": 1
+          },
+          {
+            "inner_oof_predictions_artifact": {
+              "array_sha256": {
+                "fold_ids": "29c49e79d2ba99b167252f5b7bc91eaa1a3eaaa6e66c05b14b7185acb5803866",
+                "inner_seed": "41cca688ed838a505665b771e13084dd5ccd2fc01fad46ffeaa70fbda8775a91",
+                "labels": "90d026f5fb225516b0ba3cb03c2d739d22859ff265ccc6338d09d6002a52f2d9",
+                "outer_fold": "d86e8112f3c4c4442126f8e9f44f16867da487f29052bf91b810457db34209a4",
+                "outer_validation_row_indices": "47bd67b5c357c1bc9392b14a67e07f706bfb8736e8925e73cddcd7ddbd81b717",
+                "probabilities": "bc69994bd2ab29b20a73c900560d1fff5bdbc245ceb7ad89488c1c59ecab7b0e",
+                "training_row_indices": "06d2d6309d67c6aae4ddf142d456bc647c5e0f3f751962b628c8d803c1db5df0"
+              },
+              "arrays": [
+                "training_row_indices",
+                "outer_validation_row_indices",
+                "fold_ids",
+                "labels",
+                "probabilities",
+                "outer_fold",
+                "inner_seed"
+              ],
+              "inner_fold_count": 2,
+              "path": "results\\boosting_artifacts\\phase26_two_seeds\\mean\\inner_oof_predictions\\phase26_uniform_mean_outer2_inner_oof.npz",
+              "sha256": "5eb8e3d740a6e903a948f67e9a485818fdda08ebc508c00d1ca1cb5bcaf8de14",
+              "training_rows": 175005
+            },
+            "inner_selection_metrics": {
+              "accuracy": 0.8784149024313591,
+              "average_precision": 0.4113464981990317,
+              "balanced_accuracy": 0.7221000214403475,
+              "f1": 0.43601569126378287,
+              "log_loss": 0.21783285617821424,
+              "precision": 0.36924803591470257,
+              "recall": 0.5322591082637675,
+              "specificity": 0.9119409346169274
+            },
+            "inner_threshold": 0.2175334666273541,
+            "outer_evaluation_confusion_counts": {
+              "false_negatives": 3527,
+              "false_positives": 6994,
+              "true_negatives": 72782,
+              "true_positives": 4200
+            },
+            "outer_evaluation_metrics": {
+              "accuracy": 0.8797641223729472,
+              "average_precision": 0.42909281881943384,
+              "balanced_accuracy": 0.7279390592481259,
+              "f1": 0.4439511653718091,
+              "log_loss": 0.2149909852364391,
+              "precision": 0.3752010005360014,
+              "recall": 0.5435485958327941,
+              "specificity": 0.9123295226634577
+            },
+            "outer_fold": 2
+          },
+          {
+            "inner_oof_predictions_artifact": {
+              "array_sha256": {
+                "fold_ids": "456075e9d9d652aa55f4c341fe857cdd531c3e3555c83b1d99bb9d4bd7f65f94",
+                "inner_seed": "fb3e728c2d6a3c8ed3593a640cb225f5287595226c0f34589306b347ed5e3672",
+                "labels": "3ea6ad0e4785b4f277819b85a2daf074c622501c3eb83eef3816620c22dfa4cc",
+                "outer_fold": "35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b",
+                "outer_validation_row_indices": "f3f67565e4ad383d5db8afe89fa962c65a11ac031fa376ef9d9f5171812615a5",
+                "probabilities": "ef9a2b714a03c02d75a34fe9e3a1ff393966c0fda4cad422928ec05e9d927082",
+                "training_row_indices": "7a8335f2b932c5205acc6a1f8a5280a175ab41f8c72e1bdc4f5b106b7c337e68"
+              },
+              "arrays": [
+                "training_row_indices",
+                "outer_validation_row_indices",
+                "fold_ids",
+                "labels",
+                "probabilities",
+                "outer_fold",
+                "inner_seed"
+              ],
+              "inner_fold_count": 2,
+              "path": "results\\boosting_artifacts\\phase26_two_seeds\\mean\\inner_oof_predictions\\phase26_uniform_mean_outer3_inner_oof.npz",
+              "sha256": "27b97df176719b6f48ac8d6b8ddd560893021ed476087e047b3390ee03fdffbb",
+              "training_rows": 175006
+            },
+            "inner_selection_metrics": {
+              "accuracy": 0.8792784247397232,
+              "average_precision": 0.42558169657817346,
+              "balanced_accuracy": 0.7232019812067552,
+              "f1": 0.43842534754525403,
+              "log_loss": 0.2163032839428814,
+              "precision": 0.3720395182027338,
+              "recall": 0.5336482464086968,
+              "specificity": 0.9127557160048135
+            },
+            "inner_threshold": 0.21606490280079746,
+            "outer_evaluation_confusion_counts": {
+              "false_negatives": 3530,
+              "false_positives": 7025,
+              "true_negatives": 72751,
+              "true_positives": 4196
+            },
+            "outer_evaluation_metrics": {
+              "accuracy": 0.8793741857328975,
+              "average_precision": 0.4291268151119706,
+              "balanced_accuracy": 0.7275210756439543,
+              "f1": 0.4429197234390669,
+              "log_loss": 0.21446564257546127,
+              "precision": 0.3739417164245611,
+              "recall": 0.5431012166709811,
+              "specificity": 0.9119409346169274
+            },
+            "outer_fold": 3
+          }
+        ],
+        "pooled_confusion_counts": {
+          "false_negatives": 10343,
+          "false_positives": 22186,
+          "true_negatives": 217142,
+          "true_positives": 12837
+        },
+        "pooled_metrics": {
+          "accuracy": 0.8760837764944307,
+          "average_precision": 0.42936749980518574,
+          "balanced_accuracy": 0.7305475730376951,
+          "f1": 0.4411112829235606,
+          "log_loss": 0.21508527953383935,
+          "precision": 0.3665305656283014,
+          "recall": 0.5537963761863676,
+          "specificity": 0.9072987698890226
+        },
+        "protocol": "Fixed equal weights; thresholds selected on the mean of aligned component INNER OOF probabilities only.",
+        "threshold_summary": {
+          "maximum": 0.2175334666273541,
+          "mean": 0.21036546205207785,
+          "minimum": 0.19749801672808193
+        }
+      },
+      "metric_deltas": {
+        "accuracy": -0.00035046550962247736,
+        "precision": -0.0011017734342432806,
+        "recall": -0.0007765314926660993,
+        "f1": -0.0010439443452580632,
+        "specificity": -0.0003091990907875264,
+        "balanced_accuracy": -0.0005428652917267573,
+        "log_loss": -0.00013979167794109237,
+        "average_precision": 0.0007582494330022338
+      },
+      "fold_f1_deltas": [
+        -0.002242977153283865,
+        -0.00010235560478871752,
+        -0.0005919223249464811
+      ],
+      "positive_fold_count": 0,
+      "meets_plan_promotion_rule": false,
+      "paired_conditional_f1_delta_interval_95": [
+        -0.002308415404802387,
+        0.0002138788547398456
+      ],
+      "decision_changes": {
+        "recovered_false_negatives": 214,
+        "lost_true_positives": 232,
+        "added_false_positives": 875,
+        "removed_false_positives": 801
+      }
+    }
+  ],
+  "training_helper_artifact": {
+    "path": "results/boosting_artifacts/phase26_two_seeds/executed_runner.py",
+    "sha256": "ae2c395824382885457cf2b15bf598762db76ef93b8090ce72f782eeb53a598e"
+  },
+  "verification_helper_artifact": {
+    "path": "results/boosting_artifacts/phase26_two_seeds/verification_runner.py",
+    "sha256": "1b17bea72717b788b2adcf78a847faa8821a5bbdd91156c8687d1b44dc7185dd"
+  },
+  "verification_metadata_fix": "Legacy Phase 14 checkpoints lack output_feature_names. Their order is verified from frozen preprocessing, bin edges and exact probabilities; new checkpoints must retain the field. No additional training.",
+  "baseline_inner_recovery_record": "results\\boosting_artifacts\\phase26_two_seeds\\baseline_recovery\\records\\20260930T135901859578Z_phase26-phase14-baseline-inner-recovery.json",
+  "baseline_inner_recovery_sha256": "736351240072182137cf00b9fd64625d5433a9c82b6e2a60f41c7070afd2c786",
+  "baseline_thresholds_reproduced_exactly": true,
+  "component_prediction_checks_exact": true,
+  "weights": [
+    0.5,
+    0.5
+  ],
+  "seeds": [
+    20260920,
+    20260921
+  ],
+  "new_fit_count": 15,
+  "runtime_seconds": 16417.761944599915,
+  "runtime_basis": "Six recovered baseline inner fits and nine second-seed fits; excludes preflight and final checks.",
+  "environment": {
+    "numpy": "2.4.2",
+    "python": "3.14.3"
+  },
+  "final_model_changed": false,
+  "bootstrap_seed": 20260929,
+  "bootstrap_repetitions": 20000,
+  "bootstrap_scope": "Fixed fitted models and thresholds; excludes training and repeated model-selection uncertainty.",
+  "component_complementarity": {
+    "probability_correlation": 0.9952889621695747,
+    "mean_absolute_probability_difference": 0.006268224677271783,
+    "prediction_disagreements": 4458,
+    "positive_prediction_disagreements": 1037,
+    "negative_prediction_disagreements": 3421
+  },
+  "mean_vs_second_seed": {
+    "metric_deltas": {
+      "accuracy": -0.004357962424002215,
+      "average_precision": 0.0006073888674184569,
+      "balanced_accuracy": 0.007564835191109287,
+      "f1": 0.0011876610308824698,
+      "log_loss": -0.00013652098205105268,
+      "precision": -0.008610195853270275,
+      "recall": 0.02204486626402069,
+      "specificity": -0.0069151958818023385
+    },
+    "fold_f1_deltas": [
+      0.001489104940910424,
+      0.0014602457529219182,
+      0.001124566336327515
+    ],
+    "paired_conditional_f1_delta_interval_95": [
+      -0.0004886042766133122,
+      0.002864303968363899
+    ]
+  },
+  "timing_note": {
+    "first_second_seed_outer_fit_elapsed_seconds": 12916.713542300044,
+    "remaining_study_elapsed_seconds": 3501.0484022998717,
+    "observed_first_outer_progress_elapsed_seconds": {
+      "trees175": 529.5,
+      "trees200": 12263.3
+    },
+    "process_cpu_seconds_observed_after_first_outer_fit": 2104.41,
+    "interpretation": "Elapsed time includes a long execution gap with little proportional CPU activity. Its cause was not established; this duration does not estimate typical ensemble training cost."
+  },
+  "test_counts": {
+    "before_training": 120,
+    "after_legacy_metadata_verification_fix": 124
+  },
+  "decision": {
+    "adopted_candidate": null,
+    "retained_reference": "Phase 14, seed 20260920, L2=1",
+    "next_planned_trial": "learning_rate=0.025 with 400 trees",
+    "next_trial_started": false
+  }
+}

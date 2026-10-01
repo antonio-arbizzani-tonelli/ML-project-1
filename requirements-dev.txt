@@ -1,0 +1,3 @@
+# Optional EDA and test dependencies; training requires only requirements.txt.
+-r requirements.txt
+matplotlib==3.6.3

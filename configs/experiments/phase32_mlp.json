@@ -1,0 +1,67 @@
+{
+  "experiment_prefix": "phase32_mlp",
+  "artifact_dir": "results/mlp_artifacts/phase32",
+  "data": {
+    "features_path": "data/processed/x_train_float32.npy",
+    "labels_path": "data/processed/y_train_int8.npy",
+    "split_indices_path": "results/eda/analysis/splits/stratified_seed_20260918.npz",
+    "x_train_csv_path": "data/raw/dataset/x_train.csv"
+  },
+  "feature_metadata_path": "configs/feature_metadata.json",
+  "cleaning_config_path": "configs/experiments/phase14_codebook_corrections_only.json",
+  "cleaning_variant": "phase14_codebook_corrections_only",
+  "split_id": "stratified_seed_20260918_development_inner_cv",
+  "fold_count": 3,
+  "seed": 20260919,
+  "inner_fold_count": 2,
+  "inner_seed": 20260922,
+  "preprocessing": {
+    "early_stopping_fraction": 0.1,
+    "early_stopping_seed": 20261001,
+    "frequency_features": [
+      "ALCDAY5",
+      "EXEROFT1",
+      "EXEROFT2",
+      "FRUITJU1",
+      "FRUIT1",
+      "FVBEANS",
+      "FVGREEN",
+      "FVORANG",
+      "VEGETAB1"
+    ]
+  },
+  "models": [
+    {
+      "name": "mlp64_32",
+      "parameters": {
+        "hidden_layer_sizes": [
+          64,
+          32
+        ],
+        "learning_rate": 0.001,
+        "l2": 0.0001,
+        "batch_size": 512,
+        "max_epochs": 80,
+        "patience": 8,
+        "min_delta": 0.0001,
+        "random_seed": 20261001
+      }
+    },
+    {
+      "name": "mlp128_64",
+      "parameters": {
+        "hidden_layer_sizes": [
+          128,
+          64
+        ],
+        "learning_rate": 0.001,
+        "l2": 0.0001,
+        "batch_size": 512,
+        "max_epochs": 80,
+        "patience": 8,
+        "min_delta": 0.0001,
+        "random_seed": 20261001
+      }
+    }
+  ]
+}

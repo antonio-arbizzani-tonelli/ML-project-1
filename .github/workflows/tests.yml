@@ -1,0 +1,40 @@
+name: Repository checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  official-python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.9'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - name: Install training and test dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Check repository contents and evidence
+        run: python -m tools.verify_repository
+      - name: Run unit and integration tests
+        run: python -m unittest discover -s tests -q
+      - name: Check command entry points
+        run: |
+          python run.py --help
+          python run_mlp.py --help
+          python -m tools.prepare_data --help

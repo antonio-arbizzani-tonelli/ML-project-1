@@ -1,138 +1,127 @@
-# BRFSS cardiovascular-risk classification
+# BRFSS 2015: cardiovascular disease classification
 
-NumPy-only binary classification for EPFL CS-433 Project 1. The target is
-myocardial infarction or coronary heart disease (`_MICHD`) in the 2015 BRFSS
-survey. The positive class represents 8.83% of the training data.
+NumPy implementation for EPFL CS-433 Project 1. The target `_MICHD` identifies
+myocardial infarction or coronary heart disease reported in the BRFSS survey.
+The dataset contains 328,135 labeled respondents, 321 predictors and 8.83%
+positive labels.
 
-## Current result
+The selected model is **Phase 14 histogram gradient boosting**, with 295
+features cleaned according to the codebook, 200 trees and maximum depth 5.
+It achieved the highest F1 among the completed comparisons.
 
-All reported finalist metrics use the same 262,508 development rows and nested
-F1-threshold selection. Preprocessing and threshold fitting are restricted to
-each outer fold's training rows.
+| Pipeline | Development F1 |
+| --- | ---: |
+| Historical ridge | 0.41951 |
+| Historical logistic regression | 0.42563 |
+| **Phase 14 booster** | **0.44216** |
+| MLP 64 → 32 | 0.42445 |
+| MLP 128 → 64 | 0.41927 |
 
-| Model | F1 | Precision | Recall | Average precision | Log loss |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Ridge regression | 0.41951 | 0.33303 | 0.56665 | 0.39028 | 0.22917 |
-| Logistic regression | 0.42563 | 0.35728 | 0.52632 | 0.38775 | 0.22198 |
-| NumPy histogram boosting | **0.44216** | **0.36763** | **0.55457** | **0.42861** | **0.21523** |
+These scores use the same 262,508 development rows, three outer folds and
+thresholds selected on two inner folds. Preprocessing is fitted within each
+training partition. Linear scores refer to the historical median-fill
+representation.
 
-The tree model is the current reference. It captures nonlinear thresholds and
-feature interactions that the linear baseline did not recover. Accuracy is not
-used alone: predicting every row as negative already gives 91.17% accuracy and
-F1 zero.
+`HAREHAB1` is included. It records rehabilitation after a heart attack;
+all 620 development respondents with a recorded code are positive. Removing
+this feature lowers F1 to 0.43104. Its post-event information limits the
+interpretation of the result as prediction before an event.
 
-The selected model contains 200 depth-5 histogram trees, samples 128 candidate
-features per node, and routes missing values explicitly. Full settings and the
-experiment path are in [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md).
-
-## Repository layout
-
-```text
-implementations.py        six functions required by the public grader
-run.py                    full-data training and submission entry point
-configs/                  final model, preprocessing, and experiment settings
-src/                      NumPy models, preprocessing, evaluation, and runners
-tests/                    local unit and integration tests
-docs/                     data handling and experiment decisions
-data/README.md            dataset placement and verified schema
-official_material/        text codebook required by parser tests
-results/eda/              compact analyses and figures
-results/experiments/      machine-readable experiment ledger
-```
-
-Raw data, NumPy caches, model checkpoints, OOF predictions, and submissions are
-excluded from Git.
+The [final report](docs/FINAL_REPORT.md), in Italian, explains the comparisons
+and model choice.
 
 ## Setup
 
-The official grading environment uses Python 3.9 and NumPy 1.23.1.
+The official environment uses **Python 3.9 and NumPy 1.23.1**. From the
+repository root:
 
 ```bash
-python -m venv .venv
+python3.9 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Sign in to the
-[EPFL Machine Learning Project 1 challenge on AIcrowd](https://www.aicrowd.com/challenges/epfl-machine-learning-project-1)
-with your EPFL account, download the official dataset, and place its four CSV
-files as described in [data/README.md](data/README.md). No external dataset or
-ML library is used. The BRFSS text codebook needed by the tests is included in
-the repository; the larger source PDF is not required.
+On Windows, use `py -3.9 -m venv .venv` and activate with
+`.venv\Scripts\Activate.ps1`.
 
-## Create a submission
+For tests and EDA plots, install the development dependencies:
 
-From the repository root:
+```bash
+python -m pip install -r requirements-dev.txt
+```
+
+Training uses NumPy and the Python standard library. Matplotlib is used for
+EDA and its tests.
+
+Download the official CSV files from the
+[EPFL Project 1 AIcrowd challenge](https://www.aicrowd.com/challenges/epfl-machine-learning-project-1)
+and place them under `data/raw/dataset/`, following [data/README.md](data/README.md).
+
+## Train and create a submission
 
 ```bash
 python run.py --data-dir data/raw/dataset --output submission.csv
 ```
 
-The first run parses the CSV files and creates local float32 caches under
-`data/processed/`. It then:
+The command trains on all labeled rows and writes `Id,Prediction` with labels
+`-1/+1`. Parameters and the decision threshold are in
+[configs/final_model.json](configs/final_model.json). The threshold,
+`0.21086909970855153`, is the mean of the three Phase 14 inner thresholds.
 
-1. applies the selected 295-feature codebook-aware representation;
-2. trains the 200-tree booster on all 328,135 labeled rows;
-3. applies the frozen threshold `0.2108690997`;
-4. writes `Id,Prediction` with labels in `{-1, +1}`.
+The recorded full-data run took 18 minutes 18 seconds and produced 109,379
+test predictions. Its official test score remains to be recorded.
 
-The default model is defined in `configs/final_model.json`. To retain the fitted
-model locally, add `--checkpoint results/final_model.pkl`. Checkpoints are
-pickle files and must only be loaded from trusted local runs.
+The command stores reusable caches under `data/processed/`. When changing
+feature CSV values, use a new `--cache-dir`, including when IDs and shape stay
+the same. Add `--checkpoint results/final_model.pkl` to save the fitted model.
 
-The entry point was verified end to end on the complete official data: it
-produced all 109,379 test predictions in 18 minutes 18 seconds on the
-development machine. Runtime depends on CPU speed.
+## Reproduce validation
 
-## Reproduce the selected validation result
-
-The complete three-outer-fold plus two-inner-fold evaluation is:
+Prepare the caches, then run the selected cross-validation:
 
 ```bash
+python -m tools.prepare_data
 python -m src.run_boosting_cv configs/experiments/phase14_boosting_codebook_corrections_only.json
 ```
 
-This run produced nested F1 `0.442155`, precision `0.367632`, and recall
-`0.554573`. It took 46.6 minutes on the development machine. The record is
-`results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json`.
+The fixed split is included under `results/eda/analysis/splits/`. Each outer
+fold uses the threshold selected from its inner OOF predictions. The recorded
+Phase 14 CV took approximately 46.6 minutes.
 
-## Tests
-
-Run the repository tests:
+To reproduce the MLP comparison:
 
 ```bash
+python -m src.run_mlp_cv configs/experiments/phase32_mlp.json
+```
+
+[MLP.md](docs/MLP.md) describes its preprocessing and training.
+`run_mlp.py` provides the corresponding full-data training command.
+
+## Checks
+
+```bash
+python -m tools.verify_repository
 python -m unittest discover -s tests -q
+git diff --check
 ```
 
-The official public tests are intentionally not copied into this repository.
-From the `grading_tests` directory of the official course repository, test a
-local checkout with:
+The local suite passed 164 tests with Python 3.14.3 / NumPy 2.4.2.
+GitHub Actions runs the checks with Python 3.9 / NumPy 1.23.1 on pushes and pull requests.
+The tests use synthetic fixtures and the included text codebook.
+[FINAL_AUDIT.md](docs/FINAL_AUDIT.md) records the completed checks.
 
-```bash
-pytest --github_link /absolute/path/to/this/repository . -k "not github_link_format"
-```
+## Project files
 
-For submission, pass an immutable GitHub commit URL:
+| Location | Purpose |
+| --- | --- |
+| `run.py` | Training and submission for the selected model |
+| `implementations.py` | Six functions required by the assignment |
+| `src/`, `tests/` | Models, preprocessing, evaluation and tests |
+| [configs/README.md](configs/README.md) | Model and experiment configurations |
+| [docs/README.md](docs/README.md) | Report and method documentation |
+| [results/README.md](results/README.md) | Analyses and experiment records |
+| [tools/README.md](tools/README.md) | Data preparation and study utilities |
 
-```bash
-pytest --github_link https://github.com/OWNER/REPOSITORY/tree/COMMIT_HASH .
-```
-
-The grader requires root-level `README.md`, `run.py`, and `implementations.py`,
-the exact six function signatures, function docstrings, NumPy-only project
-logic, scalar losses, and no unfinished markers in Python files.
-
-## Limitations and next work
-
-- `HAREHAB1` may encode target-conditioned survey eligibility. Its completed
-  ablation lowers nested F1 from 0.44216 to 0.43104; task validity remains to
-  be resolved before scientific interpretation.
-- Replacing six raw food-frequency columns with their daily derivatives was
-  tested and reached nested F1 0.44186. Exercise-frequency representation and
-  isolated `ALCDAY5` ablation remain open.
-- The current threshold is transferred from nested development folds. A final
-  AIcrowd submission has not yet been frozen in the experiment ledger.
-
-The next experiments and their decision criteria are listed in
-[docs/DEVELOPMENT_PLAN.md](docs/DEVELOPMENT_PLAN.md). The experiment history
-is in [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md); dataset semantics and known
-preprocessing gaps are in [docs/DATA.md](docs/DATA.md).
+Git includes code, configurations, reports and the fixed development split.
+Data, caches, checkpoints, row-level predictions and submissions are stored
+locally.

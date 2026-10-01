@@ -1,29 +1,24 @@
-# Data placement
+# Dataset files
 
-The competition dataset is not redistributed in this repository. Sign in with
-your EPFL account at the
-[EPFL Machine Learning Project 1 challenge on AIcrowd](https://www.aicrowd.com/challenges/epfl-machine-learning-project-1),
-download the official archive, extract it, and place these files in
-`data/raw/dataset/`:
-
-```text
-x_train.csv
-y_train.csv
-x_test.csv
-sample_submission.csv
-```
-
-`python run.py` validates the CSV schemas and writes reusable arrays to
-`data/processed/`. Both directories are ignored by Git.
-
-Verified local dataset sizes:
+Download the official archive from the
+[EPFL Project 1 AIcrowd challenge](https://www.aicrowd.com/challenges/epfl-machine-learning-project-1)
+and place the four CSV files under `data/raw/dataset/`:
 
 | File | Rows | Contents |
 | --- | ---: | --- |
 | `x_train.csv` | 328,135 | `Id` and 321 predictors |
-| `y_train.csv` | 328,135 | labels in `{-1, +1}` |
+| `y_train.csv` | 328,135 | `Id` and labels `-1/+1` |
 | `x_test.csv` | 109,379 | `Id` and the same 321 predictors |
-| `sample_submission.csv` | 109,379 | required test IDs and output schema |
+| `sample_submission.csv` | 109,379 | Test IDs and output schema |
 
-The SHA-256 of the downloaded archive used for the recorded experiments is
-`45812b9333df561c72bed861ba5ec382ddc2b68defd64ddda64118074d85a0fd`.
+From the repository root, prepare the caches for cross-validation:
+
+```bash
+python -m tools.prepare_data
+```
+
+The utility validates schemas and ID alignment, then stores arrays under
+`data/processed/`. `run.py` uses the same loaders for full training.
+
+When changing feature CSV values, use a new `--cache-dir`, including when
+IDs and shape stay the same. Raw data and caches are local files ignored by Git.

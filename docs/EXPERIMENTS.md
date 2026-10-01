@@ -1,157 +1,201 @@
-# Experiments and decisions
+# Experiments and model selection
 
-## Validation protocol
+The selected version is **Phase 14 NumPy histogram boosting**, with 295 source
+features including `HAREHAB1`, nested development F1 **0.442155227** and final
+threshold **0.21086909970855153**. Model search is closed for this version.
+The [final report](FINAL_REPORT.md) summarizes the selected pipeline; this
+page records the experiment path and links to the detailed evidence.
 
-A fixed stratified 80/20 split was generated with seed `20260918`. The initial
-baselines inspected the 20% partition, so later model selection is confined to
-the remaining 262,508 development rows.
+## Evaluation protocol
 
-Final comparisons use three outer development folds. For each outer fold, two
-inner fits select the F1 threshold using only that outer fold's training rows.
-The frozen threshold is then evaluated once on the outer fold. Preprocessing is
-refit inside every training partition.
+The initial stratified 80/20 split uses seed `20260918`. Baselines inspected
+the 20% partition. Later comparisons use the remaining **262,508 development
+rows**; that initial partition is not an untouched final test.
 
-F1 is the primary metric because an all-negative classifier already obtains
-91.17% accuracy while having F1 zero. Precision, recall, average precision,
-log loss, accuracy, and confusion counts are retained for every finalist.
+Final comparisons use three outer folds, seed `20260919`. In each outer
+training partition, two inner folds select the F1 threshold, with seed
+`20260922 + outer fold number`. Preprocessing and model fitting use only the
+corresponding training rows. The refitted outer model is evaluated on the
+excluded fold with the threshold selected from its inner OOF scores.
 
-## Model path
+Earlier screenings optimized a threshold on the same pooled OOF labels being
+scored. Those F1 values are **exploratory**, separate from the nested results.
+The early threshold-transfer diagnostic is also a screen: its OOF models can
+indirectly depend on labels in the fold being assessed.
 
-| Candidate | F1 | Precision | Recall | AP | Log loss | Decision |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
-| All negative | 0.00000 | 0.00000 | 0.00000 | — | — | Sanity reference |
-| Ridge, `lambda=0.0001` | 0.41951 | 0.33303 | 0.56665 | 0.39028 | 0.22917 | Rejected |
-| Logistic, 4,000 updates | 0.42563 | 0.35728 | 0.52632 | 0.38775 | 0.22198 | Linear reference |
-| Histogram boosting, Phase 14 | **0.44216** | **0.36763** | **0.55457** | **0.42861** | **0.21523** | Current reference |
+F1 of the positive class is the primary metric. A classifier that always
+predicts negative already obtains about 91.17% accuracy and F1 zero.
+Precision, recall, average precision (AP), log loss and confusion counts
+support the interpretation of F1 changes. The later operational promotion
+rule requires higher pooled F1 and improvement in at least two of three
+folds; it is a practical filter rather than a significance test.
 
-Ridge and logistic numbers use nested threshold selection. The boosting result
-uses the same outer folds and threshold isolation. The all-negative row comes
-from the initial fixed validation split and is included only as a sanity check.
+Nested threshold selection isolates the threshold of each candidate, while
+repeated model choices on the same development folds can still make model
+selection optimistic. Paired bootstrap intervals in the detailed reports
+condition on the fitted models and thresholds; they do not include retraining
+or repeated candidate selection.
 
-Logistic regression was retained as the linear baseline after convergence,
-regularization, category encoding, and selected interaction screens. Four age
-interactions produced a small repeatable improvement, but the best nested F1
-remained 0.42563.
+## Selected model and main comparisons
 
-The linear baseline preprocessing now fills `binary`, `categorical`, and
-`ordinal` feature gaps with the training-fold mode, and continuous/count gaps
-with the training-fold median. Fill statistics remain fold-local. Previously
-recorded logistic and ridge metrics were produced with median fills for every
-numeric-coded column; they are historical results and have not been rerun with
-this correction. Recompute the linear comparisons before treating them as
-results for the updated preprocessing.
+| Pipeline | Nested F1 | Precision | Recall | AP | Log loss |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Historical ridge, lambda 0.0001 | 0.419508 | 0.33303 | 0.56665 | 0.39028 | 0.22917 |
+| Historical logistic, 4,000 updates | 0.425628 | 0.35728 | 0.52632 | 0.38775 | 0.22198 |
+| **Phase 14 histogram boosting** | **0.442155** | **0.367632** | **0.554573** | **0.428609** | **0.215225** |
+| Phase 32 MLP 64 → 32 | 0.424451 | 0.360722 | 0.515531 | 0.387782 | 0.221674 |
+| Phase 32 MLP 128 → 64 | 0.419268 | 0.340005 | 0.546721 | 0.379380 | 0.222710 |
 
-The NumPy histogram booster fits quantile bins once per training partition,
-stores binned features as `uint8`, routes missing values explicitly, and fits
-shallow Newton trees. Depth 5 consistently improved ranking and log loss over
-depth 3. The selected configuration uses 200 trees and 128 candidate features
-per node. Moving to 400 trees improved AP and log loss slightly but reduced
-nested F1 from 0.44174 to 0.44113 in the Phase 11 grid.
+The frozen booster uses 200 trees, depth 5, learning rate 0.05, minimum leaf
+size 200, 64 quantile bins, 128 candidate features per node, leaf L2=1 and
+seed `20260920`. Positive class weight is 1. Missing values are routed directly
+by the trees. The active Phase 14 tree matrix contains the 295 retained source
+columns; auxiliary flags configured for other preprocessing paths are not
+added to this tree representation.
 
-Phase 14 kept the same 295 features and model while correcting documented
-response codes. Nested F1 changed from 0.44174 to 0.44216. The three fold
-changes were +0.00163, +0.00191, and -0.00210, so this is a semantic cleanup
-rather than evidence of a material predictive gain.
+The submission threshold is the mean of the three nested Phase 14 thresholds:
+`0.203056688916058`, `0.22010463713275993`, `0.20944597307683668`. The reported
+nested F1 uses each fold's own threshold; the mean is transferred to the
+full-data model. Settings are in [final_model.json](../configs/final_model.json)
+and [the preprocessing plan](../configs/experiments/phase14_codebook_corrections_only.json).
 
-## Current configuration
+The linear metrics are historical results obtained with median fills for
+numeric-coded categorical columns. Current linear preprocessing uses the
+training-fold mode for binary, categorical and ordinal columns, and the
+median for continuous/count columns. The historical results do not measure
+that updated fill policy.
 
-```text
-trees                 200
-learning rate         0.05
-maximum depth         5
-minimum leaf rows     200
-histogram bins        64
-L2 regularization     1.0
-candidate features    128 per node
-random seed           20260920
-submission threshold  0.2108690997
-```
+## Early development: baseline, linear models and booster selection
 
-The submission threshold is the mean of the three Phase 14 thresholds selected
-inside the outer training folds: 0.2030567, 0.2201046, and 0.2094460.
+| Study | Measured result and decision | Evidence |
+| --- | --- | --- |
+| Initial baselines | Fixed-threshold F1: all negative 0; ridge 0.016729; logistic with 50 updates 0.164678, on the initial 20% partition | [Main ledger](../results/experiments/index.csv) |
+| Phase 3 preprocessing | Eight logistic representations, 50 updates and threshold 0.5; F1 0.038285–0.157788. This short screen did not establish the best optimized representation | [Phase 3](../results/eda/phase3_preprocessing_summary.md) |
+| Phase 4–5 optimization | Learning rate, L2, training duration and four age interactions. At 4,000 updates, nested F1 0.423990 without interactions and 0.425441 with them | [Phase 4–5](../results/eda/phase4_model_cv_summary.md) |
+| Phase 6 semantics | Corrected BPHIGH4 nonresponses; exploratory F1 0.426321 for the reference, 0.425354 for a combined categorical/nonlinear challenger | [Phase 6](../results/eda/phase6_preprocessing_summary.md) |
+| Phase 7 linear confirmation | Corrected logistic nested F1 0.425628. Ridge lambda 0.0001/0.001/0.01: 0.419508/0.417846/0.417752; calibration fitted on inner OOF | [Phase 7](../results/eda/phase7_nested_and_ridge_summary.md) |
+| Phase 8–9 targeted representations | Error analysis followed by six isolated category/age variants; exploratory F1 0.425796–0.426322, no replacement of the reference | [Errors](../results/eda/phase8_error_analysis_summary.md), [Phase 9](../results/eda/phase9_targeted_preprocessing_summary.md) |
+| Booster benchmarks and Phase 10 | Feasibility checks and depth 3/5, 100/200/400-tree screening | [Main ledger](../results/experiments/index.csv) |
+| Phase 11 nested grid | Twelve combinations of depth 3/5, 100/200/400 trees and 64/128 candidate features. Selected depth 5, 128 candidates, 200 trees: F1 0.441741; 400 trees: 0.441132; best depth 3: 0.440987 | [Main ledger](../results/experiments/index.csv) |
+| Phase 12 paired errors | Logistic shared 91.5% of booster false negatives and 82.0% of its false positives | [Paired error analysis](../results/eda/phase12_paired_boosting_logistic_summary.md) |
+| Phase 13 canonical representation | Simultaneous feature removals: nested F1 0.440287. The compact variant was interrupted and has no complete result | [Phase 13](../results/eda/phase13_feature_handling_review.md) |
+| Phase 14 codebook correction | Same 295 features and booster; fourteen verified nonresponse corrections and ALCDAY5=888 → 0. F1 0.442155 | [Phase 14](../results/eda/phase14_codebook_corrections_summary.md) |
 
-## Evidence files
+Phase 14 changes nested F1 by +0.000415 versus Phase 11. Fold differences
+are +0.001631, +0.001915 and −0.002097. The small, mixed gain supports keeping
+the semantically correct codes without claiming a material predictive jump.
 
-- `results/eda/phase7_nested_and_ridge_summary.md`: nested logistic and ridge.
-- `results/eda/phase12_paired_boosting_logistic_summary.md`: paired errors.
-- `results/eda/phase14_codebook_corrections_summary.md`: selected tree variant.
-- `results/experiments/`: complete JSON experiment ledger.
+## Imputation and the alternate branch: Phase 15–17
 
-Large checkpoints and row-level OOF arrays are reproducible and excluded from
-Git.
+The Phase 15 feature-recovery study fitted imputers within each training fold
+without using the cardiovascular target. The direct plan evaluated 171
+categorical targets: 61 beat the mode on exact accuracy and 168 on macro F1;
+4/5 continuous targets beat the median. The extended plan gave 65/181,
+177/181 and 4/8 respectively. These are held-out known-response measurements,
+not scores on respondents whose true missing answers are unavailable.
+[Feature recovery report](../results/eda/phase15_imputation_quality_summary.md).
 
-## Results integrated after Phase 14
+Phase 16 downstream screening refitted imputers and disease models within
+outer folds, then selected thresholds on the pooled outer OOF labels:
 
-The Phase 15–18 configurations and nested results are now present alongside
-the local Phase 16 imputation screening. They use the saved development split;
-the Phase 16 imputation F1 values below use a different, optimistic threshold
-protocol and must not be ranked against the nested values.
+| Pipeline | Exploratory F1 |
+| --- | ---: |
+| Matched Phase 14 booster control | 0.442078 |
+| Restricted imputation booster | 0.442674 |
+| Expanded imputation booster | 0.441989 |
+| Restricted imputation logistic | 0.426966 |
+| Expanded imputation logistic | 0.425784 |
 
-| Experiment | F1 | Interpretation |
-| --- | ---: | --- |
-| Phase 14, with `HAREHAB1` | **0.442155** nested | Current submission reference. |
-| Phase 15, ablate only `HAREHAB1` | 0.431039 nested | About 0.01112 lower; the feature's task validity still needs a decision. |
-| Phase 16, target-feature configuration without `HAREHAB1` | 0.431370 nested | Its five configured interactions are not applied by the versioned tree preprocessor; other preprocessing also differs from Phase 15. |
-| Phase 17, learning rate 0.07 on Phase 16 | 0.432225 nested | Better than that branch's 0.431370 control. |
-| Phase 17, minimum leaf rows 150 on Phase 16 | **0.432606** nested | Best F1 among the recorded Phase 17 candidates; the commit title emphasizes 0.07, but leaf size 150 scores higher. |
-| Phase 18, replace six raw diet frequencies with daily derivatives | 0.441862 nested | Below the matched Phase 14 result by about 0.00029. |
-| Phase 19, minimum leaf rows 150 on unchanged Phase 14 | 0.439991 nested | Below Phase 14 by 0.002165; all three folds lower. |
-| Phase 19, learning rate 0.07 on unchanged Phase 14 | 0.440700 nested | Below Phase 14 by 0.001455; all three folds lower. |
-| Local Phase 16, restricted imputation | 0.442674 exploratory | Threshold selected on the same pooled outer OOF labels being scored. |
-| Local Phase 16, expanded imputation | 0.441989 exploratory | Same optimistic protocol; weaker than the restricted variant. |
+The logistic comparison also changes the historical median-fill policy to
+mode fills. An earlier diagnostic modified only inference inputs of saved
+models; it did not refit the complete imputation pipeline. These diagnostics
+are separate from the nested confirmation of restricted imputation in Phase 24.
+[Retrained screening](../results/experiments/phase16_retrained_comparison.json),
+[inference diagnostic](../results/experiments/phase16_imputation_fast_oof_inference.json),
+[imputation method](IMPUTATION.md).
 
-The Phase 17 comparisons belong to the Phase 16 representation without
-`HAREHAB1`. Phase 19 completed the paired transfer tests on Phase 14 and neither
-candidate improved F1. The full record list is in `results/experiments/index.csv`;
-the imputation caveats and follow-up are in [IMPUTATION.md](IMPUTATION.md).
+A separate Phase 16 representation excludes HAREHAB1 and scores nested F1
+0.431370. Its configuration lists five interactions, but the tree preprocessor
+does not apply them: the stored result does not measure their effect. Phase 17
+on that branch gives 0.430851 with learning rate 0.03, 0.432225 with 0.07,
+0.432606 with minimum leaf size 150 and 0.431225 with 250. Its control is
+0.431370. These branch results are not isolated changes to Phase 14;
+the transfer tests on Phase 14 completed separately in Phase 19.
+[Source conformity](../results/eda/phase19_phase14_conformity.md),
+[Main ledger](../results/experiments/index.csv).
 
-The Phase 19 source audit also corrects the interpretation of the remote
-Phase 16 experiment. Its configuration lists five interactions, but
-`tree_feature_matrices` does not read `interactions`. The retained source count
-and recorded output count are both 295. The stored result does not demonstrate
-an effective interaction experiment; implementing and validating these
-features remains open.
+## Completed comparisons against Phase 14
 
-## Phase 19 conformity and transfer decision
+All values in this table use nested threshold selection on the same development
+folds. All candidates were rejected for the selected version.
 
-The baseline audit passed all 35 checks without fitting models. Data, labels,
-metadata, preprocessing configuration and saved split hashes match the Phase 14
-record; current checkpoint inference reproduces every saved outer-fold
-probability exactly. Final model settings and the frozen threshold also match.
-The focused food/exercise nonresponse-code checks pass.
+| Phase | Change | Nested F1 | Delta Phase 14 | Improved folds | Detailed evidence |
+| --- | --- | ---: | ---: | ---: | --- |
+| 15 | Remove only HAREHAB1 | 0.431039 | −0.011116 | — | [Record](../results/experiments/20260921T154905753681Z_phase15-boosting-ablate-harehab1-depth5-features128-200trees.json) |
+| 18 | Replace six raw food frequencies with daily derivatives | 0.441862 | −0.000293 | — | [Record](../results/experiments/20260928T153145004719Z_phase18-boosting-diet-frequency-features-depth5-features128-200trees.json) |
+| 19 | Minimum leaf size 150 | 0.439991 | −0.002165 | 0/3 | [Phase 19](../results/eda/phase19_transfer_summary.md) |
+| 19 | Learning rate 0.07 | 0.440700 | −0.001455 | 0/3 | [Phase 19](../results/eda/phase19_transfer_summary.md) |
+| 20 | Exact bins for columns with at most 64 training states | 0.440783 | −0.001372 | 1/3 | [Phase 20](../results/eda/phase20_binning_summary.md) |
+| 21 | Exact bins only for BPHIGH4 and DIABETE3 | 0.439731 | −0.002424 | 0/3 | [Phase 21–22](../results/eda/phase21_22_preprocessing_summary.md) |
+| 22 | Activity one-hot with exact indicator bins | 0.440570 | −0.001585 | 0/3 | [Phase 21–22](../results/eda/phase21_22_preprocessing_summary.md) |
+| 23 | Eight missing-reason flags without fill | 0.440322 | −0.001833 | 0/3 | [Phase 23](../results/eda/phase23_missing_reason_flags_summary.md) |
+| 24 | Original restricted imputation with quantile flags | 0.441791 | −0.000364 | 1/3 | [Phase 24](../results/eda/phase24_original_restricted_imputation_summary.md) |
+| 25 | Leaf L2=5 | 0.441393 | −0.000762 | 1/3 | [Phase 25](../results/eda/phase25_l2_summary.md) |
+| 26 | Second seed 20260921 | 0.439924 | −0.002232 | 0/3 | [Phase 26](../results/eda/phase26_two_seeds_summary.md) |
+| 26 | Uniform mean of seeds 20260920/20260921 | 0.441111 | −0.001044 | 0/3 | [Phase 26](../results/eda/phase26_two_seeds_summary.md) |
+| 27 | Learning rate 0.025 and 400 trees | 0.440587 | −0.001568 | 0/3 | [Phase 27–28](../results/eda/phase27_28_summary.md) |
+| 28 | Remove only ALCDAY5, retain DROCDY3_ | 0.440535 | −0.001620 | 1/3 | [Phase 27–28](../results/eda/phase27_28_summary.md) |
+| 29 | Fold-local selection of 100 features | 0.439224 | −0.002932 | 0/3 | [Phase 29](../results/eda/phase29_feature_selection_summary.md) |
+| 29 | Fold-local selection of 60 features | 0.437584 | −0.004571 | 0/3 | [Phase 29](../results/eda/phase29_feature_selection_summary.md) |
+| 30 | Positive class weight 2 | 0.439118 | −0.003037 | 0/3 | [Phase 30–31](../results/eda/phase30_31_summary.md) |
+| 31 | Maximum depth 7 | 0.441161 | −0.000994 | 1/3 | [Phase 30–31](../results/eda/phase30_31_summary.md) |
+| 32 | MLP 64 → 32 | 0.424451 | −0.017704 | 0/3 | [Phase 32](../results/eda/phase32_mlp_summary.md) |
+| 32 | MLP 128 → 64 | 0.419268 | −0.022887 | 0/3 | [Phase 32](../results/eda/phase32_mlp_summary.md) |
 
-Both Phase 19 suites retain the Phase 14 representation with `HAREHAB1`, 295
-features and the original seeds. Each changes one parameter and selects its
-thresholds using two inner folds inside each of three outer folds. Leaf size
-150 adds 185 true positives but 942 false positives; learning rate 0.07 removes
-360 false positives but loses 156 true positives. Their small AP improvements
-do not compensate for the lower primary F1 metric. Keep leaf size 200 and
-learning rate 0.05; move next to the isolated `ALCDAY5` ablation.
+The activity one-hot trial expands the input to 446 columns while keeping
+128 candidates per node, changing the sampling probability of the other
+features. Its result is not a universal rejection of nominal representations.
 
-The two validations ran in parallel, taking 59.20 and 59.45 minutes respectively
-in Python 3.14.3 / NumPy 2.4.2. The local suite passes 86 tests. Official-version
-compatibility remains a separate check. Details, fold metrics, thresholds,
-confusion matrices and conditional paired-bootstrap intervals are in
-[the Phase 19 report](../results/eda/phase19_transfer_summary.md); the baseline
-audit is in [the conformity report](../results/eda/phase19_phase14_conformity.md).
+Phase 23 preserves all eight binary flags without imputing. Phase 24 replicates
+the original restricted pipeline, including quantile binning that collapses
+two rare flags. Three outer fits were reused after exact numerical checks;
+six new inner fits selected the thresholds. The earlier exploratory gain
+was not confirmed. Comparing Phase 23 and 24 does not isolate imputation,
+because their binning also differs.
 
-## Highest-priority next tests
+The Phase 26 ensemble fixes weights at 0.5/0.5 and selects the threshold on
+mean inner probabilities. Phase 29 selects columns separately in every outer
+and inner training partition; its development lists were not applied globally
+to CV folds. Phase 30 weights gradients, Hessians and initial prevalence while
+leaving evaluation metrics, binning and minimum leaf row counts unweighted.
 
-1. **Resolve the role of `HAREHAB1` →** use the completed Phase 15 ablation to
-   decide which feature set defines the intended task; keep results from the
-   two feature sets separate.
-2. **Isolate remaining representation questions →** ablate only `ALCDAY5`,
-   test nominal treatment of `EXRACT11`/`EXRACT21`, and investigate exercise
-   frequency units. The six diet frequencies were already tested in Phase 18.
-3. **Separate missing-state indicators from imputation →** compare Phase 14,
-   matching indicators only, and restricted Phase 16 imputation using nested
-   threshold selection.
-4. **Tune after confirmed representation changes →** leaf size 150 and learning
-   rate 0.07 were already transferred to Phase 14 in Phase 19 and both reduced
-   F1. Do not repeat them on that unchanged branch or treat their combination
-   as a combination of confirmed gains.
-5. **Check train-to-test transfer →** after a final configuration is frozen,
-   record local artifacts and the immutable Git commit before submission.
+Phase 32 uses dedicated finite preprocessing: training-only median/mode,
+scaling, nominal one-hot, missing/unseen flags and frequency conversion.
+Epoch count is selected on a 10% holdout inside the training partition,
+followed by a complete refit. Both architectures lose F1 on all three outer
+folds. The shared suite took 8.86 minutes and all 18 refit checkpoints replay
+saved probabilities exactly. [MLP workflow](MLP.md).
 
-The detailed experiment order and decision criteria are in
-[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md).
+## Retained HAREHAB1 and evidence navigation
+
+HAREHAB1 asks about rehabilitation after a heart attack. Its availability is
+conditioned by the prior CVDINFR4 response, and all 620 development rows with a
+recorded code are positive. It remains in the final classification pipeline;
+the isolated Phase 15 ablation quantifies the loss from removing it. The
+result concerns classification of reported disease and is not a measure of
+prediction before the event. [Final report](FINAL_REPORT.md#harehab1).
+
+There are **106 model records**, including repeated runs and feasibility
+benchmarks, distributed across three indices:
+
+- [Main experiment ledger](../results/experiments/index.csv): 102 records.
+- [Feature-selection ledger](../results/experiments/phase29_feature_selection/index.csv): 2 records.
+- [MLP ledger](../results/experiments/mlp/index.csv): 2 records.
+
+Each record links configuration, metrics and available artifact fingerprints.
+For historical booster records, the primary nested result is in
+`outcome.nested_threshold_evaluation.pooled_metrics`; `outcome.metrics` can
+instead contain exploratory pooled-threshold metrics. The saved phase reports
+retain fold results, runtimes, verification details and conditional bootstrap
+intervals. Large checkpoints and row-level OOF arrays are local artifacts
+excluded from Git.

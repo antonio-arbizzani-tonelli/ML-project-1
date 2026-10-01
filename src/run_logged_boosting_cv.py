@@ -23,6 +23,8 @@ def _logged_fit(original, profiles: list[dict], outer_fold_count: int):
         stage = "outer" if number <= outer_fold_count else "inner"
         started = time.perf_counter()
         entry = {"fit_number": number, "stage": stage,
+                 "feature_count": int(train_features.shape[1]),
+                 "exact_feature_indices": list(parameters.get("exact_feature_indices", [])),
                  "training_rows": int(train_labels.size),
                  "validation_rows": int(validation_features.shape[0])}
         profiles.append(entry)
@@ -31,6 +33,11 @@ def _logged_fit(original, profiles: list[dict], outer_fold_count: int):
         steps = sorted(set(checkpoints) | set(range(25, checkpoints[-1] + 1, 25)))
 
         def progress(step, model):
+            if step == checkpoints[-1]:
+                exact = getattr(model.binner_, "exact_columns_", None)
+                entry["binning_strategy"] = getattr(model, "binning_strategy", "quantile")
+                entry["exact_column_indices"] = [] if exact is None else np.flatnonzero(exact).tolist()
+                entry["bin_counts"] = model.binner_.bin_counts_.tolist()
             print(f"PROGRESS fit={number} stage={stage} trees={step}/{checkpoints[-1]} "
                   f"elapsed={time.perf_counter() - started:.1f}s", flush=True)
             if checkpoint_callback is not None and step in checkpoints:
@@ -62,6 +69,7 @@ def run_logged_suite(config_path: Path, root: Path, output_dir: Path) -> list[Pa
         "src/numpy_boosting.py", "src/feature_preprocessing.py",
         "src/evaluation.py", "src/run_boosting_cv.py",
         "src/run_logged_boosting_cv.py",
+        "src/conditional_imputation.py",
     )
     source_hashes = {name: _sha256(root / name) for name in source_names}
 

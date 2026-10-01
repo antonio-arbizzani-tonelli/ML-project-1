@@ -6,9 +6,9 @@ Questa tabella riporta le medie semplici dei tre fold. Per variabili categoriche
 
 Per lo score categorico mostro la media delle accuratezze dei fold; il riepilogo precedente usava l’accuratezza aggregata sulle righe, da cui piccole differenze possibili (61 contro 62 variabili sopra la moda). Balanced accuracy e macro-F1 sono medie dei tre fold.
 
-## Proposta per il modello dell’infarto
+## Proposta storica per il modello dell’infarto
 
-Non abbiamo ancora misurato se queste imputazioni migliorano F1 o AP della malattia. Le decisioni qui definiscono i challenger da confrontare, non una modifica già dimostrata del modello finale.
+Le indicazioni seguenti e la colonna «Decisione» conservano la proposta formulata dopo l'audit di imputazione. L'effetto delle varianti sulla classificazione è stato poi valutato nelle Phase 16 e 24, come descritto in [IMPUTATION.md](../../docs/IMPUTATION.md) e nel [confronto Phase 24](phase24_original_restricted_imputation_summary.md). Le imputazioni non sono state adottate nel modello finale.
 
 - **Set principale:** imputare `INCOME2`, `PNEUVAC3`, `EMPLOY1`, `HTM4` e `WTKG3`; conservare i flag originali. Per `_BMI5`, usare la formula BRFSS da altezza e peso quando entrambi sono disponibili, invece di predirlo indipendentemente. Così evitiamo BMI incompatibili con altezza/peso.
 
@@ -96,7 +96,7 @@ Non abbiamo ancora misurato se queste imputazioni migliorano F1 o AP della malat
 | `DRADVISE` | optional_module | binary | 151 | 238,058 | 24,299 | 0.720 / 0.698 | 0.022 | 0.177 | 0.263 | acc 3/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `DRNK3GE5` | core_survey | count | 1,744 | 136,940 | 123,824 | 0.728 / 0.757 | -0.028 | 0.005 | 0.007 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `EDUCA` | core_survey | ordinal | 1,034 | 0 | 261,474 | 0.452 / 0.369 | 0.083 | 0.116 | 0.184 | acc 3/3; bal 3/3; macro 3/3 | Set esteso: testare come secondo challenger |
-| `EMPLOY1` | core_survey | categorical | 2,250 | 0 | 260,258 | 0.611 / 0.412 | 0.199 | 0.245 | 0.260 | acc 3/3; bal 3/3; macro 3/3 | Set principale: imputare nel prossimo challenger |
+| `EMPLOY1` | core_survey | categorical | 2,250 | 0 | 260,258 | 0.611 / 0.412 | 0.199 | 0.245 | 0.260 | acc 3/3; bal 3/3; macro 3/3 | Set principale: imputare nel challenger proposto |
 | `EMTSUPRT` | optional_module | ordinal | 197 | 250,475 | 11,836 | 0.510 / 0.544 | -0.034 | 0.067 | 0.113 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `EXERANY2` | core_survey | binary | 1,481 | 21,097 | 239,930 | 0.713 / 0.734 | -0.021 | 0.120 | 0.199 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `EXERHMM1` | core_survey | count | 3,540 | 87,835 | 171,133 | 0.245 / 0.253 | -0.008 | 0.002 | 0.004 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
@@ -126,9 +126,9 @@ Non abbiamo ancora misurato se queste imputazioni migliorano F1 o AP della malat
 | `HPVADSHT` | optional_module | count | 139 | 261,635 | 734 | 0.594 / 0.630 | -0.037 | 0.034 | 0.093 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `HPVADVC2` | optional_module | categorical | 623 | 256,118 | 5,767 | 0.836 / 0.847 | -0.011 | 0.152 | 0.184 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `HPVTEST` | optional_module | count | 3,894 | 248,961 | 9,653 | 0.676 / 0.573 | 0.103 | 0.181 | 0.310 | acc 3/3; bal 3/3; macro 3/3 | Set esteso: testare come secondo challenger |
-| `HTM4` | derived | continuous | 0 | 9,096 | 253,412 | 0.033 / 0.086 | -0.054 | — | — | — | Set principale: imputare nel prossimo challenger |
+| `HTM4` | derived | continuous | 0 | 9,096 | 253,412 | 0.033 / 0.086 | -0.054 | — | — | — | Set principale: imputare nel challenger proposto |
 | `IMFVPLAC` | core_survey | categorical | 389 | 148,959 | 113,160 | 0.407 / 0.381 | 0.027 | 0.090 | 0.092 | acc 3/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
-| `INCOME2` | core_survey | ordinal | 45,073 | 1,947 | 215,488 | 0.372 / 0.320 | 0.052 | 0.138 | 0.184 | acc 3/3; bal 3/3; macro 3/3 | Set principale: imputare nel prossimo challenger |
+| `INCOME2` | core_survey | ordinal | 45,073 | 1,947 | 215,488 | 0.372 / 0.320 | 0.052 | 0.138 | 0.184 | acc 3/3; bal 3/3; macro 3/3 | Set principale: imputare nel challenger proposto |
 | `INSULIN` | optional_module | binary | 19 | 245,105 | 17,384 | 0.658 / 0.671 | -0.013 | 0.046 | 0.134 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `INTERNET` | core_survey | binary | 826 | 2,561 | 259,121 | 0.819 / 0.791 | 0.028 | 0.265 | 0.303 | acc 3/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `JOINPAIN` | core_survey | count | 1,571 | 183,244 | 77,693 | 0.194 / 0.161 | 0.033 | 0.074 | 0.122 | acc 3/3; bal 3/3; macro 3/3 | Set esteso: testare come secondo challenger |
@@ -155,7 +155,7 @@ Non abbiamo ancora misurato se queste imputazioni migliorano F1 o AP della malat
 | `PDIABTST` | optional_module | binary | 2,243 | 213,372 | 46,893 | 0.675 / 0.644 | 0.030 | 0.111 | 0.222 | acc 3/3; bal 3/3; macro 3/3 | Set esteso: testare come secondo challenger |
 | `PERSDOC2` | core_survey | categorical | 1,060 | 0 | 261,448 | 0.757 / 0.777 | -0.020 | 0.104 | 0.130 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `PHYSHLTH` | core_survey | count | 5,684 | 1 | 256,823 | 0.647 / 0.637 | 0.010 | 0.020 | 0.017 | acc 3/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
-| `PNEUVAC3` | core_survey | binary | 21,380 | 24,950 | 216,178 | 0.737 / 0.568 | 0.169 | 0.230 | 0.369 | acc 3/3; bal 3/3; macro 3/3 | Set principale: imputare nel prossimo challenger |
+| `PNEUVAC3` | core_survey | binary | 21,380 | 24,950 | 216,178 | 0.737 / 0.568 | 0.169 | 0.230 | 0.369 | acc 3/3; bal 3/3; macro 3/3 | Set principale: imputare nel challenger proposto |
 | `POORHLTH` | core_survey | count | 2,845 | 128,022 | 131,641 | 0.563 / 0.568 | -0.005 | 0.017 | 0.014 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `PREDIAB1` | optional_module | categorical | 179 | 213,371 | 48,958 | 0.877 / 0.884 | -0.008 | 0.121 | 0.166 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `PREGNANT` | core_survey | binary | 291 | 223,949 | 38,268 | 0.966 / 0.961 | 0.004 | 0.126 | 0.185 | acc 3/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
@@ -196,7 +196,7 @@ Non abbiamo ancora misurato se queste imputazioni migliorano F1 o AP della malat
 | `VIPRFVS2` | optional_module | categorical | 19 | 260,601 | 1,888 | 0.444 / 0.499 | -0.055 | 0.026 | 0.079 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `VIREDIF3` | optional_module | ordinal | 10 | 260,601 | 1,897 | 0.533 / 0.585 | -0.052 | 0.032 | 0.065 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
 | `WHRTST10` | core_survey | categorical | 1,345 | 194,840 | 66,323 | 0.430 / 0.469 | -0.039 | 0.052 | 0.078 | acc 0/3; bal 3/3; macro 3/3 | Lasciare NaN nel modello ad albero |
-| `WTKG3` | derived | continuous | 0 | 18,364 | 244,144 | 5.196 / 15.797 | -10.602 | — | — | — | Set principale: imputare nel prossimo challenger |
+| `WTKG3` | derived | continuous | 0 | 18,364 | 244,144 | 5.196 / 15.797 | -10.602 | — | — | — | Set principale: imputare nel challenger proposto |
 | `_BMI5` | derived | continuous | 0 | 21,655 | 240,853 | 1.492 / 4.637 | -3.145 | — | — | — | Derivare da HTM4 e WTKG3 |
 | `_FRUTSUM` | derived | continuous | 0 | 25,821 | 236,687 | 0.826 / 0.801 | 0.025 | — | — | — | Lasciare NaN nel modello ad albero |
 | `_VEGESUM` | derived | continuous | 0 | 30,202 | 232,306 | 0.914 / 0.923 | -0.009 | — | — | — | Lasciare NaN nel modello ad albero |

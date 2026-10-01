@@ -1,0 +1,46 @@
+[
+  {
+    "partition": "outer_1",
+    "feature": "HAREHAB1",
+    "parent_training_known_rows": 384,
+    "selector_fit_known_rows": 302,
+    "selector_min_samples_leaf": 200,
+    "selector_split_count": 90,
+    "rank": 3,
+    "selected100": true,
+    "selected60": true
+  },
+  {
+    "partition": "outer_1_inner_1",
+    "feature": "HAREHAB1",
+    "parent_training_known_rows": 188,
+    "selector_fit_known_rows": 153,
+    "selector_min_samples_leaf": 200,
+    "selector_split_count": 0,
+    "rank": 170,
+    "selected100": false,
+    "selected60": false
+  },
+  {
+    "partition": "outer_1_inner_2",
+    "feature": "HAREHAB1",
+    "parent_training_known_rows": 196,
+    "selector_fit_known_rows": 163,
+    "selector_min_samples_leaf": 200,
+    "selector_split_count": 0,
+    "rank": 165,
+    "selected100": false,
+    "selected60": false
+  },
+  {
+    "partition": "outer_2",
+    "feature": "HAREHAB1",
+    "parent_training_known_rows": 405,
+    "selector_fit_known_rows": 331,
+    "selector_min_samples_leaf": 200,
+    "selector_split_count": 94,
+    "rank": 3,
+    "selected100": true,
+    "selected60": true
+  }
+]

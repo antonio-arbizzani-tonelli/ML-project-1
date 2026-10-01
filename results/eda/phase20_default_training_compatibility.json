@@ -1,0 +1,38 @@
+{
+  "reference": "src/numpy_boosting.py at the reference_commit before Phase 20",
+  "synthetic_rows": 400,
+  "checks": [
+    {
+      "histogram_strategy": "recursive",
+      "seed": 3,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "histogram_strategy": "recursive",
+      "seed": 17,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "histogram_strategy": "recursive",
+      "seed": 20,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "histogram_strategy": "levelwise",
+      "seed": 3,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "histogram_strategy": "levelwise",
+      "seed": 17,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "histogram_strategy": "levelwise",
+      "seed": 20,
+      "maximum_score_difference": 0.0
+    }
+  ],
+  "baseline_dataset_retrained": false,
+  "reference_commit": "79d133f7dabe0d1a24685818207b635426b5667e"
+}

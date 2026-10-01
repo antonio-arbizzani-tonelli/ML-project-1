@@ -1,0 +1,29 @@
+{
+  "experiment_prefix": "phase29_phase14_feature_selection",
+  "reference_suite": "configs/experiments/phase14_boosting_codebook_corrections_only.json",
+  "artifact_dir": "results/boosting_artifacts/phase29_phase14_feature_selection",
+  "record_dir": "results/experiments/phase29_feature_selection",
+  "analysis_dir": "results/eda/phase29_feature_selection",
+  "feature_counts": [100, 60],
+  "candidate_max_features_fraction": 0.43389830508474575,
+  "selector_holdout_folds": 5,
+  "selector_seed": 20260930,
+  "permutation_repetitions": 3,
+  "permutation_max_rows": 10000,
+  "ranking_order": ["mean_f1_drop", "mean_ap_drop", "mean_log_loss_increase", "split_count", "original_column_order"],
+  "groups_are_diagnostic_only": true,
+  "diagnostic_groups": {
+    "age": ["_AGEG5YR", "_AGE80", "_AGE_G", "_AGE65YR"],
+    "body_size": ["HTM4", "WTKG3", "_BMI5", "_BMI5CAT", "_RFBMI5"],
+    "alcohol": ["ALCDAY5", "DROCDY3_", "AVEDRNK2", "MAXDRNKS", "DRNK3GE5", "_DRNKWEK", "_RFDRHV5", "_RFBING5"],
+    "smoking": ["SMOKE100", "SMOKDAY2", "STOPSMK2", "LASTSMK2", "_SMOKER3", "_RFSMOK3"],
+    "hypertension": ["BPHIGH4", "BPMEDS", "_RFHYPE5"],
+    "diabetes": ["DIABETE3", "DIABAGE2", "INSULIN", "BLDSUGAR", "FEETCHK2", "DOCTDIAB", "CHKHEMO3", "FEETCHK", "EYEEXAM", "DIABEYE", "DIABEDU"],
+    "exercise_frequency_1": ["EXEROFT1", "PAFREQ1_", "EXERHMM1", "EXRACT11"],
+    "exercise_frequency_2": ["EXEROFT2", "PAFREQ2_", "EXERHMM2", "EXRACT21"],
+    "exercise_summary": ["EXERANY2", "_TOTINDA", "_PA150R2", "_PA300R2", "_PA30021", "_PAINDEX", "_PAREC1", "_PASTAE1"],
+    "diet": ["FRUITJU1", "FRUIT1", "FVBEANS", "FVGREEN", "FVORANG", "VEGETAB1", "FTJUDA1_", "FRUTDA1_", "BEANDAY_", "GRENDAY_", "ORNGDAY_", "VEGEDA1_", "_FRUTSUM", "_VEGESUM"]
+  },
+  "resource_policy": {"numpy_threads": 1, "windows_priority": "below_normal", "candidate_jobs": 1},
+  "hypothesis": "Fold-local selection by held-out permutation F1 importance improves positive-class nested F1 with 100 or 60 inputs; column sampling retains the Phase 14 fraction."
+}

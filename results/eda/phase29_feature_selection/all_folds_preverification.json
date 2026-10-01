@@ -1,0 +1,80 @@
+[
+  {
+    "feature_count": 100,
+    "folds": [
+      {
+        "fold": 1,
+        "threshold": 0.21597079513514397,
+        "f1": 0.4348607367475292,
+        "delta_f1": -0.004166110580330562
+      },
+      {
+        "fold": 2,
+        "threshold": 0.20731416252856702,
+        "f1": 0.4419150673744386,
+        "delta_f1": -0.0021384536021592515
+      },
+      {
+        "fold": 3,
+        "threshold": 0.2135614138670298,
+        "f1": 0.4407693504069677,
+        "delta_f1": -0.0027422953570456765
+      }
+    ],
+    "pooled_metrics": {
+      "accuracy": 0.8765218583814588,
+      "precision": 0.36664548552943216,
+      "recall": 0.5476272648835203,
+      "f1": 0.43922355627832954,
+      "specificity": 0.9083767883406872,
+      "balanced_accuracy": 0.7280020266121038
+    },
+    "counts": {
+      "true_positives": 12694,
+      "false_positives": 21928,
+      "true_negatives": 217400,
+      "false_negatives": 10486
+    },
+    "delta_f1": -0.0029316709904891325,
+    "scope": "All nine fits complete; final checkpoint reproduction checks and deployment ranking still pending."
+  },
+  {
+    "feature_count": 60,
+    "folds": [
+      {
+        "fold": 1,
+        "threshold": 0.20099482268787272,
+        "f1": 0.4373198131026941,
+        "delta_f1": -0.00170703422516566
+      },
+      {
+        "fold": 2,
+        "threshold": 0.20564168777274705,
+        "f1": 0.4342683851402578,
+        "delta_f1": -0.009785135836340053
+      },
+      {
+        "fold": 3,
+        "threshold": 0.20813676530847594,
+        "f1": 0.4412080331135981,
+        "delta_f1": -0.0023036126504152876
+      }
+    ],
+    "pooled_metrics": {
+      "accuracy": 0.8725829308059183,
+      "precision": 0.35853631654359086,
+      "recall": 0.5613459879206212,
+      "f1": 0.4375840731772935,
+      "specificity": 0.9027276373846771,
+      "balanced_accuracy": 0.7320368126526491
+    },
+    "counts": {
+      "true_positives": 13012,
+      "false_positives": 23280,
+      "true_negatives": 216048,
+      "false_negatives": 10168
+    },
+    "delta_f1": -0.004571154091525198,
+    "scope": "All nine fits complete; final checkpoint reproduction checks and deployment ranking still pending."
+  }
+]

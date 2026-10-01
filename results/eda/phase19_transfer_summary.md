@@ -72,7 +72,7 @@ La prova misura il trasferimento alla rappresentazione Phase 14. L'esito diverso
 
 Nessun candidato soddisfa la regola del piano: F1 aggregato superiore al controllo e miglioramento in almeno due fold su tre. Conservare Phase 14 con minimo foglia 200 e learning rate 0.05. Il piccolo aumento dell'AP non sostituisce un miglioramento dell'F1, che resta la metrica principale.
 
-Il vantaggio della Phase 17 sul suo ramo senza HAREHAB1 non si trasferisce al ramo Phase 14 nelle due prove isolate. Non assumere un effetto additivo e non avviare una combinazione come se i due cambiamenti fossero già favorevoli. La prossima prova prioritaria del piano è l'ablazione della sola ALCDAY5, conservando DROCDY3_ e tutti gli altri input del riferimento.
+Il vantaggio della Phase 17 sul suo ramo senza HAREHAB1 non si trasferisce al ramo Phase 14 nelle due prove isolate. Non assumere un effetto additivo e non avviare una combinazione come se i due cambiamenti fossero già favorevoli. L'ablazione della sola ALCDAY5, conservando DROCDY3_ e tutti gli altri input del riferimento, è stata successivamente completata nella [Phase 28](phase28_phase14_ablate_alcday5_summary.md) e non è stata adottata.
 
 ## Ambiente e artefatti
 

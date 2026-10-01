@@ -1,0 +1,241 @@
+{
+  "variants": [
+    {
+      "experiment_name": "phase23_missing_reason_flags",
+      "preprocessing": {
+        "name": "codebook_aware",
+        "exclude_semantic_types": [
+          "identifier",
+          "date",
+          "survey_design"
+        ],
+        "exclude_features": [
+          "CTELNUM1",
+          "CELLFON2",
+          "_AGEG5YR",
+          "WEIGHT2",
+          "HEIGHT3",
+          "HTIN4"
+        ],
+        "missing_code_overrides": {
+          "ALCDAY5": [
+            {
+              "code": 777,
+              "reason": "unknown"
+            },
+            {
+              "code": 999,
+              "reason": "refused"
+            }
+          ],
+          "ASTHMA3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "BLOODCHO": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "BPHIGH4": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "CASTHDX2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "DIABETE3": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "EXRACT11": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            },
+            {
+              "code": 99,
+              "reason": "refused"
+            }
+          ],
+          "EXRACT21": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            },
+            {
+              "code": 99,
+              "reason": "refused"
+            }
+          ],
+          "FLUSHOT6": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HIVTST6": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HPVADVC2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "HPVTEST": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "IMFVPLAC": [
+            {
+              "code": 77,
+              "reason": "unknown"
+            }
+          ],
+          "NUMHHOL2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "SMOKDAY2": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "SMOKE100": [
+            {
+              "code": 7,
+              "reason": "unknown"
+            },
+            {
+              "code": 9,
+              "reason": "refused"
+            }
+          ],
+          "_AGEG5YR": [
+            {
+              "code": 14,
+              "reason": "blank"
+            }
+          ]
+        },
+        "zero_code_overrides": {
+          "ALCDAY5": [
+            888
+          ],
+          "PHYSHLTH": [
+            88
+          ],
+          "MENTHLTH": [
+            88
+          ]
+        },
+        "auxiliary_missing_features": [
+          "_AGEG5YR"
+        ],
+        "imputation": {
+          "nonresponse_source_kinds": [
+            "core_survey",
+            "optional_module"
+          ],
+          "continuous_blank_features": [
+            "HTM4",
+            "WTKG3"
+          ],
+          "anchor_features": [
+            "_AGE80",
+            "SEX",
+            "EDUCA",
+            "EMPLOY1",
+            "GENHLTH",
+            "INCOME2",
+            "MARITAL",
+            "BPHIGH4",
+            "DIABETE3",
+            "SMOKE100",
+            "_BMI5",
+            "EXERANY2",
+            "_STATE",
+            "HTM4",
+            "WTKG3"
+          ],
+          "minimum_observed": 100,
+          "anchor_bins": 12,
+          "smoothing": 1,
+          "ridge": 0.01,
+          "maximum_continuous_training_rows": 100000,
+          "prediction_batch_size": 20000,
+          "nonresponse_features": [
+            "INCOME2",
+            "PNEUVAC3",
+            "EMPLOY1"
+          ],
+          "derive_bmi_from_height_weight": true,
+          "fill_values": false
+        }
+      }
+    }
+  ]
+}

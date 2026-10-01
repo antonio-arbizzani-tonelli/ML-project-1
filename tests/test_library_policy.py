@@ -24,6 +24,7 @@ ALLOWED_ROOTS = {
     "pickle",
     "platform",
     "re",
+    "run",
     "src",
     "time",
     "typing",
@@ -35,6 +36,7 @@ class TestLibraryPolicy(unittest.TestCase):
         paths = [
             PROJECT_ROOT / "implementations.py",
             PROJECT_ROOT / "run.py",
+            PROJECT_ROOT / "run_mlp.py",
             *sorted((PROJECT_ROOT / "src").glob("*.py")),
         ]
         for path in paths:

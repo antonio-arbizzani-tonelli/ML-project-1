@@ -1,0 +1,13 @@
+{
+  "features": 295,
+  "fit_and_prediction_seconds": 1097.678453099914,
+  "negative_predictions": 94651,
+  "output": "results/submission_phase14.csv",
+  "positive_predictions": 14728,
+  "test_rows": 109379,
+  "threshold": 0.21086909970855153,
+  "training_rows": 328135,
+  "submission_sha256": "f5fe9fe80b4db737bde4e690ad8ba296155dbf991ff136431c068d8fd77b32d4",
+  "source_log_sha256": "e24e8c0fb824a3ef06d7d545928b428d5bd3870cca3df1b4754042a69e645a3e",
+  "interpretation": "Recorded full-data training and output format; no official test score and no new training in the delivery audit."
+}

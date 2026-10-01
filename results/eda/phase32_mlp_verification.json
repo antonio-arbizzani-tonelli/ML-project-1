@@ -1,0 +1,23 @@
+{
+  "pre_training_tests_passed": 162,
+  "final_tests_passed": 164,
+  "new_test_count": 20,
+  "nested_cv_complete": true,
+  "development_rows": 262508,
+  "replayed_checkpoints": 18,
+  "maximum_probability_replay_error": 0.0,
+  "protected_booster_files_unchanged": true,
+  "training_process_exit_code": 0,
+  "verification_process_exit_code": 0,
+  "records": [
+    "results\\experiments\\mlp\\20261001T014455026674Z_phase32-mlp-mlp64-32.json",
+    "results\\experiments\\mlp\\20261001T014455269281Z_phase32-mlp-mlp128-64.json"
+  ],
+  "executed_source_hashes": {
+    "src\\numpy_mlp.py": "f2d979a3e2ec78e441ddd2de81d5d41d055ce54237dec781cf0d1214c48daa92",
+    "src\\mlp_preprocessing.py": "f6d4026232b11a2208bded70e7e075bf5e14899f12ec6e4c108d367f4889144c",
+    "src\\run_mlp_cv.py": "8c1a09a84ca6e3237322917dd103d905989abcebbe7abb43706880330d14a5e7",
+    "run_mlp.py": "81e723ca2147fb89312ad5f9fdb479c13f46f1b6ad02663b24d92aae0fc1aa2b",
+    "tools\\verify_phase32_mlp.py": "e72ae6541c81abc3de774264362cd13638dc6e4f33f60ef2c5d5b81dfa88485b"
+  }
+}
