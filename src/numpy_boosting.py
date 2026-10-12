@@ -334,13 +334,13 @@ class _NewtonTree:
             missing_count = int(rows.size - known_values.size)
             missing_gradient = gradient_sum - float(cumulative_gradients[-1])
             missing_hessian = hessian_sum - float(cumulative_hessians[-1])
-            # Exact bins have no empty leading bucket. Include the final
-            # boundary to retain a pure observed-versus-missing split.
+            # Append the final boundary when missing rows can form their
+            # own child, including when every finite quantile bin is occupied.
             missing_only = (
                 self.missing_only_features is not None
                 and self.missing_only_features[feature]
             )
-            if missing_only:
+            if missing_only or missing_count > 0:
                 split_bins = range(count)
             else:
                 split_bins = range(count - 1) if count >= 2 else (0,)
@@ -486,7 +486,7 @@ class _NewtonTree:
                         self.missing_only_features is not None
                         and self.missing_only_features[feature]
                     )
-                    if missing_only:
+                    if missing_only or missing_count > 0:
                         split_bins = range(count)
                     else:
                         split_bins = range(count - 1) if count >= 2 else (0,)

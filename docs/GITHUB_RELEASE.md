@@ -1,25 +1,32 @@
 # Preparazione della versione GitHub
 
-La versione selezionata è Phase 14: 295 feature, `HAREHAB1` presente,
-peso positivo 1 e soglia 0,21086909970855153. README e
-[report finale](FINAL_REPORT.md) presentano il progetto e i risultati;
-[EXPERIMENTS.md](EXPERIMENTS.md) raccoglie i confronti conclusi.
+La versione finale è **Phase 14 storica**, con 295 feature, `HAREHAB1`
+presente, 200 alberi, profondità 5 e peso positivo 1. La soglia
+**0.2106169795070252** è calibrata su OOF a tre fold di tutte le 328.135
+righe train. Il team ha comunicato **F1 0.452 e accuracy 0.878 su AIcrowd**.
+Il [report PDF](FINAL_REPORT.pdf) contiene due pagine; le
+[note estese](FINAL_REPORT.md) e [EXPERIMENTS.md](EXPERIMENTS.md) conservano
+protocolli e confronti.
 
-## Contenuti del commit
+## Contenuti della versione
 
-La versione comprende codice, test, configurazioni, codebook testuale,
-documentazione, rapporti compatti e split development fisso. Dati ufficiali,
-cache, checkpoint, OOF individuali, log e submission restano locali e ignorati.
-[results/README.md](../results/README.md) descrive le evidenze distribuite e
-gli artefatti necessari per riprodurre i singoli studi.
+Il repository comprende codice, test, configurazioni, codebook testuale,
+report PDF e LaTeX, rapporti compatti e split development fisso. Il sorgente
+storico `src/numpy_boosting_phase14.py` è incluso e ha il fingerprint della
+submission selezionata; `.gitattributes` ne preserva gli LF.
+`run.py` e `configs/experiments/final_phase14_validation.json` lo selezionano
+esplicitamente. Phase 34 resta disponibile come confronto corretto.
+La scrittura del CSV passa da `create_csv_submission` in `helpers.py`,
+adattata dallo starter del corso con UTF-8 e LF espliciti per mantenere
+identico il file scelto.
 
-I 106 record JSON indicizzati conservano i byte originali: gli indici ne
-riportano gli hash e `.gitattributes` ne mantiene gli LF. I percorsi assoluti
-e gli hash dei sorgenti nei record descrivono l'esecuzione storica.
-La riproduzione da un altro checkout usa le configurazioni CV e genera
-nuovi artefatti locali. I runner amministrativi possono richiedere
-checkpoint, OOF o copie storiche dei sorgenti, come indicato nella
-[guida alle utility](../tools/README.md) e nei rapporti dello studio.
+Dati ufficiali, cache, checkpoint, OOF individuali, log e submission CSV
+sono ignorati da Git. Il [record finale](../results/eda/final_phase14_submission.json)
+conserva invece soglia, score AIcrowd comunicati, conteggi e hash del CSV.
+I **114 record JSON in cinque registri** mantengono i byte originali e
+gli hash verificati. I percorsi e gli hash nei record storici descrivono
+l'esecuzione originale; i runner di studio possono richiedere artefatti
+locali come indicato nella [guida alle utility](../tools/README.md).
 
 ## Verifica prima del commit
 
@@ -34,45 +41,49 @@ python -m tools.prepare_data --help
 git diff --check
 ```
 
-`tools.verify_repository` controlla tutti i file tracciati e i file non ignorati
-destinati al commit, inclusi link locali, configurazione finale e hash dei
-registri. La suite usa fixture e il codebook incluso, quindi può essere
-eseguita senza scaricare il dataset.
+I controlli usano fixture e il codebook incluso, quindi funzionano senza
+scaricare il dataset. L'[audit finale](FINAL_AUDIT.md) registra anche la
+verifica su una copia del solo contenuto Git eleggibile, i test pubblici del
+corso e la riproduzione del CSV scelto. I test pubblici sono stati eseguiti
+localmente: il controllo dell'URL del commit va completato sul link effettivo;
+il suggerimento Black dei test ufficiali è esplicitamente facoltativo.
 
-La [CI](../.github/workflows/tests.yml) esegue i controlli con Python 3.9,
-NumPy 1.23.1 e le dipendenze di sviluppo. Il suo esito sarà disponibile su
-GitHub Actions dopo il push. Le verifiche locali completate sono registrate
-in [FINAL_AUDIT.md](FINAL_AUDIT.md).
+La [CI](../.github/workflows/tests.yml) usa Python 3.9 e NumPy 1.23.1.
+Il suo esito va controllato dopo il push; i test locali usano Python 3.14.3
+e NumPy 2.4.2. La sintassi Python 3.9 è controllata su tutti i sorgenti.
 
-## Commit e push
+## Commit, push e link di consegna
 
-La preparazione dei file è completa; staging, commit e push sono passaggi separati.
+Staging, commit e push non sono stati eseguiti durante questo audit.
+Questi comandi includono tutti i file non ignorati verificati:
 
 ```bash
-git add .gitignore .gitattributes .github README.md requirements.txt requirements-dev.txt implementations.py run.py run_mlp.py data/README.md configs docs src tests tools results/README.md results/eda results/experiments
+git add .
 git diff --cached --stat
 git diff --cached --check
 git diff --cached
 git status --short
-git commit -m "Finalize Phase 14 model, experiment report and MLP comparison"
+git commit -m "Finalize Phase 14 submission and AIcrowd report"
 git push origin HEAD
+git rev-parse HEAD
 ```
 
-La selezione include le estensioni e le prove Phase 20–32 presenti nel working
-tree. Dopo il push, controllare GitHub Actions. Per la consegna universitaria
-usare il link del commit effettivo:
+Dopo il push, controllare GitHub Actions e rendere il repository pubblico
+come richiesto dalla consegna. Usare il commit effettivo nel link:
 
 ```text
 https://github.com/antonio-arbizzani-tonelli/ML-project-1/tree/COMMIT_HASH
 ```
 
-I test pubblici del corso e l'invio della submission seguono le istruzioni
-ufficiali della consegna.
+Il report PDF è la consegna scritta; le note Markdown restano documentazione
+del repository. La submission AIcrowd è caricata dal team.
 
-## Verifica di un nuovo checkout
+## Riproduzione da un nuovo checkout
 
-Installare Python 3.9 e le dipendenze seguendo il [README](../README.md), poi
-eseguire i controlli sopra. Per riprodurre la CV, scaricare i quattro CSV e
-avviare `python -m tools.prepare_data` prima del relativo runner.
-Per generare la submission selezionata usare `python run.py`.
-Se cambia il contenuto dei CSV, usare una directory cache nuova.
+Seguire il [README](../README.md) per ambiente e download dei quattro CSV.
+`python -m tools.prepare_data` prepara le cache; la suite
+`configs/experiments/final_phase14_validation.json` riproduce la valutazione
+development storica. `python run.py` addestra su tutto il train e genera
+la submission Phase 14 con la soglia finale già calibrata. Se cambia il
+contenuto dei CSV, usare una directory cache nuova. La calibrazione finale
+di entrambe le versioni è riproducibile con `tools.final_phase14_phase34`.

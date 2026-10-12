@@ -23,6 +23,7 @@ BASELINE = (
     "results/experiments/20260921T105139261213Z_"
     "phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json"
 )
+BASELINE_SUITE = "configs/experiments/phase14_boosting_codebook_corrections_only.json"
 LINK = re.compile(r"!?\[[^\]]*\]\(([^\s)]+)(?:\s+\"[^\"]*\")?\)")
 LOCAL_PREFIXES = (
     "data/raw/dataset/", "data/processed/", "results/boosting_artifacts/",
@@ -46,7 +47,7 @@ def verify(root: Path = ROOT) -> dict:
     counts = {"eligible_files": len(files), "python_files": 0,
               "json_files": 0, "markdown_links": 0, "indexed_records": 0}
     required = (
-        "README.md", "run.py", "implementations.py", "requirements.txt",
+        "README.md", "run.py", "helpers.py", "implementations.py", "requirements.txt",
         "configs/final_model.json", "docs/FINAL_REPORT.md", "docs/FINAL_AUDIT.md",
         "docs/GITHUB_RELEASE.md", ".github/workflows/tests.yml",
         "official_material/project1/brfss_2015_codebook.txt",
@@ -114,16 +115,75 @@ def verify(root: Path = ROOT) -> dict:
                 errors.append(f"Indexed record hash mismatch: {record.relative_to(root)}")
 
     final = json.loads((root / "configs/final_model.json").read_text(encoding="utf-8"))
-    suite = json.loads((root / "configs/experiments/phase14_boosting_codebook_corrections_only.json").read_text())
-    parameters = dict(suite["models"][0]["parameters"])
-    parameters["n_estimators"] = suite["models"][0]["checkpoints"][-1]
-    if final["model"] != parameters:
-        errors.append("Final model parameters differ from selected Phase 14 suite.")
-    baseline = json.loads((root / BASELINE).read_text(encoding="utf-8"))
-    nested = baseline["outcome"]["nested_threshold_evaluation"]
-    mean_threshold = sum(f["inner_threshold"] for f in nested["folds"]) / len(nested["folds"])
-    if abs(final["decision_threshold"] - mean_threshold) > 1e-15:
-        errors.append("Final threshold differs from the mean of Phase 14 inner thresholds.")
+    validation = final.get("validation", {
+        "name": "Phase 14", "suite": BASELINE_SUITE, "record": BASELINE,
+    })
+    selected = {}
+    for kind in ("suite", "record"):
+        name = validation[kind]
+        if name not in files or not (root / name).is_file():
+            errors.append(f"Missing published validation {kind}: {name}")
+        else:
+            selected[kind] = json.loads((root / name).read_text(encoding="utf-8"))
+    if "suite" in selected:
+        suite = selected["suite"]
+        parameters = dict(suite["models"][0]["parameters"])
+        parameters["n_estimators"] = suite["models"][0]["checkpoints"][-1]
+        if final["model"] != parameters:
+            errors.append("Final model parameters differ from the selected validation suite.")
+        for field, suite_field in (("config", "preprocessing_config_path"),
+                                   ("variant", "preprocessing_variant"),
+                                   ("metadata", "feature_metadata_path")):
+            if final["preprocessing"][field] != suite[suite_field]:
+                errors.append(f"Final preprocessing {field} differs from the selected validation suite.")
+    nested_f1 = None
+    if "record" in selected:
+        record = selected["record"]
+        if final["model"] != record["config"]["model"]["parameters"]:
+            errors.append("Final model parameters differ from the selected validation record.")
+        for field, record_field in (("config", "preprocessing_source"),
+                                    ("variant", "preprocessing_variant")):
+            if final["preprocessing"][field] != record["config"]["features"][record_field]:
+                errors.append(f"Final preprocessing {field} differs from the selected validation record.")
+        nested = record["outcome"]["nested_threshold_evaluation"]
+        nested_f1 = nested["pooled_metrics"]["f1"]
+        mean_threshold = sum(f["inner_threshold"] for f in nested["folds"]) / len(nested["folds"])
+        if "calibration" not in final and abs(final["decision_threshold"] - mean_threshold) > 1e-15:
+            errors.append("Final threshold differs from the mean of selected validation inner thresholds.")
+    if "implementation" in final:
+        implementation = final["implementation"]
+        source_name = {"phase14": "src/numpy_boosting_phase14.py",
+                       "phase34": "src/numpy_boosting.py"}.get(implementation)
+        if source_name is None:
+            errors.append("Unknown selected booster implementation.")
+        elif source_name not in files or not (root / source_name).is_file():
+            errors.append(f"Missing published booster implementation: {source_name}")
+        elif hashlib.sha256((root / source_name).read_bytes()).hexdigest() != final.get("implementation_source_sha256"):
+            errors.append("Selected booster source differs from the frozen implementation.")
+        if "suite" in selected and selected["suite"].get("implementation", "phase34") != implementation:
+            errors.append("Selected CV suite uses a different booster implementation.")
+    if "calibration" in final:
+        name = final["calibration"]["record"]
+        if name not in files or not (root / name).is_file():
+            errors.append(f"Missing published full-train calibration record: {name}")
+        else:
+            calibration = json.loads((root / name).read_text(encoding="utf-8"))
+            if calibration["model"] != final["model"]:
+                errors.append("Full-train calibration and final model parameters differ.")
+            if abs(calibration["threshold"]["value"] - final["decision_threshold"]) > 1e-15:
+                errors.append("Final threshold differs from its full-train OOF calibration record.")
+            if calibration["implementation"] != final.get("implementation"):
+                errors.append("Full-train calibration uses a different booster implementation.")
+            if calibration["implementation_sha256"] != final.get("implementation_source_sha256"):
+                errors.append("Full-train calibration source fingerprint differs from the selected source.")
+            if (calibration["threshold"]["method"] != "pooled_3_fold_full_train_oof_f1"
+                    or calibration["threshold"]["training_rows"] != calibration["training_rows"]
+                    or calibration["threshold"]["fold_count"] != 3):
+                errors.append("Full-train threshold calibration has inconsistent scope or protocol.")
+    for field in ("config", "metadata"):
+        name = final["preprocessing"][field]
+        if name not in files or not (root / name).is_file():
+            errors.append(f"Missing published preprocessing {field}: {name}")
     preprocessing_path = root / final["preprocessing"]["config"]
     preprocessing = json.loads(preprocessing_path.read_text(encoding="utf-8"))
     plan = next(v["preprocessing"] for v in preprocessing["variants"]
@@ -137,7 +197,7 @@ def verify(root: Path = ROOT) -> dict:
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "environment": {"python": platform.python_version()},
         "passed": not errors, "counts": counts, "errors": errors,
-        "selected_model": "Phase 14", "nested_development_f1": nested["pooled_metrics"]["f1"],
+        "selected_model": validation["name"], "nested_development_f1": nested_f1,
         "submission_threshold": final["decision_threshold"],
         "scope": "Git-eligible working-tree files, links, syntax, JSON, ledger hashes and frozen configuration. No training or official-runtime execution.",
     }

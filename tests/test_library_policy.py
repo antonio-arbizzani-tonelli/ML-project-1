@@ -15,6 +15,7 @@ ALLOWED_ROOTS = {
     "datetime",
     "gc",
     "hashlib",
+    "helpers",
     "implementations",
     "json",
     "math",
@@ -34,6 +35,7 @@ ALLOWED_ROOTS = {
 class TestLibraryPolicy(unittest.TestCase):
     def test_project_logic_imports_only_permitted_libraries(self):
         paths = [
+            PROJECT_ROOT / "helpers.py",
             PROJECT_ROOT / "implementations.py",
             PROJECT_ROOT / "run.py",
             PROJECT_ROOT / "run_mlp.py",

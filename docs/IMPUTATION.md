@@ -6,7 +6,10 @@ Their thresholds were selected on the same pooled OOF labels being scored.
 Phase 24 has now completed nested threshold selection for the original
 restricted booster pipeline: F1 0.441791 versus 0.442155 for Phase 14, with
 one of three folds improving. The exploratory gain is not confirmed. The
-Phase 14 booster and submission threshold remain the current reference.
+Phase 14 booster and threshold are historical references in this study,
+before the Phase 34 observed-versus-missing split correction. The current
+final selection retains that historical Phase 14 source, with a newly
+calibrated full-train threshold, as documented in [EXPERIMENTS.md](EXPERIMENTS.md).
 
 See [the Phase 24 report](../results/eda/phase24_original_restricted_imputation_summary.md).
 The expanded variant and the revised restricted variant with exact indicator
@@ -178,7 +181,8 @@ The dedicated configuration is
 `configs/experiments/phase24_original_restricted_imputation.json`.
 The complete result is
 `results/experiments/phase24_original_restricted_imputation_comparison.json`.
-The original restricted imputation is not adopted. Phase 14 retains its
-295-feature tree representation, direct missing-value routing and frozen
-submission threshold `0.2108690997`. Later booster and MLP comparisons are
+The original restricted imputation was not adopted. The historical Phase 14
+reference used its 295-feature tree representation, direct missing-value
+routing and submission threshold `0.2108690997` before the split correction.
+Later booster and MLP comparisons are
 summarized in [docs/EXPERIMENTS.md](EXPERIMENTS.md).

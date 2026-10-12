@@ -1,0 +1,77 @@
+{
+  "baseline_record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json",
+  "raw_record": "results/experiments/phase33_raw_preprocessing/20261007T011322024298Z_phase33-raw-321-features-depth5-features128-200trees.json",
+  "baseline_metrics": {
+    "accuracy": 0.8764342420040532,
+    "average_precision": 0.4286092503721835,
+    "balanced_accuracy": 0.7310904383294219,
+    "f1": 0.4421552272688187,
+    "log_loss": 0.21522507121178044,
+    "precision": 0.36763233906254467,
+    "recall": 0.5545729076790337,
+    "specificity": 0.9076079689798101
+  },
+  "raw_metrics": {
+    "accuracy": 0.8760647294558642,
+    "average_precision": 0.42783496220143896,
+    "balanced_accuracy": 0.730926749846363,
+    "f1": 0.44145721741519023,
+    "log_loss": 0.21534810427206727,
+    "precision": 0.3666305463670583,
+    "recall": 0.5546591889559965,
+    "specificity": 0.9071943107367295
+  },
+  "baseline_confusion_counts": {
+    "false_negatives": 10325,
+    "false_positives": 22112,
+    "true_negatives": 217216,
+    "true_positives": 12855
+  },
+  "raw_confusion_counts": {
+    "false_negatives": 10323,
+    "false_positives": 22211,
+    "true_negatives": 217117,
+    "true_positives": 12857
+  },
+  "raw_minus_cleaned_metric_deltas": {
+    "accuracy": -0.00036951254818895496,
+    "average_precision": -0.0007742881707445415,
+    "balanced_accuracy": -0.00016368848305892136,
+    "f1": -0.0006980098536284451,
+    "log_loss": 0.0001230330602868257,
+    "precision": -0.001001792695486392,
+    "recall": 8.628127696286292e-05,
+    "specificity": -0.0004136582430805946
+  },
+  "folds": [
+    {
+      "fold": 1,
+      "cleaned_f1": 0.43902684732785974,
+      "raw_f1": 0.43823283082077047,
+      "raw_inner_threshold": 0.21333464007960845
+    },
+    {
+      "fold": 2,
+      "cleaned_f1": 0.44405352097659784,
+      "raw_f1": 0.44286230201723153,
+      "raw_inner_threshold": 0.21104846531339636
+    },
+    {
+      "fold": 3,
+      "cleaned_f1": 0.44351164576401336,
+      "raw_f1": 0.4431961945245686,
+      "raw_inner_threshold": 0.20673460722850162
+    }
+  ],
+  "paired_conditional_raw_minus_cleaned_f1_interval_95": [
+    -0.0026348459934233044,
+    0.0012257231537289115
+  ],
+  "interval_scope": "Fixed fitted models and thresholds; excludes training and model-selection uncertainty.",
+  "raw_runtime_seconds": 2143.1232914999127,
+  "raw_runtime_basis": "Resume wall time; excludes earlier sequential reused training. Per-fit profiles distinguish historical and new work.",
+  "comparison_source_sha256": {
+    "tools/phase33_raw_preprocessing_benchmark.py": "a05c90d98b4458c0673a81ac250fb2992271339ec829d6266c4e17bb656f7c64"
+  },
+  "interpretation": "Joint effect of base cleaning and exclusions; 128/321 versus 128/295 candidate fraction. Does not isolate individual preprocessing operations."
+}

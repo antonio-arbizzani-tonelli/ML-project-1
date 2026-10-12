@@ -1,0 +1,13 @@
+{
+  "variants": [
+    {
+      "experiment_name": "phase33_raw_321_features",
+      "preprocessing": {
+        "name": "raw_tree_passthrough"
+      },
+      "missing_values": {
+        "method": "Preserve original finite codes and blank NaNs; no cleaning, exclusions, imputation, scaling or added features."
+      }
+    }
+  ]
+}

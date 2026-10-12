@@ -28,6 +28,7 @@ from src.evaluation import (
 from src.experiment_logger import save_experiment
 from src.feature_preprocessing import load_feature_metadata, tree_feature_matrices
 from src.numpy_boosting import HistogramGradientBoostingClassifier
+from src.boosting_implementation import get_booster_class
 from src.run_preprocessing_cv import (
     _as_binary_labels,
     _load_feature_names,
@@ -157,11 +158,14 @@ def _fit_checkpoint_probabilities(
     parameters: dict,
     checkpoints: list[int],
     checkpoint_callback=None,
+    implementation=None,
 ) -> tuple[dict[int, np.ndarray], dict]:
     parameters = dict(parameters)
     parameters["n_estimators"] = checkpoints[-1]
     started = time.perf_counter()
-    model = HistogramGradientBoostingClassifier(**parameters).fit(
+    model_class = (get_booster_class(implementation) if implementation is not None
+                   else HistogramGradientBoostingClassifier)
+    model = model_class(**parameters).fit(
         train_features, train_labels, checkpoints, checkpoint_callback
     )
     probabilities = dict(model.staged_predict_proba(validation_features, checkpoints))
@@ -310,6 +314,7 @@ def _nested_evaluations(
     inner_oof_dir: Path | None = None,
     experiment_prefix: str = "boosting",
     project_root: Path | None = None,
+    implementation=None,
 ) -> tuple[dict[tuple[str, int], dict], dict[tuple[str, int], np.ndarray]]:
     """Select every threshold from inner OOF predictions, never outer labels."""
 
@@ -363,6 +368,7 @@ def _nested_evaluations(
                     validation_matrix,
                     _resolved_parameters(model["parameters"], output_names),
                     checkpoints,
+                    **({"implementation": implementation} if implementation is not None else {}),
                 )
                 for step in checkpoints:
                     inner_probabilities[step][inner_validation] = probabilities[step]
@@ -578,6 +584,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                 _resolved_parameters(model["parameters"], output_names),
                 checkpoints,
                 save_model_checkpoint,
+                **({"implementation": suite["implementation"]} if "implementation" in suite else {}),
             )
             for step in checkpoints:
                 key = (model["name"], step)
@@ -630,6 +637,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
             artifact_root / "inner_oof_predictions",
             suite.get("experiment_prefix", "boosting"),
             project_root,
+            **({"implementation": suite["implementation"]} if "implementation" in suite else {}),
         )
     runtime = time.perf_counter() - started
     records = []
@@ -680,6 +688,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                 },
                 "model": {
                     "name": "numpy_histogram_gradient_boosting",
+                    "implementation": suite.get("implementation", "phase34"),
                     "parameters": {**model["parameters"], "n_estimators": step},
                 },
                 "threshold": {

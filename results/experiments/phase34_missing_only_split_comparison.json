@@ -1,0 +1,869 @@
+{
+  "baseline_record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json",
+  "candidate_record": "results\\experiments\\phase34_missing_only_split\\20261007T092637381255Z_phase34-missing-only-split-depth5-features128-200trees.json",
+  "baseline_metrics": {
+    "accuracy": 0.8764342420040532,
+    "average_precision": 0.4286092503721835,
+    "balanced_accuracy": 0.7310904383294219,
+    "f1": 0.4421552272688187,
+    "log_loss": 0.21522507121178044,
+    "precision": 0.36763233906254467,
+    "recall": 0.5545729076790337,
+    "specificity": 0.9076079689798101
+  },
+  "candidate_metrics": {
+    "accuracy": 0.8737638471970378,
+    "average_precision": 0.4287814331957269,
+    "balanced_accuracy": 0.7336390350704145,
+    "f1": 0.4408032399595005,
+    "log_loss": 0.21522931558252084,
+    "precision": 0.3620011086474501,
+    "recall": 0.5634598792062122,
+    "specificity": 0.9038181909346169
+  },
+  "metric_deltas": {
+    "accuracy": -0.002670394807015364,
+    "average_precision": 0.00017218282354342085,
+    "balanced_accuracy": 0.0025485967409926147,
+    "f1": -0.0013519873093181811,
+    "log_loss": 0.000004244370740397185,
+    "precision": -0.005631230415094557,
+    "recall": 0.008886971527178544,
+    "specificity": -0.003789778045193204
+  },
+  "baseline_confusion_counts": {
+    "false_negatives": 10325,
+    "false_positives": 22112,
+    "true_negatives": 217216,
+    "true_positives": 12855
+  },
+  "candidate_confusion_counts": {
+    "false_negatives": 10119,
+    "false_positives": 23019,
+    "true_negatives": 216309,
+    "true_positives": 13061
+  },
+  "prediction_transitions": {
+    "recovered_positives": 499,
+    "lost_positives": 293,
+    "introduced_false_positives": 1902,
+    "removed_false_positives": 995
+  },
+  "paired_conditional_f1_interval_95": [
+    -0.0030049692460550823,
+    0.00031912702088536326
+  ],
+  "bootstrap": {
+    "repetitions": 20000,
+    "seed": 20260929,
+    "scope": "Class-stratified paired predictions, fixed fitted models and thresholds; excludes training and repeated model-selection uncertainty."
+  },
+  "folds": [
+    {
+      "fold": 1,
+      "baseline_metrics": {
+        "accuracy": 0.8727243637361005,
+        "average_precision": 0.4290283494790698,
+        "balanced_accuracy": 0.7333118664705851,
+        "f1": 0.43902684732785974,
+        "log_loss": 0.2159400054600161,
+        "precision": 0.35939303974929904,
+        "recall": 0.5639963763426944,
+        "specificity": 0.9026273565984757
+      },
+      "candidate_metrics": {
+        "accuracy": 0.877009931088077,
+        "average_precision": 0.42923171267293375,
+        "balanced_accuracy": 0.7247922426290443,
+        "f1": 0.436721448759552,
+        "log_loss": 0.21594082158072786,
+        "precision": 0.36664030231127515,
+        "recall": 0.5399249385272421,
+        "specificity": 0.9096595467308464
+      },
+      "baseline_confusion_counts": {
+        "false_negatives": 3369,
+        "false_positives": 7768,
+        "true_negatives": 72008,
+        "true_positives": 4358
+      },
+      "candidate_confusion_counts": {
+        "false_negatives": 3555,
+        "false_positives": 7207,
+        "true_negatives": 72569,
+        "true_positives": 4172
+      },
+      "baseline_threshold": 0.203056688916058,
+      "candidate_threshold": 0.21334411247968774
+    },
+    {
+      "fold": 2,
+      "baseline_metrics": {
+        "accuracy": 0.8808155148966321,
+        "average_precision": 0.42836860553790096,
+        "balanced_accuracy": 0.7264702521726292,
+        "f1": 0.44405352097659784,
+        "log_loss": 0.2152112721971137,
+        "precision": 0.37753807106598986,
+        "recall": 0.5390190242008541,
+        "specificity": 0.9139214801444043
+      },
+      "candidate_metrics": {
+        "accuracy": 0.8733643417939956,
+        "average_precision": 0.4281598028907553,
+        "balanced_accuracy": 0.7351823052651475,
+        "f1": 0.441735100005038,
+        "log_loss": 0.2151995776411161,
+        "precision": 0.3616564923279987,
+        "recall": 0.5673612009835641,
+        "specificity": 0.9030034095467309
+      },
+      "baseline_confusion_counts": {
+        "false_negatives": 3562,
+        "false_positives": 6867,
+        "true_negatives": 72909,
+        "true_positives": 4165
+      },
+      "candidate_confusion_counts": {
+        "false_negatives": 3343,
+        "false_positives": 7738,
+        "true_negatives": 72038,
+        "true_positives": 4384
+      },
+      "baseline_threshold": 0.22010463713275993,
+      "candidate_threshold": 0.20390116008487763
+    },
+    {
+      "fold": 3,
+      "baseline_metrics": {
+        "accuracy": 0.875762839706521,
+        "average_precision": 0.4284264243672038,
+        "balanced_accuracy": 0.7334895930842964,
+        "f1": 0.44351164576401336,
+        "log_loss": 0.2145239279654205,
+        "precision": 0.3668388517232619,
+        "recall": 0.5607041159720425,
+        "specificity": 0.9062750701965503
+      },
+      "candidate_metrics": {
+        "accuracy": 0.8709172361774588,
+        "average_precision": 0.4289860854056374,
+        "balanced_accuracy": 0.7409438279369654,
+        "f1": 0.4437330706722482,
+        "log_loss": 0.21454753973426172,
+        "precision": 0.35813657683440653,
+        "recall": 0.5830960393476573,
+        "specificity": 0.8987916165262736
+      },
+      "baseline_confusion_counts": {
+        "false_negatives": 3394,
+        "false_positives": 7477,
+        "true_negatives": 72299,
+        "true_positives": 4332
+      },
+      "candidate_confusion_counts": {
+        "false_negatives": 3221,
+        "false_positives": 8074,
+        "true_negatives": 71702,
+        "true_positives": 4505
+      },
+      "baseline_threshold": 0.20944597307683668,
+      "candidate_threshold": 0.1995520450999405
+    }
+  ],
+  "diagnostics": [
+    {
+      "fold": 1,
+      "sampling_seed": 20261008,
+      "training_sample_size": 3000,
+      "validation_sample_size": 3000,
+      "training_sample_indices_sha256": "53372c1bcc44f2d78ccae0e5f40bba38b82470c0c9498121444d6333cc78aff4",
+      "validation_sample_indices_sha256": "c0b89af3a21cd4ec9ffbff2e1a3c6815564dba2fb4a2dfc554e02facffbdad86",
+      "baseline_pure_missing_nodes": {
+        "selected_nodes": 278,
+        "global_endpoint_nodes": 0,
+        "by_feature_index": {
+          "23": 8,
+          "29": 11,
+          "32": 2,
+          "35": 6,
+          "43": 1,
+          "48": 3,
+          "56": 1,
+          "64": 1,
+          "65": 11,
+          "66": 1,
+          "67": 1,
+          "73": 1,
+          "87": 3,
+          "88": 3,
+          "89": 2,
+          "90": 1,
+          "93": 2,
+          "94": 3,
+          "97": 7,
+          "98": 2,
+          "106": 1,
+          "108": 2,
+          "111": 1,
+          "116": 1,
+          "126": 5,
+          "132": 1,
+          "145": 96,
+          "146": 5,
+          "147": 42,
+          "148": 16,
+          "153": 1,
+          "155": 1,
+          "156": 5,
+          "163": 1,
+          "169": 2,
+          "172": 1,
+          "173": 1,
+          "176": 1,
+          "183": 1,
+          "188": 2,
+          "189": 1,
+          "190": 2,
+          "192": 1,
+          "197": 1,
+          "202": 1,
+          "207": 6,
+          "210": 1,
+          "222": 1,
+          "232": 2,
+          "280": 2,
+          "286": 1,
+          "292": 2,
+          "293": 1
+        },
+        "training_rows": 175005,
+        "definition": "On the complete ordered training data reaching a selected node, all finite values go to one child and all NaNs to the other. Includes lower thresholds equivalent to a global-endpoint split within that node."
+      },
+      "candidate_pure_missing_nodes": {
+        "selected_nodes": 262,
+        "global_endpoint_nodes": 99,
+        "by_feature_index": {
+          "13": 1,
+          "14": 1,
+          "23": 5,
+          "29": 12,
+          "35": 5,
+          "43": 6,
+          "49": 1,
+          "56": 3,
+          "57": 1,
+          "65": 10,
+          "66": 1,
+          "72": 1,
+          "88": 5,
+          "89": 1,
+          "93": 2,
+          "94": 2,
+          "96": 1,
+          "97": 6,
+          "98": 5,
+          "99": 2,
+          "102": 1,
+          "105": 1,
+          "106": 1,
+          "108": 2,
+          "116": 1,
+          "126": 1,
+          "145": 97,
+          "146": 4,
+          "147": 32,
+          "148": 14,
+          "156": 5,
+          "159": 2,
+          "163": 1,
+          "172": 1,
+          "173": 1,
+          "188": 1,
+          "189": 3,
+          "190": 1,
+          "191": 1,
+          "202": 1,
+          "207": 4,
+          "210": 1,
+          "215": 1,
+          "239": 1,
+          "269": 1,
+          "279": 1,
+          "281": 3,
+          "290": 1,
+          "292": 2,
+          "293": 4,
+          "294": 1
+        },
+        "training_rows": 175005,
+        "definition": "On the complete ordered training data reaching a selected node, all finite values go to one child and all NaNs to the other. Includes lower thresholds equivalent to a global-endpoint split within that node."
+      },
+      "baseline_training_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.23789824572069124,
+          "average_precision": 0.4544008184391519
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.22809798653576951,
+          "average_precision": 0.4762021037238567
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.22391119314356236,
+          "average_precision": 0.49267324900114534
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.22108312786029805,
+          "average_precision": 0.5060943780550567
+        }
+      ],
+      "baseline_validation_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.23284082861666988,
+          "average_precision": 0.41920707610919467
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.227762355693113,
+          "average_precision": 0.43118902185931035
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.22651029930676578,
+          "average_precision": 0.43635538350784814
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.22586579397071274,
+          "average_precision": 0.4374241695382703
+        }
+      ],
+      "candidate_training_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.23816880689078487,
+          "average_precision": 0.45672793664463013
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.2276052565384006,
+          "average_precision": 0.48147269412998256
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.22283304400962842,
+          "average_precision": 0.5008855145019212
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.22024877505644236,
+          "average_precision": 0.5137166152602571
+        }
+      ],
+      "candidate_validation_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.23305174545876658,
+          "average_precision": 0.41655524997086507
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.22777412542893966,
+          "average_precision": 0.43326881719595073
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.2264093516965689,
+          "average_precision": 0.43782321831808346
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.22580853012172947,
+          "average_precision": 0.4406567218233019
+        }
+      ]
+    },
+    {
+      "fold": 2,
+      "sampling_seed": 20261008,
+      "training_sample_size": 3000,
+      "validation_sample_size": 3000,
+      "training_sample_indices_sha256": "8cb45968943253d8731a2e6ceac12c8d239492c666474840f82e71c34060e496",
+      "validation_sample_indices_sha256": "edaace9b3095dac54c30b89f615c9e34d928d4336156b04ce03d83c1bdaf6452",
+      "baseline_pure_missing_nodes": {
+        "selected_nodes": 285,
+        "global_endpoint_nodes": 0,
+        "by_feature_index": {
+          "5": 2,
+          "15": 1,
+          "18": 1,
+          "23": 7,
+          "27": 1,
+          "29": 9,
+          "31": 1,
+          "35": 10,
+          "38": 1,
+          "40": 2,
+          "54": 2,
+          "56": 2,
+          "65": 16,
+          "66": 8,
+          "87": 3,
+          "88": 3,
+          "89": 2,
+          "90": 1,
+          "93": 1,
+          "97": 1,
+          "100": 1,
+          "101": 1,
+          "103": 1,
+          "107": 1,
+          "108": 3,
+          "113": 3,
+          "114": 2,
+          "126": 1,
+          "127": 1,
+          "130": 2,
+          "134": 1,
+          "145": 100,
+          "146": 3,
+          "147": 36,
+          "148": 12,
+          "151": 1,
+          "154": 1,
+          "156": 3,
+          "160": 1,
+          "161": 1,
+          "164": 1,
+          "167": 6,
+          "170": 2,
+          "171": 1,
+          "182": 3,
+          "188": 5,
+          "190": 1,
+          "192": 2,
+          "195": 1,
+          "198": 1,
+          "207": 3,
+          "212": 1,
+          "213": 1,
+          "218": 1,
+          "232": 2,
+          "253": 1,
+          "268": 1,
+          "276": 1,
+          "286": 1,
+          "293": 1
+        },
+        "training_rows": 175005,
+        "definition": "On the complete ordered training data reaching a selected node, all finite values go to one child and all NaNs to the other. Includes lower thresholds equivalent to a global-endpoint split within that node."
+      },
+      "candidate_pure_missing_nodes": {
+        "selected_nodes": 263,
+        "global_endpoint_nodes": 88,
+        "by_feature_index": {
+          "19": 1,
+          "23": 3,
+          "29": 10,
+          "31": 3,
+          "35": 5,
+          "40": 1,
+          "43": 4,
+          "48": 1,
+          "50": 1,
+          "54": 1,
+          "56": 1,
+          "65": 17,
+          "66": 3,
+          "71": 1,
+          "72": 1,
+          "87": 3,
+          "88": 1,
+          "89": 2,
+          "97": 1,
+          "100": 1,
+          "108": 3,
+          "110": 2,
+          "112": 1,
+          "126": 3,
+          "130": 1,
+          "132": 2,
+          "134": 3,
+          "145": 101,
+          "146": 1,
+          "147": 42,
+          "148": 7,
+          "151": 1,
+          "156": 6,
+          "159": 1,
+          "161": 2,
+          "167": 6,
+          "170": 1,
+          "182": 1,
+          "183": 2,
+          "188": 3,
+          "189": 3,
+          "192": 1,
+          "202": 1,
+          "205": 1,
+          "207": 1,
+          "210": 1,
+          "212": 1,
+          "232": 1,
+          "250": 1,
+          "280": 1,
+          "290": 1
+        },
+        "training_rows": 175005,
+        "definition": "On the complete ordered training data reaching a selected node, all finite values go to one child and all NaNs to the other. Includes lower thresholds equivalent to a global-endpoint split within that node."
+      },
+      "baseline_training_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.23136989303275746,
+          "average_precision": 0.4164154084468771
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.22278840920839632,
+          "average_precision": 0.43764164448367643
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.21938617366017385,
+          "average_precision": 0.4459766197577935
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.21641179948842276,
+          "average_precision": 0.4560980656963826
+        }
+      ],
+      "baseline_validation_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.21177133549127566,
+          "average_precision": 0.37900868691144357
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.2057308592927812,
+          "average_precision": 0.3960123841054458
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.20441433149846674,
+          "average_precision": 0.4008997456212799
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.2038678106205353,
+          "average_precision": 0.4034085771188191
+        }
+      ],
+      "candidate_training_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.2310621950975463,
+          "average_precision": 0.4186324368314503
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.22233769649451296,
+          "average_precision": 0.4402537494075097
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.21839115385698218,
+          "average_precision": 0.4524951419374969
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.2152018464190756,
+          "average_precision": 0.46451982049838325
+        }
+      ],
+      "candidate_validation_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.2119107844824985,
+          "average_precision": 0.37906243129475614
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.206279113390668,
+          "average_precision": 0.3914213956205734
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.20478043932754958,
+          "average_precision": 0.4017553056567881
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.2044488298910314,
+          "average_precision": 0.4012676018747687
+        }
+      ]
+    },
+    {
+      "fold": 3,
+      "sampling_seed": 20261008,
+      "training_sample_size": 3000,
+      "validation_sample_size": 3000,
+      "training_sample_indices_sha256": "984eed9f9870534e949ae1b4fe96a317de0ea37919c3c77ce7ee425054a9edaa",
+      "validation_sample_indices_sha256": "324f291648c31432c85f3e1df73db3a27d474e9049d122048cf8781fc634d3bb",
+      "baseline_pure_missing_nodes": {
+        "selected_nodes": 267,
+        "global_endpoint_nodes": 0,
+        "by_feature_index": {
+          "5": 1,
+          "11": 1,
+          "19": 2,
+          "22": 1,
+          "23": 4,
+          "27": 1,
+          "29": 10,
+          "31": 1,
+          "43": 1,
+          "50": 1,
+          "54": 2,
+          "56": 4,
+          "65": 10,
+          "66": 1,
+          "67": 1,
+          "87": 4,
+          "88": 3,
+          "89": 1,
+          "94": 1,
+          "95": 1,
+          "97": 4,
+          "98": 1,
+          "99": 1,
+          "100": 1,
+          "106": 1,
+          "110": 1,
+          "111": 1,
+          "113": 1,
+          "116": 1,
+          "119": 1,
+          "126": 2,
+          "128": 1,
+          "130": 1,
+          "132": 1,
+          "145": 99,
+          "146": 3,
+          "147": 41,
+          "148": 5,
+          "154": 1,
+          "156": 3,
+          "159": 1,
+          "162": 1,
+          "166": 1,
+          "167": 5,
+          "168": 1,
+          "169": 1,
+          "171": 2,
+          "172": 2,
+          "173": 2,
+          "186": 1,
+          "188": 1,
+          "189": 1,
+          "190": 1,
+          "191": 2,
+          "192": 1,
+          "199": 3,
+          "202": 1,
+          "207": 4,
+          "209": 1,
+          "210": 2,
+          "212": 1,
+          "216": 2,
+          "232": 4,
+          "240": 1,
+          "284": 1,
+          "286": 1,
+          "293": 1,
+          "294": 1
+        },
+        "training_rows": 175006,
+        "definition": "On the complete ordered training data reaching a selected node, all finite values go to one child and all NaNs to the other. Includes lower thresholds equivalent to a global-endpoint split within that node."
+      },
+      "candidate_pure_missing_nodes": {
+        "selected_nodes": 280,
+        "global_endpoint_nodes": 83,
+        "by_feature_index": {
+          "15": 1,
+          "19": 3,
+          "23": 7,
+          "29": 12,
+          "31": 1,
+          "35": 2,
+          "43": 3,
+          "48": 1,
+          "54": 4,
+          "56": 7,
+          "64": 1,
+          "65": 7,
+          "66": 3,
+          "67": 2,
+          "71": 1,
+          "87": 3,
+          "88": 3,
+          "89": 2,
+          "90": 1,
+          "93": 3,
+          "94": 2,
+          "95": 1,
+          "96": 1,
+          "97": 3,
+          "98": 1,
+          "108": 3,
+          "110": 1,
+          "111": 1,
+          "114": 1,
+          "122": 1,
+          "126": 3,
+          "128": 2,
+          "130": 1,
+          "131": 2,
+          "132": 1,
+          "133": 1,
+          "134": 1,
+          "145": 101,
+          "146": 4,
+          "147": 39,
+          "148": 3,
+          "153": 1,
+          "156": 1,
+          "159": 1,
+          "160": 1,
+          "166": 1,
+          "167": 5,
+          "168": 1,
+          "171": 2,
+          "172": 1,
+          "173": 1,
+          "183": 1,
+          "186": 2,
+          "188": 2,
+          "189": 2,
+          "192": 2,
+          "201": 1,
+          "207": 6,
+          "209": 1,
+          "218": 1,
+          "228": 1,
+          "264": 1,
+          "273": 1,
+          "279": 1,
+          "284": 1,
+          "287": 1,
+          "292": 1
+        },
+        "training_rows": 175006,
+        "definition": "On the complete ordered training data reaching a selected node, all finite values go to one child and all NaNs to the other. Includes lower thresholds equivalent to a global-endpoint split within that node."
+      },
+      "baseline_training_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.20235272871998183,
+          "average_precision": 0.48734960982362635
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.19346483518204421,
+          "average_precision": 0.5117681136829088
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.18988328991026787,
+          "average_precision": 0.5268862469358749
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.18729721816477657,
+          "average_precision": 0.5404887060799509
+        }
+      ],
+      "baseline_validation_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.2275423600881424,
+          "average_precision": 0.4186231853454945
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.22135376459864203,
+          "average_precision": 0.4304499631789872
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.21997543941174058,
+          "average_precision": 0.4340120879785032
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.2195147179917867,
+          "average_precision": 0.434388466909867
+        }
+      ],
+      "candidate_training_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.20290037378078848,
+          "average_precision": 0.4846915358777886
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.19417198563679078,
+          "average_precision": 0.5069083968912381
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.1905996034475271,
+          "average_precision": 0.5235555379575567
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.18738012495922102,
+          "average_precision": 0.5392712400273852
+        }
+      ],
+      "candidate_validation_staged": [
+        {
+          "trees": 50,
+          "log_loss": 0.2274087842115442,
+          "average_precision": 0.41869967400251806
+        },
+        {
+          "trees": 100,
+          "log_loss": 0.2212523633136908,
+          "average_precision": 0.4294926304719156
+        },
+        {
+          "trees": 150,
+          "log_loss": 0.2202623453569701,
+          "average_precision": 0.4319555039457919
+        },
+        {
+          "trees": 200,
+          "log_loss": 0.21985138473892957,
+          "average_precision": 0.43170109586392336
+        }
+      ]
+    }
+  ],
+  "interpretation": "One implementation correction at fixed Phase 14 data, cleaning, parameters and nested threshold protocol. Nine fresh corrected fits; historical control reused without retraining. The benchmark holds model parameters and preprocessing fixed; the historical submission is preserved.",
+  "post_evaluation_decision": {
+    "selected_record": "results\\experiments\\phase34_missing_only_split\\20261007T092637381255Z_phase34-missing-only-split-depth5-features128-200trees.json",
+    "mean_inner_threshold": 0.20559910588816863,
+    "reason": "Retain the complete set of valid split candidates; the observed F1 change is small and uncertain.",
+    "historical_submission": "The existing full-data predictions predate the correction."
+  }
+}

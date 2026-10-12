@@ -1,4 +1,6 @@
 # Experiment records are hashed byte-for-byte in results/experiments/index.csv.
+src/numpy_boosting_phase14.py text eol=lf
+helpers.py text eol=lf
 results/experiments/*.json text eol=lf
 results/experiments/index.csv text eol=lf
 results/experiments/**/*.json text eol=lf

@@ -1,0 +1,130 @@
+{
+  "selected_model": "Phase 14",
+  "implementation": "phase14",
+  "implementation_source": "src/numpy_boosting_phase14.py",
+  "implementation_sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+  "model": {
+    "n_estimators": 200,
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "min_samples_leaf": 200,
+    "n_bins": 64,
+    "l2_regularization": 1.0,
+    "max_features": 128,
+    "random_seed": 20260920
+  },
+  "training_rows": 328135,
+  "test_rows": 109379,
+  "features": 295,
+  "threshold": {
+    "value": 0.2106169795070252,
+    "method": "pooled_3_fold_full_train_oof_f1",
+    "fold_count": 3,
+    "fold_seed": 20260919,
+    "training_rows": 328135,
+    "preprocessing_fit": "within_each_training_fold_only"
+  },
+  "calibration_metrics": {
+    "accuracy": 0.8767549941335121,
+    "precision": 0.3685091743119266,
+    "recall": 0.5545125107851596,
+    "f1": 0.44276954874267993,
+    "specificity": 0.9079656371172616,
+    "balanced_accuracy": 0.7312390739512107
+  },
+  "calibration_interpretation": "The same OOF labels select and describe the threshold; these are calibration statistics, not independent test scores.",
+  "phase34_calibration": {
+    "threshold": 0.2214498433950319,
+    "f1": 0.4435698543091851
+  },
+  "aicrowd": {
+    "f1": 0.452,
+    "accuracy": 0.878,
+    "reported_on": "2026-10-12",
+    "provenance": "Team-reported AIcrowd displayed scores, three decimal places; submission URL not provided.",
+    "phase34_score": null
+  },
+  "submission": {
+    "local_path": "results/submission_phase14_full_train_oof_20261012.csv",
+    "sha256": "8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1",
+    "rows": 109379,
+    "positive_predictions": 14746,
+    "negative_predictions": 94633,
+    "header": [
+      "Id",
+      "Prediction"
+    ],
+    "label_domain": [
+      -1,
+      1
+    ]
+  },
+  "full_fit": {
+    "training_shape": [
+      328135,
+      295
+    ],
+    "validation_shape": [
+      109379,
+      295
+    ],
+    "trees": 200,
+    "fit_and_prediction_seconds": 1390.5261336999974
+  },
+  "input_sha256": {
+    "data/processed/x_train_float32.npy": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+    "data/processed/y_train_int8.npy": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+    "data/processed/x_test_float32.npy": "5633ade56ca322e4e42f1fbee599107cdc0e64f9e487918d2af73d2689419f5a",
+    "data/processed/id_train_int64.npy": "b38de1638698580e09ed9c671acd0fe4c62c31fac21c1b87b3d0f82376e425fe",
+    "data/processed/id_test_int64.npy": "afd2bf6ba13e6fd96a08dbd81840d19241538f257a3107b72fb1d7445306c596",
+    "data/raw/dataset/x_train.csv": "bfa447edece27d45b54f8f1486f6351a381885968d71c9eb1574fd1dbf0fa14a",
+    "data/raw/dataset/x_test.csv": "28a7f5f94436a33b5dceb5dd15fd72563f31ec898124e382c123d3827203503c",
+    "data/raw/dataset/y_train.csv": "bc974ff01bd82827e05780d106674ee680c918fc54225384cbf4f7b279422ec1",
+    "data/raw/dataset/sample_submission.csv": "62357ed950e0a7eb238745656fdefaecf451bb79e1775918433472974566a9e3"
+  },
+  "delivery_reproduction_verification": {
+    "passed": true,
+    "scope": "Current default configuration and normal Phase 14 module replay of trusted final checkpoint, current full-train preprocessing, official inputs and signed CSV. No repeated full training. End-to-end training entry point additionally tested on a synthetic fixture.",
+    "training_shape": [
+      328135,
+      295
+    ],
+    "test_shape": [
+      109379,
+      295
+    ],
+    "max_probability_difference": 0.0,
+    "csv_sha256": "8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1",
+    "positive_predictions": 14746,
+    "negative_predictions": 94633,
+    "input_hashes_verified": 9,
+    "seconds": 8.108060900005512
+  },
+  "csv_writer_alignment": {
+    "passed": true,
+    "writer": "helpers.create_csv_submission",
+    "source_url": "https://github.com/epfml/ML_course/blob/main/projects/project1/helpers.py",
+    "adaptations": [
+      "Explicit UTF-8 output encoding",
+      "LF CSV record endings preserve the already submitted bytes"
+    ],
+    "helper_sha256": "b427d6354cc1e74bdcaff16b4acb0315d89f3f60bd9e0a2c0aad83199940217b",
+    "submissions": [
+      {
+        "submission": "results/submission_phase14_full_train_oof_20261012.csv",
+        "rows": 109379,
+        "sha256": "8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1",
+        "byte_identical": true
+      },
+      {
+        "submission": "results/submission_phase34_full_train_oof_20261012.csv",
+        "rows": 109379,
+        "sha256": "d5ec4d39a38dd466c3efe1211c7bed2736e8bebf36a492bcafa73d6e21418899",
+        "byte_identical": true
+      }
+    ],
+    "invalid_label_rejected_before_write": true,
+    "scope": "Reserialization of the two submitted CSVs through the updated normal run.py wrapper; model and threshold unchanged.",
+    "checked_at_utc": "2026-10-12T14:58:45.399277+00:00"
+  }
+}

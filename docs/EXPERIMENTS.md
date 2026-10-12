@@ -1,8 +1,13 @@
 # Experiments and model selection
 
-The selected version is **Phase 14 NumPy histogram boosting**, with 295 source
-features including `HAREHAB1`, nested development F1 **0.442155227** and final
-threshold **0.21086909970855153**. Model search is closed for this version.
+The selected version is **historical Phase 14 NumPy histogram boosting**, with
+295 source features and parameters selected in Phase 14, including `HAREHAB1`.
+Its nested development F1 is **0.442155227**; the full-data threshold is
+**0.2106169795070252**, calibrated on pooled three-fold OOF predictions over
+all 328,135 training rows. AIcrowd feedback reported by the team is
+**F1 0.452 and accuracy 0.878**. Model search is closed for this version.
+Corrected Phase 34 reaches nested F1 0.440803240; the team retained Phase 14
+after submitting both versions with separately calibrated thresholds.
 The [final report](FINAL_REPORT.md) summarizes the selected pipeline; this
 page records the experiment path and links to the detailed evidence.
 
@@ -27,7 +32,7 @@ F1 of the positive class is the primary metric. A classifier that always
 predicts negative already obtains about 91.17% accuracy and F1 zero.
 Precision, recall, average precision (AP), log loss and confusion counts
 support the interpretation of F1 changes. The later operational promotion
-rule requires higher pooled F1 and improvement in at least two of three
+rule for experimental challengers requires higher pooled F1 and improvement in at least two of three
 folds; it is a practical filter rather than a significance test.
 
 Nested threshold selection isolates the threshold of each candidate, while
@@ -42,22 +47,33 @@ or repeated candidate selection.
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Historical ridge, lambda 0.0001 | 0.419508 | 0.33303 | 0.56665 | 0.39028 | 0.22917 |
 | Historical logistic, 4,000 updates | 0.425628 | 0.35728 | 0.52632 | 0.38775 | 0.22198 |
-| **Phase 14 histogram boosting** | **0.442155** | **0.367632** | **0.554573** | **0.428609** | **0.215225** |
+| **Selected Phase 14 histogram boosting** | **0.442155** | **0.367632** | **0.554573** | **0.428609** | **0.215225** |
+| Phase 33 historical booster, 321 raw predictors | 0.441457 | 0.366631 | 0.554659 | 0.427835 | 0.215348 |
+| Phase 34 corrected histogram boosting | 0.440803 | 0.362001 | 0.563460 | 0.428781 | 0.215229 |
 | Phase 32 MLP 64 → 32 | 0.424451 | 0.360722 | 0.515531 | 0.387782 | 0.221674 |
 | Phase 32 MLP 128 → 64 | 0.419268 | 0.340005 | 0.546721 | 0.379380 | 0.222710 |
 
 The frozen booster uses 200 trees, depth 5, learning rate 0.05, minimum leaf
 size 200, 64 quantile bins, 128 candidate features per node, leaf L2=1 and
 seed `20260920`. Positive class weight is 1. Missing values are routed directly
-by the trees. The active Phase 14 tree matrix contains the 295 retained source
-columns; auxiliary flags configured for other preprocessing paths are not
+by the historical trees; Phase 34 separately adds omitted endpoint candidates.
+The tree
+matrix contains the 295 retained Phase 14 source columns; auxiliary flags
+configured for other preprocessing paths are not
 added to this tree representation.
 
-The submission threshold is the mean of the three nested Phase 14 thresholds:
-`0.203056688916058`, `0.22010463713275993`, `0.20944597307683668`. The reported
-nested F1 uses each fold's own threshold; the mean is transferred to the
-full-data model. Settings are in [final_model.json](../configs/final_model.json)
+The submission threshold **0.2106169795070252** comes from a new three-fold
+OOF calibration on all training rows. Calibration F1 is 0.442770 for Phase 14
+and 0.443570 for Phase 34; these scores use the labels selecting the thresholds
+and are not independent evaluations. Nested development F1 uses each outer
+fold's inner-selected threshold. Settings are in [final_model.json](../configs/final_model.json)
 and [the preprocessing plan](../configs/experiments/phase14_codebook_corrections_only.json).
+The [selected Phase 14 CV configuration](../configs/experiments/final_phase14_validation.json)
+uses the included frozen historical source; the
+[Phase 34 CV configuration](../configs/experiments/phase34_missing_only_split.json)
+reproduces the corrected candidate. The
+[final submission record](../results/eda/final_phase14_submission.json)
+records the calibrated threshold, selected CSV fingerprint and AIcrowd feedback.
 
 The linear metrics are historical results obtained with median fills for
 numeric-coded categorical columns. Current linear preprocessing uses the
@@ -127,7 +143,9 @@ the transfer tests on Phase 14 completed separately in Phase 19.
 ## Completed comparisons against Phase 14
 
 All values in this table use nested threshold selection on the same development
-folds. All candidates were rejected for the selected version.
+folds. These are historical comparisons with Phase 14, before the split-search
+correction; the candidates were rejected at that stage. Their recorded deltas
+remain relative to the historical Phase 14 F1.
 
 | Phase | Change | Nested F1 | Delta Phase 14 | Improved folds | Detailed evidence |
 | --- | --- | ---: | ---: | ---: | --- |
@@ -151,6 +169,7 @@ folds. All candidates were rejected for the selected version.
 | 31 | Maximum depth 7 | 0.441161 | −0.000994 | 1/3 | [Phase 30–31](../results/eda/phase30_31_summary.md) |
 | 32 | MLP 64 → 32 | 0.424451 | −0.017704 | 0/3 | [Phase 32](../results/eda/phase32_mlp_summary.md) |
 | 32 | MLP 128 → 64 | 0.419268 | −0.022887 | 0/3 | [Phase 32](../results/eda/phase32_mlp_summary.md) |
+| 33 | All 321 raw predictors, no semantic cleaning or exclusions | 0.441457 | −0.000698 | 0/3 | [Comparison](../results/experiments/phase33_raw_preprocessing_comparison.json) |
 
 The activity one-hot trial expands the input to 446 columns while keeping
 128 candidates per node, changing the sampling probability of the other
@@ -176,6 +195,178 @@ followed by a complete refit. Both architectures lose F1 on all three outer
 folds. The shared suite took 8.86 minutes and all 18 refit checkpoints replay
 saved probabilities exactly. [MLP workflow](MLP.md).
 
+## Phase 33: contribution of the base preprocessing
+
+This controlled benchmark compares all 321 raw predictors with the 295
+Phase 14 predictors. Raw inputs preserve original finite response codes and
+NaNs, without recoding, exclusions, imputation, scaling or extra features.
+Both pipelines retain HAREHAB1 and use the same historical booster implementation,
+parameters, dataset and seeds, with three outer folds and two inner folds for
+threshold selection. Both results precede the Phase 34 split-search correction.
+
+Raw nested F1 is **0.441457**, versus **0.442155** for the cleaned Phase 14 control:
+delta −0.000698, with all three folds lower. Raw inputs add two true positives
+and 99 false positives; AP falls by 0.000774 and log loss rises by 0.000123.
+The paired conditional 95% interval for raw minus cleaned F1 is
+[−0.002635, +0.001226]. It includes zero, so the observed preprocessing benefit
+is small and uncertain. The comparison combines cleaning and exclusions and
+changes the candidate fraction from 128/321 to 128/295; it does not isolate
+any one preprocessing operation.
+
+The raw Phase 33 score and corrected clean Phase 34 score use different
+implementations. Their difference cannot measure a preprocessing gain; a
+matched raw benchmark with the corrected source has not been run.
+
+Two complete sequential outer checkpoints were verified and reused; the seven
+remaining fits ran in two single-thread workers. The unchanged standard runner
+assembled OOF scores and nested metrics from caches validated against exact
+matrices, labels, parameters and partition order. The recorded 35.72 minutes
+cover the parallel resume and metric assembly, excluding earlier reused fits.
+[Verified comparison](../results/experiments/phase33_raw_preprocessing_comparison.json),
+[study summary](../results/eda/phase33_raw_preprocessing_summary.md),
+[raw record](../results/experiments/phase33_raw_preprocessing/20261007T011322024298Z_phase33-raw-321-features-depth5-features128-200trees.json).
+
+## Phase 34: corrected observed-versus-missing splits
+
+The quantile split search omitted the terminal candidate that can put all
+observed values in one child and missing values in the other. Phase 34 adds
+this candidate when missing values are present, preserving the previous
+candidate order and gain tie rule. The 295-column cleaning, model parameters,
+rows, seeds and nested threshold protocol remain fixed. Three outer and six
+inner fits use the corrected source; saved Phase 14 OOF scores and checkpoints
+provide the historical control without retraining it.
+
+Corrected nested F1 is **0.440803**, delta **−0.001352**. Fold deltas are
+−0.002305, −0.002318 and +0.000221. Recall increases from 0.554573 to
+0.563460, while precision falls from 0.367632 to 0.362001: the corrected
+pipeline adds 206 true positives and 907 false positives. AP changes by
++0.000172 and log loss by +0.000004. This is an implementation-correction
+comparison with frozen settings. The corrected candidate is selected to
+restore the intended candidate set; the higher historical F1 does not justify
+retaining the omission.
+
+The paired conditional 95% interval for corrected minus historical F1 is
+[−0.003005, +0.000319], from 20,000 class-stratified paired resamples. It
+includes zero and conditions on the fitted models and thresholds; retraining
+and repeated model-selection uncertainty are outside its scope. Across the
+three outer models, the new terminal candidate is selected 270 times.
+Historical trees could already form pure observed/missing partitions when
+lower thresholds were equivalent within a node. The JSON diagnostics count
+actual partitions on complete training rows and also report staged loss/AP
+on matched 3,000-row training and validation samples per fold.
+
+The [Phase 34 record](../results/experiments/phase34_missing_only_split/20261007T092637381255Z_phase34-missing-only-split-depth5-features128-200trees.json)
+contains nested metrics, thresholds and frozen execution provenance. Its
+index F1, 0.441740, comes from selecting a threshold on pooled outer OOF labels;
+the **0.440803** result above uses thresholds selected inside each outer
+training partition.
+[Verified comparison](../results/experiments/phase34_missing_only_split_comparison.json),
+[study summary](../results/eda/phase34_missing_only_split_summary.md).
+
+## Additional positive weights on the historical implementation (Phase 35)
+
+The requested weights 1.25 and 1.5 were evaluated using the exact Phase 30
+numerical source snapshot, with the historical Phase 14 data, cleaning, seeds
+and nested threshold protocol. Each candidate completed nine fits; weights
+1 and 2 reuse verified historical results. This isolates weighting from the
+subsequent missing-only split correction and does not evaluate these weights
+under the corrected Phase 34 implementation.
+
+| Positive weight | Nested F1 | Precision | Recall | Favorable folds versus weight 1 |
+| --- | ---: | ---: | ---: | ---: |
+| 1, historical baseline | 0.442155 | 0.367632 | 0.554573 | — |
+| 1.25 | 0.440831 | 0.372562 | 0.539733 | 0/3 |
+| 1.5 | 0.440613 | 0.364316 | 0.557334 | 0/3 |
+| 2, previously evaluated | 0.439118 | 0.361155 | 0.560009 | 0/3 |
+
+Neither new weight meets the operational promotion rule. Their paired
+conditional F1-delta intervals include zero; the observed declines do not
+establish a population-level effect. Weight 1 remains preferred within this
+historical comparison. The final Phase 34 configuration was updated by its
+separate study and is not changed by these weight trials.
+
+[Verified study and runtime scope](../results/eda/phase35_positive_weights_summary.md),
+[comparison JSON](../results/experiments/phase35_positive_weights_comparison.json).
+The recorded runtime is the final resumed invocation, not the original cost
+of all nine fits; checkpoint reuse and a long execution pause preclude a
+simple speed comparison.
+
+## Two undersampling methods on the corrected implementation (Phase 36)
+
+Random undersampling and hybrid hard-negative sampling were compared with
+corrected Phase 34. Both keep every positive and three negatives per positive,
+retaining about 35.3% of eligible training rows. Random draws negatives
+uniformly; hybrid draws half uniformly and fills the remaining budget with
+the highest-risk negatives from a 24-tree, depth-3 training-only pilot.
+This avoids a distance metric over mixed features and missing values.
+
+Each candidate completed nine fresh 200-tree fits with the same 295 columns,
+model parameters and seeds as Phase 34. Sampling is repeated within each
+outer/inner training partition. Final preprocessing and bins use retained
+rows. Inner and outer validation keep all original rows; thresholds are
+selected independently from inner OOF predictions. The holdout and test were
+not evaluated.
+
+| Pipeline | Nested F1 | Precision | Recall | Favorable folds versus all rows |
+| --- | ---: | ---: | ---: | ---: |
+| All rows, corrected Phase 34 | 0.440803 | 0.362001 | 0.563460 | — |
+| Random, 3:1 | 0.439389 | 0.363860 | 0.554487 | 1/3 |
+| Hybrid hard-negative, 3:1 | 0.393535 | 0.314655 | 0.525194 | 0/3 |
+
+Neither candidate improves nested F1. Random's paired conditional delta
+interval is [-0.003356, +0.000540], including zero. Hybrid's interval is
+[-0.051379, -0.043165]; AP, precision and recall also decrease. Prefer
+all training rows for the current model. These results concern the two fixed
+3:1 procedures and one sampling seed, not every possible undersampling policy.
+
+The complete candidate runners took 24.9 and 28.2 minutes, respectively,
+with two single-thread candidates running concurrently; hybrid includes its
+pilots. Both were fresh runs without checkpoint reuse. The archived control
+resumed two outer models at 125 trees and its saved tree timers contain pauses,
+so its recorded runtime cannot establish a clean full-training speed ratio.
+
+Verification reproduced all 18 final models, all nine pilots and all 18
+retained-row binners exactly, including inner OOF predictions. Seventeen unit
+tests passed; synthetic end-to-end and interrupted-checkpoint workflows passed
+for both samplers. Final configuration and submission are unchanged.
+[Study summary](../results/eda/phase36_undersampling_summary.md),
+[comparison JSON](../results/experiments/phase36_undersampling_comparison.json).
+
+## Less aggressive random undersampling on historical Phase 14 (Phase 37)
+
+Random sampling at 5:1 and 7:1 was evaluated against historical Phase 14,
+whose nested F1 is 0.442155. The verified historical Phase 35 numerical
+snapshot preserves the old split search. Both candidates use the same 295
+columns, model parameters, seeds and nested folds as the control; all positives
+remain in each eligible training partition. A shared random permutation of
+negatives makes the 5:1 sample a subset of the 7:1 sample in all nine fits.
+About 53.0% and 70.6% of eligible training rows remain, respectively.
+Validation rows and prevalence stay unchanged; thresholds are selected from
+inner OOF predictions. Each candidate completed nine fresh 200-tree fits.
+
+| Historical pipeline | Nested F1 | Precision | Recall | Favorable folds versus all rows |
+| --- | ---: | ---: | ---: | ---: |
+| All rows, Phase 14 | 0.442155 | 0.367632 | 0.554573 | — |
+| Random 5:1 | 0.438226 | 0.365893 | 0.546204 | 0/3 |
+| Random 7:1 | 0.439820 | 0.363932 | 0.555695 | 0/3 |
+
+Keeping more negatives reduces the observed F1 loss relative to 5:1, but neither
+candidate improves the historical all-row control. Prefer all rows within this
+comparison. These are two fixed ratios with one shared sampling seed; the
+development folds have already been used for multiple choices. Paired
+conditional intervals and complete runner timings are saved in the study.
+The 3:1 experiment in Phase 36 used corrected Phase 34 and cannot supply a
+matched historical 3:1 control.
+
+Verification replayed all 18 new models, including their inner OOF scores,
+reconstructed all retained-row bin edges, reproduced thresholds and metrics,
+and checked all nine sample nesting relationships. Twenty selected unit tests
+passed. Synthetic full-workflow and interrupted-checkpoint checks passed for
+both ratios. Holdout and test were not evaluated in that study. These ratios
+were not adopted; the final Phase 14 uses all training rows.
+[Historical ratio study](../results/eda/phase37_undersampling_ratios_summary.md),
+[comparison JSON](../results/experiments/phase37_undersampling_ratios_comparison.json).
+
 ## Retained HAREHAB1 and evidence navigation
 
 HAREHAB1 asks about rehabilitation after a heart attack. Its availability is
@@ -185,12 +376,14 @@ the isolated Phase 15 ablation quantifies the loss from removing it. The
 result concerns classification of reported disease and is not a measure of
 prediction before the event. [Final report](FINAL_REPORT.md#harehab1).
 
-There are **106 model records**, including repeated runs and feasibility
-benchmarks, distributed across three indices:
+There are **114 model records**, including repeated runs and feasibility
+benchmarks, distributed across five indices:
 
-- [Main experiment ledger](../results/experiments/index.csv): 102 records.
+- [Main experiment ledger](../results/experiments/index.csv): 108 records.
 - [Feature-selection ledger](../results/experiments/phase29_feature_selection/index.csv): 2 records.
 - [MLP ledger](../results/experiments/mlp/index.csv): 2 records.
+- [Raw-input benchmark ledger](../results/experiments/phase33_raw_preprocessing/index.csv): 1 record.
+- [Split-search correction ledger](../results/experiments/phase34_missing_only_split/index.csv): 1 record.
 
 Each record links configuration, metrics and available artifact fingerprints.
 For historical booster records, the primary nested result is in

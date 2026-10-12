@@ -16,8 +16,10 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
+from helpers import create_csv_submission
 from src.feature_preprocessing import load_feature_metadata, tree_feature_matrices
 from src.numpy_boosting import HistogramGradientBoostingClassifier
+from src.boosting_implementation import get_booster_class
 
 DEFAULT_CONFIG = Path("configs/final_model.json")
 
@@ -150,7 +152,7 @@ def _load_variant(path: Path, name: str) -> Mapping[str, Any]:
 
 
 def _write_submission(path: Path, ids: np.ndarray, predictions: np.ndarray) -> None:
-    """Write and validate an AIcrowd submission with signed predictions."""
+    """Validate vectors, then save them with the course submission helper."""
 
     ids = np.asarray(ids)
     predictions = np.asarray(predictions)
@@ -159,10 +161,7 @@ def _write_submission(path: Path, ids: np.ndarray, predictions: np.ndarray) -> N
     if not np.all((predictions == -1) | (predictions == 1)):
         raise ValueError("Submission predictions must use the {-1, +1} domain.")
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as handle:
-        writer = csv.writer(handle, lineterminator="\n")
-        writer.writerow(["Id", "Prediction"])
-        writer.writerows(zip(ids.astype(np.int64), predictions.astype(np.int8)))
+    create_csv_submission(ids.astype(np.int64), predictions.astype(np.int8), path)
 
 
 def _read_sample_submission_ids(path: Path) -> np.ndarray:
@@ -228,7 +227,9 @@ def run_pipeline(
     )
 
     started = time.perf_counter()
-    model = HistogramGradientBoostingClassifier(**config["model"]).fit(
+    model_class = (get_booster_class(config["implementation"])
+                   if "implementation" in config else HistogramGradientBoostingClassifier)
+    model = model_class(**config["model"]).fit(
         train_matrix, labels
     )
     probabilities = model.predict_proba(test_matrix)[:, 1]
@@ -252,6 +253,7 @@ def run_pipeline(
         "positive_predictions": int(np.count_nonzero(predictions == 1)),
         "negative_predictions": int(np.count_nonzero(predictions == -1)),
         "threshold": threshold,
+        "implementation": config.get("implementation", "phase34"),
         "fit_and_prediction_seconds": time.perf_counter() - started,
         "output": str(output_path),
     }

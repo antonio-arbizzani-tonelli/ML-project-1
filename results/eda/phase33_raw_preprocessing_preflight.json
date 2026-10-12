@@ -1,0 +1,46 @@
+{
+  "scope": "One full preprocessing ablation; model, data and folds fixed.",
+  "reference_record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json",
+  "raw_suite": "configs/experiments/phase33_raw_boosting_cv.json",
+  "input_sha256": {
+    "features": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+    "labels": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+    "split_indices": "1845a935f0fe7f71ff09a834ee5efbc594efc078e94345be521352aa1d6a3630",
+    "feature_metadata": "28e5f94aae365c1aece9dbc7398d875ca90fbd91456115c46ecfc573723ad587"
+  },
+  "raw_feature_count": 321,
+  "source_sha256": {
+    "tools/phase33_raw_preprocessing_benchmark.py": "54c3cbaa1225b4390e23234aaa3a6a738ca253c2c15cb0486c8b661b9db5b659",
+    "src/feature_preprocessing.py": "458fdd9476c159e9c9a4c8e8ef2134829bb15653308b034a63f18968807e7510",
+    "src/numpy_boosting.py": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+    "src/evaluation.py": "b887e906f31993fe5a349dbcd0ba2e28f5d28568d7c133fe3b61358ae9520c1c",
+    "src/run_boosting_cv.py": "33b3ecc61b797f7d197f495f2c3aa2fae8c3e4a1b3155772bdcdfb3e79447b4b",
+    "src/run_logged_boosting_cv.py": "e6f734231df4e7879a63598821398471eb7e0688bb71de33b77483746708463d",
+    "configs/final_model.json": "da007a747bb28aaa34c778ac67bf17ae4dd49d2da1af93fad07ef103cf70cc77"
+  },
+  "model_parameters": {
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "min_samples_leaf": 200,
+    "n_bins": 64,
+    "l2_regularization": 1.0,
+    "max_features": 128,
+    "random_seed": 20260920,
+    "n_estimators": 200
+  },
+  "fold_count": 3,
+  "inner_threshold": {
+    "inner_fold_count": 2,
+    "inner_seed": 20260922,
+    "model_checkpoints": [
+      {
+        "model": "depth5_features128",
+        "checkpoints": [
+          200
+        ]
+      }
+    ]
+  },
+  "raw_policy": "All parsed CSV predictors; original finite codes and NaNs unchanged; no fill, scaling, recoding, exclusions or extra features. Training-fitted histogram bins and missing routing remain model components.",
+  "interpretation": "Joint effect of base cleaning and exclusions; 128/321 versus 128/295 candidate fraction. Does not isolate individual preprocessing operations."
+}

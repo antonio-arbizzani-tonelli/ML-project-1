@@ -55,6 +55,8 @@ def tree_feature_matrices(
     ``tree_one_hot_features`` optionally replaces named sources with a vocabulary
     learned only from cleaned training rows and an unknown-category indicator.
     Missing sources remain NaN throughout their encoded block.
+    ``raw_tree_passthrough`` instead copies every source column unchanged for
+    a raw-input benchmark; it accepts no additional preprocessing options.
     """
 
     training_features = np.asarray(training_features, dtype=np.float32)
@@ -68,6 +70,15 @@ def tree_feature_matrices(
         raise ValueError("Tree feature matrices must align with every feature name.")
     if np.any(np.isinf(training_features)) or np.any(np.isinf(validation_features)):
         raise ValueError("Tree feature matrices must not contain infinite values.")
+
+    if plan.get("name") == "raw_tree_passthrough":
+        if set(plan) != {"name"}:
+            raise ValueError(
+                "Raw tree preprocessing accepts only its name, without cleaning options."
+            )
+        if len(set(feature_names)) != len(feature_names):
+            raise ValueError("Feature names must be unique.")
+        return training_features.copy(), validation_features.copy(), list(feature_names)
 
     processor = FeaturePreprocessor(feature_names, metadata, plan)
     output_names = [

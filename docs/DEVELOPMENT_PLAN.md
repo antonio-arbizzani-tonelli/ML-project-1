@@ -1,8 +1,10 @@
 # Stato finale del modello e studi conclusi
 
 La ricerca dei modelli è **conclusa per questa versione**. Il modello adottato
-è Phase 14; le prove successive non hanno fornito un miglioramento F1 che ne
-motivasse la sostituzione. Questo documento riassume lo stato congelato e le
+è il booster storico Phase 14, scelto dopo il confronto delle due submission
+su AIcrowd: **F1 0.452 e accuracy 0.878**. Phase 34 ripristina il candidato
+che separa valori osservati e mancanti e rimane un confronto documentato. Questo
+documento riassume lo stato congelato e le
 idee rinviate; il percorso dei risultati è in [EXPERIMENTS.md](EXPERIMENTS.md)
 e la spiegazione della scelta è nel [report finale](FINAL_REPORT.md).
 
@@ -11,19 +13,23 @@ e la spiegazione della scelta è nel [report finale](FINAL_REPORT.md).
 | Componente | Stato adottato |
 | --- | --- |
 | Modello | Gradient boosting a istogrammi implementato in NumPy |
+| Ricerca degli split | Sorgente storico Phase 14 incluso e verificato tramite SHA-256 |
 | Input | 295 feature Phase 14, incluse HAREHAB1 e ALCDAY5 |
 | Preprocessing | Non risposte documentate → NaN, zeri documentati → 0, bin a quantili appresi sul training |
 | Parametri | 200 alberi, profondità 5, learning rate 0.05, minimo foglia 200, 64 bin, 128 candidate per nodo |
 | Regolarizzazione / pesatura | L2 delle foglie 1; peso dei positivi 1 |
 | Seed del modello | 20260920 |
 | F1 development annidato | 0.442155227 |
-| Precision / recall | 0.367632339 / 0.554572908 |
-| Soglia finale | 0.21086909970855153, media delle tre soglie Phase 14 |
+| Precision / recall | 0.367632 / 0.554573 |
+| Soglia finale | 0.2106169795070252, F1 ottimizzato su OOF a tre fold di tutto il train |
+| Risultato AIcrowd | F1 0.452, accuracy 0.878, comunicati dal team |
 
 La [configurazione finale](../configs/final_model.json) e il
 [piano di preprocessing](../configs/experiments/phase14_codebook_corrections_only.json)
-definiscono il percorso usato da `run.py`. Il modello completo è già stato
-addestrato su 328.135 righe e ha generato 109.379 predizioni test.
+definiscono il percorso usato da `run.py`. Il nuovo training completo
+Phase 14 su 328.135 righe genera 109.379 predizioni test, di cui 14.746
+positive. Il [record finale](../results/eda/final_phase14_submission.json)
+conserva la calibrazione e il fingerprint della submission scelta.
 
 HAREHAB1 rimane nella versione finale. La domanda riguarda riabilitazione
 post-infarto e può rivelare informazioni attraverso l'eleggibilità alla
@@ -44,10 +50,20 @@ con la classificazione della malattia dichiarata.
 | Secondo seed e media | 0.439924 e 0.441111; entrambi inferiori nei tre fold | [Phase 26](../results/eda/phase26_two_seeds_summary.md) |
 | Selezione di 100/60 feature | 0.439224 e 0.437584; entrambe inferiori nei tre fold | [Phase 29](../results/eda/phase29_feature_selection_summary.md) |
 | MLP con preprocessing dedicato | 64 → 32: 0.424451; 128 → 64: 0.419268; entrambe inferiori nei tre fold | [Phase 32](../results/eda/phase32_mlp_summary.md) |
+| Preprocessing grezzo | 321 input grezzi: 0.441457, contro 0.442155 del controllo pulito con lo stesso codice precedente | [Phase 33](../results/eda/phase33_raw_preprocessing_summary.md) |
+| Correzione osservati/mancanti | F1 0.440803, delta −0.001352; +206 veri positivi e +907 falsi positivi; confronto con Phase 14 | [Phase 34](../results/eda/phase34_missing_only_split_summary.md) |
 
-Gli F1 della tabella usano la selezione annidata della soglia. Le famiglie
+Gli F1 della tabella usano la selezione annidata della soglia. I confronti
+fino a Phase 33 usano il codice del booster precedente alla correzione.
+Il confronto grezzo/pulito Phase 33 resta relativo a quel codice; confrontare
+il suo grezzo con Phase 34 cambierebbe anche l'implementazione. Le famiglie
 raggruppate riportano il migliore dei candidati effettivamente confrontati
 con Phase 14, non un risultato comune a ogni variante.
+
+L'intervallo appaiato condizionale del delta Phase 34 è [−0.003005, +0.000319]
+e include zero. Tiene fissi modelli e soglie; non comprende variabilità del
+training e selezione ripetuta. La scelta finale conserva Phase 14 dopo il
+confronto sul feedback AIcrowd, con la stessa configurazione dei parametri.
 
 Lo screening dell'imputazione Phase 16 aveva F1 esplorativo 0.442674:
 selezionava la soglia sugli stessi OOF poi valutati. La conferma Phase 24,
@@ -67,8 +83,8 @@ non sono componenti della versione finale né una coda di training attiva:
 - implementare interazioni effettive sul percorso ad alberi o un ensemble
   booster–logistica, con scelte apprese esclusivamente nei training interni.
 
-Le prove concluse restano documentate nei rapporti e nei tre registri degli
-esperimenti. Qualunque studio futuro costituirebbe un confronto distinto,
+Le prove concluse restano documentate nei rapporti e nei cinque registri degli
+esperimenti, per un totale di 114 record. Qualunque studio futuro costituirebbe un confronto distinto,
 realizzato con NumPy e la libreria standard. Le CV development hanno già
 contribuito a molte scelte e il 20% iniziale è stato consultato dalle baseline;
 il risultato corrente è quindi evidenza development dopo selezione.

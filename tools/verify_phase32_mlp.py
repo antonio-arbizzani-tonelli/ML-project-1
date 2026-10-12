@@ -137,7 +137,7 @@ def verify():
               "il suo legame con il target è descritto nel [report finale](../../docs/FINAL_REPORT.md#harehab1). "
               "Ambiente eseguito: Python 3.14.3 / NumPy 2.4.2, OpenBLAS con un thread; compatibilità nell'ambiente ufficiale non verificata.", "",
               "Phase 14 rimane il modello selezionato. "
-              "Dettagli: [metodo MLP](../../docs/MLP.md), "
+              "Dettagli: [pipeline MLP](../../docs/MLP.md), "
               "[confronto completo](../experiments/mlp/phase32_comparison.json). "
               "I checkpoint locali sono in `results/mlp_artifacts/phase32/`."]
     (ROOT / "results/eda/phase32_mlp_summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

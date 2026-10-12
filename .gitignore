@@ -35,6 +35,7 @@ submission*.csv
 # Temporary test directories
 tests/tmp*/
 pytest-cache-files-*/
+results/phase35_smoke_*/
 
 # Editors and operating systems
 .local/

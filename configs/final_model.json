@@ -20,6 +20,16 @@
     "max_features": 128,
     "random_seed": 20260920
   },
-  "decision_threshold": 0.21086909970855153,
-  "threshold_source": "Mean of the three Phase 14 nested-CV thresholds: 0.203056688916058, 0.22010463713275993, 0.20944597307683668"
+  "decision_threshold": 0.2106169795070252,
+  "threshold_source": "F1-maximizing threshold from three stratified OOF folds covering all 328135 labeled rows (seed 20260919).",
+  "validation": {
+    "name": "Phase 14",
+    "suite": "configs/experiments/final_phase14_validation.json",
+    "record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json"
+  },
+  "implementation": "phase14",
+  "implementation_source_sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+  "calibration": {
+    "record": "results/eda/final_phase14_submission.json"
+  }
 }

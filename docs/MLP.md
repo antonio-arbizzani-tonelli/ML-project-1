@@ -1,7 +1,9 @@
 # MLP NumPy: preprocessing, training e valutazione
 
 La MLP è una pipeline sperimentale separata. `run.py`, il preprocessing degli
-alberi e `configs/final_model.json` continuano a definire il booster Phase 14.
+alberi e `configs/final_model.json` definiscono il booster corrente. Il
+riferimento Phase 14 in questo studio è storico, precedente alla correzione
+degli split osservati/mancanti Phase 34.
 La configurazione delle due reti è `configs/experiments/phase32_mlp.json`.
 
 Il confronto Phase 32 è concluso. Entrambe le reti hanno un F1 inferiore a
@@ -9,13 +11,14 @@ Phase 14 in tutti e tre i fold e non sono state adottate:
 
 | Pipeline | F1 annidato | Delta rispetto a Phase 14 | Fold favorevoli |
 | --- | ---: | ---: | ---: |
-| Phase 14, booster selezionato | 0.442155 | — | — |
+| Phase 14, booster storico prima della correzione | 0.442155 | — | — |
 | MLP 64→32 | 0.424451 | −0.017704 | 0/3 |
 | MLP 128→64 | 0.419268 | −0.022887 | 0/3 |
 
 Metriche, soglie e verifiche sono nel [rapporto Phase 32](../results/eda/phase32_mlp_summary.md)
 e nel [confronto JSON](../results/experiments/mlp/phase32_comparison.json).
-Il preprocessing e la configurazione finale del booster sono invariati.
+Il confronto conserva la configurazione e il preprocessing del booster
+storico. La versione corrente è documentata in [EXPERIMENTS.md](EXPERIMENTS.md).
 
 ## Codice
 

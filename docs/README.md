@@ -1,11 +1,13 @@
 # Documentation
 
 Use the [root README](../README.md) for installation and commands, and the
-[final report](FINAL_REPORT.md) for results and model choice.
+[two-page final report](FINAL_REPORT.pdf) for results and model choice.
 
 | Document | Contents |
 | --- | --- |
-| [FINAL_REPORT.md](FINAL_REPORT.md) | Dataset, selected model, comparisons and HAREHAB1 ablation; in Italian |
+| [FINAL_REPORT.pdf](FINAL_REPORT.pdf) | Two-page submission report in English, written in LaTeX |
+| [FINAL_REPORT.tex](FINAL_REPORT.tex) | Editable standalone LaTeX source of the report |
+| [FINAL_REPORT.md](FINAL_REPORT.md) | Extended supporting notes and links to experimental evidence |
 | [DATA.md](DATA.md) | Dataset semantics and preprocessing |
 | [EXPERIMENTS.md](EXPERIMENTS.md) | Experiment protocols, results and evidence links |
 | [MLP.md](MLP.md) | Neural preprocessing, training and reproduction |

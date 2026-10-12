@@ -1,0 +1,190 @@
+{
+  "checked_at_utc": "2026-10-07T00:09:15.379764+00:00",
+  "environment": {
+    "python": "3.14.3",
+    "numpy": "2.4.2"
+  },
+  "scope": "Descriptive counts on development rows only, same 295 retained Phase14 source columns before binary recoding. No training or inference; zero mappings exclude binary recodings and values already equal to zero.",
+  "rows": 262508,
+  "columns": 295,
+  "feature_cells": 77439860,
+  "raw_missing_cells": 36129440,
+  "raw_missing_fraction": 0.46654836411119543,
+  "cleaned_missing_cells": 37224861,
+  "cleaned_missing_fraction": 0.4806938054898343,
+  "finite_nonresponse_codes_mapped_to_nan": 1095421,
+  "documented_zero_codes_converted_to_zero": 899687,
+  "rows_with_nonresponse_conversion": 180068,
+  "rows_with_zero_conversion": 261005,
+  "rows_with_any_conversion": 262040,
+  "examples": {
+    "PHYSHLTH": {
+      "finite_nonresponse_to_nan": 5684,
+      "zero_code_counts": {
+        "88.0": 163506
+      },
+      "documented_zero_codes_to_zero": 163506
+    },
+    "MENTHLTH": {
+      "finite_nonresponse_to_nan": 4299,
+      "zero_code_counts": {
+        "88.0": 179536
+      },
+      "documented_zero_codes_to_zero": 179536
+    },
+    "ALCDAY5": {
+      "finite_nonresponse_to_nan": 3382,
+      "zero_code_counts": {
+        "888.0": 123530
+      },
+      "documented_zero_codes_to_zero": 123530
+    }
+  },
+  "largest_nonresponse_conversion_counts": [
+    {
+      "feature": "_HCVU651",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 94237,
+      "finite_nonresponse_to_nan": 94237,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_INCOMG",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 47020,
+      "finite_nonresponse_to_nan": 47020,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "INCOME2",
+      "raw_missing_cells": 1947,
+      "cleaned_missing_cells": 47020,
+      "finite_nonresponse_to_nan": 45073,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "PAMISS1_",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 35334,
+      "finite_nonresponse_to_nan": 35334,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_PAREC1",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 34180,
+      "finite_nonresponse_to_nan": 34180,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_PASTAE1",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 34180,
+      "finite_nonresponse_to_nan": 34180,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_PACAT1",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 33229,
+      "finite_nonresponse_to_nan": 33229,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_PA300R2",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 33229,
+      "finite_nonresponse_to_nan": 33229,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_PA30021",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 33229,
+      "finite_nonresponse_to_nan": 33229,
+      "documented_zero_codes_to_zero": 0
+    },
+    {
+      "feature": "_PAINDX1",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 31689,
+      "finite_nonresponse_to_nan": 31689,
+      "documented_zero_codes_to_zero": 0
+    }
+  ],
+  "largest_zero_conversion_counts": [
+    {
+      "feature": "CHILDREN",
+      "raw_missing_cells": 3,
+      "cleaned_missing_cells": 2191,
+      "finite_nonresponse_to_nan": 2188,
+      "documented_zero_codes_to_zero": 192541
+    },
+    {
+      "feature": "MENTHLTH",
+      "raw_missing_cells": 0,
+      "cleaned_missing_cells": 4299,
+      "finite_nonresponse_to_nan": 4299,
+      "documented_zero_codes_to_zero": 179536
+    },
+    {
+      "feature": "PHYSHLTH",
+      "raw_missing_cells": 1,
+      "cleaned_missing_cells": 5685,
+      "finite_nonresponse_to_nan": 5684,
+      "documented_zero_codes_to_zero": 163506
+    },
+    {
+      "feature": "ALCDAY5",
+      "raw_missing_cells": 9491,
+      "cleaned_missing_cells": 12873,
+      "finite_nonresponse_to_nan": 3382,
+      "documented_zero_codes_to_zero": 123530
+    },
+    {
+      "feature": "DRNK3GE5",
+      "raw_missing_cells": 136940,
+      "cleaned_missing_cells": 138684,
+      "finite_nonresponse_to_nan": 1744,
+      "documented_zero_codes_to_zero": 93673
+    },
+    {
+      "feature": "POORHLTH",
+      "raw_missing_cells": 128022,
+      "cleaned_missing_cells": 130867,
+      "finite_nonresponse_to_nan": 2845,
+      "documented_zero_codes_to_zero": 74781
+    },
+    {
+      "feature": "ADMOVE",
+      "raw_missing_cells": 250468,
+      "cleaned_missing_cells": 250715,
+      "finite_nonresponse_to_nan": 247,
+      "documented_zero_codes_to_zero": 10482
+    },
+    {
+      "feature": "ADTHINK",
+      "raw_missing_cells": 250459,
+      "cleaned_missing_cells": 250583,
+      "finite_nonresponse_to_nan": 124,
+      "documented_zero_codes_to_zero": 10155
+    },
+    {
+      "feature": "ADFAIL",
+      "raw_missing_cells": 250448,
+      "cleaned_missing_cells": 250588,
+      "finite_nonresponse_to_nan": 140,
+      "documented_zero_codes_to_zero": 9888
+    },
+    {
+      "feature": "ADDOWN",
+      "raw_missing_cells": 250430,
+      "cleaned_missing_cells": 250571,
+      "finite_nonresponse_to_nan": 141,
+      "documented_zero_codes_to_zero": 8864
+    }
+  ],
+  "preprocessing_config_sha256": "3c6188166857fbf9b22b5896dfbaea9025b70e1004a44769b7cba4ee8dec41fb",
+  "development_indices_sha256": "d673c76f285cced30ceef85f10b3867102bf2b3a59278b7afc2fcaf5a825e51b",
+  "interpretation": "Counts quantify codebook transformations, not predictive performance or a gain caused by them. Blank count differs from the earlier 44.79% figure because these counts use development only and the 295 retained columns."
+}

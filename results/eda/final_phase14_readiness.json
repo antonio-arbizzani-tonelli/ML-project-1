@@ -1,0 +1,168 @@
+{
+  "checked_at_utc": "2026-10-12T14:58:45.399277+00:00",
+  "selected_model": "Phase 14",
+  "local_delivery_ready": true,
+  "publication_complete": false,
+  "environment": {
+    "python": "3.14.3",
+    "numpy": "2.4.2"
+  },
+  "repository_verification": {
+    "checked_at_utc": "2026-10-12T14:58:49.093235+00:00",
+    "environment": {
+      "python": "3.14.3"
+    },
+    "passed": true,
+    "counts": {
+      "eligible_files": 493,
+      "python_files": 96,
+      "json_files": 285,
+      "markdown_links": 305,
+      "indexed_records": 114
+    },
+    "errors": [],
+    "selected_model": "Phase 14",
+    "nested_development_f1": 0.4421552272688187,
+    "submission_threshold": 0.2106169795070252,
+    "scope": "Git-eligible working-tree files, links, syntax, JSON, ledger hashes and frozen configuration. No training or official-runtime execution."
+  },
+  "package": {
+    "eligible_files": 493,
+    "total_bytes": 22505988,
+    "dataset_models_predictions_included": false,
+    "clean_package_tested": true
+  },
+  "unit_tests": {
+    "passed": 206,
+    "working_tree": true,
+    "clean_git_eligible_copy": true
+  },
+  "public_course_tests": {
+    "passed": 26,
+    "deselected": 2,
+    "test_source": "Official course test_project1_public.py",
+    "target": "Clean Git-eligible package, local directory option",
+    "exclusions": {
+      "github_link_format": "No new delivery commit has been published; precise URL must be verified after push.",
+      "black_format": "Formatting advice explicitly optional in official test; frozen numerical source kept byte-exact."
+    }
+  },
+  "selected_submission_reproduction": {
+    "passed": true,
+    "scope": "Current default configuration and normal Phase 14 module replay of trusted final checkpoint, current full-train preprocessing, official inputs and signed CSV. No repeated full training. End-to-end training entry point additionally tested on a synthetic fixture.",
+    "training_shape": [
+      328135,
+      295
+    ],
+    "test_shape": [
+      109379,
+      295
+    ],
+    "max_probability_difference": 0.0,
+    "csv_sha256": "8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1",
+    "positive_predictions": 14746,
+    "negative_predictions": 94633,
+    "input_hashes_verified": 9,
+    "seconds": 8.108060900005512
+  },
+  "report": {
+    "path": "docs/FINAL_REPORT.pdf",
+    "source": "docs/FINAL_REPORT.tex",
+    "pages": 2,
+    "paper": "A4",
+    "latex_errors": 0,
+    "overfull_boxes": 0,
+    "rendered_pages_visually_checked": 2,
+    "pdf_sha256": "38479e7bac719f6ceeeb32e489992bc38abbaebb4f78aa93c92bcdafd7bf5b2d",
+    "tex_sha256": "b8af350aff0b33b60a850d165602dc479a2d8651ba3c1d6fa69285384c7f44b2"
+  },
+  "entry_points_checked": [
+    "run.py --help",
+    "run_mlp.py --help",
+    "python -m tools.prepare_data --help",
+    "python -m tools.final_phase14_phase34 --help"
+  ],
+  "git_diff_check_passed": true,
+  "content_scan": {
+    "secret_pattern_scan": {
+      "patterns": [
+        "private_key",
+        "github_token",
+        "aws_access_key",
+        "openai_token"
+      ],
+      "matches": [],
+      "passed": true
+    },
+    "model_and_analysis_imports": [
+      "__future__",
+      "argparse",
+      "collections",
+      "copy",
+      "csv",
+      "dataclasses",
+      "datetime",
+      "gc",
+      "hashlib",
+      "helpers",
+      "implementations",
+      "json",
+      "math",
+      "matplotlib",
+      "numpy",
+      "os",
+      "pathlib",
+      "pickle",
+      "platform",
+      "re",
+      "run",
+      "src",
+      "time",
+      "typing"
+    ],
+    "unexpected_external_imports": [],
+    "passed": true
+  },
+  "external_steps_remaining": [
+    "Stage, commit and push verified working-tree changes.",
+    "Observe GitHub Actions on Python 3.9 / NumPy 1.23.1.",
+    "Verify public repository access and precise commit URL.",
+    "Deliver report PDF and precise commit URL according to course instructions."
+  ],
+  "remote_visibility": "Not verified; GitHub page/API access unavailable in this session.",
+  "aicrowd_feedback": {
+    "f1": 0.452,
+    "accuracy": 0.878,
+    "reported_on": "2026-10-12",
+    "provenance": "Team-reported AIcrowd displayed scores, three decimal places; submission URL not provided.",
+    "phase34_score": null
+  },
+  "scope": "Local Git-eligible working-tree readiness, clean-package execution, public mathematical tests and exact trusted-checkpoint replay. No Git staging/commit/push or independent hidden-test evaluation.",
+  "csv_writer_alignment": {
+    "passed": true,
+    "writer": "helpers.create_csv_submission",
+    "source_url": "https://github.com/epfml/ML_course/blob/main/projects/project1/helpers.py",
+    "adaptations": [
+      "Explicit UTF-8 output encoding",
+      "LF CSV record endings preserve the already submitted bytes"
+    ],
+    "helper_sha256": "b427d6354cc1e74bdcaff16b4acb0315d89f3f60bd9e0a2c0aad83199940217b",
+    "submissions": [
+      {
+        "submission": "results/submission_phase14_full_train_oof_20261012.csv",
+        "rows": 109379,
+        "sha256": "8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1",
+        "byte_identical": true
+      },
+      {
+        "submission": "results/submission_phase34_full_train_oof_20261012.csv",
+        "rows": 109379,
+        "sha256": "d5ec4d39a38dd466c3efe1211c7bed2736e8bebf36a492bcafa73d6e21418899",
+        "byte_identical": true
+      }
+    ],
+    "invalid_label_rejected_before_write": true,
+    "scope": "Reserialization of the two submitted CSVs through the updated normal run.py wrapper; model and threshold unchanged.",
+    "checked_at_utc": "2026-10-12T14:58:45.399277+00:00"
+  }
+}
