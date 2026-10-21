@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "scope": "Full OOF coverage and independently reconstructed thresholds; all three full-model checkpoints replayed without training; signed CSVs preserve official IDs and decisions.",
+  "variants": {
+    "phase18": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "377194cd25c57f89129d86cb6f4cce6e175c7aef14a3f4a9eb66d03bf8d69a13",
+      "features": 289,
+      "threshold": 0.218219460678348,
+      "full_model_replay_max_difference": 0.0,
+      "csv_sha256": "7535a1d83ba4f1bb0101a4b676aff9f45ea49f1f3dd3a820900f81df82c9201f",
+      "positive_predictions": 13996,
+      "negative_predictions": 95383
+    },
+    "phase24": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "d23dfb4bcd1eb12b3b20890dbdc15f22ae57cc9857a477ee5b433542a26e6324",
+      "features": 303,
+      "threshold": 0.2118445372019307,
+      "full_model_replay_max_difference": 0.0,
+      "csv_sha256": "ae2b5f141a4d11f788cd3927a35c418fdad5437f402947452b078298816a7932",
+      "positive_predictions": 14562,
+      "negative_predictions": 94817
+    },
+    "phase25": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "4d1c8b3ae4a80ce919c24265d1105162719afad1c3e23b01d353ff4c3480df0a",
+      "features": 295,
+      "threshold": 0.21880347655706073,
+      "full_model_replay_max_difference": 0.0,
+      "csv_sha256": "7b2e294d874d69198517e5a76a21022935ccd7169cce4ff3093cdfe50c577659",
+      "positive_predictions": 13898,
+      "negative_predictions": 95481
+    }
+  },
+  "seconds": 29.489649400000417
+}

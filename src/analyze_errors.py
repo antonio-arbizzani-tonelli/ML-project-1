@@ -526,7 +526,8 @@ def run_analysis(config_path: Path, project_root: Path) -> dict:
                 writer.writerow(
                     {"feature_pair": row["feature_pair"], "group": row["group"], **fold}
                 )
-    output_report.write_text(_report_text(result), encoding="utf-8", newline="\n")
+    with output_report.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(_report_text(result))
     return result
 
 

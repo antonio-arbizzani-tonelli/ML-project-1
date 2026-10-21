@@ -1,0 +1,77 @@
+{
+  "passed": true,
+  "complete": true,
+  "scope": "OOF coverage and independently reconstructed thresholds; full-model replay; base297-column identity; independent rawcount checks; signed CSV/sampleID integrity.",
+  "variants": {
+    "count_a": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "5382c61b7c70fb8622b1367dbb603ba8fcf86966539763717cb9d09062529553",
+      "features": 299,
+      "threshold": 0.22139906254902406,
+      "full_model_replay_max_difference": 0.0,
+      "base_297_columns_exactly_preserved": true,
+      "raw_count_columns_exact": true,
+      "csv_sha256": "dfcad9778fbeae1fd3b71b58787e5be1e8a799aeadf57ce31459f3bdfdff9362",
+      "model_sha256": "03c2d877237facd5538223b4add43cb853f0033e2e1d2ba8661d7c3d061ab28f",
+      "configuration_sha256": "a9ab3e560d8574d35e14a8748b8a22e9b172a0f4d4bf06e1fe8297da7bdb8027",
+      "positive_predictions": 13692,
+      "negative_predictions": 95687
+    },
+    "count_b": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "3b50cf6d73df80122c3e81e5a8ae92b105c5d3981c27a12c8dde792337eda0b8",
+      "features": 299,
+      "threshold": 0.21333428726929282,
+      "full_model_replay_max_difference": 0.0,
+      "base_297_columns_exactly_preserved": true,
+      "raw_count_columns_exact": true,
+      "csv_sha256": "78048260c9d62ddf0a83ba0e3029f0637db05ae00341ea4e37062e852922d9b5",
+      "model_sha256": "e4fbbf6fed8bcf192ac47a98a25197f77e18843d77cf723d717c41a97c2be23e",
+      "configuration_sha256": "98cbbadabbd6f434eee6f1e9d3deddcd7fbf0a03e32587d73a3889af70d31f30",
+      "positive_predictions": 14452,
+      "negative_predictions": 94927
+    },
+    "count_ab": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "740d1567c20db313b76d686007a9b6bc9f8792e2c6472f49588cbff1fbae10f5",
+      "features": 301,
+      "threshold": 0.21805437631155952,
+      "full_model_replay_max_difference": 0.0,
+      "base_297_columns_exactly_preserved": true,
+      "raw_count_columns_exact": true,
+      "csv_sha256": "739b99d9b7a82481700df7d8edd86c6ba7d1dac7a035623321dceae3525af15b",
+      "model_sha256": "11d1250052833e3c27a7bcc85583713e21ae05ce01abf6404fd61b45ac63fd99",
+      "configuration_sha256": "a66ab276f8cb56eb565617d1071efc7157db14417bad927c43bc576604984c93",
+      "positive_predictions": 13986,
+      "negative_predictions": 95393
+    }
+  },
+  "seconds": 12.841933700001391
+}

@@ -1,0 +1,33 @@
+{
+  "logged_at_utc": "2026-10-15T15:35:37Z",
+  "source": "Scores reported by the user in this chat; not independently fetched from AIcrowd.",
+  "displayed_decimal_places": 3,
+  "scores": [
+    {
+      "variant": "combined18_24_native_categories",
+      "role": "evaluated_alternative",
+      "reported_on_local": "2026-10-15",
+      "csv": "submission_combined18_24_native_categories_full_train_oof.csv",
+      "csv_sha256": "6f93e5a6e88697c5c71a3551615edfea68c76832693fa5ea4d6fb55596d55d17",
+      "n_estimators": 200,
+      "max_features": 256,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 200,
+      "max_depth": 5,
+      "categorical_features": ["EXRACT11", "EXRACT21"],
+      "aicrowd_f1": 0.452,
+      "aicrowd_accuracy": 0.885,
+      "local_oof_f1": 0.4423260523651092,
+      "local_oof_accuracy": 0.882511771069834
+    }
+  ],
+  "comparison": {
+    "working_reference": "combined18_24_features256",
+    "reference_scores_file": "../aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json",
+    "reference_aicrowd_f1": 0.455,
+    "reference_aicrowd_accuracy": 0.883,
+    "displayed_f1_delta_vs_features256": -0.003,
+    "displayed_accuracy_delta_vs_features256": 0.002,
+    "interpretation": "The native categorical alternative has lower reported AIcrowd F1 and lower local OOF F1 than the verified reference, despite higher accuracy. Keep combined18_24_features256 as the working F1 reference."
+  }
+}

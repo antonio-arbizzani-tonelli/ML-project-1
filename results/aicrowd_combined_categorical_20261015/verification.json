@@ -1,0 +1,120 @@
+{
+  "passed": true,
+  "complete": true,
+  "run_manifest_sha256": "7d174dd21c8883349ab5688acd5c51437b5dc9dcb8ca0261c3b06c3c00b98821",
+  "origin_manifest_sha256": "55dd6a95fea2fae58993eaa5c6fc1debf5ea62f838e15a0915a6871db56b7633",
+  "scope": "Native subset splits only for EXRACT11/EXRACT21. Identical base rows, fold-local preprocessing and 295 numeric column bins; train-only native vocabularies; independently recalculated OOF threshold and exact final model/CSV replay.",
+  "historical_booster_sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+  "native_booster_sha256": "e07e40d078ad8ab34ed4f0341337449bd91dae3980aaaf4fbc74a639833263d9",
+  "variants": {
+    "combined18_24_native_categories": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "264c16b6dc34f3443f35cf90104c6f441cb3a600f7378903244a50e50e898e43",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 200,
+        "histogram_strategy": "recursive",
+        "categorical_feature_indices": [
+          74,
+          77
+        ]
+      },
+      "categorical_columns": {
+        "EXRACT11": 74,
+        "EXRACT21": 77
+      },
+      "threshold": 0.22318329009733187,
+      "calibration_metrics": {
+        "accuracy": 0.882511771069834,
+        "precision": 0.3807495953181422,
+        "recall": 0.5276617773943054,
+        "f1": 0.4423260523651092,
+        "specificity": 0.916880599010563,
+        "balanced_accuracy": 0.7222711882024342
+      },
+      "calibration_confusion_counts": {
+        "true_positives": 15289,
+        "false_positives": 24866,
+        "true_negatives": 274294,
+        "false_negatives": 13686
+      },
+      "delta_f1_vs_features256": -0.001744643187912509,
+      "full_model_replay_max_difference": 0.0,
+      "preprocessing_signatures_identical_to_base": true,
+      "partitions": {
+        "fold_1": {
+          "unchanged_numeric_columns": 295,
+          "train_only_category_levels": {
+            "EXRACT11": 75,
+            "EXRACT21": 76
+          },
+          "categorical_split_nodes": {
+            "EXRACT11": 505,
+            "EXRACT21": 672
+          },
+          "preprocessing_signature_identical_to_base": true,
+          "checkpoint_sha256": "da630054cb1cd6d033f7e57173864a4ff8003cca6df2c7b5241ec9f73b704c63"
+        },
+        "fold_2": {
+          "unchanged_numeric_columns": 295,
+          "train_only_category_levels": {
+            "EXRACT11": 75,
+            "EXRACT21": 76
+          },
+          "categorical_split_nodes": {
+            "EXRACT11": 519,
+            "EXRACT21": 675
+          },
+          "preprocessing_signature_identical_to_base": true,
+          "checkpoint_sha256": "ecf4602667433f24c0e2e6816a8fbfd64156a41e9acc42b33597550aec9b2fc4"
+        },
+        "fold_3": {
+          "unchanged_numeric_columns": 295,
+          "train_only_category_levels": {
+            "EXRACT11": 75,
+            "EXRACT21": 76
+          },
+          "categorical_split_nodes": {
+            "EXRACT11": 457,
+            "EXRACT21": 642
+          },
+          "preprocessing_signature_identical_to_base": true,
+          "checkpoint_sha256": "95ade161656d5ce746936a67306aa84ed6a47ea87675df7a3c41750313e8975c"
+        },
+        "full": {
+          "unchanged_numeric_columns": 295,
+          "train_only_category_levels": {
+            "EXRACT11": 75,
+            "EXRACT21": 76
+          },
+          "categorical_split_nodes": {
+            "EXRACT11": 547,
+            "EXRACT21": 657
+          },
+          "preprocessing_signature_identical_to_base": true,
+          "checkpoint_sha256": "1db791bf88d1d4a7c9a363c5bcea8154fd780f8601ac16199c711f1119b3fd3b"
+        }
+      },
+      "csv_sha256": "6f93e5a6e88697c5c71a3551615edfea68c76832693fa5ea4d6fb55596d55d17",
+      "positive_predictions": 13467,
+      "negative_predictions": 95912,
+      "changed_test_decisions_vs_base": 1332
+    }
+  },
+  "seconds": 28.228344299999662
+}

@@ -6,30 +6,31 @@
     "sample_submission": "sample_submission.csv"
   },
   "preprocessing": {
-    "config": "configs/experiments/phase14_codebook_corrections_only.json",
-    "variant": "phase14_codebook_corrections_only",
+    "config": "configs/experiments/combined18_24_preprocessing.json",
+    "variant": "combined18_24",
     "metadata": "configs/feature_metadata.json"
   },
   "model": {
-    "n_estimators": 200,
     "learning_rate": 0.05,
     "max_depth": 5,
     "min_samples_leaf": 200,
     "n_bins": 64,
     "l2_regularization": 1.0,
-    "max_features": 128,
-    "random_seed": 20260920
+    "max_features": 256,
+    "random_seed": 20260920,
+    "n_estimators": 200
   },
-  "decision_threshold": 0.2106169795070252,
-  "threshold_source": "F1-maximizing threshold from three stratified OOF folds covering all 328135 labeled rows (seed 20260919).",
+  "decision_threshold": 0.22007772525099117,
+  "threshold_source": "F1-maximizing threshold from three stratified OOF folds covering all 328135 labeled rows (seed 20260919); same-label calibration, not independent validation.",
   "validation": {
-    "name": "Phase 14",
-    "suite": "configs/experiments/final_phase14_validation.json",
-    "record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json"
+    "name": "combined18_24_features256",
+    "type": "full_train_oof_calibration",
+    "suite": "configs/experiments/final_combined_validation.json",
+    "record": "results/eda/final_combined18_24_submission.json"
   },
   "implementation": "phase14",
   "implementation_source_sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
   "calibration": {
-    "record": "results/eda/final_phase14_submission.json"
+    "record": "results/eda/final_combined18_24_submission.json"
   }
 }

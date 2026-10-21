@@ -1,0 +1,18 @@
+{
+  "reported_at_utc": "2026-10-13T11:29:07+00:00",
+  "source": "User-reported AIcrowd display scores; three decimals; submission URLs not provided.",
+  "variants": {
+    "combined18_24_l2_1": {
+      "f1": 0.455,
+      "accuracy": 0.882,
+      "csv_sha256": "1e4817ab85020156f579ab33fc5384c8aecd24fd8453ce6e37a3dcc094a45854"
+    },
+    "combined18_24_l2_5": {
+      "f1": 0.453,
+      "accuracy": 0.883,
+      "csv_sha256": "09f87dae35ff807532e866ed33a4ef2bac9253de9d825a268c290471a62bc399"
+    }
+  },
+  "best_reported_f1_candidate": "combined18_24_l2_1",
+  "previous_candidates_feedback": "results/aicrowd_candidates_20261013/aicrowd_feedback_20261013.json"
+}

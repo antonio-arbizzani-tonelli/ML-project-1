@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "scope": "Full OOF coverage and reconstructed thresholds; both 297-feature final models replayed without training; signed CSVs preserve official ID order and decisions.",
+  "variants": {
+    "combined18_24_l2_1": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "d5cfd08d742d04f80ed43c952ad3bb64e1b9271f0e9534e22894377e2d936dbc",
+      "features": 297,
+      "threshold": 0.21811010373987366,
+      "full_model_replay_max_difference": 0.0,
+      "csv_sha256": "1e4817ab85020156f579ab33fc5384c8aecd24fd8453ce6e37a3dcc094a45854",
+      "positive_predictions": 13999,
+      "negative_predictions": 95380
+    },
+    "combined18_24_l2_5": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "196ec58c071220de24d72878f98434be2b87748f6e3a4c38ccd6fc57699f65e6",
+      "features": 297,
+      "threshold": 0.2206061257480886,
+      "full_model_replay_max_difference": 0.0,
+      "csv_sha256": "09f87dae35ff807532e866ed33a4ef2bac9253de9d825a268c290471a62bc399",
+      "positive_predictions": 13775,
+      "negative_predictions": 95604
+    }
+  },
+  "seconds": 17.77095950000148
+}

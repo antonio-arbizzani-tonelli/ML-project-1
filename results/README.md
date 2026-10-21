@@ -1,9 +1,11 @@
 # Results and evidence
 
-The selected Phase 14 booster scores **F1 0.452 and accuracy 0.878 on AIcrowd**,
-as reported by the team. Its nested development F1 is **0.442155227**;
-the corrected Phase 34 comparison reaches **0.440803240**. The
-[final report](../docs/FINAL_REPORT.md) explains the model comparison and choice.
+The selected delivery model, **combined18_24_features256**, has user-reported
+**AIcrowd F1 0.455 and accuracy 0.883**. Its full-training OOF calibration F1
+is **0.444070696**; the exact combined pipeline has no nested evaluation.
+Historical Phase 14 remains the nested reference (F1 **0.442155227**) and
+corrected Phase 34 reaches **0.440803240**. The
+[final report](../docs/FINAL_REPORT.md) explains the comparison and selection.
 
 | Location | Contents |
 | --- | --- |
@@ -14,14 +16,54 @@ the corrected Phase 34 comparison reaches **0.440803240**. The
 | [Raw-input benchmark index](experiments/phase33_raw_preprocessing/index.csv) | One controlled preprocessing comparison |
 | [Split-search correction index](experiments/phase34_missing_only_split/index.csv) | One controlled implementation correction |
 | [Full-data training](eda/final_training_summary.json) | Historical Phase 14 runtime, prediction counts and submission fingerprint |
-| [Selected submission](eda/final_phase14_submission.json) | Full-train OOF calibration, selected source and CSV fingerprints, AIcrowd feedback |
-| [Final project checks](eda/final_phase14_readiness.json) | Current clean-package tests, public course tests and integrity checks |
+| [Selected combined submission](eda/final_combined18_24_submission.json) | Current threshold, 297-column representation, hashes and reported AIcrowd feedback |
+| [Final-candidate overview](eda/final_combined_experiments_summary.json) | 17 full-training candidates with calibration metrics, parameters, fingerprints and feedback |
+| [Current delivery checks](eda/final_delivery_readiness_20261021.json) | Clean-package tests, historical hashes, selected submission replay and two-page PDF checks |
+| [Historical Phase 14 submission](eda/final_phase14_submission.json) | Previous full-train OOF calibration, source/CSV fingerprints and AIcrowd feedback |
+| [Historical Phase 14 checks](eda/final_phase14_readiness.json) | Earlier clean-package tests, public course tests and integrity checks |
 | [Earlier project checks](eda/final_readiness.json) | Historical audit and execution environment |
 | [Fixed split](eda/analysis/splits/stratified_seed_20260918.npz) | Development and initial-validation row indices |
 
-The five indices cover **114 records** and store a SHA-256 fingerprint for
-each JSON record. [EXPERIMENTS.md](../docs/EXPERIMENTS.md) connects the studies
+The five historical indices cover **114 records** and store a SHA-256 fingerprint for
+each JSON record. The 17 later candidate deliveries are summarized separately
+and are not new rows in those indices. [EXPERIMENTS.md](../docs/EXPERIMENTS.md) connects the studies
 to their results.
+
+## Final full-training studies
+
+The selected 297-column model combines six Phase 18 raw diet-code exclusions
+with restricted Phase 24 imputation and eight missing-reason indicators.
+It uses the historical booster, 200 trees, depth 5, 64 bins, 256 candidate
+features per node, learning rate 0.05, minimum leaf size 200 and leaf L2=1.
+Three full-training OOF folds select threshold **0.22007772525099117**.
+The selected signed CSV has **13,895 positive and 95,484 negative** predictions.
+
+These pooled labels select and describe the threshold; calibration F1 is not
+an independent or nested estimate. AIcrowd values are user-reported display
+scores rounded to three decimals. The 256-candidate model ties the earlier
+128-candidate combined model at displayed F1 0.455 and has displayed accuracy
+0.883 versus 0.882. An exact F1 improvement and the official tie-break were
+not established. Later alternatives recorded through 16 October have lower
+displayed F1. Repeated local and leaderboard choices limit interpretation.
+
+| Study | Completed candidates | Archived evidence |
+| --- | --- | --- |
+| Individual Phase 18/24/25 | Diet exclusions, restricted imputation, leaf L2=5 | [Feedback](aicrowd_candidates_20261013/aicrowd_feedback_20261013.json), [verification](aicrowd_candidates_20261013/verification.json) |
+| Combined 18+24 | Leaf L2=1 or 5 | [Feedback](aicrowd_combined18_24_20261013/aicrowd_feedback_20261013.json), [verification](aicrowd_combined18_24_20261013/verification.json) |
+| Raw response counts | Functional limitations, other conditions, both groups; no recorded AIcrowd scores | [Verification](aicrowd_count_candidates_20261013/verification.json) |
+| Binning and feature candidates | 128 bins or 256 candidate features | [Feedback](aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json), [verification](aicrowd_combined_tuning_20261014/verification.json) |
+| Growth | 300 trees or all 297 candidate features | [Feedback](aicrowd_combined_growth_20261014/reported_aicrowd_scores.json), [verification](aicrowd_combined_growth_20261014/verification.json) |
+| Regularization | Minimum leaf 400 or depth 4 | [Feedback](aicrowd_combined_regularization_20261015/reported_aicrowd_scores.json), [verification](aicrowd_combined_regularization_20261015/verification.json) |
+| Activity categories | Native categorical splits on EXRACT11/EXRACT21 | [Feedback](aicrowd_combined_categorical_20261015/reported_aicrowd_scores.json), [verification](aicrowd_combined_categorical_20261015/verification.json) |
+| Structural alternatives | Row subsample 0.8; leafwise growth with 32 leaves/depth 8 | [Feedback](aicrowd_combined_structural_20261015/reported_aicrowd_scores.json), [verification](aicrowd_combined_structural_20261015/verification.json) |
+
+The [portable aggregate](eda/final_combined_experiments_summary.json) preserves
+all 17 candidates' exact numerical outcomes and fingerprints from the original
+local manifests. Those manifests, delivery notes, lock files and partial
+checks stay local. Archived completed verification records and user-reported
+feedback are retained in Git without rewriting their historical bytes.
+The historical replay checks reconstructed thresholds and reproduced
+full-model predictions exactly; preparing this summary did not rerun training.
 
 ## Reading the scores
 

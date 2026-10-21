@@ -93,6 +93,55 @@ class TestSelectedValidation(unittest.TestCase):
         self.assertEqual(result["submission_threshold"], 0.25)
         self.assertEqual(result["nested_development_f1"], 0.44)
 
+    def _select_calibration_only(self):
+        self._select_full_train_calibration()
+        self.final["validation"] = {
+            "name": "Combined full-train candidate", "type": "full_train_oof_calibration",
+            "suite": BASELINE_SUITE, "record": self.final["calibration"]["record"],
+        }
+        self.calibration["preprocessing"] = self.preprocessing.copy()
+        self._write(self.final["calibration"]["record"], self.calibration)
+        self._write("configs/final_model.json", self.final)
+
+    def test_calibration_only_candidate_has_no_invented_nested_score(self):
+        self._select_calibration_only()
+        result = self._verify()
+        self.assertTrue(result["passed"], result["errors"])
+        self.assertEqual(result["validation_type"], "full_train_oof_calibration")
+        self.assertIsNone(result["nested_development_f1"])
+        self.assertEqual(result["submission_threshold"], 0.25)
+
+    def test_calibration_only_candidate_rejects_parameter_and_preprocessing_mismatch(self):
+        self._select_calibration_only()
+        self.calibration["model"]["max_depth"] = 7
+        self.calibration["preprocessing"]["variant"] = "other"
+        self._write(self.final["calibration"]["record"], self.calibration)
+        result = self._verify()
+        self.assertFalse(result["passed"])
+        self.assertIn("Full-train calibration and final model parameters differ.", result["errors"])
+        self.assertIn("Full-train calibration and final preprocessing differ.", result["errors"])
+
+    def test_calibration_only_candidate_rejects_different_record_references(self):
+        self._select_calibration_only()
+        self._write("results/eda/other_calibration.json", self.calibration)
+        self.final["validation"]["record"] = "results/eda/other_calibration.json"
+        self._write("configs/final_model.json", self.final)
+        self.assertIn("Selected validation and full-train calibration records differ.",
+                      self._verify()["errors"])
+
+    def test_calibration_only_candidate_requires_a_calibration_reference(self):
+        self._select_calibration_only()
+        del self.final["calibration"]
+        self._write("configs/final_model.json", self.final)
+        self.assertIn("Full-train validation requires a calibration record.", self._verify()["errors"])
+
+    def test_unknown_validation_evidence_type_is_rejected(self):
+        self.final["validation"] = {
+            "name": "Unknown", "type": "unknown", "suite": BASELINE_SUITE, "record": BASELINE,
+        }
+        self._write("configs/final_model.json", self.final)
+        self.assertIn("Unknown selected validation evidence type.", self._verify()["errors"])
+
     def test_final_threshold_must_match_published_full_train_calibration(self):
         self._select_full_train_calibration()
         self.final["decision_threshold"] = 0.3

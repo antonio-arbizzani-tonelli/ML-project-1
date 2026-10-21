@@ -1,0 +1,50 @@
+{
+  "logged_at_utc": "2026-10-15T08:32:40Z",
+  "source": "Scores reported by the user in this chat; not independently fetched from AIcrowd.",
+  "displayed_decimal_places": 3,
+  "scores": [
+    {
+      "variant": "combined18_24_leaf400",
+      "role": "evaluated_alternative",
+      "reported_on_local": "2026-10-15",
+      "csv": "submission_combined18_24_leaf400_full_train_oof.csv",
+      "csv_sha256": "afcbe00b48fc7d4639b93733313c2ddcccf69eca4ed2f7b3e7f9bca63ec9ac91",
+      "n_estimators": 200,
+      "max_features": 256,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 400,
+      "max_depth": 5,
+      "aicrowd_f1": 0.453,
+      "aicrowd_accuracy": 0.882,
+      "local_oof_f1": 0.4432745236414961,
+      "local_oof_accuracy": 0.8797933777256313
+    },
+    {
+      "variant": "combined18_24_depth4",
+      "role": "evaluated_alternative",
+      "reported_on_local": "2026-10-15",
+      "csv": "submission_combined18_24_depth4_full_train_oof.csv",
+      "csv_sha256": "00bdc74fde83110354dd47e520736bfd2308572699b4baccfcbf193612841a45",
+      "n_estimators": 200,
+      "max_features": 256,
+      "l2_regularization": 1.0,
+      "min_samples_leaf": 200,
+      "max_depth": 4,
+      "aicrowd_f1": 0.450,
+      "aicrowd_accuracy": 0.884,
+      "local_oof_f1": 0.44214033374500966,
+      "local_oof_accuracy": 0.8816157983756685
+    }
+  ],
+  "comparison": {
+    "working_reference": "combined18_24_features256",
+    "reference_scores_file": "../aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json",
+    "reference_aicrowd_f1": 0.455,
+    "reference_aicrowd_accuracy": 0.883,
+    "leaf400_displayed_f1_delta_vs_features256": -0.002,
+    "leaf400_displayed_accuracy_delta_vs_features256": -0.001,
+    "depth4_displayed_f1_delta_vs_features256": -0.005,
+    "depth4_displayed_accuracy_delta_vs_features256": 0.001,
+    "interpretation": "Both regularization alternatives have lower reported AIcrowd F1 and lower local OOF F1 than the verified 200-tree features256 reference. Leaf400 also has lower reported accuracy; depth4 has higher reported accuracy. The working reference for F1 remains combined18_24_features256 with min_samples_leaf=200, max_depth=5 and L2=1."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "complete": true,
+  "run_manifest_sha256": "0e2ebc156de8e68358f857d204376015fbb93719a57c68b59899dcbb5d69468b",
+  "origin_manifest_sha256": "55dd6a95fea2fae58993eaa5c6fc1debf5ea62f838e15a0915a6871db56b7633",
+  "scope": "Exactly one authorized parameter change; identical folds and fold-local preprocessing; own OOF threshold; fresh fits with the two separate regularization changes; final model and CSV replay.",
+  "variants": {
+    "combined18_24_leaf400": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "ec61d1952d218ab0e59a90bb0ddc74443203899b524bafb70d3f8268b5e11145",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 400,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "threshold": 0.21749255393178843,
+      "calibration_metrics": {
+        "accuracy": 0.8797933777256313,
+        "precision": 0.37499701492537313,
+        "recall": 0.5419499568593615,
+        "f1": 0.4432745236414961,
+        "specificity": 0.9125150421179302,
+        "balanced_accuracy": 0.7272324994886459
+      },
+      "delta_f1_vs_features256": -0.0007961719115255894,
+      "full_model_replay_max_difference": 0.0,
+      "preprocessing_signatures_identical_to_base": true,
+      "csv_sha256": "afcbe00b48fc7d4639b93733313c2ddcccf69eca4ed2f7b3e7f9bca63ec9ac91",
+      "positive_predictions": 14059,
+      "negative_predictions": 95320,
+      "changed_test_decisions_vs_base": 1104
+    },
+    "combined18_24_depth4": {
+      "rows": 109379,
+      "header": [
+        "Id",
+        "Prediction"
+      ],
+      "label_domain": [
+        -1,
+        1
+      ],
+      "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+      "predictions_sha256": "b92d7ddadd63aff47d6a16ad438ec590ec1b80d82af799b67dc774b76595eb7a",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "threshold": 0.22052129624910013,
+      "calibration_metrics": {
+        "accuracy": 0.8816157983756685,
+        "precision": 0.3786123613468113,
+        "recall": 0.5312855910267472,
+        "f1": 0.44214033374500966,
+        "specificity": 0.9155468645540847,
+        "balanced_accuracy": 0.7234162277904159
+      },
+      "delta_f1_vs_features256": -0.0019303618080120377,
+      "full_model_replay_max_difference": 0.0,
+      "preprocessing_signatures_identical_to_base": true,
+      "csv_sha256": "00bdc74fde83110354dd47e520736bfd2308572699b4baccfcbf193612841a45",
+      "positive_predictions": 13534,
+      "negative_predictions": 95845,
+      "changed_test_decisions_vs_base": 1355
+    }
+  },
+  "seconds": 34.882365800003754
+}

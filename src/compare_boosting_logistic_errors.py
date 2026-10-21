@@ -673,7 +673,8 @@ def run_comparison(config_path: Path, root: Path) -> dict:
         writer.writerows(
             {name: row[name] for name in group_fields} for row in results["group_rows"]
         )
-    output_report.write_text(_markdown(results), encoding="utf-8", newline="\n")
+    with output_report.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(_markdown(results))
     return results
 
 

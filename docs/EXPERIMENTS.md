@@ -1,15 +1,19 @@
 # Experiments and model selection
 
-The selected version is **historical Phase 14 NumPy histogram boosting**, with
-295 source features and parameters selected in Phase 14, including `HAREHAB1`.
-Its nested development F1 is **0.442155227**; the full-data threshold is
-**0.2106169795070252**, calibrated on pooled three-fold OOF predictions over
-all 328,135 training rows. AIcrowd feedback reported by the team is
-**F1 0.452 and accuracy 0.878**. Model search is closed for this version.
-Corrected Phase 34 reaches nested F1 0.440803240; the team retained Phase 14
-after submitting both versions with separately calibrated thresholds.
-The [final report](FINAL_REPORT.md) summarizes the selected pipeline; this
-page records the experiment path and links to the detailed evidence.
+The selected delivery model is **combined18_24_features256**: the historical
+NumPy booster with 297 input features and 256 candidate features per node.
+The team reported **AIcrowd F1 0.455 and accuracy 0.883**. Its full-training
+three-fold OOF threshold is **0.22007772525099117** and calibration F1 is
+**0.444070696**. The exact combined pipeline has no nested evaluation.
+
+Historical Phase 14 remains the nested reference (F1 **0.442155227**, 295
+source columns), while corrected Phase 34 reaches **0.440803240**. These
+historical results cannot be assigned to the combined model. The
+[final report](FINAL_REPORT.md) explains the selected pipeline and limitations;
+the [selected submission record](../results/eda/final_combined18_24_submission.json)
+and [17-candidate overview](../results/eda/final_combined_experiments_summary.json)
+retain its evidence. Model choices use feedback recorded through 16 October
+2026, including the leaderboard, rather than a final independent test.
 
 ## Evaluation protocol
 
@@ -17,7 +21,7 @@ The initial stratified 80/20 split uses seed `20260918`. Baselines inspected
 the 20% partition. Later comparisons use the remaining **262,508 development
 rows**; that initial partition is not an untouched final test.
 
-Final comparisons use three outer folds, seed `20260919`. In each outer
+Historical nested comparisons use three outer folds, seed `20260919`. In each outer
 training partition, two inner folds select the F1 threshold, with seed
 `20260922 + outer fold number`. Preprocessing and model fitting use only the
 corresponding training rows. The refitted outer model is evaluated on the
@@ -41,13 +45,13 @@ selection optimistic. Paired bootstrap intervals in the detailed reports
 condition on the fitted models and thresholds; they do not include retraining
 or repeated candidate selection.
 
-## Selected model and main comparisons
+## Historical nested comparisons
 
 | Pipeline | Nested F1 | Precision | Recall | AP | Log loss |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Historical ridge, lambda 0.0001 | 0.419508 | 0.33303 | 0.56665 | 0.39028 | 0.22917 |
 | Historical logistic, 4,000 updates | 0.425628 | 0.35728 | 0.52632 | 0.38775 | 0.22198 |
-| **Selected Phase 14 histogram boosting** | **0.442155** | **0.367632** | **0.554573** | **0.428609** | **0.215225** |
+| **Historical Phase 14 histogram boosting** | **0.442155** | **0.367632** | **0.554573** | **0.428609** | **0.215225** |
 | Phase 33 historical booster, 321 raw predictors | 0.441457 | 0.366631 | 0.554659 | 0.427835 | 0.215348 |
 | Phase 34 corrected histogram boosting | 0.440803 | 0.362001 | 0.563460 | 0.428781 | 0.215229 |
 | Phase 32 MLP 64 → 32 | 0.424451 | 0.360722 | 0.515531 | 0.387782 | 0.221674 |
@@ -62,17 +66,17 @@ matrix contains the 295 retained Phase 14 source columns; auxiliary flags
 configured for other preprocessing paths are not
 added to this tree representation.
 
-The submission threshold **0.2106169795070252** comes from a new three-fold
+The historical Phase 14 submission threshold **0.2106169795070252** comes from a new three-fold
 OOF calibration on all training rows. Calibration F1 is 0.442770 for Phase 14
 and 0.443570 for Phase 34; these scores use the labels selecting the thresholds
 and are not independent evaluations. Nested development F1 uses each outer
-fold's inner-selected threshold. Settings are in [final_model.json](../configs/final_model.json)
+fold's inner-selected threshold. Its preserved settings are in [final_phase14_model.json](../configs/final_phase14_model.json)
 and [the preprocessing plan](../configs/experiments/phase14_codebook_corrections_only.json).
-The [selected Phase 14 CV configuration](../configs/experiments/final_phase14_validation.json)
+The [historical Phase 14 CV configuration](../configs/experiments/final_phase14_validation.json)
 uses the included frozen historical source; the
 [Phase 34 CV configuration](../configs/experiments/phase34_missing_only_split.json)
 reproduces the corrected candidate. The
-[final submission record](../results/eda/final_phase14_submission.json)
+[historical submission record](../results/eda/final_phase14_submission.json)
 records the calibrated threshold, selected CSV fingerprint and AIcrowd feedback.
 
 The linear metrics are historical results obtained with median fills for
@@ -241,9 +245,9 @@ Corrected nested F1 is **0.440803**, delta **−0.001352**. Fold deltas are
 0.563460, while precision falls from 0.367632 to 0.362001: the corrected
 pipeline adds 206 true positives and 907 false positives. AP changes by
 +0.000172 and log loss by +0.000004. This is an implementation-correction
-comparison with frozen settings. The corrected candidate is selected to
-restore the intended candidate set; the higher historical F1 does not justify
-retaining the omission.
+comparison with frozen settings. The correction restores the intended candidate set. The final competition
+pipeline preserves the historical source for exact reproduction; these
+scores do not establish that omitting candidates is generally preferable.
 
 The paired conditional 95% interval for corrected minus historical F1 is
 [−0.003005, +0.000319], from 20,000 class-stratified paired resamples. It
@@ -282,8 +286,8 @@ under the corrected Phase 34 implementation.
 Neither new weight meets the operational promotion rule. Their paired
 conditional F1-delta intervals include zero; the observed declines do not
 establish a population-level effect. Weight 1 remains preferred within this
-historical comparison. The final Phase 34 configuration was updated by its
-separate study and is not changed by these weight trials.
+historical comparison. These trials do not measure weights under corrected Phase 34 or under the
+later combined delivery pipeline.
 
 [Verified study and runtime scope](../results/eda/phase35_positive_weights_summary.md),
 [comparison JSON](../results/experiments/phase35_positive_weights_comparison.json).
@@ -328,7 +332,7 @@ so its recorded runtime cannot establish a clean full-training speed ratio.
 Verification reproduced all 18 final models, all nine pilots and all 18
 retained-row binners exactly, including inner OOF predictions. Seventeen unit
 tests passed; synthetic end-to-end and interrupted-checkpoint workflows passed
-for both samplers. Final configuration and submission are unchanged.
+for both samplers. Neither sampler was adopted by that study.
 [Study summary](../results/eda/phase36_undersampling_summary.md),
 [comparison JSON](../results/experiments/phase36_undersampling_comparison.json).
 
@@ -367,6 +371,77 @@ were not adopted; the final Phase 14 uses all training rows.
 [Historical ratio study](../results/eda/phase37_undersampling_ratios_summary.md),
 [comparison JSON](../results/experiments/phase37_undersampling_ratios_comparison.json).
 
+## Full-training candidates and leaderboard feedback, 13–16 October
+
+These later runs calibrate thresholds on three stratified OOF folds covering
+all **328,135 labelled rows** (seed `20260919`), then fit on all rows for the
+109,379-row test submission. Preprocessing and imputers fit only the training
+partition of each OOF fit. The pooled labels both select and describe the
+threshold, so the calibration scores below are not independent validation or
+nested estimates. Reported AIcrowd values are user-provided display scores
+rounded to three decimals, without submission URLs or independent retrieval.
+Repeated leaderboard feedback contributed to selection.
+
+| Candidate | Features | OOF calibration F1 | Reported AIcrowd F1 | Reported accuracy |
+| --- | ---: | ---: | ---: | ---: |
+| Phase 18, raw diet exclusions | 289 | 0.444790 | 0.453 | 0.882 |
+| Phase 24, restricted imputation | 303 | 0.443520 | 0.454 | 0.880 |
+| Phase 25, leaf L2=5 | 295 | 0.444429 | 0.453 | 0.883 |
+| Combined 18+24, leaf L2=1, 128 candidates | 297 | 0.443882 | 0.455 | 0.882 |
+| Combined 18+24, leaf L2=5 | 297 | 0.442655 | 0.453 | 0.883 |
+| Combined plus functional-limitation counts (A) | 299 | 0.443450 | Unreported | Unreported |
+| Combined plus other-condition counts (B) | 299 | 0.443144 | Unreported | Unreported |
+| Combined plus both count groups (A+B) | 301 | 0.443352 | Unreported | Unreported |
+| Combined, 128 bins | 297 | 0.443517 | 0.452 | 0.883 |
+| **Selected combined, 256 candidate features** | **297** | **0.444071** | **0.455** | **0.883** |
+| 256 candidates, 300 trees | 297 | 0.445145 | 0.453 | 0.883 |
+| All 297 candidate features, 200 trees | 297 | 0.442930 | 0.452 | 0.885 |
+| 256 candidates, minimum leaf 400 | 297 | 0.443275 | 0.453 | 0.882 |
+| 256 candidates, depth 4 | 297 | 0.442140 | 0.450 | 0.884 |
+| 256 candidates, native activity categories | 297 | 0.442326 | 0.452 | 0.885 |
+| 256 candidates, row subsample 0.8 per tree | 297 | 0.443789 | 0.453 | 0.878 |
+| 256 candidates, leafwise, 32 leaves/depth 8 | 297 | 0.444142 | 0.452 | 0.881 |
+
+The combined representation retains the CDC's existing daily food-frequency
+columns and removes six redundant raw frequency codes (`FRUITJU1`, `FRUIT1`,
+`FVBEANS`, `FVGREEN`, `FVORANG`, `VEGETAB1`). It combines these exclusions
+with Phase 24 restricted imputation: Naive Bayes for documented nonresponses
+in `INCOME2`, `PNEUVAC3`, `EMPLOY1`, ridge for blank height/weight, and BMI
+reconstruction. Eight original missing-reason indicators remain. The matrix
+has **289 source columns plus eight indicators**; remaining structural blanks
+retain direct tree missing routing. `HAREHAB1` remains present.
+
+The selected model keeps 200 trees, depth 5, learning rate 0.05, minimum leaf
+size 200, 64 bins, leaf L2=1, weight 1 and seed `20260920`. Relative to the
+first combined model, only candidate features per node change from 128 to
+256. Both display F1 0.455; the latter's accuracy is 0.883 versus 0.882.
+Rounding does not establish an exact F1 improvement, and the official
+leaderboard tie-break was not verified. Later recorded alternatives do not
+improve its displayed F1. The 300-tree trial has the highest local calibration
+F1 but lower reported AIcrowd F1, illustrating why calibration does not provide
+an independent selection score.
+
+The count trials retain individual source features and add yes/valid-response
+counts from raw codes 1/2: A uses `BLIND`, `DECIDE`, `USEEQUIP`; B uses
+`ADDEPEV2`, `CHCCOPD1`, `CHCKIDNY`. They do not improve the earlier combined
+model's calibration F1, and no AIcrowd feedback is recorded for them.
+
+Six fixed probability blends of Phase 18/24/25 were explored without new fits
+or submissions. Their calibration F1 values (0.444215–0.444616) do not exceed
+Phase 18's 0.444790. A later activity-category blend diagnostic reaches
+0.444467 at 25% categorical weight, compared with 0.444071 for the reference;
+its reused OOF labels do not establish independent improvement. Neither
+exploratory screen changes the selected single model.
+
+The [aggregate evidence](../results/eda/final_combined_experiments_summary.json)
+records exact thresholds, parameters, counts, hashes and archived verification
+scopes for all 17 candidates. Historical verification reconstructed pooled
+OOF thresholds, checked official IDs/signed labels and replayed full-model
+predictions with zero difference. The selected CSV contains **13,895 positive
+and 95,484 negative** predictions; its SHA-256 is in the
+[selected submission record](../results/eda/final_combined18_24_submission.json).
+These archived replay checks are separate from the delivery checks run now.
+
 ## Retained HAREHAB1 and evidence navigation
 
 HAREHAB1 asks about rehabilitation after a heart attack. Its availability is
@@ -374,9 +449,9 @@ conditioned by the prior CVDINFR4 response, and all 620 development rows with a
 recorded code are positive. It remains in the final classification pipeline;
 the isolated Phase 15 ablation quantifies the loss from removing it. The
 result concerns classification of reported disease and is not a measure of
-prediction before the event. [Final report](FINAL_REPORT.md#harehab1).
+prediction before the event. [Final report](FINAL_REPORT.md#split-search-correction-and-disease-timing).
 
-There are **114 model records**, including repeated runs and feasibility
+The historical nested/screening ledgers contain **114 model records**, including repeated runs and feasibility
 benchmarks, distributed across five indices:
 
 - [Main experiment ledger](../results/experiments/index.csv): 108 records.
@@ -384,6 +459,9 @@ benchmarks, distributed across five indices:
 - [MLP ledger](../results/experiments/mlp/index.csv): 2 records.
 - [Raw-input benchmark ledger](../results/experiments/phase33_raw_preprocessing/index.csv): 1 record.
 - [Split-search correction ledger](../results/experiments/phase34_missing_only_split/index.csv): 1 record.
+
+The 17 later full-training candidate deliveries above are summarized separately
+and are not additional rows in those historical ledgers.
 
 Each record links configuration, metrics and available artifact fingerprints.
 For historical booster records, the primary nested result is in

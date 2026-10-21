@@ -1,7 +1,22 @@
 # Experiment records are hashed byte-for-byte in results/experiments/index.csv.
 src/numpy_boosting_phase14.py text eol=lf
+src/feature_preprocessing.py -text whitespace=cr-at-eol
+src/conditional_imputation.py text eol=lf
+src/baseline_preprocessing.py -text whitespace=cr-at-eol
+src/evaluation.py text eol=lf
 helpers.py text eol=lf
 results/experiments/*.json text eol=lf
 results/experiments/index.csv text eol=lf
 results/experiments/**/*.json text eol=lf
 results/experiments/**/index.csv text eol=lf
+
+# New studies freeze these bytes; preserve the original CRLF JSON recipes.
+configs/experiments/combined*.json -text whitespace=cr-at-eol
+configs/experiments/count*.json -text whitespace=cr-at-eol
+results/aicrowd_*/*.json -text whitespace=cr-at-eol
+tools/final_combined*.py text eol=lf
+tools/final_count_candidates.py text eol=lf
+tools/final_promising_candidates.py text eol=lf
+src/count_features.py text eol=lf
+src/numpy_boosting_categorical.py text eol=lf
+src/numpy_boosting_structural.py text eol=lf

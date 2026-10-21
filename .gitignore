@@ -36,6 +36,23 @@ submission*.csv
 tests/tmp*/
 pytest-cache-files-*/
 results/phase35_smoke_*/
+# Tests of optional local scheduling helpers are kept with the local runs.
+tests/test_count_ab_parallel_tail.py
+tests/test_tuning_parallel_tail.py
+
+# Delivery work directories contain local paths and duplicated generated output.
+# Publish only the dated aggregate AIcrowd feedback; portable summaries live in eda/.
+results/aicrowd_*/*
+!results/aicrowd_*/reported_aicrowd_scores.json
+!results/aicrowd_*/aicrowd_feedback_20261013.json
+!results/aicrowd_*/verification.json
+
+# LaTeX build intermediates (the report source and PDF are versioned).
+*.aux
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
 
 # Editors and operating systems
 .local/

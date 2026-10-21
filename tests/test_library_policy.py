@@ -15,6 +15,7 @@ ALLOWED_ROOTS = {
     "datetime",
     "gc",
     "hashlib",
+    "heapq",
     "helpers",
     "implementations",
     "json",

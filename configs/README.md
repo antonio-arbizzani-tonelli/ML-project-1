@@ -1,18 +1,25 @@
 # Configuration guide
 
-[final_model.json](final_model.json) defines the selected historical Phase 14 booster
-used by `python run.py`: Phase 14 model parameters and preprocessing, data
-filenames, and threshold **0.2106169795070252**, selected on pooled three-fold
-OOF predictions over all 328,135 training rows. The included historical
-source is identified by its SHA-256; the calibration and AIcrowd scores are
-in [the final submission record](../results/eda/final_phase14_submission.json).
+[final_model.json](final_model.json) selects `combined18_24_features256` for
+`python run.py`: 297 processed columns, historical Phase 14 numerical source,
+200 trees, depth 5, 256 candidate features, and threshold **0.22007772525099117**.
+The threshold is calibrated on three-fold OOF predictions over all 328,135
+training rows. [The final submission record](../results/eda/final_combined18_24_submission.json)
+separates calibration from reported AIcrowd F1 0.455 / accuracy 0.883.
+This exact combined pipeline has no completed nested development evaluation.
+[final_phase14_model.json](final_phase14_model.json) preserves the previous
+295-column submission and its threshold for historical reproduction.
 
 | File | Contents |
 | --- | --- |
 | [final_model.json](final_model.json) | Settings for full-data training and prediction |
-| [Selected Phase 14 validation](experiments/final_phase14_validation.json) | Explicit historical implementation, original development folds and inner threshold selection |
+| [Combined representation](experiments/combined18_24_preprocessing.json) | Phase 18 diet exclusions, restricted Phase 24 imputation and eight missing-reason flags |
+| [Selected combined parameters](experiments/combined18_24_features256.json) | Original full-train study recipe: 200 trees, depth 5, 64 bins, 256 candidate features |
+| [Combined validation recipe](experiments/final_combined_validation.json) | Explicit historical implementation for a fresh nested evaluation; not yet executed |
+| [Historical full-data model](final_phase14_model.json) | Previous Phase 14 submission, retained for reproduction |
+| [Historical Phase 14 validation](experiments/final_phase14_validation.json) | Explicit historical implementation, original development folds and inner threshold selection |
 | [feature_metadata.json](feature_metadata.json) | Feature names, semantic types and codebook response codes |
-| [Phase 14 cleaning](experiments/phase14_codebook_corrections_only.json) | The selected 295 source columns, exclusions and code corrections |
+| [Phase 14 cleaning](experiments/phase14_codebook_corrections_only.json) | Historical 295 source columns, exclusions and code corrections |
 | [Phase 14 CV](experiments/phase14_boosting_codebook_corrections_only.json) | Historical suite: three outer folds and two inner folds for threshold selection |
 | [Phase 32 MLP](experiments/phase32_mlp.json) | Dedicated neural preprocessing and the two evaluated architectures |
 | [Raw tree inputs](experiments/phase33_raw_tree_preprocessing.json) | All 321 predictors, preserving original response codes and NaNs |
@@ -32,7 +39,7 @@ Configurations specify settings and input representations; the executed source
 also determines the result. Recorded Phase 14 and Phase 33 scores used the
 implementation before the missing-only split correction. Running those settings
 with the default corrected CV code performs a new experiment. Use
-`final_phase14_validation.json` for the selected historical pipeline and the
+`final_phase14_validation.json` for the historical nested reference and the
 Phase 34 suite for the corrected comparison. The historical preprocessing comparison keeps
 both its raw and cleaned controls on the previous implementation.
 

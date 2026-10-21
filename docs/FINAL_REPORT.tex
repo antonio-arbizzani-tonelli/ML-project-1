@@ -8,7 +8,7 @@
 \usepackage[hidelinks]{hyperref}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{4pt}
-\renewcommand{\arraystretch}{1.12}
+\renewcommand{\arraystretch}{1.10}
 \newcommand{\heading}[1]{\vspace{5pt}{\large\bfseries #1}\par\vspace{2pt}}
 \newcommand{\code}[1]{\texttt{\small #1}}
 \pagestyle{plain}
@@ -25,70 +25,63 @@ EPFL CS-433 --- Project 1
 \end{center}
 \vspace{-3pt}
 
-We selected Phase 14 histogram gradient boosting implemented in NumPy.
-Its AIcrowd submission obtains \textbf{F1 0.452 and accuracy 0.878}.
-Nested development F1 is 0.44216, compared with 0.42563 for logistic regression.
-Codebook-based cleaning and subsequent experiments led us to keep 295 features,
-direct handling of missing values, all training rows and 200 trees.
+We selected histogram gradient boosting implemented in NumPy, combining
+Phase 18 diet representation, Phase 24 restricted imputation and 256 candidate
+features per node. The team reported \textbf{AIcrowd F1 0.455 and accuracy
+0.883}. This final pipeline has 297 inputs. Its threshold-calibration F1 is
+0.444071; an independent nested evaluation of this exact combination was not run.
 
 \heading{Data and evaluation}
 The dataset contains 328,135 labelled rows, 321 predictors and 109,379 test
 rows. The target \code{\_MICHD} records self-reported myocardial infarction
 or coronary heart disease. Positives make up 8.83\% of training labels;
-44.79\% of predictor cells are blank. We used F1 as our main criterion:
-always predicting negative gives 91.17\% accuracy and F1 zero.
+44.79\% of predictor cells are blank. Always predicting negative gives
+91.17\% accuracy and F1 zero, motivating our focus on F1.
 
-The initial stratified split uses seed 20260918: 262,508 development rows and
-65,627 local validation rows. The reported comparisons use three outer folds
-on development data (seed 20260919). Within each outer training partition,
-two inner folds produce out-of-fold predictions and select the threshold
-maximising F1. We then apply that threshold to the excluded outer fold.
-Preprocessing, imputation, feature selection and sampling use only the training
-partition of each fit. Validation retains all rows and its original prevalence.
-Pooled F1 uses the outer predictions, with the threshold
-chosen separately for each fold.
+The initial stratified split (seed 20260918) gives 262,508 development and
+65,627 local validation rows. Historical comparisons use three outer folds
+on development data (seed 20260919). Two inner folds within each outer
+training partition generate out-of-fold (OOF) predictions and select the
+F1 threshold; that threshold is applied to the excluded outer fold.
+Preprocessing, imputation, feature selection and sampling use only the
+training partition of each fit. Validation preserves all rows and prevalence.
+Later submission candidates instead calibrate thresholds on three OOF folds
+covering all labelled rows; those calibration scores are reported separately.
 
-\heading{Methods and preprocessing choices}
-In \code{implementations.py}, we implemented all six required functions:
+\heading{Methods and preprocessing}
+In \code{implementations.py}, we implemented the six required methods:
 linear regression with GD/SGD, least squares, ridge, logistic regression and
-L2 logistic regression. Least squares and ridge solve the normal equations;
-linear losses use half-MSE. Returned losses exclude regularisation.
+L2 logistic regression. Least squares and ridge solve normal equations;
+linear losses use half-MSE and returned losses exclude regularisation.
+Historical linear baselines use median imputation, training-fitted scaling
+and age interactions. Logistic regression uses $\gamma=0.2$, 4,000 updates
+and $\lambda=0$; ridge uses $\lambda=10^{-4}$ and inner-OOF logistic calibration.
 
-Linear baselines use historical median imputation, training-fitted
-standardisation and age interactions. Logistic regression starts from zero,
-with $\gamma=0.2$, 4,000 updates and $\lambda=0$.
-Ridge uses $\lambda=10^{-4}$, selected from three values, with logistic
-calibration fitted on inner OOF scores. These results precede categorical
-mode imputation.
+\textbf{Codebook cleaning.} The CDC 2015 codebook guides types, units,
+response codes and exclusions. Removing identifiers, interview date,
+survey-design fields and redundant measurements leaves 295 source columns.
+Documented nonresponse codes become \code{NaN}; zero-quantity codes such as
+\code{ALCDAY5=888} and \code{PHYSHLTH=88} become zero. On retained development
+columns this recodes 1.10 million finite nonresponses and about 900,000
+zero quantities. Histogram trees fit quantile bins and missing-value
+directions on training rows, then use logistic gradients and curvatures
+to update leaf predictions.
 
-\textbf{Codebook-based preprocessing.} Using the
-\href{https://www.cdc.gov/brfss/annual_data/2015/pdf/CODEBOOK15_LLCP.pdf}{CDC 2015 codebook},
-we audited types, units, response codes and redundancies. We removed identifiers, the full interview
-date, survey-design fields and redundant measurements, keeping 295 source
-columns. Nonresponse codes become \code{NaN} only where the codebook assigns
-that meaning; \code{ALCDAY5=888} and \code{PHYSHLTH=88} become zero.
-This preserves valid category meanings and separates nonresponse from zero
-quantities. Across the retained development columns, we recode 1.10 million
-finite nonresponses and about 900,000 documented zero quantities.
-Questionnaire branching motivates retaining a distinct missing
-state: each tree split learns its direction from training rows.
-Quantile bins are also fitted on training data. Each new tree uses the
-gradient and curvature of logistic loss to update predictions.
+\textbf{Final representation.} Phase 18 removes six mixed-unit raw diet
+columns while retaining their existing CDC per-day equivalents, leaving 289
+source columns. Phase 24 adds eight original missing-reason indicators and
+feature-only imputation: Naive Bayes fills documented unknown/refused responses
+in \code{INCOME2}, \code{PNEUVAC3} and \code{EMPLOY1}; ridge predicts missing
+height/weight and BMI is reconstructed when possible. Imputers and anchor
+bins are fitted within each training partition. Structural blanks remain
+missing. The combined representation has \textbf{297 columns}.
 
-An implementation audit found omitted splits separating all observed
-values from missing responses. Phase 34 restores this candidate and was
-evaluated on the same features, parameters and nested folds. The submitted
-model preserves the historical Phase 14 search for exact reproduction.
+The selected model uses \textbf{200 trees, depth 5}, learning rate 0.05,
+at least 200 rows per leaf, 64 quantile bins, \textbf{256 candidates per node},
+leaf L2 of 1, positive weight 1 and model seed 20260920. It retains the
+historical Phase 14 numerical implementation for exact reproduction.
 
-The selected configuration uses \textbf{200 trees, depth 5}, learning rate
-0.05, at least 200 rows per leaf, 64 bins, 128 candidate features per node,
-leaf L2 of 1, positive weight 1 and seed 20260920.
-The initial grid compared depths 3/5, 100/200/400 trees and 64/128 candidates.
-Before the split correction, additional codebook corrections raise F1 from
-0.44174 to 0.44216, with mixed directions across folds. Their consistent
-interpretation of response codes supports retaining them.
-
-\heading{Results on the same development data}
+\heading{Historical nested development evidence}
 \begin{center}
 \small
 \begin{tabularx}{\linewidth}{@{}Xrrrr@{}}
@@ -97,104 +90,108 @@ Pipeline & F1 & Precision & Recall & AP \\
 \midrule
 Ridge & 0.41951 & 0.33303 & 0.56665 & 0.39028 \\
 Logistic regression & 0.42563 & 0.35728 & 0.52632 & 0.38775 \\
-Raw booster, earlier split search & 0.44146 & 0.36663 & 0.55466 & 0.42783 \\
-\textbf{Selected Phase 14 booster} & \textbf{0.44216} & \textbf{0.36763} & \textbf{0.55457} & \textbf{0.42861} \\
+Raw-input booster & 0.44146 & 0.36663 & 0.55466 & 0.42783 \\
+Phase 14, cleaned 295 inputs & 0.44216 & 0.36763 & 0.55457 & 0.42861 \\
 Phase 34, complete split search & 0.44080 & 0.36200 & 0.56346 & 0.42878 \\
 MLP 64/32 & 0.42445 & 0.36072 & 0.51553 & 0.38778 \\
 \bottomrule
 \end{tabularx}
 \end{center}
 \vspace{-4pt}
-The selected booster improves F1 by \textbf{0.01653} over logistic regression, increasing
-both precision and recall. Average precision (AP) also supports better
-ranking of positives. The three fold F1 scores are 0.43903, 0.44405 and 0.44351.
+Phase 14 exceeds logistic F1 by 0.01653. Cleaning exceeds raw-input F1 by
+0.00070; its paired conditional 95\% interval includes zero. Activity one-hot,
+exact discrete bins, restricted imputation, stronger regularisation, positive
+weights, two-seed averaging and selecting 100/60 columns did not improve
+ the matched Phase 14 control. Random undersampling at 5:1/7:1 gives
+0.43823/0.43982; random/hybrid 3:1 on corrected Phase 34 gives
+0.43939/0.39353. These are historical comparisons, not a nested estimate
+for the final combined pipeline.
 
 \newpage
-\heading{Experiments that guided the final choice}
-The control is historical Phase 14 (F1 0.44216), except $\dagger$ rows, which
-use corrected Phase 34 (0.44080). All thresholds are selected on inner folds;
-$\Delta$ is the difference from the corresponding control.
+\heading{Full-training calibration and AIcrowd selection}
+For each candidate below, three stratified folds (seed 20260919) cover all
+328,135 labelled rows. Each fold fits its own preprocessing and booster.
+Pooled OOF probabilities select the F1 threshold, breaking threshold ties
+by accuracy; a final fit then uses all labelled rows. \textbf{OOF F1 uses the
+same labels that selected the threshold and is a calibration score.}
+AIcrowd values are team-reported display scores at three decimals, recorded
+on 12--16 October 2026; they were not independently fetched from the platform.
+
 \begin{center}
 \small
-\begin{tabularx}{\linewidth}{@{}Xrr@{}}
+\begin{tabularx}{\linewidth}{@{}Xrrr@{}}
 \toprule
-Experiment & F1 & $\Delta$F1 \\
+Submission candidate & OOF F1 & AIcrowd F1 & AIcrowd accuracy \\
 \midrule
-Daily food frequencies / activity one-hot & 0.44186 / 0.44057 & $-0.00029$ / $-0.00159$ \\
-Exact discrete bins / eight nonresponse indicators & 0.44078 / 0.44032 & $-0.00137$ / $-0.00183$ \\
-Selective imputation & 0.44179 & $-0.00036$ \\
-100 / 60 features selected by permutation & 0.43922 / 0.43758 & $-0.00293$ / $-0.00457$ \\
-Learning rate 0.025, 400 trees / depth 7 & 0.44059 / 0.44116 & $-0.00157$ / $-0.00099$ \\
-Positive weight 1.25 / 1.5 & 0.44083 / 0.44061 & $-0.00132$ / $-0.00154$ \\
-Mean probabilities across two random seeds & 0.44111 & $-0.00104$ \\
-Removal of \code{HAREHAB1} & 0.43104 & $-0.01112$ \\
-Random undersampling 5:1 / 7:1 & 0.43823 / 0.43982 & $-0.00393$ / $-0.00234$ \\
-Random / hybrid hard undersampling 3:1$\dagger$ & 0.43939 / 0.39353 & $-0.00141$ / $-0.04727$ \\
+Phase 14 reference & 0.442770 & 0.452 & 0.878 \\
+Phase 18 diet representation & 0.444790 & 0.453 & 0.882 \\
+Phase 24 restricted imputation & 0.443520 & 0.454 & 0.880 \\
+Phase 25 leaf L2=5 & 0.444429 & 0.453 & 0.883 \\
+Combined 18+24, 128 candidates, L2=1 & 0.443882 & 0.455 & 0.882 \\
+Combined 18+24, 128 candidates, L2=5 & 0.442655 & 0.453 & 0.883 \\
+Combined 18+24, 128 bins & 0.443517 & 0.452 & 0.883 \\
+\textbf{Combined 18+24, 256 candidates} & \textbf{0.444071} & \textbf{0.455} & \textbf{0.883} \\
+\midrule
+\multicolumn{4}{@{}l}{Separate changes to the selected 256-candidate configuration:} \\
+300 trees & 0.445145 & 0.453 & 0.883 \\
+297 candidates per node & 0.442930 & 0.452 & 0.885 \\
+Minimum leaf size 400 & 0.443275 & 0.453 & 0.882 \\
+Maximum depth 4 & 0.442140 & 0.450 & 0.884 \\
+Native categorical splits on two activities & 0.442326 & 0.452 & 0.885 \\
+80\% stratified row sample per tree & 0.443789 & 0.453 & 0.878 \\
+Leaf-wise growth, 32 leaves, depth 8 & 0.444142 & 0.452 & 0.881 \\
 \bottomrule
 \end{tabularx}
 \end{center}
 \vspace{-4pt}
 
-\textbf{Missing values and representation.} Selective imputation combines
-Naive Bayes for three categorical columns, ridge for height/weight and BMI
-reconstruction. Screening F1 0.44267 uses a threshold selected on the same
-predictions being evaluated; inner threshold selection gives 0.44179.
-We retain direct missing-value handling. One-hot, daily frequencies and
-exact bins also score below the control. Selecting 100 or 60 features
-worsens every fold, supporting all 295 columns.
+The selected configuration ties the earlier combined model at the displayed
+F1 precision and has 0.001 greater displayed accuracy. Rounding prevents
+establishing an exact F1 improvement. All seven subsequent alternatives in
+the table have lower reported F1. The 300-tree model improves calibration F1
+but loses 0.002 displayed AIcrowd F1, illustrating imperfect transfer from
+calibration to leaderboard feedback.
 
-\textbf{Complexity and positive recovery.} More trees, greater depth and
-positive weighting fail to improve the historical control. Weights 1.25/1.5
-lose F1 in every fold; weight 2 scores 0.43912, adding 126 true positives and
-850 false positives.
-Two-seed averaging also loses in every fold. The ReLU MLPs (64/32 and 128/64)
-use sigmoid output, Adam (0.001, batch 512), binary cross-entropy and L2
-$10^{-4}$, with imputation, scaling, one-hot and frequency conversion.
-Epoch selection uses an inner 10\% split (maximum 80, patience 8), then refitting.
-Both lose in every fold (F1 0.42445/0.41927).
+Three further count-feature candidates augment the 128-candidate combined
+base with positive-response and valid-response counts for functional
+limitations, other diagnoses, or both. They give calibration F1
+0.443450, 0.443144 and 0.443352, below their base 0.443882. Their AIcrowd
+scores are unavailable; we do not infer them from local OOF results.
 
-\textbf{Training balance.} Undersampling keeps all positives and 3, 5 or 7
-negatives per positive; statistics and bins use retained rows.
-Hybrid 3:1 takes half its negatives randomly and half from a training-only
-pilot's highest scores (24 trees, depth 3). Its AP falls from 0.42878 to
-0.38423, consistent with reduced negative coverage. These matched comparisons
-support retaining all rows and weight 1.
+\heading{Interpretation and limitations}
+\textbf{Split-search audit.} Phase 34 adds an omitted candidate separating
+all observed values from missing responses. With Phase 14 features and
+parameters fixed, nested F1 changes from 0.442155 to 0.440803: 206 more
+true positives and 907 more false positives. Its paired conditional 95\%
+interval [$-0.00300$, $+0.00032$] includes zero. The final submission keeps
+the historical search; results for it and the corrected algorithm remain
+distinct. These intervals condition on fixed fitted models and thresholds.
 
-\heading{Interpreting the result}
-The Phase 34 search adds 206 true positives and 907 false positives
-($\Delta$F1 $-0.00135$); AP and log loss barely change. Its paired 95\% interval
-[$-0.00300$, $+0.00032$] includes zero. Phase 14 remains the submitted model.
-Intervals condition on fixed fits, samples and thresholds.
+\textbf{Disease timing.} \code{HAREHAB1} asks about rehabilitation after a
+heart attack; all 620 recorded development responses belong to positives.
+Removing it from historical Phase 14 lowers F1 by 0.01112. It remains in
+the final model to classify reported disease. A model intended to predict
+before an event would require excluding it and auditing the timing of other
+responses. The score does not establish prospective clinical performance.
 
-The selected model finds \textbf{12,855 of 23,180 positives}, with 22,112 false
-positives and 10,325 false negatives. At precision 36.76\%, roughly
-two thirds of flagged cases are false alarms.
+\textbf{Repeated selection.} Development folds were reused for many choices,
+and initial baselines consulted the local 20\% partition. Later candidates
+use all labelled rows for calibration; AIcrowd feedback contributed to
+selection. Neither calibration F1 nor the selected leaderboard score is an
+untouched estimate of performance after this search. The historical nested
+results do not measure the exact combined submission.
 
-\textbf{HAREHAB1 contributes to the score.} It asks about rehabilitation
-after a heart attack; all 620 recorded development responses belong to
-positives. Its historical Phase 14 ablation lowers F1 by 0.01112. We retained it to classify
-reported disease in this dataset. For prediction before an event, we would
-exclude it and check when the other responses would become available.
-
-\heading{Reproduction and limitations}
-Results are recorded in \path{results/experiments/}. After
-\code{python -m tools.prepare\_data}, the selected CV is reproduced with:\par
-{\small\ttfamily python -m src.run\_boosting\_cv configs/experiments/final\_phase14\_validation.json}\par
-For final calibration, three stratified OOF folds cover all 328,135 labelled
-rows, fitting preprocessing and models within each training fold.
-Pooled predictions select threshold \textbf{0.2106169795}. Calibration F1 is
-0.442770 for Phase 14 and 0.443570 for Phase 34; these scores use the labels
-that selected their thresholds and are not independent evaluations.
-\path{configs/final_model.json} fixes the selected implementation and threshold.
-The following command trains on all labelled rows:\par
+\heading{Reproduction and final output}
+Install the dependencies, supply the official CSVs and run
+\code{python -m tools.prepare\_data}. The selected implementation,
+preprocessing and threshold are fixed in \path{configs/final_model.json}.
+Train on all labelled rows and generate predictions with:\par
 {\small\ttfamily python run.py -{}-data-dir data/raw/dataset -{}-output submission.csv}\par
-The verified CSV contains 109,379 predictions: 14,746 positive and 94,633
-negative. AIcrowd returned \textbf{F1 0.452, accuracy 0.878} for Phase 14.
-
-\textbf{Development and leaderboard results follow model selection.}
-We reused these folds and consulted the local 20\% in initial baselines.
-Inner threshold selection reduces one source of optimism. We compared the
-two predefined split-search versions on AIcrowd and retained Phase 14;
-leaderboard feedback also contributed to the final choice.
+The selected threshold is \textbf{0.22007772525099117}. The verified CSV has
+109,379 rows: \textbf{13,895 positive and 95,484 negative}, header
+\code{Id,Prediction}, labels $-1/+1$ and IDs in official sample order.
+Its SHA-256 starts \code{d01c3949dea567dc}. Compact manifests, verification
+records and reported feedback are retained under \path{results/};
+\path{docs/FINAL_REPORT.md} links the full evidence and calibration commands.
 
 \end{document}

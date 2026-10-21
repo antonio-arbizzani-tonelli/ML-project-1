@@ -1,0 +1,21 @@
+{
+  "reported_at_utc": "2026-10-13T09:50:24.090421+00:00",
+  "source": "User-reported AIcrowd display scores; three decimals; submission URLs not provided.",
+  "variants": {
+    "phase18": {
+      "f1": 0.453,
+      "accuracy": 0.882,
+      "csv_sha256": "7535a1d83ba4f1bb0101a4b676aff9f45ea49f1f3dd3a820900f81df82c9201f"
+    },
+    "phase24": {
+      "f1": 0.454,
+      "accuracy": 0.88,
+      "csv_sha256": "ae2b5f141a4d11f788cd3927a35c418fdad5437f402947452b078298816a7932"
+    },
+    "phase25": {
+      "f1": 0.453,
+      "accuracy": 0.883,
+      "csv_sha256": "7b2e294d874d69198517e5a76a21022935ccd7169cce4ff3093cdfe50c577659"
+    }
+  }
+}

@@ -118,6 +118,15 @@ def verify(root: Path = ROOT) -> dict:
     validation = final.get("validation", {
         "name": "Phase 14", "suite": BASELINE_SUITE, "record": BASELINE,
     })
+    validation_type = validation.get("type", "nested_development")
+    if validation_type not in {"nested_development", "full_train_oof_calibration"}:
+        errors.append("Unknown selected validation evidence type.")
+    calibration_only = validation_type == "full_train_oof_calibration"
+    if calibration_only:
+        if "calibration" not in final:
+            errors.append("Full-train validation requires a calibration record.")
+        elif validation["record"] != final["calibration"]["record"]:
+            errors.append("Selected validation and full-train calibration records differ.")
     selected = {}
     for kind in ("suite", "record"):
         name = validation[kind]
@@ -137,7 +146,7 @@ def verify(root: Path = ROOT) -> dict:
             if final["preprocessing"][field] != suite[suite_field]:
                 errors.append(f"Final preprocessing {field} differs from the selected validation suite.")
     nested_f1 = None
-    if "record" in selected:
+    if "record" in selected and not calibration_only:
         record = selected["record"]
         if final["model"] != record["config"]["model"]["parameters"]:
             errors.append("Final model parameters differ from the selected validation record.")
@@ -170,6 +179,8 @@ def verify(root: Path = ROOT) -> dict:
             calibration = json.loads((root / name).read_text(encoding="utf-8"))
             if calibration["model"] != final["model"]:
                 errors.append("Full-train calibration and final model parameters differ.")
+            if (calibration_only or "preprocessing" in calibration) and calibration.get("preprocessing") != final["preprocessing"]:
+                errors.append("Full-train calibration and final preprocessing differ.")
             if abs(calibration["threshold"]["value"] - final["decision_threshold"]) > 1e-15:
                 errors.append("Final threshold differs from its full-train OOF calibration record.")
             if calibration["implementation"] != final.get("implementation"):
@@ -198,6 +209,7 @@ def verify(root: Path = ROOT) -> dict:
         "environment": {"python": platform.python_version()},
         "passed": not errors, "counts": counts, "errors": errors,
         "selected_model": validation["name"], "nested_development_f1": nested_f1,
+        "validation_type": validation_type,
         "submission_threshold": final["decision_threshold"],
         "scope": "Git-eligible working-tree files, links, syntax, JSON, ledger hashes and frozen configuration. No training or official-runtime execution.",
     }

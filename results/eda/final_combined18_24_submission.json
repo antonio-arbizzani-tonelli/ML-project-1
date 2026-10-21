@@ -1,0 +1,121 @@
+{
+  "selected_model": "combined18_24_features256",
+  "selection_as_of": "2026-10-21",
+  "implementation": "phase14",
+  "implementation_source": "src/numpy_boosting_phase14.py",
+  "implementation_sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+  "preprocessing": {
+    "config": "configs/experiments/combined18_24_preprocessing.json",
+    "variant": "combined18_24",
+    "metadata": "configs/feature_metadata.json"
+  },
+  "model": {
+    "learning_rate": 0.05,
+    "max_depth": 5,
+    "min_samples_leaf": 200,
+    "n_bins": 64,
+    "l2_regularization": 1.0,
+    "max_features": 256,
+    "random_seed": 20260920,
+    "n_estimators": 200
+  },
+  "training_rows": 328135,
+  "test_rows": 109379,
+  "features": 297,
+  "threshold": {
+    "value": 0.22007772525099117,
+    "method": "pooled_3_fold_full_train_oof_f1",
+    "fold_count": 3,
+    "fold_seed": 20260919,
+    "training_rows": 328135,
+    "preprocessing_fit": "within_each_training_fold_only",
+    "tie_break": "accuracy"
+  },
+  "calibration_metrics": {
+    "accuracy": 0.8811342892407088,
+    "precision": 0.3782445064950832,
+    "recall": 0.5376358930112166,
+    "f1": 0.4440706955530217,
+    "specificity": 0.9144036635913892,
+    "balanced_accuracy": 0.7260197783013029
+  },
+  "calibration_confusion_counts": {
+    "true_positives": 15578,
+    "false_positives": 25607,
+    "true_negatives": 273553,
+    "false_negatives": 13397
+  },
+  "calibration_interpretation": "OOF F1 uses the same labels to select and describe its threshold. It is not an unbiased test score.",
+  "nested_development_evaluation": null,
+  "nested_development_note": "No nested evaluation has been executed for this exact combined pipeline. The Phase 14 nested result is a historical reference with different preprocessing and max_features.",
+  "aicrowd": {
+    "f1": 0.455,
+    "accuracy": 0.883,
+    "reported_on": "2026-10-14",
+    "provenance": "User-reported AIcrowd displayed scores, three decimal places; not independently fetched and submission URL unavailable.",
+    "feedback_record": "results/aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json",
+    "selection_note": "Same displayed F1 as combined18_24_l2_1 (.455), higher displayed accuracy (.883 versus .882). An exact F1 improvement and official tie-break are not established. Later alternatives have lower reported F1."
+  },
+  "submission": {
+    "local_path": "results/aicrowd_combined_tuning_20261014/submission_combined18_24_features256_full_train_oof.csv",
+    "sha256": "d01c3949dea567dc9aa929ba232cbe77395d236b1c4a4492624e0bec5305e883",
+    "rows": 109379,
+    "positive_predictions": 13895,
+    "negative_predictions": 95484,
+    "header": [
+      "Id",
+      "Prediction"
+    ],
+    "label_domain": [
+      -1,
+      1
+    ]
+  },
+  "input_sha256": {
+    "data/processed/x_train_float32.npy": "8a6f1b0587adac3139dfadffef5a3ccb3d9f32e0a6ad5854a75a52168acf03b8",
+    "data/processed/y_train_int8.npy": "cfa3b3138223cc6b57f2d320f5800bc9ba9d59edfb4c08cc2a67d09f903a55fd",
+    "data/processed/x_test_float32.npy": "5633ade56ca322e4e42f1fbee599107cdc0e64f9e487918d2af73d2689419f5a",
+    "data/processed/id_train_int64.npy": "b38de1638698580e09ed9c671acd0fe4c62c31fac21c1b87b3d0f82376e425fe",
+    "data/processed/id_test_int64.npy": "afd2bf6ba13e6fd96a08dbd81840d19241538f257a3107b72fb1d7445306c596",
+    "data/raw/dataset/x_train.csv": "bfa447edece27d45b54f8f1486f6351a381885968d71c9eb1574fd1dbf0fa14a",
+    "data/raw/dataset/x_test.csv": "28a7f5f94436a33b5dceb5dd15fd72563f31ec898124e382c123d3827203503c",
+    "data/raw/dataset/y_train.csv": "bc974ff01bd82827e05780d106674ee680c918fc54225384cbf4f7b279422ec1",
+    "data/raw/dataset/sample_submission.csv": "62357ed950e0a7eb238745656fdefaecf451bb79e1775918433472974566a9e3"
+  },
+  "historical_provenance": {
+    "run_manifest_sha256": "55dd6a95fea2fae58993eaa5c6fc1debf5ea62f838e15a0915a6871db56b7633",
+    "original_suite_sha256": "8b7b874dca513e6e28d2d1fba93a6a41f9f2346526930f51a59a944a67049218",
+    "configuration_sha256": "2111ccbd250b8e08791e720430f595210ff632cc82447eec9a91f23b4533d5f5",
+    "full_model_sha256": "c80b246354ce9e37f8bca9296ecd0e25a4126a456e4eafe84eb7621ec63e06b8",
+    "test_probabilities_sha256": "fd9a1c29ada387a595f82aa243087faf1d635cd6beb25b25058ba03ccb69354e",
+    "oof_sha256": "77827fd2bc7ec42ca8cb90d0a4a5a3efe6bebbc1c16186736d939cd67bc420cd",
+    "folds_sha256": "a0e9b589234ef5718101fb20930cd192f931b2af97ebc6ac52a6ecbb63db3227",
+    "note": "Original experiment suites and records remain unchanged. The separate final_combined_validation.json explicitly selects the historical implementation for fresh development validation; no nested run of the exact combined pipeline has yet been executed."
+  },
+  "source_sha256": {
+    "src/numpy_boosting_phase14.py": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+    "src/feature_preprocessing.py": "458fdd9476c159e9c9a4c8e8ef2134829bb15653308b034a63f18968807e7510",
+    "src/baseline_preprocessing.py": "e44a994a4d0fd0c37fd4427076d648a0beb1371b1cd0474662a402a5105ae92b",
+    "src/conditional_imputation.py": "03bc6cb2bc2172bc71729b79d0b6e5a61645367683646dfd92dd2c6aeefb758e",
+    "src/evaluation.py": "b887e906f31993fe5a349dbcd0ba2e28f5d28568d7c133fe3b61358ae9520c1c"
+  },
+  "delivery_reproduction_verification": {
+    "passed": true,
+    "scope": "Current final config and normal Phase 14 module replay of trusted final checkpoint; current full-training preprocessing, nine official input hashes, five numerical source hashes and signed CSV. Full training was not repeated.",
+    "training_shape": [
+      328135,
+      297
+    ],
+    "test_shape": [
+      109379,
+      297
+    ],
+    "max_probability_difference": 0.0,
+    "csv_sha256": "d01c3949dea567dc9aa929ba232cbe77395d236b1c4a4492624e0bec5305e883",
+    "positive_predictions": 13895,
+    "negative_predictions": 95484,
+    "input_hashes_verified": 9,
+    "source_hashes_verified": 5,
+    "seconds": 15.954239500017138
+  }
+}

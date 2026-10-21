@@ -1,86 +1,84 @@
-# Audit della versione finale — 12 ottobre 2026
+# Final delivery audit - 21 October 2026
 
-La versione di consegna seleziona **Phase 14 storica**, con 295 feature,
-200 alberi di profondità 5 e soglia **0.2106169795070252** calibrata su
-OOF a tre fold di tutte le 328.135 righe train. Il team ha comunicato
-**F1 0.452 e accuracy 0.878 su AIcrowd**. Il
-[record finale](../results/eda/final_phase14_submission.json) conserva
-provenienza del feedback, parametri, calibrazione e fingerprint della submission.
-Il [report inglese](FINAL_REPORT.pdf) è di due pagine A4, senza appendice;
-il [sorgente LaTeX](FINAL_REPORT.tex) è incluso.
+The project release selects **combined18_24_features256**, with 297 processed
+columns, 200 trees of depth 5, 256 candidate features per node and threshold
+**0.22007772525099117**. AIcrowd feedback reported on 14 October gives
+**F1 0.455 and accuracy 0.883**. The [selected submission record](../results/eda/final_combined18_24_submission.json)
+and [17-candidate comparison](../results/eda/final_combined_experiments_summary.json)
+preserve its provenance. The previous Phase 14 release remains historical evidence.
 
-## Modello, risultati e riproduzione
+## Requirements and final contents
 
-| Controllo | Esito |
+| Requirement | Verified delivery |
 | --- | --- |
-| Selezione del codice | `run.py` e la suite finale CV usano `src/numpy_boosting_phase14.py`, copia byte-esatta del codice storico |
-| Fingerprint del sorgente | `6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98`; LF preservati da Git |
-| F1 development annidato | 0.4421552272688187, con soglie scelte nei fold interni |
-| Soglia di submission | 0.2106169795070252, da tre fold OOF su tutto il train; preprocessing appreso nel training di ciascun fold |
-| F1 di calibrazione | 0.44276954874267993; le stesse etichette selezionano la soglia, quindi non è un test indipendente |
-| Riproduzione del modello completo | Checkpoint finale caricato con il modulo normale Phase 14; matrici train/test ricostruite identiche, differenza massima delle probabilità 0 |
-| Riproduzione del CSV | SHA-256 identico alla submission scelta: `8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1` |
-| Scrittura del CSV | `create_csv_submission` in `helpers.py`, adattata dallo starter EPFL con UTF-8 e LF espliciti; `run.py` conserva i controlli su forma e dominio delle etichette |
-| Conteggi e schema | 109.379 ID unici nell'ordine del sample ufficiale; 14.746 positivi, 94.633 negativi; header `Id,Prediction`, etichette −1/+1 |
-| Dati di input | Nove fingerprint dei CSV e delle cache verificati prima del replay |
-| Entry point di training | Test end-to-end su fixture del `run_pipeline` normale con Phase 14 e creazione di checkpoint e submission |
+| Six required methods | `implementations.py`; all applicable public numerical tests pass |
+| Executable reproduction | `run.py` and `configs/final_model.json` select the combined preprocessing and frozen historical booster |
+| Permitted libraries | Training uses NumPy and Python standard libraries; visualization uses Matplotlib |
+| Written report | English LaTeX report, two A4 pages, no appendix; PDF compiled and both pages checked visually |
+| Reproducible settings and evidence | Selected config, historical configs, fixed development split, 114 historical ledger records, 17 later candidate summaries and dated aggregate feedback |
+| Public code repository | GitHub API confirms `ML-project-1` is public on 21 October; hand in the precise commit URL |
+| Local material excluded | Official datasets, caches, checkpoints, individual OOF/test probabilities, CSV submissions, logs and temporary scheduling helpers |
 
-Il training completo delle due implementazioni era già terminato: sei fit
-OOF e due fit su tutte le righe, con identici parametri e fold. Il replay
-verifica questi modelli e la pipeline finale senza ripetere i fit completi.
-La nuova suite `configs/experiments/final_phase14_validation.json` rende
-riproducibile la CV storica senza dipendere da sorgenti locali ignorati.
+The delivery contains approximately **22.1 MiB**. Original local experiment
+manifests remain untouched. Compact aggregate summaries retain their hashes;
+15 published feedback/verification fingerprints and five selected numerical
+source fingerprints were checked against the raw staged blobs. Git attributes
+preserve the exact original bytes of frozen sources and recipes, including
+original CRLF files. The two preprocessing files have no logical code change.
 
-Phase 34 conserva la correzione degli split osservati/mancanti come confronto.
-Il feedback leaderboard ha contribuito alla scelta finale fra le due
-submission; le metriche development, calibrazione e AIcrowd sono separate
-nel report. Il punteggio numerico AIcrowd di Phase 34 non è stato fornito.
+## Selected prediction replay
 
-## Verifica del contenuto per GitHub
+Current preprocessing rebuilt the recorded training and test matrices exactly:
+328,135 x 297 and 109,379 x 297. The trusted saved checkpoint was replayed
+through the normal `src.numpy_boosting_phase14` module. Maximum probability
+difference is **zero**, and the normal submission writer reproduces the chosen
+CSV byte for byte:
 
-- **206 test del progetto superati**, sia nel working tree sia in una copia
-  del solo contenuto Git eleggibile, priva di dati, cache e checkpoint.
-- **26 test pubblici del corso superati** contro la copia di consegna.
-  Esclusi il controllo dell'URL, perché il test usa un percorso locale, e
-  Black, che il test ufficiale dichiara facoltativo. La verifica dell'URL
-  richiede il commit effettivamente pubblicato.
-- Le sei funzioni di `implementations.py` superano i controlli ufficiali su
-  firme, docstring, loss e aggiornamenti; GD/SGD, least squares, ridge e
-  logistica sono implementati in NumPy.
-- `tools.verify_repository` verifica sintassi Python 3.9, JSON, link Markdown
-  locali, configurazione finale, codice congelato e tutti i **114 hash**
-  dei record nei cinque registri.
-- I quattro help (`run.py`, `run_mlp.py`, `tools.prepare_data`,
-  `tools.final_phase14_phase34`) funzionano anche nella copia pulita.
-- `git diff --check` passa. Modelli e preprocessing usano NumPy e libreria
-  standard; Matplotlib è usato per analisi e grafici.
-- Dati, cache, checkpoint, OOF individuali, log e submission sono esclusi dal
-  contenuto Git eleggibile. Il pacchetto è di circa 21,5 MiB.
-- Nessuna corrispondenza nella scansione dei pattern di chiavi private,
-  token GitHub/OpenAI e access key AWS; il perimetro è indicato nel
-  [riepilogo automatico](../results/eda/final_phase14_readiness.json).
-- Il PDF compila senza errori né avvisi di testo fuori margine; entrambe le
-  pagine renderizzate sono state controllate visivamente.
+`d01c3949dea567dc9aa929ba232cbe77395d236b1c4a4492624e0bec5305e883`
 
-Ambiente delle esecuzioni locali: **Python 3.14.3 / NumPy 2.4.2**.
-Il parsing della sintassi Python 3.9 non sostituisce un'esecuzione completa
-nel runtime ufficiale. La CI è configurata per Python 3.9 / NumPy 1.23.1.
+The CSV has 109,379 unique IDs in official sample order, header `Id,Prediction`,
+labels -1/+1, **13,895 positive** and **95,484 negative** predictions. Nine
+input fingerprints and five numerical source fingerprints were checked.
+This audit replays the completed full fit; it does not repeat expensive training.
+Synthetic end-to-end tests also exercise training, calibration and CSV output.
 
-## Passaggi esterni per completare la consegna
+## Checks actually performed
 
-Il contenuto locale è pronto per staging, commit e push; questi passaggi
-non sono stati eseguiti durante l'audit. Dopo il push occorre:
+- **281 project tests passed**, with zero skips or failures, on an export of
+  the exact staged Git blobs without datasets, caches or saved models.
+- **26 public course tests passed** against that clean export. The commit URL
+  format check is separate; the explicitly optional Black check is excluded.
+- After the full suite, two existing report writers were made compatible with
+  Python 3.9 by using `Path.open(..., newline=...)`. Their six existing tests
+  passed in a targeted follow-up. No model calculation changed.
+- `tools.verify_repository` passed: Python 3.9 syntax, JSON, local Markdown links,
+  selected model/preprocessing/calibration agreement, frozen booster and all
+  **114 historical indexed record hashes**. Calibration-only selection returns
+  no invented nested score.
+- Training, MLP and data-preparation help entry points work in the clean export.
+- The 17 archived candidate CSV hashes agree with the aggregate evidence.
+  Submission CSVs themselves remain local.
+- `git diff --cached --check` passed. The final report compiles without text
+  outside the margins; both rendered pages have been inspected.
+- No matches were found for the private-key, GitHub/OpenAI token and AWS access
+  key patterns scanned in Git-eligible text. This is a scoped pattern check.
 
-1. controllare l'esito della CI nell'ambiente ufficiale;
-2. verificare che il repository sia pubblico e accessibile al correttore;
-3. consegnare il link al commit preciso e il PDF secondo le istruzioni del corso.
+[Machine-readable readiness](../results/eda/final_delivery_readiness_20261021.json)
+records environment, scope and results. Earlier readiness JSONs remain dated
+historical records and do not define the current model.
 
-La visibilità remota non è stata verificata: l'accesso alla pagina/API GitHub
-non era disponibile in questa sessione. La
-[guida alla pubblicazione](GITHUB_RELEASE.md) contiene i comandi e il formato
-richiesto del link. Il feedback AIcrowd è stato registrato dal messaggio del
-team, senza URL della submission.
+## Interpretation and remaining external steps
 
-Gli [audit precedenti](../results/eda/final_readiness.json) e il
-[controllo Phase 34](../results/eda/phase34_repository_verification.json)
-restano evidenze datate; non definiscono il modello finale corrente.
+The exact combined pipeline has **no completed nested development evaluation**.
+Its OOF F1 **0.444071** calibrates the threshold on the same labels. Historical
+Phase 14 nested F1 **0.442155** belongs to a different pipeline. Reported AIcrowd
+F1/accuracy are rounded team feedback, without independent platform retrieval.
+Development and leaderboard feedback both contributed to model selection.
+
+Local checks use **Python 3.14.3 / NumPy 2.4.2**. Python 3.9 syntax checking does
+not replace full runtime execution. GitHub Actions is configured for
+**Python 3.9 / NumPy 1.23.1**; check the workflow for the published commit.
+The team must still submit that commit link and the PDF through the course
+system. The [release guide](GITHUB_RELEASE.md) describes the hand-in format
+and fresh-checkout reproduction. No AIcrowd upload or course hand-in is
+performed by the repository push.

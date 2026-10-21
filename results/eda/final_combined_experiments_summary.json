@@ -1,0 +1,1378 @@
+{
+  "schema_version": 1,
+  "prepared_on": "2026-10-21",
+  "purpose": "Portable aggregate of the completed 13-16 October final-candidate studies. Original local manifests and numerical outcomes are unchanged. Large generated artifacts are excluded from Git.",
+  "selected_variant": "combined18_24_features256",
+  "selection_reason": "Current project reference in the 14 October feedback and all subsequent feedback through 16 October. It ties the earlier combined18_24_l2_1 at displayed F1 0.455 and has displayed accuracy 0.883 rather than 0.882. Rounding prevents inferring an exact F1 improvement, and the official leaderboard tie-break was not verified.",
+  "protocol": {
+    "training_rows": 328135,
+    "test_rows": 109379,
+    "fold_count": 3,
+    "fold_seed": 20260919,
+    "folds_sha256": "a0e9b589234ef5718101fb20930cd192f931b2af97ebc6ac52a6ecbb63db3227",
+    "threshold_selection": "Maximise F1 on pooled full-training OOF probabilities; break F1 ties by accuracy.",
+    "fit_scope": "Preprocessing, imputation and model fitting use only the training rows of each OOF fit. The final model uses every labelled row.",
+    "calibration_warning": "The same pooled OOF labels select and describe each threshold; calibration F1 is not an independent or nested estimate.",
+    "leaderboard_warning": "Scores are user-reported display values rounded to three decimals, without submission URLs or independent retrieval. Repeated leaderboard feedback contributed to selection.",
+    "nested_warning": "These 17 full-training candidates have no nested evaluation recorded for their exact full-training calibration runs. Earlier separate Phase 18/24/25 nested studies are preserved in the historical ledger."
+  },
+  "historical_booster_sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+  "variants": {
+    "phase18": {
+      "study": "aicrowd_candidates_20261013",
+      "configuration": "configs/experiments/phase18_boosting_diet_frequency_features.json",
+      "features": 289,
+      "preprocessing_variant": "phase18_diet_frequency_features",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.218219460678348,
+      "calibration_metrics": {
+        "accuracy": 0.8804303106952931,
+        "precision": 0.37695481147462345,
+        "recall": 0.5423986194995686,
+        "f1": 0.4447903547624776,
+        "specificity": 0.9131702099211124,
+        "balanced_accuracy": 0.7277844147103405
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_phase18_full_train_oof.csv",
+        "sha256": "7535a1d83ba4f1bb0101a4b676aff9f45ea49f1f3dd3a820900f81df82c9201f",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "377194cd25c57f89129d86cb6f4cce6e175c7aef14a3f4a9eb66d03bf8d69a13",
+        "positive_predictions": 13996,
+        "negative_predictions": 95383
+      },
+      "local_artifact_sha256": {
+        "full_model": "cc516d7d763534e18f0d8f99b83cdcb25ba7f0a625d3f5819f68ecfe11bdf747",
+        "test_probabilities": "d7857d5ef2c1ea7562cf38cc2ff6e78c6aea713e8c0f586510bb58476f49d506",
+        "oof_predictions": "5b77dd1cf36c48cc640b08427f1289d367ab7a72db324043601a9ea073576e4f"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_candidates_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Full OOF coverage and independently reconstructed thresholds; all three full-model checkpoints replayed without training; signed CSVs preserve official IDs and decisions."
+      },
+      "reported_aicrowd": {
+        "f1": 0.453,
+        "accuracy": 0.882,
+        "csv_sha256": "7535a1d83ba4f1bb0101a4b676aff9f45ea49f1f3dd3a820900f81df82c9201f",
+        "source": "results/aicrowd_candidates_20261013/aicrowd_feedback_20261013.json"
+      },
+      "local_calibrated_final_configuration_sha256": "dcaf4c543a47e6768214be7897b92f16c56f54cfba286aff5fcf93c26d3664f2",
+      "configuration_file_sha256": "91e44a24b61149e90cc1748fe7997e2bf34e827c9ab54201f04e18d577875941"
+    },
+    "phase24": {
+      "study": "aicrowd_candidates_20261013",
+      "configuration": "configs/experiments/phase24_original_restricted_imputation.json",
+      "features": 303,
+      "preprocessing_variant": "phase16_imputation_restricted",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.2118445372019307,
+      "calibration_metrics": {
+        "accuracy": 0.8772822161610313,
+        "precision": 0.36985733053679676,
+        "recall": 0.5538222605694564,
+        "f1": 0.44352007959978995,
+        "specificity": 0.9086107768418238,
+        "balanced_accuracy": 0.7312165187056401
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_phase24_full_train_oof.csv",
+        "sha256": "ae2b5f141a4d11f788cd3927a35c418fdad5437f402947452b078298816a7932",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "d23dfb4bcd1eb12b3b20890dbdc15f22ae57cc9857a477ee5b433542a26e6324",
+        "positive_predictions": 14562,
+        "negative_predictions": 94817
+      },
+      "local_artifact_sha256": {
+        "full_model": "b45221303df15f960d0640313ed377d85d65e37db98eb734cafc92697aa2b7b4",
+        "test_probabilities": "12b174aa8f526a23b55e59c0df6701cd935023feb6b4be09f7ccccf1eee5e027",
+        "oof_predictions": "6f98d50cd3b676dd9d5084170a18a12a4039fcfcb8d618a3ab2b55daeb82baff"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_candidates_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Full OOF coverage and independently reconstructed thresholds; all three full-model checkpoints replayed without training; signed CSVs preserve official IDs and decisions."
+      },
+      "reported_aicrowd": {
+        "f1": 0.454,
+        "accuracy": 0.88,
+        "csv_sha256": "ae2b5f141a4d11f788cd3927a35c418fdad5437f402947452b078298816a7932",
+        "source": "results/aicrowd_candidates_20261013/aicrowd_feedback_20261013.json"
+      },
+      "local_calibrated_final_configuration_sha256": "6022e5fd039e5fc5d69c2dbd4f3198020f44ce2d7b98ed13c773acd1df4b6854",
+      "configuration_file_sha256": "2c3c341662d185d4ede5331949c6ea06190a4fa239aae65f527936192d0cf738"
+    },
+    "phase25": {
+      "study": "aicrowd_candidates_20261013",
+      "configuration": "configs/experiments/phase25_phase14_l2_5.json",
+      "features": 295,
+      "preprocessing_variant": "phase14_codebook_corrections_only",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 5.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21880347655706073,
+      "calibration_metrics": {
+        "accuracy": 0.8805064988495589,
+        "precision": 0.3769861301411024,
+        "recall": 0.5412597066436583,
+        "f1": 0.4444287009748356,
+        "specificity": 0.9133640861077684,
+        "balanced_accuracy": 0.7273118963757134
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_phase25_full_train_oof.csv",
+        "sha256": "7b2e294d874d69198517e5a76a21022935ccd7169cce4ff3093cdfe50c577659",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "4d1c8b3ae4a80ce919c24265d1105162719afad1c3e23b01d353ff4c3480df0a",
+        "positive_predictions": 13898,
+        "negative_predictions": 95481
+      },
+      "local_artifact_sha256": {
+        "full_model": "e72dda19a7c99dadd2d27e4cae19b0c6567efc0a07d7c240febe1778790cf392",
+        "test_probabilities": "f1664f2f12ac212fd1cf89f9e201efc134a2a86e81ce53311f5b52383f373d97",
+        "oof_predictions": "0f07f58b9a36bd9d1a50bafe5841870b239cdfeb9db58743b0b03236ad37fc49"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_candidates_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Full OOF coverage and independently reconstructed thresholds; all three full-model checkpoints replayed without training; signed CSVs preserve official IDs and decisions."
+      },
+      "reported_aicrowd": {
+        "f1": 0.453,
+        "accuracy": 0.883,
+        "csv_sha256": "7b2e294d874d69198517e5a76a21022935ccd7169cce4ff3093cdfe50c577659",
+        "source": "results/aicrowd_candidates_20261013/aicrowd_feedback_20261013.json"
+      },
+      "local_calibrated_final_configuration_sha256": "4fb5e0e4d19aa770eb3f266395ab4a82c12660cd326c11d1d588f21c43d814ff",
+      "configuration_file_sha256": "a04c98624ca5279ded8c58eb4ff15706282b4208d61b3c0b534539f4c7ae781f"
+    },
+    "combined18_24_l2_1": {
+      "study": "aicrowd_combined18_24_20261013",
+      "configuration": "configs/experiments/combined18_24_l2_1.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21811010373987366,
+      "calibration_metrics": {
+        "accuracy": 0.8800585125024761,
+        "precision": 0.37580151210642165,
+        "recall": 0.5420880069025021,
+        "f1": 0.4438823812013395,
+        "specificity": 0.9127924856264207,
+        "balanced_accuracy": 0.7274402462644614
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_l2_1_full_train_oof.csv",
+        "sha256": "1e4817ab85020156f579ab33fc5384c8aecd24fd8453ce6e37a3dcc094a45854",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "d5cfd08d742d04f80ed43c952ad3bb64e1b9271f0e9534e22894377e2d936dbc",
+        "positive_predictions": 13999,
+        "negative_predictions": 95380
+      },
+      "local_artifact_sha256": {
+        "full_model": "2e6c6655ed60c97c09d4092f3381ad696859202d3b655f530b2437a2f1eb507f",
+        "test_probabilities": "46ec0b83dbd9679cd2884cedd3ce80b3722d89e98afaff65fc12c789bf35e3b9",
+        "oof_predictions": "2bd2112ed93ef3b8cf5e20b1c0da4aeba65b95cfa949447e8071aaaeffcda0e6"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined18_24_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Full OOF coverage and reconstructed thresholds; both 297-feature final models replayed without training; signed CSVs preserve official ID order and decisions."
+      },
+      "reported_aicrowd": {
+        "f1": 0.455,
+        "accuracy": 0.882,
+        "csv_sha256": "1e4817ab85020156f579ab33fc5384c8aecd24fd8453ce6e37a3dcc094a45854",
+        "source": "results/aicrowd_combined18_24_20261013/aicrowd_feedback_20261013.json"
+      },
+      "local_calibrated_final_configuration_sha256": "a6f924d06395ed4e7c58f3e13c6c402e30a325150235374cb1e6ee3a8637a120",
+      "configuration_file_sha256": "0fa08a3bb87e9c966cfeece0502c93b7ccd5427a0ec4e9a1e7d5b40f82114fca"
+    },
+    "combined18_24_l2_5": {
+      "study": "aicrowd_combined18_24_20261013",
+      "configuration": "configs/experiments/combined18_24_l2_5.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 5.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.2206061257480886,
+      "calibration_metrics": {
+        "accuracy": 0.8810489585079312,
+        "precision": 0.37752393014589475,
+        "recall": 0.5349439171699741,
+        "f1": 0.4426547863833676,
+        "specificity": 0.9145707982350582,
+        "balanced_accuracy": 0.7247573577025161
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_l2_5_full_train_oof.csv",
+        "sha256": "09f87dae35ff807532e866ed33a4ef2bac9253de9d825a268c290471a62bc399",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "196ec58c071220de24d72878f98434be2b87748f6e3a4c38ccd6fc57699f65e6",
+        "positive_predictions": 13775,
+        "negative_predictions": 95604
+      },
+      "local_artifact_sha256": {
+        "full_model": "e79c9f4141f20ab0204e32629a53fb6ba2e8f8e7779d6ccdb4dc86f7ab2645d1",
+        "test_probabilities": "827ecf1c2618e1f0988b25455a8a7b3b40a69140f5592bb8a2ff5691e6848666",
+        "oof_predictions": "ccf3d9a57316ba21685a1bfaee184d33cb93f308f4fa395840a94e83ce016062"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined18_24_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Full OOF coverage and reconstructed thresholds; both 297-feature final models replayed without training; signed CSVs preserve official ID order and decisions."
+      },
+      "reported_aicrowd": {
+        "f1": 0.453,
+        "accuracy": 0.883,
+        "csv_sha256": "09f87dae35ff807532e866ed33a4ef2bac9253de9d825a268c290471a62bc399",
+        "source": "results/aicrowd_combined18_24_20261013/aicrowd_feedback_20261013.json"
+      },
+      "local_calibrated_final_configuration_sha256": "e1c7ef236fb8732d0c42a4e710912223f5dc9b1628d7b887e29b89bf2276012d",
+      "configuration_file_sha256": "f771268c240b415b59be70bdab843cdca1d2d7db625fac5fc8c0385cd22d37bc"
+    },
+    "count_a": {
+      "study": "aicrowd_count_candidates_20261013",
+      "configuration": "configs/experiments/count_a.json",
+      "features": 299,
+      "preprocessing_variant": "count_a",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.22139906254902406,
+      "calibration_metrics": {
+        "accuracy": 0.881347616072653,
+        "precision": 0.3784924721212269,
+        "recall": 0.5353235547886108,
+        "f1": 0.4434501686774544,
+        "specificity": 0.9148616125150422,
+        "balanced_accuracy": 0.7250925836518265
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_count_a_full_train_oof.csv",
+        "sha256": "dfcad9778fbeae1fd3b71b58787e5be1e8a799aeadf57ce31459f3bdfdff9362",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "5382c61b7c70fb8622b1367dbb603ba8fcf86966539763717cb9d09062529553",
+        "positive_predictions": 13692,
+        "negative_predictions": 95687
+      },
+      "local_artifact_sha256": {
+        "full_model": "03c2d877237facd5538223b4add43cb853f0033e2e1d2ba8661d7c3d061ab28f",
+        "test_probabilities": "66f8db512d8ce877d5231f09c6aa622a1966a48b0c7508ca693dcafa13c82e62",
+        "oof_predictions": "b0999e11da2de8c8a053a564b2d488c82587e1323b626424ae3eb419b6d200c8"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_count_candidates_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "OOF coverage and independently reconstructed thresholds; full-model replay; base297-column identity; independent rawcount checks; signed CSV/sampleID integrity."
+      },
+      "reported_aicrowd": null,
+      "local_calibrated_final_configuration_sha256": "a9ab3e560d8574d35e14a8748b8a22e9b172a0f4d4bf06e1fe8297da7bdb8027",
+      "configuration_file_sha256": "256817a52cbaef7af18c0104c03de16576eff9bd7a78eef288ee0dff9d746874"
+    },
+    "count_b": {
+      "study": "aicrowd_count_candidates_20261013",
+      "configuration": "configs/experiments/count_b.json",
+      "features": 299,
+      "preprocessing_variant": "count_b",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21333428726929282,
+      "calibration_metrics": {
+        "accuracy": 0.8776387767229951,
+        "precision": 0.37043220181784453,
+        "recall": 0.5513718723037101,
+        "f1": 0.4431438359014188,
+        "specificity": 0.909239203102019,
+        "balanced_accuracy": 0.7303055377028645
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_count_b_full_train_oof.csv",
+        "sha256": "78048260c9d62ddf0a83ba0e3029f0637db05ae00341ea4e37062e852922d9b5",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "3b50cf6d73df80122c3e81e5a8ae92b105c5d3981c27a12c8dde792337eda0b8",
+        "positive_predictions": 14452,
+        "negative_predictions": 94927
+      },
+      "local_artifact_sha256": {
+        "full_model": "e4fbbf6fed8bcf192ac47a98a25197f77e18843d77cf723d717c41a97c2be23e",
+        "test_probabilities": "1d61d9ca1c15ff1df5e4a7a95661425734a49d3cb739c67aec53933d062d6799",
+        "oof_predictions": "d34b2908f4bf33455f06c7b05c57f2d6001c24baeb4ce069531c4d5a3664f653"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_count_candidates_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "OOF coverage and independently reconstructed thresholds; full-model replay; base297-column identity; independent rawcount checks; signed CSV/sampleID integrity."
+      },
+      "reported_aicrowd": null,
+      "local_calibrated_final_configuration_sha256": "98cbbadabbd6f434eee6f1e9d3deddcd7fbf0a03e32587d73a3889af70d31f30",
+      "configuration_file_sha256": "be649b330e3a155ad529e4c84921eb19b68204c011c333136febc4467e32be49"
+    },
+    "count_ab": {
+      "study": "aicrowd_count_candidates_20261013",
+      "configuration": "configs/experiments/count_ab.json",
+      "features": 301,
+      "preprocessing_variant": "count_ab",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21805437631155952,
+      "calibration_metrics": {
+        "accuracy": 0.8799305164033097,
+        "precision": 0.3753229356042484,
+        "recall": 0.5415012942191545,
+        "f1": 0.44335184164794644,
+        "specificity": 0.9127089183045862,
+        "balanced_accuracy": 0.7271051062618703
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_count_ab_full_train_oof.csv",
+        "sha256": "739b99d9b7a82481700df7d8edd86c6ba7d1dac7a035623321dceae3525af15b",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "740d1567c20db313b76d686007a9b6bc9f8792e2c6472f49588cbff1fbae10f5",
+        "positive_predictions": 13986,
+        "negative_predictions": 95393
+      },
+      "local_artifact_sha256": {
+        "full_model": "11d1250052833e3c27a7bcc85583713e21ae05ce01abf6404fd61b45ac63fd99",
+        "test_probabilities": "ea341a77025df694786d2c482132b079f33db6c9814c47ebc23a03c19bd63dc2",
+        "oof_predictions": "7e4f84147b26b4118b9cd3e1b47a8daecb9df9203da0ee44ace84dfca5c67314"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_count_candidates_20261013/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "OOF coverage and independently reconstructed thresholds; full-model replay; base297-column identity; independent rawcount checks; signed CSV/sampleID integrity."
+      },
+      "reported_aicrowd": null,
+      "local_calibrated_final_configuration_sha256": "a66ab276f8cb56eb565617d1071efc7157db14417bad927c43bc576604984c93",
+      "configuration_file_sha256": "b31f5835ec089396ef2fd3336a7ddacc319311b617e3c7762da9d7a02e50523c"
+    },
+    "combined18_24_bins128": {
+      "study": "aicrowd_combined_tuning_20261014",
+      "configuration": "configs/experiments/combined18_24_bins128.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 128,
+        "l2_regularization": 1.0,
+        "max_features": 128,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21988053187819157,
+      "calibration_metrics": {
+        "accuracy": 0.8809209624087647,
+        "precision": 0.3775611648602119,
+        "recall": 0.5373943054357204,
+        "f1": 0.44351714708898254,
+        "specificity": 0.9141930739403663,
+        "balanced_accuracy": 0.7257936896880434
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_bins128_full_train_oof.csv",
+        "sha256": "47c58ca19eb00b5487e99adff49ec3c5c9dc7ee564719d2f51e2f6a4d2ba2e88",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "708f38324ce618cdf67b1c05635ab593a551a172b2a5c3210de1e09dd9bf080b",
+        "positive_predictions": 13866,
+        "negative_predictions": 95513
+      },
+      "local_artifact_sha256": {
+        "full_model": "173f499c0b12da246a86eb6a343af28689e85a5119541d23542bded0553c3f83",
+        "test_probabilities": "5fa451280c0fc111f8aeacc182ae3f7f515b17b91142ec713788b94cb95e9556",
+        "oof_predictions": "1aeb05dbc4c98a5902ad949d812a7ec2dab416cc27c24dea17804352515ed215"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_tuning_20261014/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Identical source/data/folds/preprocessing to the original combined base; only one authorized parameter differs per variant; OOF thresholds reconstructed; full checkpoints replayed; CSV IDs and signed labels checked."
+      },
+      "reported_aicrowd": {
+        "f1": 0.452,
+        "accuracy": 0.883,
+        "csv_sha256": "47c58ca19eb00b5487e99adff49ec3c5c9dc7ee564719d2f51e2f6a4d2ba2e88",
+        "source": "results/aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "e5e850981427197d91c71d8988e89a51794cdd022011b118ab75d4bd70752dbe",
+      "configuration_file_sha256": "cdfeeeef3c39e41766cbc351e8a4bc5283c00ab739c09eec5b0b2eaf68cc31f2"
+    },
+    "combined18_24_features256": {
+      "study": "aicrowd_combined_tuning_20261014",
+      "configuration": "configs/experiments/combined18_24_features256.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.22007772525099117,
+      "calibration_metrics": {
+        "accuracy": 0.8811342892407088,
+        "precision": 0.3782445064950832,
+        "recall": 0.5376358930112166,
+        "f1": 0.4440706955530217,
+        "specificity": 0.9144036635913892,
+        "balanced_accuracy": 0.7260197783013029
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_features256_full_train_oof.csv",
+        "sha256": "d01c3949dea567dc9aa929ba232cbe77395d236b1c4a4492624e0bec5305e883",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "e77152ea23565a202408c331de20c336c8fc5f2bc27947eb9fa93e102a5b2f66",
+        "positive_predictions": 13895,
+        "negative_predictions": 95484
+      },
+      "local_artifact_sha256": {
+        "full_model": "c80b246354ce9e37f8bca9296ecd0e25a4126a456e4eafe84eb7621ec63e06b8",
+        "test_probabilities": "fd9a1c29ada387a595f82aa243087faf1d635cd6beb25b25058ba03ccb69354e",
+        "oof_predictions": "77827fd2bc7ec42ca8cb90d0a4a5a3efe6bebbc1c16186736d939cd67bc420cd"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_tuning_20261014/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Identical source/data/folds/preprocessing to the original combined base; only one authorized parameter differs per variant; OOF thresholds reconstructed; full checkpoints replayed; CSV IDs and signed labels checked."
+      },
+      "reported_aicrowd": {
+        "f1": 0.455,
+        "accuracy": 0.883,
+        "csv_sha256": "d01c3949dea567dc9aa929ba232cbe77395d236b1c4a4492624e0bec5305e883",
+        "source": "results/aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "2111ccbd250b8e08791e720430f595210ff632cc82447eec9a91f23b4533d5f5",
+      "configuration_file_sha256": "8b7b874dca513e6e28d2d1fba93a6a41f9f2346526930f51a59a944a67049218",
+      "configuration_note": "The delivery configuration now explicitly selects the historical Phase 14 backend. The local calibrated final configuration hash identifies the unchanged original run artifact; the current suite file hash identifies the delivery file."
+    },
+    "combined18_24_trees300": {
+      "study": "aicrowd_combined_growth_20261014",
+      "configuration": "configs/experiments/combined18_24_trees300.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 300
+      },
+      "decision_threshold": 0.22005869121682445,
+      "calibration_metrics": {
+        "accuracy": 0.8809209624087647,
+        "precision": 0.3781697107148889,
+        "recall": 0.5409490940465919,
+        "f1": 0.44514498310187156,
+        "specificity": 0.9138487765744083,
+        "balanced_accuracy": 0.7273989353105001
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_trees300_full_train_oof.csv",
+        "sha256": "5779110f6da8a95555f6ec38188f713c071a49185d069c268ea1fe8bd1190fff",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "e3d6ae33993f92321249d44cabe05c01b3498136fc8d536fc2ce3226d8024907",
+        "positive_predictions": 13937,
+        "negative_predictions": 95442
+      },
+      "local_artifact_sha256": {
+        "full_model": "31688a45dad7ad237fde048efb41bc42392f1af9f37268ee0102750a7a16db9a",
+        "test_probabilities": "06902006fc2f60d66eba3ee3684c93c44dda595d300635b6e0e3a3b299a72359",
+        "oof_predictions": "fc2596270097636b71b9095464aefaa1ad49dca646d232cd54d4f72cb22f72f9"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_growth_20261014/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Exactly one authorized parameter change; identical folds and fold-local preprocessing; own OOF threshold; preserved origin200 trees for continuation; final model and CSV replay."
+      },
+      "reported_aicrowd": {
+        "f1": 0.453,
+        "accuracy": 0.883,
+        "csv_sha256": "5779110f6da8a95555f6ec38188f713c071a49185d069c268ea1fe8bd1190fff",
+        "source": "results/aicrowd_combined_growth_20261014/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "4a162fa98323adea68f5c7d780856e62122c09a3349b12dc874c0740ca8c87c7",
+      "configuration_file_sha256": "4f0e46869e695e58306e2c81e08e414d541bc1db2952145d9a9a32da02b009ae"
+    },
+    "combined18_24_features297": {
+      "study": "aicrowd_combined_growth_20261014",
+      "configuration": "configs/experiments/combined18_24_features297.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 297,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.22576122772907076,
+      "calibration_metrics": {
+        "accuracy": 0.8831517515656666,
+        "precision": 0.38248061626477303,
+        "recall": 0.5260742018981881,
+        "f1": 0.44293020282443196,
+        "specificity": 0.9177363283861478,
+        "balanced_accuracy": 0.721905265142168
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_features297_full_train_oof.csv",
+        "sha256": "285d659741516cef95409c8e8f27d3396fb693feff2c49e03f8bf76d617ccbbb",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "9edfe2e0ca09821a715a057429c1ea9d656de7c318acf10cded1e571fd2f6955",
+        "positive_predictions": 13288,
+        "negative_predictions": 96091
+      },
+      "local_artifact_sha256": {
+        "full_model": "02d3b84ef12ffade5347f09e1384ed5796db29f2fffb523b664fcfecaf5be658",
+        "test_probabilities": "14fb29b815f000ade603fb518772cde9132058321f6d7adc80915dfa9cc6e397",
+        "oof_predictions": "9cfc165e1070a97beeecb841b65786c8649a1b57e26c3fab0b82887822d3ff0f"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_growth_20261014/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Exactly one authorized parameter change; identical folds and fold-local preprocessing; own OOF threshold; preserved origin200 trees for continuation; final model and CSV replay."
+      },
+      "reported_aicrowd": {
+        "f1": 0.452,
+        "accuracy": 0.885,
+        "csv_sha256": "285d659741516cef95409c8e8f27d3396fb693feff2c49e03f8bf76d617ccbbb",
+        "source": "results/aicrowd_combined_growth_20261014/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "8045163819041546c3c91745de99a132053dccc3c3658cd8089770b1c56ad78c",
+      "configuration_file_sha256": "46095be4ea77bb8a02b688ac9aa1acb3601c891cdbe5032fd679b86767518c86"
+    },
+    "combined18_24_leaf400": {
+      "study": "aicrowd_combined_regularization_20261015",
+      "configuration": "configs/experiments/combined18_24_leaf400.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 400,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21749255393178843,
+      "calibration_metrics": {
+        "accuracy": 0.8797933777256313,
+        "precision": 0.37499701492537313,
+        "recall": 0.5419499568593615,
+        "f1": 0.4432745236414961,
+        "specificity": 0.9125150421179302,
+        "balanced_accuracy": 0.7272324994886459
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_leaf400_full_train_oof.csv",
+        "sha256": "afcbe00b48fc7d4639b93733313c2ddcccf69eca4ed2f7b3e7f9bca63ec9ac91",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "ec61d1952d218ab0e59a90bb0ddc74443203899b524bafb70d3f8268b5e11145",
+        "positive_predictions": 14059,
+        "negative_predictions": 95320
+      },
+      "local_artifact_sha256": {
+        "full_model": "b076c892aefad92a13726080ca4d7845969ee8c794af0d693652ef58972dbd76",
+        "test_probabilities": "3de23c720bd447f22f21a6af8b3370604220b11acd7e42e780501bbd9a9a7fdf",
+        "oof_predictions": "dd45bd2fce821b72301ec04b8d2a9abf2d3e0f5fa15df2d404d33e34b3c74b73"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_regularization_20261015/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Exactly one authorized parameter change; identical folds and fold-local preprocessing; own OOF threshold; fresh fits with the two separate regularization changes; final model and CSV replay."
+      },
+      "reported_aicrowd": {
+        "f1": 0.453,
+        "accuracy": 0.882,
+        "csv_sha256": "afcbe00b48fc7d4639b93733313c2ddcccf69eca4ed2f7b3e7f9bca63ec9ac91",
+        "source": "results/aicrowd_combined_regularization_20261015/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "6849f895678a78b51d04b48b4bedf2ea5a5cbb10f865435649a3a4f91ce91b9b",
+      "configuration_file_sha256": "5c8cb67c8f02b91013d57ff0e1f581372771db8588027d1469a7e59061e4d63c"
+    },
+    "combined18_24_depth4": {
+      "study": "aicrowd_combined_regularization_20261015",
+      "configuration": "configs/experiments/combined18_24_depth4.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.22052129624910013,
+      "calibration_metrics": {
+        "accuracy": 0.8816157983756685,
+        "precision": 0.3786123613468113,
+        "recall": 0.5312855910267472,
+        "f1": 0.44214033374500966,
+        "specificity": 0.9155468645540847,
+        "balanced_accuracy": 0.7234162277904159
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_depth4_full_train_oof.csv",
+        "sha256": "00bdc74fde83110354dd47e520736bfd2308572699b4baccfcbf193612841a45",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "b92d7ddadd63aff47d6a16ad438ec590ec1b80d82af799b67dc774b76595eb7a",
+        "positive_predictions": 13534,
+        "negative_predictions": 95845
+      },
+      "local_artifact_sha256": {
+        "full_model": "8ae49b8488498488745c2ac960cc82e3a4ec863db0284cc9027dd9bde4aaddd0",
+        "test_probabilities": "8b5e2bf92fe1b2ac357d94ad23db39b6b8da501973ea6b3705a10b6eedf5203f",
+        "oof_predictions": "cf7c462224d960f00fa25ab76a412557e0be6f4859dfdadb76941502364358f3"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_regularization_20261015/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Exactly one authorized parameter change; identical folds and fold-local preprocessing; own OOF threshold; fresh fits with the two separate regularization changes; final model and CSV replay."
+      },
+      "reported_aicrowd": {
+        "f1": 0.45,
+        "accuracy": 0.884,
+        "csv_sha256": "00bdc74fde83110354dd47e520736bfd2308572699b4baccfcbf193612841a45",
+        "source": "results/aicrowd_combined_regularization_20261015/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "695a1b48291323fcf4ead8340bddb021a227b0510333cae176d48ced267fdd75",
+      "configuration_file_sha256": "c68eb65a2ab974cb46cb5f478240317fa01a3407a9e68aac5e5a686a6fb264a4"
+    },
+    "combined18_24_native_categories": {
+      "study": "aicrowd_combined_categorical_20261015",
+      "configuration": "configs/experiments/combined18_24_native_categories.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "histogram_strategy": "recursive",
+        "n_estimators": 200,
+        "categorical_feature_indices": [
+          74,
+          77
+        ]
+      },
+      "decision_threshold": 0.22318329009733187,
+      "calibration_metrics": {
+        "accuracy": 0.882511771069834,
+        "precision": 0.3807495953181422,
+        "recall": 0.5276617773943054,
+        "f1": 0.4423260523651092,
+        "specificity": 0.916880599010563,
+        "balanced_accuracy": 0.7222711882024342
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_native_categories_full_train_oof.csv",
+        "sha256": "6f93e5a6e88697c5c71a3551615edfea68c76832693fa5ea4d6fb55596d55d17",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "264c16b6dc34f3443f35cf90104c6f441cb3a600f7378903244a50e50e898e43",
+        "positive_predictions": 13467,
+        "negative_predictions": 95912
+      },
+      "local_artifact_sha256": {
+        "full_model": "1db791bf88d1d4a7c9a363c5bcea8154fd780f8601ac16199c711f1119b3fd3b",
+        "test_probabilities": "aa564654510a9f91908c5e073234cf617d119162453ee260abb93dee007554ad",
+        "oof_predictions": "fa004a70c5336a145eb0fd7236a59d03389dd07a7e060fb6b5d7f83f467cfcfa"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_categorical_20261015/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Native subset splits only for EXRACT11/EXRACT21. Identical base rows, fold-local preprocessing and 295 numeric column bins; train-only native vocabularies; independently recalculated OOF threshold and exact final model/CSV replay."
+      },
+      "reported_aicrowd": {
+        "f1": 0.452,
+        "accuracy": 0.885,
+        "csv_sha256": "6f93e5a6e88697c5c71a3551615edfea68c76832693fa5ea4d6fb55596d55d17",
+        "source": "results/aicrowd_combined_categorical_20261015/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "e173329eb17f2ca511006e56f2bd0f4b6ba5f59be373f6391565482697c1b3c7",
+      "configuration_file_sha256": "56c5f503ff61850f22800612ee2d79e4ffa7af6cfd99d083dbcb42b2651ac0bf"
+    },
+    "combined18_24_subsample08": {
+      "study": "aicrowd_combined_structural_20261015",
+      "configuration": "configs/experiments/combined18_24_subsample08.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "histogram_strategy": "recursive",
+        "subsample": 0.8,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21606016566947786,
+      "calibration_metrics": {
+        "accuracy": 0.879241775488747,
+        "precision": 0.37401220839445415,
+        "recall": 0.5455737704918033,
+        "f1": 0.44378939094061004,
+        "specificity": 0.9115590319561439,
+        "balanced_accuracy": 0.7285664012239736
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_subsample08_full_train_oof.csv",
+        "sha256": "f796e96668eca3ee604c3ac8603a076380b5b6183a11dbe918b884bdc15db7d5",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "5e131c726f76cb4e20cc1b723402df832af541263109bc549da9121e6b714003",
+        "positive_predictions": 14146,
+        "negative_predictions": 95233
+      },
+      "local_artifact_sha256": {
+        "full_model": "52156d04571c6ac08b20e5867df243e0e9a7c1337c696214b3a4188882d7f203",
+        "test_probabilities": "52671562a01abd1deec8b43ca895bb1ebae497765aa26ac213c79e35370d7f73",
+        "oof_predictions": "6ee1e983a367bbb270a3e1babcc4df76e7103afeff1a4d0ab6fdae78d651831e"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_structural_20261015/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Two isolated structural changes; all base matrices and 297 numeric bins unchanged; sampling replay and bounded tree shapes; own OOF thresholds; full training-score and test-probability replays; official CSV IDs and signed labels."
+      },
+      "reported_aicrowd": {
+        "f1": 0.453,
+        "accuracy": 0.878,
+        "csv_sha256": "f796e96668eca3ee604c3ac8603a076380b5b6183a11dbe918b884bdc15db7d5",
+        "source": "results/aicrowd_combined_structural_20261015/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "19c76f5de70e4d258c172aef7a59876088bd5124713a409d46fba4f48d584f35",
+      "configuration_file_sha256": "7ee204617aa91bf9c5611ff2fb35cdc4e25a592caec2cec3223ba73df27fcde4"
+    },
+    "combined18_24_leafwise32_depth8": {
+      "study": "aicrowd_combined_structural_20261015",
+      "configuration": "configs/experiments/combined18_24_leafwise32_depth8.json",
+      "features": 297,
+      "preprocessing_variant": "combined18_24",
+      "model_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 8,
+        "min_samples_leaf": 200,
+        "n_bins": 64,
+        "l2_regularization": 1.0,
+        "max_features": 256,
+        "random_seed": 20260920,
+        "histogram_strategy": "recursive",
+        "growth_policy": "leafwise",
+        "max_leaves": 32,
+        "n_estimators": 200
+      },
+      "decision_threshold": 0.21131493361511805,
+      "calibration_metrics": {
+        "accuracy": 0.8756609322382556,
+        "precision": 0.36691052335396734,
+        "recall": 0.5625539257981018,
+        "f1": 0.444141689373297,
+        "specificity": 0.9059867629362214,
+        "balanced_accuracy": 0.7342703443671617
+      },
+      "nested_development_f1": null,
+      "submission": {
+        "filename": "submission_combined18_24_leafwise32_depth8_full_train_oof.csv",
+        "sha256": "e8c6d0e28346775130f8ac1e0e10dd6aa795ebe1abb266f54747b92b2063d027",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "5cc18a68611da6b24b19046716fced50af8d75174fdbaececf07ac3ca4d82d0d",
+        "positive_predictions": 14912,
+        "negative_predictions": 94467
+      },
+      "local_artifact_sha256": {
+        "full_model": "eec45c54d1399c548750be3449800b8272a5b588d0084ed8905759020f3d2e9b",
+        "test_probabilities": "7f90ec8bd70716e7c811839a4c396abef4691656619cf8dafa232dff60a73268",
+        "oof_predictions": "7f99da9a699033c7416dd56e025fac63db9826eb2169959c0fc60847a5c41ae6"
+      },
+      "archived_verification": {
+        "passed": true,
+        "source": "results/aicrowd_combined_structural_20261015/verification.json",
+        "full_model_replay_max_difference": 0.0,
+        "scope": "Two isolated structural changes; all base matrices and 297 numeric bins unchanged; sampling replay and bounded tree shapes; own OOF thresholds; full training-score and test-probability replays; official CSV IDs and signed labels."
+      },
+      "reported_aicrowd": {
+        "f1": 0.452,
+        "accuracy": 0.881,
+        "csv_sha256": "e8c6d0e28346775130f8ac1e0e10dd6aa795ebe1abb266f54747b92b2063d027",
+        "source": "results/aicrowd_combined_structural_20261015/reported_aicrowd_scores.json"
+      },
+      "local_calibrated_final_configuration_sha256": "dbb3d5909788c6d7eb90c3779b5c4c367f09a567070c66c6b22ae7af974cd312",
+      "configuration_file_sha256": "0163e85772faacf26d0ee1bf678776c1707efc4d789bb39dd592582f71010451"
+    }
+  },
+  "source_fingerprints": [
+    {
+      "path": "results/aicrowd_candidates_20261013/manifest.json",
+      "sha256": "2d0e103a68106c8e39d75712b63e2c54a62c8085222a8cd2adedc96ef7149811",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_candidates_20261013/verification.json",
+      "sha256": "aedd486d91ee53a0448e6af41f2a5758034a1e4e56102ac0ec7a7794828dba60",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_candidates_20261013/aicrowd_feedback_20261013.json",
+      "sha256": "40043b219b75558a2469af38f8ca61764fe733326c764d7bc9d50966a24f8d15",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_combined18_24_20261013/manifest.json",
+      "sha256": "fccb6202565ae5dce713988d18308081a1f581d1592755faf2acac55693f1d78",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined18_24_20261013/verification.json",
+      "sha256": "d44e0c17721978c939cb9dc106b87018375296b85a0d9d58275d14efa5ad3c49",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined18_24_20261013/aicrowd_feedback_20261013.json",
+      "sha256": "bb31cbc631944ecf2511f3c95d9cbbf01a1804ee2733a385aeaa9f9ca9c1c9e6",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_count_candidates_20261013/manifest.json",
+      "sha256": "d54bd2322b56dcefdddfdf69429898099d4bb1c5e3f0b6e4459241a2e2d0c390",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_count_candidates_20261013/verification.json",
+      "sha256": "3e5e16d8f9925bd8fd6c190339867847eefe27a6abc7c4607db36f53ac89c649",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined_tuning_20261014/manifest.json",
+      "sha256": "c1869e8eba56dc15ac368ca7575cc7186d98e454c160af28cc95dca32bc1a117",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined_tuning_20261014/verification.json",
+      "sha256": "c8cf3032975fbb5ee8da1ed736a6e462e4427c486bd13fe8e68b389cbb700e85",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined_tuning_20261014/reported_aicrowd_scores.json",
+      "sha256": "b9f87b45d40384de97fff7d4dd25cb8fcc72c9cd4dd7325ca0efd970e1577731",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_combined_growth_20261014/manifest.json",
+      "sha256": "b29e0800f65303ec76c2002937effe9f70daf4e0199ec64c67e84c9f049978c0",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined_growth_20261014/verification.json",
+      "sha256": "c61e581c27bcba229900a73ad6ebbdbc98db3b38ab038bf2c6a0facbdf335c9e",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined_growth_20261014/reported_aicrowd_scores.json",
+      "sha256": "8718344c619f9400b0deefa0ad047eafb5991c4c68d75f2e2dfe41ed6200e7fe",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_combined_regularization_20261015/manifest.json",
+      "sha256": "f1c1611df3c1ed845ac0953bcd92e93fc35c668b222c87dfb63fb38b73e91075",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined_regularization_20261015/verification.json",
+      "sha256": "8ada01146f8dd67976ebbe95240ced789f03ed9faa9a24203b338a792e4448be",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined_regularization_20261015/reported_aicrowd_scores.json",
+      "sha256": "fefc9f0e86540d623eb1e4258ed0aba07eb4ad09547ab73c242e9dd90fc7eba6",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_combined_categorical_20261015/manifest.json",
+      "sha256": "0e4728174d1eac7740aa6e682600436d1cd553af0989934b433effa022453b2b",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined_categorical_20261015/verification.json",
+      "sha256": "ee0659c36a25ad15854adc8d7747554940a2fa6b4652611627a8068526ab5439",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined_categorical_20261015/reported_aicrowd_scores.json",
+      "sha256": "98a4ac1c8d477a84ab696002469844b2f3b98ab51f654161d53c60cb325621ec",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_combined_structural_20261015/manifest.json",
+      "sha256": "87610b4eedb78487f16c72d120b5f587038ebfb3f895a8d59ec6da24f8d14538",
+      "role": "Original local delivery manifest; retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined_structural_20261015/verification.json",
+      "sha256": "7aa593626904e8f616e9ce2d5facb5647ef6787ba57809e9213615cfa08e4497",
+      "role": "Archived completed verification; no new training or replay performed for this summary."
+    },
+    {
+      "path": "results/aicrowd_combined_structural_20261015/reported_aicrowd_scores.json",
+      "sha256": "0daf906398fc087ca9286315d663430d2804dced346669fb704daf8ce4f2c45c",
+      "role": "User-reported AIcrowd display feedback; three decimals; not independently fetched."
+    },
+    {
+      "path": "results/aicrowd_candidates_20261013/blend_screen_20261013.json",
+      "sha256": "3a86fba1e4c04ad558e99e6f94cb7096be431ae7fa9efb87456cb3c797c2143c",
+      "role": "Original exploratory reused-OOF diagnostic retained locally without rewriting."
+    },
+    {
+      "path": "results/aicrowd_combined_categorical_20261015/exploratory_blend_diagnostic.json",
+      "sha256": "0759af9a20b34182d38cdf42ad4ef438922d93eca62f5e460a073ff6a2d1bcf0",
+      "role": "Original exploratory reused-OOF diagnostic retained locally without rewriting."
+    }
+  ],
+  "exploratory_blends": {
+    "warning": "Reuse of previously consulted full-training OOF labels; pooled thresholds selected and described on the same labels. No new fits, submissions or independent improvement established.",
+    "phase18_24_25": {
+      "source": "results/aicrowd_candidates_20261013/blend_screen_20261013.json",
+      "no_new_training": true,
+      "blends": {
+        "mean_18_24": {
+          "weights": {
+            "phase18": 0.5,
+            "phase24": 0.5,
+            "phase25": 0.0
+          },
+          "threshold": 0.2130251435651055,
+          "pooled_oof_calibration": {
+            "accuracy": 0.8780380026513478,
+            "precision": 0.3717814770959578,
+            "recall": 0.552648835202761,
+            "f1": 0.44452155567276463,
+            "specificity": 0.9095534162321166,
+            "balanced_accuracy": 0.7311011257174388,
+            "average_precision": 0.4312276776083502,
+            "log_loss": 0.21475447053513796
+          }
+        },
+        "mean_24_25": {
+          "weights": {
+            "phase18": 0.0,
+            "phase24": 0.5,
+            "phase25": 0.5
+          },
+          "threshold": 0.21701146837208313,
+          "pooled_oof_calibration": {
+            "accuracy": 0.8798329955658494,
+            "precision": 0.3755000952562393,
+            "recall": 0.5441932700603969,
+            "f1": 0.444375554835346,
+            "specificity": 0.9123412220885145,
+            "balanced_accuracy": 0.7282672460744557,
+            "average_precision": 0.43091101140065785,
+            "log_loss": 0.21479089437279525
+          }
+        },
+        "mean_18_25": {
+          "weights": {
+            "phase18": 0.5,
+            "phase24": 0.0,
+            "phase25": 0.5
+          },
+          "threshold": 0.22214966706800654,
+          "pooled_oof_calibration": {
+            "accuracy": 0.8818138875767596,
+            "precision": 0.3798343218469683,
+            "recall": 0.5348748921484038,
+            "f1": 0.444215142525474,
+            "specificity": 0.915416499532023,
+            "balanced_accuracy": 0.7251456958402134,
+            "average_precision": 0.43134488465577864,
+            "log_loss": 0.21475288936412332
+          }
+        },
+        "equal_three": {
+          "weights": {
+            "phase18": 0.3333333333333333,
+            "phase24": 0.3333333333333333,
+            "phase25": 0.3333333333333333
+          },
+          "threshold": 0.22441986460172583,
+          "pooled_oof_calibration": {
+            "accuracy": 0.8829231871028692,
+            "precision": 0.3824744834453572,
+            "recall": 0.5302502157031924,
+            "f1": 0.4443994504302553,
+            "specificity": 0.9170811605829656,
+            "balanced_accuracy": 0.723665688143079,
+            "average_precision": 0.4313928540945739,
+            "log_loss": 0.2147210019394095
+          }
+        },
+        "phase24_half": {
+          "weights": {
+            "phase18": 0.25,
+            "phase24": 0.5,
+            "phase25": 0.25
+          },
+          "threshold": 0.21779320359176232,
+          "pooled_oof_calibration": {
+            "accuracy": 0.8801682234446189,
+            "precision": 0.37628545463241975,
+            "recall": 0.5430198446937015,
+            "f1": 0.444532342595601,
+            "specificity": 0.912822569862281,
+            "balanced_accuracy": 0.7279212072779913,
+            "average_precision": 0.43123540067122335,
+            "log_loss": 0.2147422014445057
+          }
+        },
+        "phase24_sixty": {
+          "weights": {
+            "phase18": 0.2,
+            "phase24": 0.6,
+            "phase25": 0.2
+          },
+          "threshold": 0.21534911161364814,
+          "pooled_oof_calibration": {
+            "accuracy": 0.8790893991802154,
+            "precision": 0.3740049926993547,
+            "recall": 0.54809318377912,
+            "f1": 0.44461553536682674,
+            "specificity": 0.9111478807327182,
+            "balanced_accuracy": 0.729620532255919,
+            "average_precision": 0.43107322538726045,
+            "log_loss": 0.21476677116027607
+          }
+        }
+      }
+    },
+    "native_activity_categories": {
+      "source": "results/aicrowd_combined_categorical_20261015/exploratory_blend_diagnostic.json",
+      "scope": "Exploratory reuse of existing full-training OOF probabilities. No new fits, CSVs or AIcrowd submissions.",
+      "formula": "(1-native_weight)*base_probability + native_weight*native_probability",
+      "results": [
+        {
+          "native_weight": 0.0,
+          "pooled_oof_f1": 0.4440706955530217,
+          "accuracy": 0.8811342892407088,
+          "threshold": 0.22007772525099117,
+          "fold_f1_at_pooled_threshold": [
+            0.4459075651949393,
+            0.4432715413662891,
+            0.4430519095605048
+          ]
+        },
+        {
+          "native_weight": 0.1,
+          "pooled_oof_f1": 0.44442858570144017,
+          "accuracy": 0.8813750438081887,
+          "threshold": 0.22014770493945107,
+          "fold_f1_at_pooled_threshold": [
+            0.44560344827586207,
+            0.44419604471195184,
+            0.4435029445409482
+          ]
+        },
+        {
+          "native_weight": 0.25,
+          "pooled_oof_f1": 0.44446653789342117,
+          "accuracy": 0.8807990613619394,
+          "threshold": 0.2185882783774391,
+          "fold_f1_at_pooled_threshold": [
+            0.4461426179538917,
+            0.4445205479452055,
+            0.44276994316985896
+          ]
+        },
+        {
+          "native_weight": 0.5,
+          "pooled_oof_f1": 0.4437723321047745,
+          "accuracy": 0.8795008152132506,
+          "threshold": 0.2157660157740548,
+          "fold_f1_at_pooled_threshold": [
+            0.4462239638795417,
+            0.4436437624517825,
+            0.44150220667832457
+          ]
+        },
+        {
+          "native_weight": 1.0,
+          "pooled_oof_f1": 0.4423260523651092,
+          "accuracy": 0.882511771069834,
+          "threshold": 0.22318329009733187,
+          "fold_f1_at_pooled_threshold": [
+            0.44414228694240976,
+            0.4419364678199486,
+            0.44093747327003674
+          ]
+        }
+      ]
+    }
+  }
+}

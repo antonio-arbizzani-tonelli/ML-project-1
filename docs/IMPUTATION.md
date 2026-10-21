@@ -1,23 +1,29 @@
 # Codebook-aware imputation experiments
 
-Phase 15 validated feature recovery. The selected Phase 16 downstream
-challengers have been retrained in an exploratory outer-fold comparison.
-Their thresholds were selected on the same pooled OOF labels being scored.
-Phase 24 has now completed nested threshold selection for the original
-restricted booster pipeline: F1 0.441791 versus 0.442155 for Phase 14, with
-one of three folds improving. The exploratory gain is not confirmed. The
-Phase 14 booster and threshold are historical references in this study,
-before the Phase 34 observed-versus-missing split correction. The current
-final selection retains that historical Phase 14 source, with a newly
-calibrated full-train threshold, as documented in [EXPERIMENTS.md](EXPERIMENTS.md).
+Phase 15 validated feature recovery. The Phase 16 downstream comparisons were
+exploratory: the same pooled OOF labels selected and described their thresholds.
+Phase 24 later evaluated the original restricted pipeline with nested threshold
+selection: F1 **0.441791** versus **0.442155** for historical Phase 14, with
+one of three folds improving. The isolated exploratory gain was not confirmed.
+[Phase 24 evidence](../results/eda/phase24_original_restricted_imputation_summary.md).
 
-See [the Phase 24 report](../results/eda/phase24_original_restricted_imputation_summary.md).
+The current delivery model **combined18_24_features256** subsequently combines
+that restricted imputation with Phase 18 raw diet exclusions and 256 candidate
+features per node. Its 297 columns comprise 289 source columns and eight
+missing-reason indicators. It retains the historical booster, calibrates
+threshold **0.22007772525099117** on three-fold full-training OOF predictions,
+and has user-reported AIcrowd **F1 0.455, accuracy 0.883**. Calibration F1 is
+**0.444071**; the exact combined pipeline has no nested evaluation. This later
+choice does not turn Phase 24's isolated nested result into an imputation gain.
+[Selected record](../results/eda/final_combined18_24_submission.json),
+[experiment history](EXPERIMENTS.md).
+
 The expanded variant and the revised restricted variant with exact indicator
-bins have not received this nested evaluation. This document covers conditional
-feature imputation for the booster and the historical logistic experiments.
-The MLP uses a separate median/mode preprocessing pipeline described in
-[docs/MLP.md](MLP.md); its Phase 32 F1 scores, 0.424451 and 0.419268, did not
-replace Phase 14.
+bins have not received the Phase 24 nested evaluation. This document covers
+conditional feature imputation for the booster and historical logistic
+experiments. The MLP uses a separate median/mode preprocessing pipeline in
+[MLP.md](MLP.md); its Phase 32 F1 scores, 0.424451 and 0.419268, were below
+the historical Phase 14 reference.
 
 ## Scope
 
@@ -61,7 +67,7 @@ corresponding training rows. Neither `_MICHD` nor validation labels are passed
 to the imputers. The downstream booster and F1 threshold follow the existing
 nested evaluation protocol.
 
-## Selected downstream variants
+## Restricted and expanded downstream variants
 
 The restricted variant imputes documented `unknown`/`refused` codes only for
 `INCOME2`, `PNEUVAC3`, and `EMPLOY1`. The expanded variant adds `ARTHDIS2`,
@@ -181,8 +187,10 @@ The dedicated configuration is
 `configs/experiments/phase24_original_restricted_imputation.json`.
 The complete result is
 `results/experiments/phase24_original_restricted_imputation_comparison.json`.
-The original restricted imputation was not adopted. The historical Phase 14
-reference used its 295-feature tree representation, direct missing-value
-routing and submission threshold `0.2108690997` before the split correction.
+The original restricted imputation was not adopted as an isolated replacement
+in the Phase 24 nested study. It was later combined with diet exclusions for
+the current delivery model described above. The historical Phase 14 reference
+used 295 source columns, direct missing routing and threshold `0.2108690997`
+in its earlier September submission, before the split correction.
 Later booster and MLP comparisons are
 summarized in [docs/EXPERIMENTS.md](EXPERIMENTS.md).
