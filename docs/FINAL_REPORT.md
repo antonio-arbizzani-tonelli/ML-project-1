@@ -255,7 +255,10 @@ implementation; the correction's result does not supply a nested result
 for that combination.
 
 `HAREHAB1` concerns outpatient rehabilitation following a heart attack.
-All 620 recorded development responses belong to positive labels. Its
+All 620 recorded raw development responses belong to positive labels, including
+13 unknown/refused codes; 607 are valid yes/no responses. The
+[compact response counts](../results/eda/dataset_summary.json) preserve the raw-code
+breakdown and original audit fingerprint. Its
 [historical Phase 14 ablation](../results/experiments/20260921T154905753681Z_phase15-boosting-ablate-harehab1-depth5-features128-200trees.json)
 reduces F1 from 0.442155 to 0.431039. It remains in the final model for
 classification of reported disease. A prospective model would require
@@ -288,7 +291,7 @@ to the combined base and reproduced final checkpoint probabilities with
 maximum difference zero. The [current selected-pipeline check](../results/eda/final_combined18_24_submission.json)
 reconstructs the normal preprocessing and exactly reproduces the selected
 checkpoint probabilities and CSV. No expensive full training was repeated
-for that checkpoint check. Release checks are documented separately in
+for that checkpoint check. Delivery scope and current integrity checks are documented in
 [FINAL_AUDIT.md](FINAL_AUDIT.md). Raw data, checkpoints, individual
 probabilities and submission CSVs remain local, outside the Git deliverable.
 

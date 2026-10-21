@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "reference_commit": "d491f15211dd63d5a6888acae75e90a82b39ea4f",
+  "purpose": "Freeze the selected pipeline, report and compact outcomes while pruning unrelated development material. No training or numerical result changes.",
+  "byte_policy": "Preserve numerical sources and frozen CRLF recipes exactly. For Git-normalized text only, CRLF is normalized to LF before SHA-256.",
+  "files": {
+    "run.py": {
+      "sha256": "791336cb9b57166d339ba5029d771fc73baddffa643bb292e9dc1f93fa36da52",
+      "newline_policy": "lf"
+    },
+    "helpers.py": {
+      "sha256": "b427d6354cc1e74bdcaff16b4acb0315d89f3f60bd9e0a2c0aad83199940217b",
+      "newline_policy": "preserve"
+    },
+    "implementations.py": {
+      "sha256": "0047b178fd326a2fbd09f8690f9135b25188e9c4b231c28d674d00fbbd987ec1",
+      "newline_policy": "lf"
+    },
+    "configs/final_model.json": {
+      "sha256": "20531307a9d8569f122b9c4f8de3595ba59aa10c7fb9afa16fa071cd33d3d9dc",
+      "newline_policy": "lf"
+    },
+    "configs/feature_metadata.json": {
+      "sha256": "f2005d31ac962c7abf58ad4f3183ef0489bc3935e49cf013c047119934e033c2",
+      "newline_policy": "lf"
+    },
+    "configs/experiments/combined18_24_preprocessing.json": {
+      "sha256": "26a90a950aa29a1fa179d19978d0aaa4138c808b01c85108d1283cb2a5bebcc0",
+      "newline_policy": "preserve"
+    },
+    "src/numpy_boosting_phase14.py": {
+      "sha256": "6fede57915b07a6ea7675292833f8ad79269e665f09977bffd2a9562ce1aaf98",
+      "newline_policy": "preserve"
+    },
+    "src/feature_preprocessing.py": {
+      "sha256": "458fdd9476c159e9c9a4c8e8ef2134829bb15653308b034a63f18968807e7510",
+      "newline_policy": "preserve"
+    },
+    "src/baseline_preprocessing.py": {
+      "sha256": "e44a994a4d0fd0c37fd4427076d648a0beb1371b1cd0474662a402a5105ae92b",
+      "newline_policy": "preserve"
+    },
+    "src/conditional_imputation.py": {
+      "sha256": "03bc6cb2bc2172bc71729b79d0b6e5a61645367683646dfd92dd2c6aeefb758e",
+      "newline_policy": "preserve"
+    },
+    "src/evaluation.py": {
+      "sha256": "b887e906f31993fe5a349dbcd0ba2e28f5d28568d7c133fe3b61358ae9520c1c",
+      "newline_policy": "preserve"
+    },
+    "docs/FINAL_REPORT.pdf": {
+      "sha256": "ca47486860d389a5ea90e0439d0f8bad309812df28274ae6140da4f91b5f9667",
+      "newline_policy": "preserve"
+    },
+    "docs/FINAL_REPORT.tex": {
+      "sha256": "a5ad9735208d98c3f3427d0f6589862a12f1db710bc12f5d377d4d70bdd38c70",
+      "newline_policy": "lf"
+    },
+    "results/eda/final_combined18_24_submission.json": {
+      "sha256": "9fa93efac6ba592ab07ec64be35038ba1d98344b0b8a5424754c7a079f8b64c0",
+      "newline_policy": "lf"
+    },
+    "results/eda/final_combined_experiments_summary.json": {
+      "sha256": "b3effc77aa1f9926bab809c59b4fb7ddb3b4b5ca25dc5d58315aa2cac66c7435",
+      "newline_policy": "lf"
+    }
+  }
+}

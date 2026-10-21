@@ -1,76 +1,94 @@
-# Configuration guide
+# Configuration and reproduction catalog
 
-[final_model.json](final_model.json) selects `combined18_24_features256` for
-`python run.py`: 297 processed columns, historical Phase 14 numerical source,
-200 trees, depth 5, 256 candidate features, and threshold **0.22007772525099117**.
-The threshold is calibrated on three-fold OOF predictions over all 328,135
-training rows. [The final submission record](../results/eda/final_combined18_24_submission.json)
-separates calibration from reported AIcrowd F1 0.455 / accuracy 0.883.
-This exact combined pipeline has no completed nested development evaluation.
-[final_phase14_model.json](final_phase14_model.json) preserves the previous
-295-column submission and its threshold for historical reproduction.
+[final_model.json](final_model.json) is the single executable definition of the
+selected full-data model. Its evidence is in the
+[submission record](../results/eda/final_combined18_24_submission.json).
+[final_phase14_model.json](final_phase14_model.json) retains the earlier submission;
+[feature_metadata.json](feature_metadata.json) supplies codebook semantics.
 
-| File | Contents |
-| --- | --- |
-| [final_model.json](final_model.json) | Settings for full-data training and prediction |
-| [Combined representation](experiments/combined18_24_preprocessing.json) | Phase 18 diet exclusions, restricted Phase 24 imputation and eight missing-reason flags |
-| [Selected combined parameters](experiments/combined18_24_features256.json) | Original full-train study recipe: 200 trees, depth 5, 64 bins, 256 candidate features |
-| [Combined validation recipe](experiments/final_combined_validation.json) | Explicit historical implementation for a fresh nested evaluation; not yet executed |
-| [Historical full-data model](final_phase14_model.json) | Previous Phase 14 submission, retained for reproduction |
-| [Historical Phase 14 validation](experiments/final_phase14_validation.json) | Explicit historical implementation, original development folds and inner threshold selection |
-| [feature_metadata.json](feature_metadata.json) | Feature names, semantic types and codebook response codes |
-| [Phase 14 cleaning](experiments/phase14_codebook_corrections_only.json) | Historical 295 source columns, exclusions and code corrections |
-| [Phase 14 CV](experiments/phase14_boosting_codebook_corrections_only.json) | Historical suite: three outer folds and two inner folds for threshold selection |
-| [Phase 32 MLP](experiments/phase32_mlp.json) | Dedicated neural preprocessing and the two evaluated architectures |
-| [Raw tree inputs](experiments/phase33_raw_tree_preprocessing.json) | All 321 predictors, preserving original response codes and NaNs |
-| [Raw preprocessing ablation CV](experiments/phase33_raw_boosting_cv.json) | Historical Phase 14 parameters and folds with raw inputs |
-| [Corrected missing-only split CV](experiments/phase34_missing_only_split.json) | Same 295-column representation and nested folds, with the corrected split search |
-| [Historical positive weight 1.25](experiments/phase35_phase14_positive_weight1p25.json) | Phase 14 settings with positive loss weight 1.25; execute through the Phase 35 driver |
-| [Historical positive weight 1.5](experiments/phase35_phase14_positive_weight1p5.json) | Phase 14 settings with positive loss weight 1.5; execute through the Phase 35 driver |
-| [Random undersampling](experiments/phase36_undersampling_random.json) | Corrected Phase 34 with three randomly selected negatives per positive; execute through the Phase 36 driver |
-| [Hybrid hard-negative undersampling](experiments/phase36_undersampling_hybrid_hard.json) | Same sample budget; half random negatives and half highest-risk negatives from a training-only pilot |
-| [Historical random undersampling 5:1](experiments/phase37_phase14_random_ratio5.json) | Phase 14 with all positives and five negatives per positive; execute through the Phase 37 driver |
-| [Historical random undersampling 7:1](experiments/phase37_phase14_random_ratio7.json) | Same historical model and shared random negative permutation; the 5:1 sample is contained in this one |
+From the repository root, prepare official inputs with `python -m tools.prepare_data`.
+For a row naming a standard runner, use `python -m RUNNER configs/experiments/FILE.json`.
+For historical tree recipes, add the **listed implementation**; the unqualified
+standard runner defaults to the corrected backend and is not an exact historical
+reproduction. Explicit overrides record source hashes and use backend-specific
+artifact subdirectories. Use a new `--output-dir` for new experiment records.
 
-The other configurations in `experiments/` describe experimental pipelines.
-The measured results are explained in [EXPERIMENTS.md](../docs/EXPERIMENTS.md).
+Calibration drivers use `prepare`, then `run`; details and prerequisite order are
+in [tools/README.md](../tools/README.md). **Local replay** means that saved original
+models, OOF arrays or numerical snapshots are required in addition to official data.
+Those artifacts are not included in Git. A shared preprocessing plan is not a CLI.
+**Fresh chain (explicit override)** means completing the combined/tuning sequence
+and passing its new tuning manifest to the follow-up driver. Without that override,
+the driver checks the pinned original manifest and requires the original archive.
+The linked tools guide provides concrete `prepare`/`run` commands and output paths.
+The catalog below includes all 54 retained experiment recipes and shared plans.
 
-Configurations specify settings and input representations; the executed source
-also determines the result. Recorded Phase 14 and Phase 33 scores used the
-implementation before the missing-only split correction. Running those settings
-with the default corrected CV code performs a new experiment. Use
-`final_phase14_validation.json` for the historical nested reference and the
-Phase 34 suite for the corrected comparison. The historical preprocessing comparison keeps
-both its raw and cleaned controls on the previous implementation.
+| Recipe | Runner/driver | Availability | Backend or prerequisites |
+| --- | --- | --- | --- |
+| [all_negative_baseline.json](experiments/all_negative_baseline.json) | `src.run_experiment` | Fresh data | Initial baseline; historical linear fill differs from current categorical mode fill |
+| [combined18_24_bins128.json](experiments/combined18_24_bins128.json) | `tools.final_combined_tuning` | Fresh data | Full-training calibration; follow-up studies need preceding combined artifacts |
+| [combined18_24_depth4.json](experiments/combined18_24_depth4.json) | `tools.final_combined_regularization` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--base-manifest` |
+| [combined18_24_features256.json](experiments/combined18_24_features256.json) | `tools.final_combined_tuning` | Fresh data | Full-training calibration; follow-up studies need preceding combined artifacts |
+| [combined18_24_features297.json](experiments/combined18_24_features297.json) | `tools.final_combined_growth` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--origin-manifest` |
+| [combined18_24_l2_1.json](experiments/combined18_24_l2_1.json) | `tools.final_combined_18_24` | Fresh data | Full-training calibration; follow-up studies need preceding combined artifacts |
+| [combined18_24_l2_5.json](experiments/combined18_24_l2_5.json) | `tools.final_combined_18_24` | Fresh data | Full-training calibration; follow-up studies need preceding combined artifacts |
+| [combined18_24_leaf400.json](experiments/combined18_24_leaf400.json) | `tools.final_combined_regularization` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--base-manifest` |
+| [combined18_24_leafwise32_depth8.json](experiments/combined18_24_leafwise32_depth8.json) | `tools.final_combined_structural` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--base-manifest` |
+| [combined18_24_native_categories.json](experiments/combined18_24_native_categories.json) | `tools.final_combined_categorical` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--base-manifest` |
+| [combined18_24_preprocessing.json](experiments/combined18_24_preprocessing.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [combined18_24_subsample08.json](experiments/combined18_24_subsample08.json) | `tools.final_combined_structural` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--base-manifest` |
+| [combined18_24_trees300.json](experiments/combined18_24_trees300.json) | `tools.final_combined_growth` | Fresh chain (explicit override); original replay by default | Pass completed tuning manifest with `--origin-manifest`; continues completed features256 checkpoints |
+| [count_a.json](experiments/count_a.json) | `tools.final_count_candidates` | Fresh data | Raw-response counts, full-training calibration |
+| [count_ab.json](experiments/count_ab.json) | `tools.final_count_candidates` | Fresh data | Raw-response counts, full-training calibration |
+| [count_b.json](experiments/count_b.json) | `tools.final_count_candidates` | Fresh data | Raw-response counts, full-training calibration |
+| [count_candidates_preprocessing.json](experiments/count_candidates_preprocessing.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [final_combined_validation.json](experiments/final_combined_validation.json) | `src.run_boosting_cv` | Fresh data | Explicit phase14; no completed nested result for this exact combined pipeline |
+| [final_phase14_validation.json](experiments/final_phase14_validation.json) | `src.run_boosting_cv` | Fresh data | Explicit phase14; historical nested reference |
+| [logistic_baseline.json](experiments/logistic_baseline.json) | `src.run_experiment` | Fresh data | Initial baseline; historical linear fill differs from current categorical mode fill |
+| [phase14_boosting_codebook_corrections_only.json](experiments/phase14_boosting_codebook_corrections_only.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase14_codebook_corrections_only.json](experiments/phase14_codebook_corrections_only.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase15_ablate_harehab1.json](experiments/phase15_ablate_harehab1.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase15_boosting_ablate_harehab1.json](experiments/phase15_boosting_ablate_harehab1.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase16_selected_imputation_preprocessing.json](experiments/phase16_selected_imputation_preprocessing.json) | Used by Phase 24 and combined calibration validation | Shared plan | Original restricted-imputation plan required by the retained Phase 24 recipe |
+| [phase18_boosting_diet_frequency_features.json](experiments/phase18_boosting_diet_frequency_features.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase18_diet_frequency_features.json](experiments/phase18_diet_frequency_features.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase20_phase14_exact_low_cardinality.json](experiments/phase20_phase14_exact_low_cardinality.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase21_phase14_clinical_exact.json](experiments/phase21_phase14_clinical_exact.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase22_activity_one_hot_preprocessing.json](experiments/phase22_activity_one_hot_preprocessing.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase22_phase14_activity_one_hot.json](experiments/phase22_phase14_activity_one_hot.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase23_missing_reason_flags_preprocessing.json](experiments/phase23_missing_reason_flags_preprocessing.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase23_phase14_missing_reason_flags.json](experiments/phase23_phase14_missing_reason_flags.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase24_original_restricted_imputation.json](experiments/phase24_original_restricted_imputation.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase25_phase14_l2_5.json](experiments/phase25_phase14_l2_5.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase26_phase14_seed20260921.json](experiments/phase26_phase14_seed20260921.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase27_phase14_lr0025_400trees.json](experiments/phase27_phase14_lr0025_400trees.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase29_phase14_feature_selection.json](experiments/phase29_phase14_feature_selection.json) | `tools.phase29_feature_selection` | Local replay | Requires original Phase 14 OOF/models and matching snapshots |
+| [phase30_phase14_positive_weight2.json](experiments/phase30_phase14_positive_weight2.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase31_phase14_depth7.json](experiments/phase31_phase14_depth7.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase32_mlp.json](experiments/phase32_mlp.json) | `src.run_mlp_cv` | Fresh data | Two neural architectures |
+| [phase33_raw_boosting_cv.json](experiments/phase33_raw_boosting_cv.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase14` |
+| [phase33_raw_tree_preprocessing.json](experiments/phase33_raw_tree_preprocessing.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase34_missing_only_split.json](experiments/phase34_missing_only_split.json) | `src.run_boosting_cv` | Fresh data | `--implementation phase34` |
+| [phase35_phase14_positive_weight1p25.json](experiments/phase35_phase14_positive_weight1p25.json) | `tools.phase35_positive_weights` | Local replay | Requires archived Phase 30 source snapshot and Phase 14 fits |
+| [phase35_phase14_positive_weight1p5.json](experiments/phase35_phase14_positive_weight1p5.json) | `tools.phase35_positive_weights` | Local replay | Requires archived Phase 30 source snapshot and Phase 14 fits |
+| [phase36_undersampling_hybrid_hard.json](experiments/phase36_undersampling_hybrid_hard.json) | `tools.phase36_undersampling` | Local replay | Requires corrected Phase 34 control models/OOF |
+| [phase36_undersampling_random.json](experiments/phase36_undersampling_random.json) | `tools.phase36_undersampling` | Local replay | Requires corrected Phase 34 control models/OOF |
+| [phase37_phase14_random_ratio5.json](experiments/phase37_phase14_random_ratio5.json) | `tools.phase37_undersampling_ratios` | Local replay | Requires historical Phase 35 source snapshot and Phase 14 fits |
+| [phase37_phase14_random_ratio7.json](experiments/phase37_phase14_random_ratio7.json) | `tools.phase37_undersampling_ratios` | Local replay | Requires historical Phase 35 source snapshot and Phase 14 fits |
+| [phase3_preprocessing_cv.json](experiments/phase3_preprocessing_cv.json) | Used by the matching CV/calibration recipe | Shared plan | Not a standalone model comparison |
+| [phase7_p2_corrected_interactions_nested_cv.json](experiments/phase7_p2_corrected_interactions_nested_cv.json) | `src.run_model_cv` | Fresh data | Historical linear parameters; see evidence caveat below |
+| [phase7_ridge_p2_nested_cv.json](experiments/phase7_ridge_p2_nested_cv.json) | `src.run_ridge_cv` | Fresh data | Historical linear parameters; see evidence caveat below |
+| [ridge_baseline.json](experiments/ridge_baseline.json) | `src.run_experiment` | Fresh data | Initial baseline; historical linear fill differs from current categorical mode fill |
 
-CV uses numeric caches and the included fixed split. Place the official CSVs
-as described in [data/README.md](../data/README.md), then run from the repository
-root:
+## What the records mean
 
-```bash
-python -m tools.prepare_data
-```
+The [114-record historical ledger](../results/experiments/index.csv) keeps original
+JSON bytes and hashes. Earlier runs can refer to recipes and source files now
+available only in the [development archive](../docs/ARCHIVE.md); their embedded paths
+are provenance rather than live execution instructions. Original linear results
+predate categorical mode filling, so executing their old parameters with current
+preprocessing is a new comparison. Exact historical replay uses the archived
+checkout and original artifacts/environment.
 
-Historical checkpoint replay also requires the saved model and OOF files
-identified in each study report.
-
-Phase 35 uses `python -m tools.phase35_positive_weights prepare` followed by
-`python -m tools.phase35_positive_weights run` to select the exact archived
-Phase 30 implementation. Running these configurations directly with the
-current standard runner would test the corrected implementation instead and
-would not reproduce the [historical weight study](../results/eda/phase35_positive_weights_summary.md).
-
-Phase 36 uses `python -m tools.phase36_undersampling prepare` followed by
-`python -m tools.phase36_undersampling run`. The driver applies sampling
-separately inside every outer and inner training fold, refits preprocessing
-and histogram bins on retained rows, and preserves the complete validation
-partitions. Running its configurations directly with the standard CV runner
-does not implement undersampling.
-
-Phase 37 uses `python -m tools.phase37_undersampling_ratios prepare` and
-`python -m tools.phase37_undersampling_ratios run`. It executes the verified
-historical numerical snapshot from Phase 35 and compares against historical
-Phase 14, rather than corrected Phase 34. Sampling is fitted inside every
-outer/inner training partition; all validation rows are preserved. Running
-these configurations directly with the standard CV runner neither applies
-the sampling nor selects the historical implementation.
+The presence of `final_combined_validation.json` is a runnable recipe, not evidence
+of completed nested evaluation. The selected pipeline's OOF F1 is calibration.

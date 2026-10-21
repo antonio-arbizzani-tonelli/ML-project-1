@@ -65,6 +65,8 @@ def _validate_checkpoints(checkpoints: object, name: str) -> list[int]:
 
 
 def _validate_suite(suite: dict) -> None:
+    if suite.get("implementation", "phase34") not in {"phase14", "phase34"}:
+        raise ValueError("implementation must be 'phase14' or 'phase34'.")
     required = {
         "data",
         "feature_metadata_path",
@@ -458,12 +460,29 @@ def _nested_evaluations(
     return results, applied_thresholds
 
 
-def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[Path]:
+def run_suite(
+    config_path: Path, project_root: Path, output_dir: Path,
+    implementation: str | None = None,
+) -> list[Path]:
     """Evaluate all configured booster settings on deterministic development folds."""
 
     with config_path.open(encoding="utf-8") as handle:
         suite = json.load(handle)
+    if implementation is not None:
+        if implementation not in {"phase14", "phase34"}:
+            raise ValueError("implementation must be 'phase14' or 'phase34'.")
+        suite["implementation"] = implementation
+        # Reproduction never overwrites the original study's model directory.
+        suite["artifact_dir"] = str(
+            Path(suite.get("artifact_dir", "results/boosting_artifacts"))
+            / ("reproduction_" + implementation)
+        )
     _validate_suite(suite)
+    selected_implementation = suite.get("implementation", "phase34")
+    implementation_path = Path(__file__).with_name(
+        "numpy_boosting_phase14.py" if selected_implementation == "phase14"
+        else "numpy_boosting.py"
+    )
     preprocessing_path = _resolve(project_root, suite["preprocessing_config_path"])
     with preprocessing_path.open(encoding="utf-8") as handle:
         preprocessing_suite = json.load(handle)
@@ -486,6 +505,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
         "labels": _sha256(labels_path),
         "split_indices": _sha256(split_path),
         "feature_metadata": _sha256(metadata_path),
+        "implementation_source": _sha256(implementation_path),
     }
     features = np.load(features_path, mmap_mode="r")
     labels = _as_binary_labels(np.load(labels_path))
@@ -558,6 +578,8 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                         "model_name": model_name,
                         "outer_fold": outer_fold,
                         "fitted_tree_count": step,
+                        "implementation": selected_implementation,
+                        "implementation_source_sha256": fingerprints["implementation_source"],
                         "training_row_indices": training_rows,
                         "training_row_indices_sha256": _array_sha256(training_rows),
                         "training_labels_sha256": _array_sha256(
@@ -689,6 +711,7 @@ def run_suite(config_path: Path, project_root: Path, output_dir: Path) -> list[P
                 "model": {
                     "name": "numpy_histogram_gradient_boosting",
                     "implementation": suite.get("implementation", "phase34"),
+                    "implementation_source_sha256": fingerprints["implementation_source"],
                     "parameters": {**model["parameters"], "n_estimators": step},
                 },
                 "threshold": {
@@ -740,12 +763,16 @@ def main() -> None:
     parser.add_argument("config", type=Path)
     parser.add_argument("--project-root", type=Path, default=Path("."))
     parser.add_argument("--output-dir", type=Path, default=Path("results/experiments"))
+    parser.add_argument(
+        "--implementation", choices=("phase14", "phase34"),
+        help="Explicit backend for a fresh reproduction; artifacts use a backend-specific subdirectory.",
+    )
     args = parser.parse_args()
     root = args.project_root.resolve()
     output_dir = (
         args.output_dir if args.output_dir.is_absolute() else root / args.output_dir
     )
-    for record in run_suite(args.config, root, output_dir):
+    for record in run_suite(args.config, root, output_dir, args.implementation):
         print(f"Saved experiment record: {record}")
 
 

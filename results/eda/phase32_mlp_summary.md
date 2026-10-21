@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Phase 32 — MLP con preprocessing dedicato
 
 Valutazione completa: 262,508 righe development, tre fold esterni e due interni. Soglie F1 scelte dagli OOF interni. Epoch selection su holdout 10% del training, quindi refit completo.

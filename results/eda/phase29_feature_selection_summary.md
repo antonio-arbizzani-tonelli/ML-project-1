@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Phase 29 — Selezione di 100 e 60 feature
 
 ## Risultati
@@ -47,10 +49,10 @@ Tempo dei nove fit ridotti e preprocessing: 13.51 minuti; costo dei nove seletto
 
 Questa decima selezione usa soltanto le 262.508 righe development. Produce liste utilizzabili come punto di partenza per un training successivo; non vengono riutilizzate per calcolare gli F1 riportati sopra. Un futuro training sull'intero dataset deve rifare la selezione su quel training.
 
-- [Classifica completa](phase29_feature_selection/development/ranking.csv).
-- [Lista delle 100 feature](phase29_feature_selection/development/top100.json).
-- [Lista delle 60 feature](phase29_feature_selection/development/top60.json).
-- [Importanza dei gruppi](phase29_feature_selection/development/group_importance.json).
+- [Classifica completa](https://github.com/antonio-arbizzani-tonelli/ML-project-1/blob/d491f15211dd63d5a6888acae75e90a82b39ea4f/results/eda/phase29_feature_selection/development/ranking.csv).
+- [Lista delle 100 feature](https://github.com/antonio-arbizzani-tonelli/ML-project-1/blob/d491f15211dd63d5a6888acae75e90a82b39ea4f/results/eda/phase29_feature_selection/development/top100.json).
+- [Lista delle 60 feature](https://github.com/antonio-arbizzani-tonelli/ML-project-1/blob/d491f15211dd63d5a6888acae75e90a82b39ea4f/results/eda/phase29_feature_selection/development/top60.json).
+- [Importanza dei gruppi](https://github.com/antonio-arbizzani-tonelli/ML-project-1/blob/d491f15211dd63d5a6888acae75e90a82b39ea4f/results/eda/phase29_feature_selection/development/group_importance.json).
 
 | Posizione | Feature | Calo medio F1 | Deviazione standard | Calo AP | Mancanti nel fit |
 | ---: | --- | ---: | ---: | ---: | ---: |
@@ -97,7 +99,7 @@ I sorgenti, le configurazioni e gli input protetti di Phase 27/28 sono stati ver
 
 ## Stabilità della selezione e variabili rare
 
-[Frequenza di selezione delle 295 colonne](phase29_feature_selection/selection_frequency.csv). È una diagnosi delle liste dei diversi training: non è una nuova lista da applicare globalmente agli stessi fold. Solo 37 colonne su 100 e 19 su 60 sono comuni a tutti e tre i training esterni.
+[Frequenza di selezione delle 295 colonne](https://github.com/antonio-arbizzani-tonelli/ML-project-1/blob/d491f15211dd63d5a6888acae75e90a82b39ea4f/results/eda/phase29_feature_selection/selection_frequency.csv). È una diagnosi delle liste dei diversi training: non è una nuova lista da applicare globalmente agli stessi fold. Solo 37 colonne su 100 e 19 su 60 sono comuni a tutti e tre i training esterni.
 
 Sul development, il taglio delle 100 colonne cade su CPDEMO1 (calo F1 0.000347, deviazione standard 0.000120); quello delle 60 cade su PDIABTST (calo F1 0.000828, deviazione standard 0.000711). Le importanze vicino al taglio sono piccole e vanno lette insieme alla loro variabilità.
 

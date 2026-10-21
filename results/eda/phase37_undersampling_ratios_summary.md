@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Phase 37 — Undersampling casuale 5:1 e 7:1 su Phase 14
 
 Confronto sul miglior modello storico Phase 14 (F1 nested 0,442155227), usando lo snapshot numerico storico già verificato per Phase 35. Tutti i positivi restano nel training. I negativi seguono una permutazione casuale condivisa per ciascun fit: il campione 5:1 è contenuto nel 7:1. Tutte le righe di validazione sono conservate; preprocessing e bin apprendono solo dalle righe selezionate. Soglie scelte tramite OOF interno. Holdout e test non valutati.

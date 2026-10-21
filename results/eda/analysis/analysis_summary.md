@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../../docs/ARCHIVE.md).
+
 # Dataset statistical analysis
 
 This report extends the structural audit and feature registry. All supplied predictor columns remain available for competition modelling; flags below describe data behaviour rather than automatic exclusions.

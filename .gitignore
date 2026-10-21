@@ -16,6 +16,7 @@ data/processed/
 results/boosting_artifacts/
 results/mlp_artifacts/
 results/oof_predictions/
+results/reproduction/
 results/experiments/*_oof_predictions.npz
 results/linear_imputation_artifacts/**/*.npz
 *.pkl

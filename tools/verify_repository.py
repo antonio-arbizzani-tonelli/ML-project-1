@@ -24,6 +24,14 @@ BASELINE = (
     "phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json"
 )
 BASELINE_SUITE = "configs/experiments/phase14_boosting_codebook_corrections_only.json"
+INTEGRITY_RECEIPT = "results/eda/final_pipeline_integrity.json"
+PIPELINE_FILES = (
+    "run.py", "helpers.py", "implementations.py", "configs/final_model.json",
+    "configs/feature_metadata.json", "configs/experiments/combined18_24_preprocessing.json",
+    "src/numpy_boosting_phase14.py", "src/feature_preprocessing.py",
+    "src/baseline_preprocessing.py", "src/conditional_imputation.py", "src/evaluation.py",
+    "docs/FINAL_REPORT.pdf", "docs/FINAL_REPORT.tex",
+)
 LINK = re.compile(r"!?\[[^\]]*\]\(([^\s)]+)(?:\s+\"[^\"]*\")?\)")
 LOCAL_PREFIXES = (
     "data/raw/dataset/", "data/processed/", "results/boosting_artifacts/",
@@ -40,16 +48,68 @@ def published_files(root: Path) -> set[str]:
     return set(filter(None, output.decode("utf-8").split("\0")))
 
 
+def configuration_references(value) -> set[str]:
+    """Find repository configuration paths, including nested recipe settings."""
+    if isinstance(value, dict):
+        return set().union(*(configuration_references(item) for item in value.values()))
+    if isinstance(value, list):
+        return set().union(*(configuration_references(item) for item in value))
+    if isinstance(value, str) and value.startswith("configs/"):
+        return {value}
+    return set()
+
+
+def verify_pipeline_integrity(root: Path, files: set[str]) -> tuple[list[str], int]:
+    """Check the frozen delivery receipt, including preprocessing and metadata."""
+    errors = []
+    count = 0
+    path = root / INTEGRITY_RECEIPT
+    if INTEGRITY_RECEIPT not in files or not path.is_file():
+        return [f"Missing pipeline integrity receipt: {INTEGRITY_RECEIPT}"], count
+    try:
+        receipt = json.loads(path.read_text(encoding="utf-8"))
+    except (ValueError, UnicodeError):
+        return ["Invalid pipeline integrity receipt."], count
+    entries = receipt.get("files")
+    if receipt.get("schema_version") != 1 or not isinstance(entries, dict):
+        return ["Unsupported pipeline integrity receipt."], count
+    for name in PIPELINE_FILES:
+        if name not in entries:
+            errors.append(f"Missing pipeline fingerprint: {name}")
+    for name, entry in entries.items():
+        destination = (root / name).resolve()
+        try:
+            destination.relative_to(root.resolve())
+        except ValueError:
+            errors.append(f"Pipeline fingerprint escapes the repository: {name}")
+            continue
+        if name not in files or not destination.is_file():
+            errors.append(f"Missing fingerprinted pipeline file: {name}")
+            continue
+        if not isinstance(entry, dict) or entry.get("newline_policy") not in {"preserve", "lf"}:
+            errors.append(f"Invalid pipeline fingerprint policy: {name}")
+            continue
+        content = destination.read_bytes()
+        if entry["newline_policy"] == "lf":
+            content = content.replace(b"\r\n", b"\n")
+        count += 1
+        if hashlib.sha256(content).hexdigest() != entry.get("sha256"):
+            errors.append(f"Pipeline fingerprint mismatch: {name}")
+    return errors, count
+
+
 def verify(root: Path = ROOT) -> dict:
     """Fail on inconsistent delivery contents without modifying the repository."""
     files = published_files(root)
     errors = []
     counts = {"eligible_files": len(files), "python_files": 0,
-              "json_files": 0, "markdown_links": 0, "indexed_records": 0}
+              "json_files": 0, "markdown_links": 0, "indexed_records": 0,
+              "configuration_dependencies": 0}
     required = (
         "README.md", "run.py", "helpers.py", "implementations.py", "requirements.txt",
         "configs/final_model.json", "docs/FINAL_REPORT.md", "docs/FINAL_AUDIT.md",
-        "docs/GITHUB_RELEASE.md", ".github/workflows/tests.yml",
+        "docs/ARCHIVE.md", "docs/FINAL_REPORT.pdf", "docs/FINAL_REPORT.tex",
+        ".github/workflows/tests.yml",
         "official_material/project1/brfss_2015_codebook.txt",
         "results/eda/analysis/splits/stratified_seed_20260918.npz", BASELINE,
     )
@@ -78,9 +138,21 @@ def verify(root: Path = ROOT) -> dict:
         if path.suffix == ".json":
             counts["json_files"] += 1
             try:
-                json.loads(path.read_text(encoding="utf-8"))
+                configuration = json.loads(path.read_text(encoding="utf-8"))
             except (ValueError, UnicodeError) as exc:
                 errors.append(f"Invalid JSON: {name}: {exc}")
+            else:
+                if name.startswith("configs/"):
+                    for reference in sorted(configuration_references(configuration)):
+                        counts["configuration_dependencies"] += 1
+                        destination = (root / reference).resolve()
+                        try:
+                            relative = destination.relative_to(root.resolve()).as_posix()
+                        except ValueError:
+                            errors.append(f"Configuration dependency escapes the repository: {name}: {reference}")
+                            continue
+                        if relative not in files or not destination.is_file():
+                            errors.append(f"Missing published configuration dependency: {name}: {reference}")
         if path.suffix == ".md":
             for match in LINK.finditer(path.read_text(encoding="utf-8")):
                 target = match.group(1).strip("<>")
@@ -113,6 +185,9 @@ def verify(root: Path = ROOT) -> dict:
                 errors.append(f"Missing indexed record: {record.relative_to(root)}")
             elif hashlib.sha256(record.read_bytes()).hexdigest() != row["record_sha256"]:
                 errors.append(f"Indexed record hash mismatch: {record.relative_to(root)}")
+
+    integrity_errors, counts["pipeline_fingerprints"] = verify_pipeline_integrity(root, files)
+    errors.extend(integrity_errors)
 
     final = json.loads((root / "configs/final_model.json").read_text(encoding="utf-8"))
     validation = final.get("validation", {
@@ -187,6 +262,11 @@ def verify(root: Path = ROOT) -> dict:
                 errors.append("Full-train calibration uses a different booster implementation.")
             if calibration["implementation_sha256"] != final.get("implementation_source_sha256"):
                 errors.append("Full-train calibration source fingerprint differs from the selected source.")
+            for source, expected in calibration.get("source_sha256", {}).items():
+                if source not in files or not (root / source).is_file():
+                    errors.append(f"Missing selected pipeline source: {source}")
+                elif hashlib.sha256((root / source).read_bytes()).hexdigest() != expected:
+                    errors.append(f"Selected pipeline source fingerprint mismatch: {source}")
             if (calibration["threshold"]["method"] != "pooled_3_fold_full_train_oof_f1"
                     or calibration["threshold"]["training_rows"] != calibration["training_rows"]
                     or calibration["threshold"]["fold_count"] != 3):

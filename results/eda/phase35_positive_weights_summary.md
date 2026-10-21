@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Phase 35 — Pesi dei positivi 1,25 e 1,5
 
 Confronto controllato con Phase 14 e peso 2 già valutato. I due nuovi candidati usano il codice numerico storico di Phase 30, isolato dalla successiva correzione della ricerca degli split sui mancanti. Cambia soltanto il peso della loss positiva; peso negativo 1. Stesse 262.508 righe development, 295 feature, seed e parametri; tre fold esterni e due interni per ogni soglia. Nove fit per candidato.

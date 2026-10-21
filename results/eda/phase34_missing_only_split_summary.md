@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Phase 34 — corrected missing-only split candidates
 
 One implementation correction at fixed Phase 14 data, cleaning, parameters and nested threshold protocol. Nine fresh corrected fits; historical control reused without retraining. The benchmark holds model parameters and preprocessing fixed; the historical submission is preserved.
@@ -20,7 +22,11 @@ Prediction transitions: recovered positives: 499, lost positives: 293, introduce
 
 Selected observed-versus-missing nodes and staged log loss/AP on identical 3,000-row training/validation samples per fold are recorded in the comparison JSON. These samples diagnose fit behaviour; they do not replace the full nested evaluation.
 
-Reproduce: `python -B -m tools.phase34_missing_only_benchmark prepare`, then `python -B -m tools.phase34_missing_only_benchmark run --workers 2`.
+The original commands `python -B -m tools.phase34_missing_only_benchmark prepare`
+and `python -B -m tools.phase34_missing_only_benchmark run --workers 2` use a driver
+now available in the [development archive](../../docs/ARCHIVE.md). For a fresh
+corrected-backend comparison, follow the retained `phase34_missing_only_split.json`
+recipe with `--implementation phase34` in the [current catalog](../../configs/README.md).
 
 Candidate record: `results\experiments\phase34_missing_only_split\20261007T092637381255Z_phase34-missing-only-split-depth5-features128-200trees.json`.
 Comparison: [JSON](../experiments/phase34_missing_only_split_comparison.json).

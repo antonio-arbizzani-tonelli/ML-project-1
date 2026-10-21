@@ -8,7 +8,10 @@ import unittest
 from unittest.mock import patch
 from uuid import uuid4
 
-from tools.verify_repository import BASELINE, BASELINE_SUITE, verify
+from tools.verify_repository import (
+    BASELINE, BASELINE_SUITE, INTEGRITY_RECEIPT, PIPELINE_FILES,
+    verify, verify_pipeline_integrity,
+)
 
 
 class TestSelectedValidation(unittest.TestCase):
@@ -17,7 +20,8 @@ class TestSelectedValidation(unittest.TestCase):
         self.root.mkdir()
         self.files = set()
         for name in ("README.md", "run.py", "helpers.py", "implementations.py", "docs/FINAL_REPORT.md",
-                     "docs/FINAL_AUDIT.md", "docs/GITHUB_RELEASE.md", ".github/workflows/tests.yml",
+                     "docs/FINAL_AUDIT.md", "docs/ARCHIVE.md", "docs/FINAL_REPORT.pdf",
+                     "docs/FINAL_REPORT.tex", ".github/workflows/tests.yml",
                      "official_material/project1/brfss_2015_codebook.txt",
                      "results/eda/analysis/splits/stratified_seed_20260918.npz"):
             self._write(name, "")
@@ -66,7 +70,8 @@ class TestSelectedValidation(unittest.TestCase):
         self._write("configs/final_model.json", self.final)
 
     def _verify(self):
-        with patch("tools.verify_repository.published_files", return_value=self.files):
+        with patch("tools.verify_repository.published_files", return_value=self.files), \
+                patch("tools.verify_repository.verify_pipeline_integrity", return_value=([], 0)):
             return verify(self.root)
 
     def _select_full_train_calibration(self):
@@ -160,6 +165,28 @@ class TestSelectedValidation(unittest.TestCase):
         self.assertEqual(result["selected_model"], "Phase 14")
         self.assertEqual(result["nested_development_f1"], 0.44)
 
+    def test_nonselected_recipe_requires_published_preprocessing_dependency(self):
+        recipe = "configs/experiments/comparison.json"
+        dependency = "configs/experiments/comparison_preprocessing.json"
+        self._write(recipe, {"preprocessing_config_path": dependency})
+        expected = f"Missing published configuration dependency: {recipe}: {dependency}"
+        self.assertIn(expected, self._verify()["errors"])
+        self._write(dependency, {})
+        self.files.remove(dependency)
+        self.assertIn(expected, self._verify()["errors"])
+
+    def test_nested_configuration_dependencies_are_checked_transitively(self):
+        recipe = "configs/experiments/comparison.json"
+        dependency = "configs/experiments/comparison_preprocessing.json"
+        metadata = "configs/comparison_metadata.json"
+        self._write(recipe, {"variants": [{"preprocessing_config_path": dependency}]})
+        self._write(dependency, {"feature_metadata_path": metadata})
+        expected = f"Missing published configuration dependency: {dependency}: {metadata}"
+        self.assertIn(expected, self._verify()["errors"])
+        self._write(metadata, {})
+        result = self._verify()
+        self.assertTrue(result["passed"], result["errors"])
+
     def test_selected_evidence_replaces_legacy_metrics_and_threshold(self):
         self._select_phase34()
         result = self._verify()
@@ -202,6 +229,78 @@ class TestSelectedValidation(unittest.TestCase):
         result = self._verify()
         self.assertFalse(result["passed"])
         self.assertIn("Final preprocessing config differs from the selected validation record.", result["errors"])
+
+
+class TestPipelineIntegrity(unittest.TestCase):
+    def setUp(self):
+        self.root = Path(__file__).resolve().parent / ("tmp_integrity_" + uuid4().hex)
+        self.root.mkdir()
+        self.files = {INTEGRITY_RECEIPT, *PIPELINE_FILES}
+        self.receipt = {"schema_version": 1, "files": {}}
+        for name in PIPELINE_FILES:
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            content = ("Frozen fixture: " + name + "\n").encode()
+            path.write_bytes(content)
+            self.receipt["files"][name] = {
+                "sha256": hashlib.sha256(content).hexdigest(), "newline_policy": "preserve"}
+        self._save_receipt()
+
+    def tearDown(self):
+        if self.root.resolve().parent != Path(__file__).resolve().parent:
+            raise ValueError("Fixture cleanup escaped the tests directory.")
+        shutil.rmtree(self.root)
+
+    def _save_receipt(self):
+        path = self.root / INTEGRITY_RECEIPT
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(self.receipt), encoding="utf-8")
+
+    def test_checks_all_required_delivery_fingerprints(self):
+        errors, count = verify_pipeline_integrity(self.root, self.files)
+        self.assertEqual(errors, [])
+        self.assertEqual(count, len(PIPELINE_FILES))
+
+    def test_modified_metadata_or_preprocessing_is_rejected(self):
+        for name in ("configs/feature_metadata.json", "src/feature_preprocessing.py"):
+            with self.subTest(file=name):
+                path = self.root / name
+                original = path.read_bytes()
+                path.write_bytes(original + b"changed")
+                errors, _ = verify_pipeline_integrity(self.root, self.files)
+                self.assertIn("Pipeline fingerprint mismatch: " + name, errors)
+                path.write_bytes(original)
+
+    def test_only_explicit_git_normalized_text_accepts_crlf(self):
+        normalized = "configs/final_model.json"
+        self.receipt["files"][normalized]["newline_policy"] = "lf"
+        self._save_receipt()
+        for name in (normalized, "src/numpy_boosting_phase14.py"):
+            path = self.root / name
+            path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+        errors, _ = verify_pipeline_integrity(self.root, self.files)
+        self.assertNotIn("Pipeline fingerprint mismatch: " + normalized, errors)
+        self.assertIn("Pipeline fingerprint mismatch: src/numpy_boosting_phase14.py", errors)
+
+    def test_missing_fingerprint_or_unpublished_file_is_rejected(self):
+        del self.receipt["files"]["configs/feature_metadata.json"]
+        self._save_receipt()
+        self.files.remove("run.py")
+        errors, _ = verify_pipeline_integrity(self.root, self.files)
+        self.assertIn("Missing pipeline fingerprint: configs/feature_metadata.json", errors)
+        self.assertIn("Missing fingerprinted pipeline file: run.py", errors)
+
+    def test_missing_receipt_and_outside_path_are_rejected(self):
+        errors, _ = verify_pipeline_integrity(self.root, self.files - {INTEGRITY_RECEIPT})
+        self.assertIn("Missing pipeline integrity receipt: " + INTEGRITY_RECEIPT, errors)
+        self.receipt["files"]["../outside.py"] = {"sha256": "", "newline_policy": "preserve"}
+        self._save_receipt()
+        errors, _ = verify_pipeline_integrity(self.root, self.files)
+        self.assertIn("Pipeline fingerprint escapes the repository: ../outside.py", errors)
+        self.receipt["files"]["run.py"]["newline_policy"] = "unknown"
+        self._save_receipt()
+        errors, _ = verify_pipeline_integrity(self.root, self.files)
+        self.assertIn("Invalid pipeline fingerprint policy: run.py", errors)
 
 
 if __name__ == "__main__":

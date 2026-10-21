@@ -1,0 +1,148 @@
+{
+  "scope": "Selected aggregate fields copied from the original audits identified below; no data recomputation or model fitting.",
+  "sources": [
+    {
+      "source_commit": "d491f15211dd63d5a6888acae75e90a82b39ea4f",
+      "source_path": "results/eda/dataset_audit.json",
+      "source_sha256": "ca7f7a77520e109b9d350c4c7bd99a90ab5471a51344a40f0c24e6f89054ef27",
+      "fields": [
+        "files",
+        "cross_file_checks"
+      ]
+    },
+    {
+      "source_commit": "d491f15211dd63d5a6888acae75e90a82b39ea4f",
+      "source_path": "results/eda/analysis/dataset_analysis.json",
+      "source_sha256": "a38c61d2b4092b1cf985503f7e785b3a3b02a17bfb1e7c46ca49a9308499e597",
+      "fields": [
+        "split_and_duplicate_checks",
+        "duplicates"
+      ]
+    },
+    {
+      "source_commit": "d491f15211dd63d5a6888acae75e90a82b39ea4f",
+      "source_path": "results/eda/analysis/phase12_paired_boosting_logistic_errors.json",
+      "source_sha256": "936791dad49413110270b2b4cf65aad9788f12b011e40128e1bbb5fef3adea55",
+      "fields": [
+        "harehab1_raw_development_counts"
+      ]
+    }
+  ],
+  "files": {
+    "x_train": {
+      "bytes": 227376867,
+      "sha256": "bfa447edece27d45b54f8f1486f6351a381885968d71c9eb1574fd1dbf0fa14a",
+      "row_count": 328135,
+      "column_count_including_id": 322,
+      "feature_count": 321,
+      "first_id": 0,
+      "last_id": 328134,
+      "adjacent_duplicate_ids": 0,
+      "non_monotonic_id_steps": 0,
+      "total_missing_cells": 47175779,
+      "missing_cell_fraction": 0.4478798165806975
+    },
+    "y_train": {
+      "bytes": 3469411,
+      "sha256": "bc974ff01bd82827e05780d106674ee680c918fc54225384cbf4f7b279422ec1",
+      "row_count": 328135,
+      "first_id": 0,
+      "last_id": 328134,
+      "non_monotonic_id_steps": 0,
+      "label_counts": {
+        "-1": 299160,
+        "1": 28975
+      },
+      "positive_fraction": 0.08830207079403295
+    },
+    "x_test": {
+      "bytes": 91705179,
+      "sha256": "28a7f5f94436a33b5dceb5dd15fd72563f31ec898124e382c123d3827203503c",
+      "row_count": 109379,
+      "column_count_including_id": 322,
+      "feature_count": 321,
+      "first_id": 328135,
+      "last_id": 437513,
+      "adjacent_duplicate_ids": 0,
+      "non_monotonic_id_steps": 0,
+      "total_missing_cells": 15724379,
+      "missing_cell_fraction": 0.44785200414495213
+    },
+    "sample_submission": {
+      "bytes": 1203182,
+      "sha256": "62357ed950e0a7eb238745656fdefaecf451bb79e1775918433472974566a9e3",
+      "row_count": 109379,
+      "first_id": 328135,
+      "last_id": 437513,
+      "prediction_counts": {
+        "-1": 109379
+      }
+    }
+  },
+  "cross_file_checks": {
+    "train_test_feature_names_equal_and_ordered": true,
+    "train_test_id_ranges_disjoint": true,
+    "constant_train_features": []
+  },
+  "split_and_duplicate_checks": {
+    "seed": 20260918,
+    "validation_fraction": 0.2,
+    "development_rows": 262508,
+    "validation_rows": 65627,
+    "development_positive": 23180,
+    "validation_positive": 5795,
+    "development_indices_sha256": "d673c76f285cced30ceef85f10b3867102bf2b3a59278b7afc2fcaf5a825e51b",
+    "validation_indices_sha256": "e1f6534c2c5508cf151db08a4d71a713af5fa048ea2d415202a2a3b6bd1df402"
+  },
+  "duplicates": {
+    "hash_algorithm": "BLAKE2b-128 over all 321 raw feature fields; Id excluded",
+    "train_duplicate_groups": 0,
+    "train_duplicate_extra_rows": 0,
+    "train_duplicate_groups_with_conflicting_labels": 0,
+    "test_duplicate_groups": 0,
+    "test_duplicate_extra_rows": 0,
+    "unique_feature_rows_shared_by_train_and_test": 0,
+    "test_rows_matching_a_train_feature_row": 0,
+    "examples_train": []
+  },
+  "harehab1_raw_development_counts": {
+    "scope": "Raw recorded HAREHAB1 responses in the fixed development split, including unknown/refused codes; cleaned valid-only yes/no responses have a different scope.",
+    "source_group_rows_zero_based": [
+      60,
+      61,
+      62,
+      63
+    ],
+    "groups": [
+      {
+        "group": "1: Yes",
+        "rows": 241,
+        "positive_rows": 241,
+        "negative_rows": 0
+      },
+      {
+        "group": "2: No",
+        "rows": 366,
+        "positive_rows": 366,
+        "negative_rows": 0
+      },
+      {
+        "group": "7: Don’t know/Not Sure",
+        "rows": 7,
+        "positive_rows": 7,
+        "negative_rows": 0
+      },
+      {
+        "group": "9: Refused",
+        "rows": 6,
+        "positive_rows": 6,
+        "negative_rows": 0
+      }
+    ],
+    "recorded_response_rows": 620,
+    "positive_rows": 620,
+    "negative_rows": 0,
+    "valid_yes_no_rows": 607,
+    "unknown_or_refused_rows": 13
+  }
+}

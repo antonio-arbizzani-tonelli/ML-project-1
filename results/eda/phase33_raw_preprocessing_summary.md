@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Raw predictors versus the selected preprocessing
 
 Same 262,508 development rows, three outer folds, two inner threshold folds, and 200-tree Phase 14 parameters. Raw input retains all 321 predictors and original response codes/NaNs. The selected input has 295 cleaned predictors.
@@ -21,7 +23,7 @@ Joint effect of base cleaning and exclusions; 128/321 versus 128/295 candidate f
 
 This is a development comparison after repeated model selection. Both pipelines keep HAREHAB1. The benchmark measures the combined preprocessing effect, including feature exclusions; it cannot attribute the difference to one operation.
 
-Reproduce with `python -m tools.phase33_raw_preprocessing_benchmark run`.
+Fresh CV uses `python -m src.run_boosting_cv configs/experiments/phase33_raw_boosting_cv.json --implementation phase14`; exact old-checkpoint replay uses the archived complete tree.
 
 Raw record: [20261007T011322024298Z_phase33-raw-321-features-depth5-features128-200trees.json](../experiments/phase33_raw_preprocessing/20261007T011322024298Z_phase33-raw-321-features-depth5-features128-200trees.json).
 Comparison: [JSON](../experiments/phase33_raw_preprocessing_comparison.json).

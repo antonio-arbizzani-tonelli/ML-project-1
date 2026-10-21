@@ -1,3 +1,5 @@
+> Historical study evidence. The selected combined pipeline is described in the [current report](../../docs/FINAL_REPORT.md); original replay prerequisites are in the [archive note](../../docs/ARCHIVE.md).
+
 # Phase 36 — Due metodi di undersampling
 
 Confronto con la versione corretta Phase 34. Tutti i positivi restano nel training; si conservano tre negativi per positivo. Random sceglie i negativi uniformemente. Hybrid hard conserva metà negativi casuali e metà tra quelli con probabilità positiva maggiore secondo un pilot di 24 alberi, profondità 3, addestrato esclusivamente sul training del fold. Il pilot usa a sua volta un campione casuale 3:1.
