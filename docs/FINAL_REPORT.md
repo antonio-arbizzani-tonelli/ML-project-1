@@ -131,6 +131,10 @@ rate 0.2, 4,000 updates and no L2; ridge uses lambda 0.0001, selected from
 three values, with inner-OOF logistic score calibration. The six required
 functions are in `implementations.py`; least squares and ridge solve normal
 equations, linear losses use half-MSE and returned losses exclude penalties.
+Both linear baselines append the square of the preprocessed `_AGE80` channel
+and its products with the preprocessed `BPHIGH4`, `DIABETE3` and `SMOKE100`
+channels. These are products after imputation and the channel's own scaling or
+binary mapping; each product is then centred and scaled using fitting rows only.
 
 Phase 14 raises F1 by 0.016527 over logistic regression. It recovers 12,855
 of 23,180 development positives, with 22,112 false positives and 10,325
@@ -169,9 +173,10 @@ corrected control's 0.428781. The 3:1 and 5:1/7:1 experiments use different
 implementations and do not form one controlled ratio curve.
 
 MLPs use ReLU hidden layers, sigmoid output, BCE and Adam (learning rate
-0.001, batch 512), with L2 0.0001. Their preprocessing includes imputation,
+0.001, batch 512, seed 20261001), with L2 0.0001 on weights. Their preprocessing includes imputation,
 scaling, one-hot and frequency conversion fitted on training rows. Epoch
-selection uses an inner 10% split, at most 80 epochs and patience 8, followed
+selection uses a stratified inner 10% split, at most 80 epochs, patience 8
+and minimum improvement 0.0001, followed
 by a full refit. Both networks underperform the historical booster in all
 three folds. Detailed evidence is linked from [EXPERIMENTS.md](EXPERIMENTS.md)
 and [MLP.md](MLP.md).

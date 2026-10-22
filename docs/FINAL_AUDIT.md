@@ -2,8 +2,23 @@
 
 This package organizes the existing report evidence and retains optional
 procedures for repeating it. The selected model, required methods, numerical
-sources, configuration/metadata and report PDF/LaTeX are unchanged. The 114
+sources and configuration/metadata are unchanged. The report has the editorial
+clarifications described below; its scientific results are unchanged. The 114
 historical execution records retain their original bytes and indexed hashes.
+
+## Report detail clarification on 22 October 2026
+
+The two-page report now specifies the MLP preprocessing, architecture, optimizer,
+training settings and inner epoch selection. It also defines the linear baselines'
+four age-product features on preprocessed channels and their training-only scaling.
+Existing text was compacted to keep both pages; no result or model setting changed.
+
+The saved LaTeX source was compiled to PDF and both rendered pages were inspected.
+The current PDF/LaTeX fingerprints and their preceding hashes are recorded in the
+pipeline integrity receipt. This was document compilation and editorial/static
+review only: no local project tests, training or experiments were run. The numerical
+checks below remain evidence for the earlier tested sources, not a new execution
+of the report experiments.
 
 ## Cache and EDA instruction corrections on 22 October 2026
 
@@ -17,8 +32,8 @@ These changes were reviewed statically. No project commands, tests, training or
 experiments were run for this correction. The pipeline integrity receipt records
 the new loader hash and retains its earlier hash as historical provenance;
 the checks below describe the earlier tested commit, not this loader revision.
-Model algorithms, preprocessing, settings, historical records and report
-PDF/LaTeX remain unchanged.
+Model algorithms, preprocessing, settings and historical records were unchanged
+by that cache correction; the later report clarification is described above.
 
 ## Independent checks on 22 October 2026
 

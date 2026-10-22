@@ -24,7 +24,7 @@ python -m tools.verify_repository
 The verifier checks links, Python 3.9 syntax, JSON and retained configuration
 dependencies, 114 historical ledger hashes,
 selected parameters, five numerical sources and the separate pipeline integrity
-receipt (including preprocessing, metadata and unchanged report PDF/LaTeX).
+receipt (including preprocessing, metadata and the current report PDF/LaTeX).
 
 For standard historical CV use the explicit backend documented in the catalog:
 

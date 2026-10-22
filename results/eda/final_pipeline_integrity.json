@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "reference_commit": "d491f15211dd63d5a6888acae75e90a82b39ea4f",
-  "purpose": "Protect the selected numerical pipeline, current loader, report and compact outcomes. Loader-only changes after the reference release are identified separately; no training or numerical result changes.",
+  "purpose": "Protect the selected numerical pipeline, current loader, report and compact outcomes. Loader safety and report editorial changes after the reference release are identified separately; no training or numerical result changes.",
   "byte_policy": "Preserve numerical sources and frozen CRLF recipes exactly. For Git-normalized text only, CRLF is normalized to LF before SHA-256.",
   "post_reference_changes": [
     {
@@ -10,6 +10,20 @@
       "date": "2026-10-22",
       "scope": "Bind feature caches to CSV/array SHA-256 receipts; reject missing, partial or obsolete caches without deleting them.",
       "validation": "Static review only; no project commands, tests, training or experiments were run for this change. Earlier execution evidence applies to the earlier loader."
+    },
+    {
+      "path": "docs/FINAL_REPORT.tex",
+      "previous_sha256": "a5ad9735208d98c3f3427d0f6589862a12f1db710bc12f5d377d4d70bdd38c70",
+      "date": "2026-10-22",
+      "scope": "Clarify MLP settings and preprocessed age-product features, compacting prose to retain two pages; scientific results unchanged.",
+      "validation": "LaTeX document compilation, source/configuration reading and visual review only; no local project tests, training or experiments were run."
+    },
+    {
+      "path": "docs/FINAL_REPORT.pdf",
+      "previous_sha256": "ca47486860d389a5ea90e0439d0f8bad309812df28274ae6140da4f91b5f9667",
+      "date": "2026-10-22",
+      "scope": "Regenerated the two-page PDF from the clarified LaTeX source; scientific results unchanged.",
+      "validation": "Successful local LaTeX compilation; two pages confirmed by PDF reading and both pages visually inspected. No local project tests, training or experiments were run."
     }
   ],
   "files": {
@@ -58,11 +72,11 @@
       "newline_policy": "preserve"
     },
     "docs/FINAL_REPORT.pdf": {
-      "sha256": "ca47486860d389a5ea90e0439d0f8bad309812df28274ae6140da4f91b5f9667",
+      "sha256": "4583b9b6083dd8ff82aad3daffb5dd4976ed899b6d53b5ef07231409751e9b90",
       "newline_policy": "preserve"
     },
     "docs/FINAL_REPORT.tex": {
-      "sha256": "a5ad9735208d98c3f3427d0f6589862a12f1db710bc12f5d377d4d70bdd38c70",
+      "sha256": "8e6b532f84835f4222ea7df3732cbf2462a12b403b5b2ece566a573ac7ffd3a1",
       "newline_policy": "lf"
     },
     "results/eda/final_combined18_24_submission.json": {

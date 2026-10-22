@@ -7,7 +7,7 @@
 \usepackage{booktabs,tabularx,array}
 \usepackage[hidelinks]{hyperref}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{4pt}
+\setlength{\parskip}{3pt}
 \renewcommand{\arraystretch}{1.10}
 \newcommand{\heading}[1]{\vspace{5pt}{\large\bfseries #1}\par\vspace{2pt}}
 \newcommand{\code}[1]{\texttt{\small #1}}
@@ -25,61 +25,65 @@ EPFL CS-433 --- Project 1
 \end{center}
 \vspace{-3pt}
 
-We selected histogram gradient boosting implemented in NumPy, combining
-Phase 18 diet representation, Phase 24 restricted imputation and 256 candidate
-features per node. The team reported \textbf{AIcrowd F1 0.455 and accuracy
-0.883}. This final pipeline has 297 inputs. Its threshold-calibration F1 is
-0.444071; an independent nested evaluation of this exact combination was not run.
+Our NumPy histogram booster combines Phase 18 diet representation, Phase 24
+restricted imputation and 256 candidate features per node (297 inputs).
+The team reported \textbf{AIcrowd F1 0.455 and accuracy 0.883}.
+Its threshold-calibration F1 is 0.444071; this exact pipeline has no independent
+nested evaluation.
 
 \heading{Data and evaluation}
 The dataset contains 328,135 labelled rows, 321 predictors and 109,379 test
 rows. The target \code{\_MICHD} records self-reported myocardial infarction
 or coronary heart disease. Positives make up 8.83\% of training labels;
 44.79\% of predictor cells are blank. Always predicting negative gives
-91.17\% accuracy and F1 zero, motivating our focus on F1.
+91.17\% accuracy but F1 zero.
 
-The initial stratified split (seed 20260918) gives 262,508 development and
-65,627 local validation rows. Historical comparisons use three outer folds
-on development data (seed 20260919). Two inner folds within each outer
-training partition generate out-of-fold (OOF) predictions and select the
-F1 threshold; that threshold is applied to the excluded outer fold.
-Preprocessing, imputation, feature selection and sampling use only the
-training partition of each fit. Validation preserves all rows and prevalence.
-Later submission candidates instead calibrate thresholds on three OOF folds
-covering all labelled rows; those calibration scores are reported separately.
+The stratified split (seed 20260918) gives 262,508 development and 65,627
+local validation rows. Historical comparisons use three outer development
+folds (seed 20260919); two inner folds select each outer fold's F1 threshold
+from out-of-fold (OOF) predictions. Preprocessing, imputation, selection and
+sampling fit training rows only; validation preserves all rows and prevalence.
+Later candidates calibrate thresholds on three OOF folds covering all labelled
+rows; those calibration scores are reported separately.
 
 \heading{Methods and preprocessing}
-In \code{implementations.py}, we implemented the six required methods:
-linear regression with GD/SGD, least squares, ridge, logistic regression and
-L2 logistic regression. Least squares and ridge solve normal equations;
-linear losses use half-MSE and returned losses exclude regularisation.
-Historical linear baselines use median imputation, training-fitted scaling
-and age interactions. Logistic regression uses $\gamma=0.2$, 4,000 updates
-and $\lambda=0$; ridge uses $\lambda=10^{-4}$ and inner-OOF logistic calibration.
+\code{implementations.py} provides the six required methods: GD/SGD linear
+regression, least squares, ridge, logistic and L2 logistic regression.
+Least squares/ridge solve normal equations; linear losses are half-MSE,
+and returned losses exclude regularisation.
+Historical linear baselines use median imputation and training-fitted scaling.
+Their age terms square the preprocessed \code{\_AGE80} channel and multiply it
+by preprocessed \code{BPHIGH4}, \code{DIABETE3} and \code{SMOKE100}; each product
+is centred/scaled on training rows. Logistic regression uses $\gamma=0.2$,
+4,000 updates and $\lambda=0$; ridge uses $\lambda=10^{-4}$ and inner-OOF
+logistic calibration.
 
-\textbf{Codebook cleaning.} The CDC 2015 codebook guides types, units,
-response codes and exclusions. Removing identifiers, interview date,
-survey-design fields and redundant measurements leaves 295 source columns.
-Documented nonresponse codes become \code{NaN}; zero-quantity codes such as
-\code{ALCDAY5=888} and \code{PHYSHLTH=88} become zero. On retained development
-columns this recodes 1.10 million finite nonresponses and about 900,000
-zero quantities. Histogram trees fit quantile bins and missing-value
-directions on training rows, then use logistic gradients and curvatures
-to update leaf predictions.
+The multilayer perceptron (MLP) uses training-fitted imputation/scaling and
+categorical one-hot inputs, 64/32 ReLU hidden units, sigmoid output and binary
+cross-entropy. Adam uses learning rate 0.001, batch 512, weight L2 $10^{-4}$
+and seed 20261001. A stratified inner 10\% split selects epochs (maximum 80,
+patience 8, minimum improvement $10^{-4}$), followed by a complete training-partition refit.
 
-\textbf{Final representation.} Phase 18 removes six mixed-unit raw diet
-columns while retaining their existing CDC per-day equivalents, leaving 289
-source columns. Phase 24 adds eight original missing-reason indicators and
-feature-only imputation: Naive Bayes fills documented unknown/refused responses
-in \code{INCOME2}, \code{PNEUVAC3} and \code{EMPLOY1}; ridge predicts missing
-height/weight and BMI is reconstructed when possible. Imputers and anchor
-bins are fitted within each training partition. Structural blanks remain
-missing. The combined representation has \textbf{297 columns}.
+\textbf{Codebook cleaning.} CDC codebook types, units and response codes guide
+cleaning. Excluding identifiers, interview date, survey-design fields and
+redundant measurements leaves 295 columns. Nonresponses become \code{NaN};
+zero quantities (e.g.\ \code{ALCDAY5=888}, \code{PHYSHLTH=88}) become zero:
+1.10 million nonresponses and about 900,000 zeros on retained development
+columns. Trees fit quantile bins and missing-value directions on training
+rows, using logistic gradients and curvatures for leaf updates.
+
+\textbf{Final representation.} Phase 18 removes six mixed-unit diet columns,
+retaining their CDC per-day equivalents (289 source columns). Phase 24 adds
+eight missing-reason indicators and feature-only imputation: Naive Bayes fills
+unknown/refused \code{INCOME2}, \code{PNEUVAC3}, \code{EMPLOY1}; ridge predicts
+missing height/weight, reconstructing BMI when possible. Imputers and anchor
+bins fit training rows only; structural blanks remain missing. The combination
+has \textbf{297 columns}.
 
 The selected model uses \textbf{200 trees, depth 5}, learning rate 0.05,
 at least 200 rows per leaf, 64 quantile bins, \textbf{256 candidates per node},
 leaf L2 of 1, positive weight 1 and model seed 20260920. It retains the
-historical Phase 14 numerical implementation for exact reproduction.
+historical Phase 14 implementation for exact reproduction.
 
 \heading{Historical nested development evidence}
 \begin{center}
@@ -98,14 +102,13 @@ MLP 64/32 & 0.42445 & 0.36072 & 0.51553 & 0.38778 \\
 \end{tabularx}
 \end{center}
 \vspace{-4pt}
-Phase 14 exceeds logistic F1 by 0.01653. Cleaning exceeds raw-input F1 by
-0.00070; its paired conditional 95\% interval includes zero. Activity one-hot,
-exact discrete bins, restricted imputation, stronger regularisation, positive
-weights, two-seed averaging and selecting 100/60 columns did not improve
- the matched Phase 14 control. Random undersampling at 5:1/7:1 gives
-0.43823/0.43982; random/hybrid 3:1 on corrected Phase 34 gives
-0.43939/0.39353. These are historical comparisons, not a nested estimate
-for the final combined pipeline.
+AP is average precision. Phase 14 exceeds logistic F1 by 0.01653 and raw-input
+F1 by 0.00070 (cleaning's paired conditional 95\% interval includes zero).
+Activity one-hot, exact bins, restricted imputation, stronger regularisation,
+positive weights, two-seed averaging and 100/60-column selection lose to matched
+Phase 14. Random undersampling 5:1/7:1 yields 0.43823/0.43982; random/hybrid
+3:1 on corrected Phase 34 yields 0.43939/0.39353. These historical comparisons
+do not evaluate the final combined pipeline.
 
 \newpage
 \heading{Full-training calibration and AIcrowd selection}
