@@ -1,0 +1,65 @@
+{
+  "validation_date": "2026-10-22",
+  "tested_commit": "f0741b0f137cf34bc5da0eef8c09aa7f32c0d14e",
+  "scope": "Existing evidence organization and optional reproduction procedures; not a complete full-data numerical rerun.",
+  "environment": {
+    "python": "3.9.13",
+    "numpy": "1.23.1",
+    "matplotlib": "3.6.3",
+    "platform": "Windows"
+  },
+  "clean_clone": {
+    "initial_inputs": "Published Git files and four official CSVs only",
+    "previous_models_caches_predictions_or_snapshots": false,
+    "source_imports_from_clone_verified": true
+  },
+  "project_tests": {
+    "passed": 271,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 184.659
+  },
+  "reduced_workflows": {
+    "passed": 45,
+    "pdf_studies": 39,
+    "supporting_studies": 6,
+    "training_rows": 5999,
+    "development_rows": 4799,
+    "test_rows": 100,
+    "trees": 3,
+    "logistic_updates": 10,
+    "mlp_max_epochs": 2,
+    "rare_feature_exclusions_recorded": true,
+    "separate_receipt_check_passed": true,
+    "historical_metric_reproduction": false
+  },
+  "independent_negative_checks_passed": 7,
+  "protected_files_verified": 13,
+  "official_input_files_verified": 4,
+  "unchanged_historical_records_verified": 114,
+  "pipeline_fingerprints_verified": 15,
+  "configuration_dependencies_verified_at_tested_commit": 133,
+  "full_data_descriptive_counts": "Matched the recorded dataset, split, cleaning and HAREHAB1 counts",
+  "full_scientific_rerun": {
+    "required_catalog_studies": 45,
+    "completed": [
+      {
+        "experiment": "ridge",
+        "status": "matched",
+        "f1": 0.41950783283563026,
+        "maximum_absolute_metric_difference": 1.3877787807814457e-16,
+        "absolute_tolerance": 0.000001,
+        "development_rows": 262508,
+        "official_label_alignment_verified": true,
+        "reserved_holdout_excluded": true,
+        "oof_sha256": "5c7f24b5818ea14ae7a4cf55c9c7717988a0ab4ca9b0a02b70f6c566efb3e22a"
+      }
+    ],
+    "interrupted_without_completed_result": ["logistic", "cal_phase18"],
+    "all_catalog_metrics_revalidated": false,
+    "stop_reason": "User requested organization from existing results and no further experiment execution."
+  },
+  "aicrowd_scores": "External team-reported feedback; not reproduced offline",
+  "historical_report_numbers_changed": false
+}

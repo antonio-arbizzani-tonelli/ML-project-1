@@ -4,6 +4,11 @@ The current tree keeps compact evidence supporting the report. Large per-column
 audits, preflights, partial rankings and duplicate release summaries are recoverable
 from the [development archive](../docs/ARCHIVE.md).
 
+The [22 October validation receipt](eda/report_reproduction_validation_20261022.json)
+separates the 45 reduced workflow checks from the single completed full ridge
+rerun. It does not replace the historical scientific records or claim a complete
+numerical rerun of the report.
+
 | Location | Evidence |
 | --- | --- |
 | [Final combined submission](eda/final_combined18_24_submission.json) | Selected model, calibration, reported feedback, source/input hashes and exact CSV replay |

@@ -50,22 +50,19 @@ Caches are created under `data/processed/`. Use a new `--cache-dir` after changi
 feature values. Add `--checkpoint results/final_model.pkl` to save the fitted model.
 CSV output uses the course helper in `helpers.py`, with explicit UTF-8 and LF.
 
-## Reproduce report comparisons
+## Report evidence and optional reproduction
 
-```bash
-python -m tools.reproduce_report run --experiment report --require-complete
-python -m tools.reproduce_report check --require-complete
-```
+The [experiment catalog](docs/EXPERIMENTS.md) and [retained results](results/README.md)
+organize the existing scientific evidence. The 114 historical execution records,
+the final candidate summaries and the report's numerical results are preserved.
 
-This regenerates the report's experiments and required intermediate artifacts
-from the four official CSVs, without historical local checkpoints or snapshots.
-It includes the historical median-fill linear baselines, two-seed ensemble,
-fold-local feature selection, weighting/sampling studies and final calibrations.
-The [reproduction guide](docs/REPRODUCIBILITY.md) maps report claims to commands,
-explains resumable outputs and separates reduced workflow checks from full
-scientific comparisons. Full execution can take many hours. AIcrowd feedback
-remains external evidence. The exact combined model has no historical nested
-result; its full-training calibration is reproduced separately.
+The [optional reproduction guide](docs/REPRODUCIBILITY.md) maps each report study
+to its configuration, backend and command. Its runner regenerates intermediate
+artifacts from official CSVs, including the historical median-fill baselines,
+two-seed ensemble, feature selection, sampling and final calibrations.
+All 45 workflows passed reduced checks; a full numerical rerun of the complete
+catalog was not completed. See the [audit](docs/FINAL_AUDIT.md) for actual coverage.
+Full execution can take days. AIcrowd scores remain external reported feedback.
 
 ## Checks and contents
 
