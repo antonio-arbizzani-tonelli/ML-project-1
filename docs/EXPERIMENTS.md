@@ -6,6 +6,12 @@ This catalog retains the comparisons used in the [two-page report](FINAL_REPORT.
 backend and prerequisites. Earlier exploratory screens and detailed diagnostics
 are available from the [development archive](ARCHIVE.md).
 
+For fresh report executions, use the [self-contained report runner](REPRODUCIBILITY.md)
+and its [claim/configuration/target map](../configs/report_experiments.json).
+It regenerates required controls, median-fill baseline representations, feature
+selection and sampling fits from official data. Legacy replay utilities below
+retain original provenance requirements; they are not required by this runner.
+
 ## Evaluation scopes
 
 Historical nested comparisons use the fixed 262,508 development rows, three outer

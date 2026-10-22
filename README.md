@@ -53,20 +53,19 @@ CSV output uses the course helper in `helpers.py`, with explicit UTF-8 and LF.
 ## Reproduce report comparisons
 
 ```bash
-python -m tools.prepare_data
-python -m src.run_boosting_cv configs/experiments/final_phase14_validation.json
+python -m tools.reproduce_report run --experiment report --require-complete
+python -m tools.reproduce_report check --require-complete
 ```
 
-This evaluates historical Phase 14 (nested F1 0.442155), not the selected combined
-pipeline. For raw inputs, ablations and other historical recipes, the
-[configuration catalog](configs/README.md) names the correct backend and driver.
-Explicit `--implementation phase14` / `phase34` overrides use separate artifact
-subdirectories and record the backend/source hash. The previous full-data Phase 14
-submission is available with `python run.py --config configs/final_phase14_model.json`.
-
-MLP comparison: `python -m src.run_mlp_cv configs/experiments/phase32_mlp.json`;
-see [MLP.md](docs/MLP.md). Full-training calibration studies and their prerequisites
-are documented in [tools/README.md](tools/README.md).
+This regenerates the report's experiments and required intermediate artifacts
+from the four official CSVs, without historical local checkpoints or snapshots.
+It includes the historical median-fill linear baselines, two-seed ensemble,
+fold-local feature selection, weighting/sampling studies and final calibrations.
+The [reproduction guide](docs/REPRODUCIBILITY.md) maps report claims to commands,
+explains resumable outputs and separates reduced workflow checks from full
+scientific comparisons. Full execution can take many hours. AIcrowd feedback
+remains external evidence. The exact combined model has no historical nested
+result; its full-training calibration is reproduced separately.
 
 ## Checks and contents
 

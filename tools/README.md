@@ -1,5 +1,14 @@
 # Retained utilities
 
+For complete report workflows from official data, use
+`python -m tools.reproduce_report run --experiment report --require-complete`.
+This entry point regenerates all intermediate artifacts, including the two-seed
+ensemble, selector and sampling controls. See the
+[reproduction guide](../docs/REPRODUCIBILITY.md) and
+[report-to-experiment map](../configs/report_experiments.json).
+The original calibration and historical replay utilities remain below; their
+archived-artifact dependencies do not apply to the new report runner.
+
 The ordinary `python run.py` trains the selected model from official data without
 old checkpoints. These utilities support data preparation, integrity checks and
 comparisons reported in the project. Every recipe is listed in

@@ -1,0 +1,1298 @@
+{
+  "schema_version": 1,
+  "report": "docs/FINAL_REPORT.tex",
+  "full_metric_tolerance": 1e-06,
+  "protocols": {
+    "historical_nested": {
+      "development_seed": 20260918,
+      "validation_fraction": 0.2,
+      "outer_folds": 3,
+      "outer_seed": 20260919,
+      "inner_folds": 2,
+      "inner_seed": 20260922,
+      "ridge_inner_seed": 20260923
+    },
+    "calibration": {
+      "rows": 328135,
+      "folds": 3,
+      "fold_seed": 20260919,
+      "threshold": "Max F1, accuracy tie break; same labels select and describe threshold"
+    }
+  },
+  "external_evidence": "AIcrowd scores are team-reported external feedback; an offline execution cannot reproduce leaderboard evaluation.",
+  "experiments": [
+    {
+      "id": "ridge",
+      "kind": "ridge",
+      "recipe": "configs/experiments/phase7_ridge_p2_nested_cv.json",
+      "report_scope": "PDF and supporting evidence",
+      "expected": {
+        "accuracy": 0.8615242202142411,
+        "average_precision": 0.39028273319209134,
+        "balanced_accuracy": 0.7283680940224806,
+        "f1": 0.41950783283563026,
+        "log_loss": 0.22917496377979585,
+        "precision": 0.33302908141274307,
+        "recall": 0.5666522864538395,
+        "specificity": 0.8900839015911218
+      },
+      "historical_record": "results/experiments/20260920T111540545185Z_phase7-p2-codebook-clean-ridge-lambda-0p0001.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment ridge",
+      "report_location": "Historical nested development evidence table"
+    },
+    {
+      "id": "logistic",
+      "kind": "logistic",
+      "recipe": "configs/experiments/phase7_p2_corrected_interactions_nested_cv.json",
+      "report_scope": "PDF and supporting evidence",
+      "expected": {
+        "accuracy": 0.8745676322245417,
+        "average_precision": 0.3877451806152685,
+        "balanced_accuracy": 0.7173065944293143,
+        "f1": 0.42562841244090915,
+        "log_loss": 0.22197857200982044,
+        "precision": 0.35727882390839605,
+        "recall": 0.5263157894736842,
+        "specificity": 0.9082973993849445
+      },
+      "historical_record": "results/experiments/20260920T113608936798Z_phase7-p2-codebook-clean-bphigh4-corrected-interactions-gamma-0p2-nested-4000.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment logistic",
+      "report_location": "Historical nested development evidence table"
+    },
+    {
+      "id": "phase14",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase14_boosting_codebook_corrections_only.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8764342420040532,
+        "average_precision": 0.4286092503721835,
+        "balanced_accuracy": 0.7310904383294219,
+        "f1": 0.4421552272688187,
+        "log_loss": 0.21522507121178044,
+        "precision": 0.36763233906254467,
+        "recall": 0.5545729076790337,
+        "specificity": 0.9076079689798101
+      },
+      "historical_record": "results/experiments/20260921T105139261213Z_phase14-boosting-codebook-corrections-only-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment phase14",
+      "report_location": "Historical nested development evidence table"
+    },
+    {
+      "id": "raw321",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase33_raw_boosting_cv.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8760647294558642,
+        "average_precision": 0.42783496220143896,
+        "balanced_accuracy": 0.730926749846363,
+        "f1": 0.44145721741519023,
+        "log_loss": 0.21534810427206727,
+        "precision": 0.3666305463670583,
+        "recall": 0.5546591889559965,
+        "specificity": 0.9071943107367295
+      },
+      "historical_record": "results/experiments/phase33_raw_preprocessing/20261007T011322024298Z_phase33-raw-321-features-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment raw321",
+      "report_location": "Historical nested development evidence table"
+    },
+    {
+      "id": "phase34",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase34_missing_only_split.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase34",
+      "expected": {
+        "accuracy": 0.8737638471970378,
+        "average_precision": 0.4287814331957269,
+        "balanced_accuracy": 0.7336390350704145,
+        "f1": 0.4408032399595005,
+        "log_loss": 0.21522931558252084,
+        "precision": 0.3620011086474501,
+        "recall": 0.5634598792062122,
+        "specificity": 0.9038181909346169
+      },
+      "historical_record": "results/experiments/phase34_missing_only_split/20261007T092637381255Z_phase34-missing-only-split-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment phase34",
+      "report_location": "Historical nested development evidence table"
+    },
+    {
+      "id": "harehab_ablation",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase15_boosting_ablate_harehab1.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8692535084645039,
+        "average_precision": 0.39685691648886934,
+        "balanced_accuracy": 0.7299965741724226,
+        "f1": 0.4310390557655328,
+        "log_loss": 0.21905507426225362,
+        "precision": 0.3500161533491277,
+        "recall": 0.5608714408973253,
+        "specificity": 0.8991217074475197
+      },
+      "historical_record": "results/experiments/20260921T154905753681Z_phase15-boosting-ablate-harehab1-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment harehab_ablation",
+      "report_location": "Disease timing paragraph"
+    },
+    {
+      "id": "diet",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase18_boosting_diet_frequency_features.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8764990019351792,
+        "average_precision": 0.4287979789722235,
+        "balanced_accuracy": 0.7306973694449146,
+        "f1": 0.4418620665909169,
+        "log_loss": 0.21523820274152633,
+        "precision": 0.3676445310261846,
+        "recall": 0.5536238136324417,
+        "specificity": 0.9077709252573873
+      },
+      "historical_record": "results/experiments/20260928T153145004719Z_phase18-boosting-diet-frequency-features-depth5-features128-200trees.json",
+      "in_pdf": false,
+      "command": "python -m tools.reproduce_report run --experiment diet",
+      "report_location": "Supporting notes: historical nested development results"
+    },
+    {
+      "id": "exact_bins",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase20_phase14_exact_low_cardinality.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8771656482850047,
+        "average_precision": 0.42887442462280334,
+        "balanced_accuracy": 0.7286278344535825,
+        "f1": 0.4407831983489707,
+        "log_loss": 0.21522213837662488,
+        "precision": 0.3685507960906006,
+        "recall": 0.5482312338222606,
+        "specificity": 0.9090244350849044
+      },
+      "historical_record": "results/experiments/20260930T005323542120Z_phase20-phase14-exact-low-cardinality-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment exact_bins",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "clinical_bins",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase21_phase14_clinical_exact.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8738057506818839,
+        "average_precision": 0.42881737873779224,
+        "balanced_accuracy": 0.7324736667760323,
+        "f1": 0.4397314255754562,
+        "log_loss": 0.21526301329140485,
+        "precision": 0.3616435307536095,
+        "recall": 0.5608283002588438,
+        "specificity": 0.904119033293221
+      },
+      "historical_record": "results/experiments/20260930T020213451046Z_phase21-phase14-clinical-exact-depth5-features128-200trees.json",
+      "in_pdf": false,
+      "command": "python -m tools.reproduce_report run --experiment clinical_bins",
+      "report_location": "Supporting notes: historical nested development results"
+    },
+    {
+      "id": "activity_one_hot",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase22_phase14_activity_one_hot.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8772723117009767,
+        "average_precision": 0.4287462173519238,
+        "balanced_accuracy": 0.7282577465825797,
+        "f1": 0.4405702477903767,
+        "log_loss": 0.21529180701048714,
+        "precision": 0.3686826121072975,
+        "recall": 0.5472821397756686,
+        "specificity": 0.9092333533894906
+      },
+      "historical_record": "results/experiments/20260930T024920071303Z_phase22-phase14-activity-one-hot-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment activity_one_hot",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "missing_flags",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase23_phase14_missing_reason_flags.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8747276273484998,
+        "average_precision": 0.4288329614986372,
+        "balanced_accuracy": 0.7317324563566597,
+        "f1": 0.44032200418673517,
+        "log_loss": 0.21525767247102284,
+        "precision": 0.36360570031199935,
+        "recall": 0.5580672993960311,
+        "specificity": 0.9053976133172884
+      },
+      "historical_record": "results/experiments/20260930T103147105876Z_phase23-phase14-missing-reason-flags-depth5-features128-200trees.json",
+      "in_pdf": false,
+      "command": "python -m tools.reproduce_report run --experiment missing_flags",
+      "report_location": "Supporting notes: historical nested development results"
+    },
+    {
+      "id": "restricted_imputation",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase24_original_restricted_imputation.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8765980465357246,
+        "average_precision": 0.4286107053654765,
+        "balanced_accuracy": 0.7304789522973789,
+        "f1": 0.44179073614557485,
+        "log_loss": 0.2152303063907383,
+        "precision": 0.36781246413405255,
+        "recall": 0.5530198446937015,
+        "specificity": 0.9079380599010562
+      },
+      "historical_record": "results/experiments/20260930T114012414713Z_phase24-original-restricted-imputation-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment restricted_imputation",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "l2_5",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase25_phase14_l2_5.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8736800402273455,
+        "average_precision": 0.4293161264648069,
+        "balanced_accuracy": 0.7343723184912001,
+        "f1": 0.4413934840470334,
+        "log_loss": 0.21517567874169544,
+        "precision": 0.3620861201702504,
+        "recall": 0.5651855047454702,
+        "specificity": 0.9035591322369301
+      },
+      "historical_record": "results/experiments/20260930T130145988120Z_phase25-phase14-l2-5-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment l2_5",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "two_seeds",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase14_boosting_codebook_corrections_only.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "ensemble": [
+        20260920,
+        20260921
+      ],
+      "expected": {
+        "accuracy": 0.8760837764944307,
+        "average_precision": 0.42936749980518574,
+        "balanced_accuracy": 0.7305475730376951,
+        "f1": 0.4411112829235606,
+        "log_loss": 0.21508527953383935,
+        "precision": 0.3665305656283014,
+        "recall": 0.5537963761863676,
+        "specificity": 0.9072987698890226
+      },
+      "historical_record": "results/experiments/20260930T181509840904Z_phase26-phase14-uniform-mean-two-seeds.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment two_seeds",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "slow_400",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase27_phase14_lr0025_400trees.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8750171423347098,
+        "average_precision": 0.4293520551208401,
+        "balanced_accuracy": 0.7315795360890274,
+        "f1": 0.44058722228853003,
+        "log_loss": 0.2151233289420229,
+        "precision": 0.36426174969691844,
+        "recall": 0.5573770491803278,
+        "specificity": 0.9057820229977269
+      },
+      "historical_record": "results/experiments/20260930T221319968519Z_phase27-phase14-lr0025-400trees-depth5-features128-400trees.json",
+      "in_pdf": false,
+      "command": "python -m tools.reproduce_report run --experiment slow_400",
+      "report_location": "Supporting notes: historical nested development results"
+    },
+    {
+      "id": "weight2",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase30_phase14_positive_weight2.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8736762308196322,
+        "average_precision": 0.4282379321384736,
+        "balanced_accuracy": 0.7320324929647707,
+        "f1": 0.43911844798132704,
+        "log_loss": 0.23172261474783137,
+        "precision": 0.36115516234037226,
+        "recall": 0.5600086281276963,
+        "specificity": 0.9040563578018451
+      },
+      "historical_record": "results/experiments/20261001T000013003849Z_phase30-phase14-positive-weight2-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment weight2",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "depth7",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase31_phase14_depth7.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.874940954180444,
+        "average_precision": 0.428748337642389,
+        "balanced_accuracy": 0.732278035603515,
+        "f1": 0.44116094986807386,
+        "log_loss": 0.21509023337569877,
+        "precision": 0.3643469703360045,
+        "recall": 0.559016393442623,
+        "specificity": 0.905539677764407
+      },
+      "historical_record": "results/experiments/20261001T001533065665Z_phase31-phase14-depth7-depth7-features128-200trees.json",
+      "in_pdf": false,
+      "command": "python -m tools.reproduce_report run --experiment depth7",
+      "report_location": "Supporting notes: historical nested development results"
+    },
+    {
+      "id": "weight1p25",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase35_phase14_positive_weight1p25.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8790932085879287,
+        "average_precision": 0.4291352591552876,
+        "balanced_accuracy": 0.7258471772444005,
+        "f1": 0.4408308521696235,
+        "log_loss": 0.21672996200425967,
+        "precision": 0.37256186534051994,
+        "recall": 0.539732528041415,
+        "specificity": 0.911961826447386
+      },
+      "historical_record": "results/experiments/20261007T115927629165Z_phase35-phase14-positive-weight1p25-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment weight1p25",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "weight1p5",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase35_phase14_positive_weight1p5.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8750399987809895,
+        "average_precision": 0.4285934103210763,
+        "balanced_accuracy": 0.7315725900511076,
+        "f1": 0.44061322283044285,
+        "log_loss": 0.22061219155011963,
+        "precision": 0.36431572713685456,
+        "recall": 0.5573339085418464,
+        "specificity": 0.905811271560369
+      },
+      "historical_record": "results/experiments/20261007T115928100147Z_phase35-phase14-positive-weight1p5-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment weight1p5",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "random3",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase36_undersampling_random.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase34",
+      "expected": {
+        "accuracy": 0.875059045819556,
+        "average_precision": 0.425835950971669,
+        "balanced_accuracy": 0.7302972809774761,
+        "f1": 0.4393887597429236,
+        "log_loss": 0.2749165371561139,
+        "precision": 0.36386026497565394,
+        "recall": 0.5544866264020708,
+        "specificity": 0.9061079355528814
+      },
+      "historical_record": "results/experiments/20261007T124912476309Z_phase36-undersampling-random-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment random3",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "hard3",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase36_undersampling_hybrid_hard.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase34",
+      "expected": {
+        "accuracy": 0.85706340378198,
+        "average_precision": 0.3842250188042801,
+        "balanced_accuracy": 0.7072002887925132,
+        "f1": 0.3935348310974624,
+        "log_loss": 0.269448019127125,
+        "precision": 0.3146549495993797,
+        "recall": 0.5251941328731665,
+        "specificity": 0.8892064447118598
+      },
+      "historical_record": "results/experiments/20261007T125233036668Z_phase36-undersampling-hybrid-hard-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment hard3",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "random5",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase37_phase14_random_ratio5.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8763428162189343,
+        "average_precision": 0.42682745006902517,
+        "balanced_accuracy": 0.7272609575145177,
+        "f1": 0.43822577574719207,
+        "log_loss": 0.23429998660911455,
+        "precision": 0.36589313065341156,
+        "recall": 0.5462036238136324,
+        "specificity": 0.9083182912154031
+      },
+      "historical_record": "results/experiments/20261007T135726798413Z_phase37-phase14-random-ratio5-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment random5",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "random7",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase37_phase14_random_ratio7.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8750057141115699,
+        "average_precision": 0.42789061075061857,
+        "balanced_accuracy": 0.7308135042282902,
+        "f1": 0.4398197152320142,
+        "log_loss": 0.22039321524226402,
+        "precision": 0.3639317398429112,
+        "recall": 0.5556945642795513,
+        "specificity": 0.905932444177029
+      },
+      "historical_record": "results/experiments/20261007T140713077912Z_phase37-phase14-random-ratio7-depth5-features128-200trees.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment random7",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "top100",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase14_boosting_codebook_corrections_only.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "feature_count": 100,
+      "expected": {
+        "accuracy": 0.8765218583814588,
+        "average_precision": 0.427210061126528,
+        "balanced_accuracy": 0.7280020266121038,
+        "f1": 0.43922355627832954,
+        "log_loss": 0.21553505037463436,
+        "precision": 0.36664548552943216,
+        "recall": 0.5476272648835203,
+        "specificity": 0.9083767883406872
+      },
+      "historical_record": "results/experiments/phase29_feature_selection/20260930T222023662096Z_phase29-phase14-fold-local-top100-permutation-features.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment top100",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "top60",
+      "kind": "nested_tree",
+      "recipe": "configs/experiments/phase14_boosting_codebook_corrections_only.json",
+      "report_scope": "PDF and supporting evidence",
+      "backend": "phase14",
+      "feature_count": 60,
+      "expected": {
+        "accuracy": 0.8725829308059183,
+        "average_precision": 0.4239735012542594,
+        "balanced_accuracy": 0.7320368126526491,
+        "f1": 0.4375840731772935,
+        "log_loss": 0.21636197697600557,
+        "precision": 0.35853631654359086,
+        "recall": 0.5613459879206212,
+        "specificity": 0.9027276373846771
+      },
+      "historical_record": "results/experiments/phase29_feature_selection/20260930T222046496842Z_phase29-phase14-fold-local-top60-permutation-features.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment top60",
+      "report_location": "Historical nested development evidence paragraph"
+    },
+    {
+      "id": "mlp64_32",
+      "kind": "mlp",
+      "recipe": "configs/experiments/phase32_mlp.json",
+      "report_scope": "PDF and supporting evidence",
+      "model": "mlp64_32",
+      "expected": {
+        "accuracy": 0.8765447148277385,
+        "average_precision": 0.3877821137819869,
+        "balanced_accuracy": 0.7135205963814009,
+        "f1": 0.42445123250692623,
+        "log_loss": 0.22167438622387117,
+        "precision": 0.36072204781453754,
+        "recall": 0.5155306298533219,
+        "specificity": 0.9115105629094798
+      },
+      "historical_record": "results/experiments/mlp/20261001T014455026674Z_phase32-mlp-mlp64-32.json",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment mlp64_32",
+      "report_location": "Historical nested development evidence table"
+    },
+    {
+      "id": "mlp128_64",
+      "kind": "mlp",
+      "recipe": "configs/experiments/phase32_mlp.json",
+      "report_scope": "PDF and supporting evidence",
+      "model": "mlp128_64",
+      "expected": {
+        "accuracy": 0.8662631234095722,
+        "average_precision": 0.37938028877628655,
+        "balanced_accuracy": 0.721966752809506,
+        "f1": 0.4192678609829123,
+        "log_loss": 0.2227104181960239,
+        "precision": 0.34000482923295683,
+        "recall": 0.5467213114754098,
+        "specificity": 0.8972121941436021
+      },
+      "historical_record": "results/experiments/mlp/20261001T014455269281Z_phase32-mlp-mlp128-64.json",
+      "in_pdf": false,
+      "command": "python -m tools.reproduce_report run --experiment mlp128_64",
+      "report_location": "Supporting notes: historical nested development results"
+    },
+    {
+      "id": "cal_phase18",
+      "kind": "calibration",
+      "recipe": "configs/experiments/phase18_boosting_diet_frequency_features.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8804303106952931,
+        "precision": 0.37695481147462345,
+        "recall": 0.5423986194995686,
+        "f1": 0.4447903547624776,
+        "specificity": 0.9131702099211124,
+        "balanced_accuracy": 0.7277844147103405
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_phase18_full_train_oof.csv",
+        "sha256": "7535a1d83ba4f1bb0101a4b676aff9f45ea49f1f3dd3a820900f81df82c9201f",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "377194cd25c57f89129d86cb6f4cce6e175c7aef14a3f4a9eb66d03bf8d69a13",
+        "positive_predictions": 13996,
+        "negative_predictions": 95383
+      },
+      "expected_threshold": 0.218219460678348,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_phase18",
+      "expected_features": 289,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_phase24",
+      "kind": "calibration",
+      "recipe": "configs/experiments/phase24_original_restricted_imputation.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8772822161610313,
+        "precision": 0.36985733053679676,
+        "recall": 0.5538222605694564,
+        "f1": 0.44352007959978995,
+        "specificity": 0.9086107768418238,
+        "balanced_accuracy": 0.7312165187056401
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_phase24_full_train_oof.csv",
+        "sha256": "ae2b5f141a4d11f788cd3927a35c418fdad5437f402947452b078298816a7932",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "d23dfb4bcd1eb12b3b20890dbdc15f22ae57cc9857a477ee5b433542a26e6324",
+        "positive_predictions": 14562,
+        "negative_predictions": 94817
+      },
+      "expected_threshold": 0.2118445372019307,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_phase24",
+      "expected_features": 303,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_phase25",
+      "kind": "calibration",
+      "recipe": "configs/experiments/phase25_phase14_l2_5.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8805064988495589,
+        "precision": 0.3769861301411024,
+        "recall": 0.5412597066436583,
+        "f1": 0.4444287009748356,
+        "specificity": 0.9133640861077684,
+        "balanced_accuracy": 0.7273118963757134
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_phase25_full_train_oof.csv",
+        "sha256": "7b2e294d874d69198517e5a76a21022935ccd7169cce4ff3093cdfe50c577659",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "4d1c8b3ae4a80ce919c24265d1105162719afad1c3e23b01d353ff4c3480df0a",
+        "positive_predictions": 13898,
+        "negative_predictions": 95481
+      },
+      "expected_threshold": 0.21880347655706073,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_phase25",
+      "expected_features": 295,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_l2_1",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_l2_1.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8800585125024761,
+        "precision": 0.37580151210642165,
+        "recall": 0.5420880069025021,
+        "f1": 0.4438823812013395,
+        "specificity": 0.9127924856264207,
+        "balanced_accuracy": 0.7274402462644614
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_l2_1_full_train_oof.csv",
+        "sha256": "1e4817ab85020156f579ab33fc5384c8aecd24fd8453ce6e37a3dcc094a45854",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "d5cfd08d742d04f80ed43c952ad3bb64e1b9271f0e9534e22894377e2d936dbc",
+        "positive_predictions": 13999,
+        "negative_predictions": 95380
+      },
+      "expected_threshold": 0.21811010373987366,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_l2_1",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_l2_5",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_l2_5.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8810489585079312,
+        "precision": 0.37752393014589475,
+        "recall": 0.5349439171699741,
+        "f1": 0.4426547863833676,
+        "specificity": 0.9145707982350582,
+        "balanced_accuracy": 0.7247573577025161
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_l2_5_full_train_oof.csv",
+        "sha256": "09f87dae35ff807532e866ed33a4ef2bac9253de9d825a268c290471a62bc399",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "196ec58c071220de24d72878f98434be2b87748f6e3a4c38ccd6fc57699f65e6",
+        "positive_predictions": 13775,
+        "negative_predictions": 95604
+      },
+      "expected_threshold": 0.2206061257480886,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_l2_5",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_count_a",
+      "kind": "calibration",
+      "recipe": "configs/experiments/count_a.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.881347616072653,
+        "precision": 0.3784924721212269,
+        "recall": 0.5353235547886108,
+        "f1": 0.4434501686774544,
+        "specificity": 0.9148616125150422,
+        "balanced_accuracy": 0.7250925836518265
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_count_a_full_train_oof.csv",
+        "sha256": "dfcad9778fbeae1fd3b71b58787e5be1e8a799aeadf57ce31459f3bdfdff9362",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "5382c61b7c70fb8622b1367dbb603ba8fcf86966539763717cb9d09062529553",
+        "positive_predictions": 13692,
+        "negative_predictions": 95687
+      },
+      "expected_threshold": 0.22139906254902406,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_count_a",
+      "expected_features": 299,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_count_b",
+      "kind": "calibration",
+      "recipe": "configs/experiments/count_b.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8776387767229951,
+        "precision": 0.37043220181784453,
+        "recall": 0.5513718723037101,
+        "f1": 0.4431438359014188,
+        "specificity": 0.909239203102019,
+        "balanced_accuracy": 0.7303055377028645
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_count_b_full_train_oof.csv",
+        "sha256": "78048260c9d62ddf0a83ba0e3029f0637db05ae00341ea4e37062e852922d9b5",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "3b50cf6d73df80122c3e81e5a8ae92b105c5d3981c27a12c8dde792337eda0b8",
+        "positive_predictions": 14452,
+        "negative_predictions": 94927
+      },
+      "expected_threshold": 0.21333428726929282,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_count_b",
+      "expected_features": 299,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_count_ab",
+      "kind": "calibration",
+      "recipe": "configs/experiments/count_ab.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8799305164033097,
+        "precision": 0.3753229356042484,
+        "recall": 0.5415012942191545,
+        "f1": 0.44335184164794644,
+        "specificity": 0.9127089183045862,
+        "balanced_accuracy": 0.7271051062618703
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_count_ab_full_train_oof.csv",
+        "sha256": "739b99d9b7a82481700df7d8edd86c6ba7d1dac7a035623321dceae3525af15b",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "740d1567c20db313b76d686007a9b6bc9f8792e2c6472f49588cbff1fbae10f5",
+        "positive_predictions": 13986,
+        "negative_predictions": 95393
+      },
+      "expected_threshold": 0.21805437631155952,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_count_ab",
+      "expected_features": 301,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_bins128",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_bins128.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8809209624087647,
+        "precision": 0.3775611648602119,
+        "recall": 0.5373943054357204,
+        "f1": 0.44351714708898254,
+        "specificity": 0.9141930739403663,
+        "balanced_accuracy": 0.7257936896880434
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_bins128_full_train_oof.csv",
+        "sha256": "47c58ca19eb00b5487e99adff49ec3c5c9dc7ee564719d2f51e2f6a4d2ba2e88",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "708f38324ce618cdf67b1c05635ab593a551a172b2a5c3210de1e09dd9bf080b",
+        "positive_predictions": 13866,
+        "negative_predictions": 95513
+      },
+      "expected_threshold": 0.21988053187819157,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_bins128",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_features256",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_features256.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8811342892407088,
+        "precision": 0.3782445064950832,
+        "recall": 0.5376358930112166,
+        "f1": 0.4440706955530217,
+        "specificity": 0.9144036635913892,
+        "balanced_accuracy": 0.7260197783013029
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_features256_full_train_oof.csv",
+        "sha256": "d01c3949dea567dc9aa929ba232cbe77395d236b1c4a4492624e0bec5305e883",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "e77152ea23565a202408c331de20c336c8fc5f2bc27947eb9fa93e102a5b2f66",
+        "positive_predictions": 13895,
+        "negative_predictions": 95484
+      },
+      "expected_threshold": 0.22007772525099117,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_features256",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_trees300",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_trees300.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8809209624087647,
+        "precision": 0.3781697107148889,
+        "recall": 0.5409490940465919,
+        "f1": 0.44514498310187156,
+        "specificity": 0.9138487765744083,
+        "balanced_accuracy": 0.7273989353105001
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_trees300_full_train_oof.csv",
+        "sha256": "5779110f6da8a95555f6ec38188f713c071a49185d069c268ea1fe8bd1190fff",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "e3d6ae33993f92321249d44cabe05c01b3498136fc8d536fc2ce3226d8024907",
+        "positive_predictions": 13937,
+        "negative_predictions": 95442
+      },
+      "expected_threshold": 0.22005869121682445,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_trees300",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_features297",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_features297.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8831517515656666,
+        "precision": 0.38248061626477303,
+        "recall": 0.5260742018981881,
+        "f1": 0.44293020282443196,
+        "specificity": 0.9177363283861478,
+        "balanced_accuracy": 0.721905265142168
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_features297_full_train_oof.csv",
+        "sha256": "285d659741516cef95409c8e8f27d3396fb693feff2c49e03f8bf76d617ccbbb",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "9edfe2e0ca09821a715a057429c1ea9d656de7c318acf10cded1e571fd2f6955",
+        "positive_predictions": 13288,
+        "negative_predictions": 96091
+      },
+      "expected_threshold": 0.22576122772907076,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_features297",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_leaf400",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_leaf400.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8797933777256313,
+        "precision": 0.37499701492537313,
+        "recall": 0.5419499568593615,
+        "f1": 0.4432745236414961,
+        "specificity": 0.9125150421179302,
+        "balanced_accuracy": 0.7272324994886459
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_leaf400_full_train_oof.csv",
+        "sha256": "afcbe00b48fc7d4639b93733313c2ddcccf69eca4ed2f7b3e7f9bca63ec9ac91",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "ec61d1952d218ab0e59a90bb0ddc74443203899b524bafb70d3f8268b5e11145",
+        "positive_predictions": 14059,
+        "negative_predictions": 95320
+      },
+      "expected_threshold": 0.21749255393178843,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_leaf400",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_depth4",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_depth4.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8816157983756685,
+        "precision": 0.3786123613468113,
+        "recall": 0.5312855910267472,
+        "f1": 0.44214033374500966,
+        "specificity": 0.9155468645540847,
+        "balanced_accuracy": 0.7234162277904159
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_depth4_full_train_oof.csv",
+        "sha256": "00bdc74fde83110354dd47e520736bfd2308572699b4baccfcbf193612841a45",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "b92d7ddadd63aff47d6a16ad438ec590ec1b80d82af799b67dc774b76595eb7a",
+        "positive_predictions": 13534,
+        "negative_predictions": 95845
+      },
+      "expected_threshold": 0.22052129624910013,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_depth4",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_native_categories",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_native_categories.json",
+      "backend": "categorical",
+      "expected": {
+        "accuracy": 0.882511771069834,
+        "precision": 0.3807495953181422,
+        "recall": 0.5276617773943054,
+        "f1": 0.4423260523651092,
+        "specificity": 0.916880599010563,
+        "balanced_accuracy": 0.7222711882024342
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_native_categories_full_train_oof.csv",
+        "sha256": "6f93e5a6e88697c5c71a3551615edfea68c76832693fa5ea4d6fb55596d55d17",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "264c16b6dc34f3443f35cf90104c6f441cb3a600f7378903244a50e50e898e43",
+        "positive_predictions": 13467,
+        "negative_predictions": 95912
+      },
+      "expected_threshold": 0.22318329009733187,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_native_categories",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_subsample08",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_subsample08.json",
+      "backend": "structural",
+      "expected": {
+        "accuracy": 0.879241775488747,
+        "precision": 0.37401220839445415,
+        "recall": 0.5455737704918033,
+        "f1": 0.44378939094061004,
+        "specificity": 0.9115590319561439,
+        "balanced_accuracy": 0.7285664012239736
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_subsample08_full_train_oof.csv",
+        "sha256": "f796e96668eca3ee604c3ac8603a076380b5b6183a11dbe918b884bdc15db7d5",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "5e131c726f76cb4e20cc1b723402df832af541263109bc549da9121e6b714003",
+        "positive_predictions": 14146,
+        "negative_predictions": 95233
+      },
+      "expected_threshold": 0.21606016566947786,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_subsample08",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_combined18_24_leafwise32_depth8",
+      "kind": "calibration",
+      "recipe": "configs/experiments/combined18_24_leafwise32_depth8.json",
+      "backend": "structural",
+      "expected": {
+        "accuracy": 0.8756609322382556,
+        "precision": 0.36691052335396734,
+        "recall": 0.5625539257981018,
+        "f1": 0.444141689373297,
+        "specificity": 0.9059867629362214,
+        "balanced_accuracy": 0.7342703443671617
+      },
+      "historical_record": "results/eda/final_combined_experiments_summary.json",
+      "expected_submission": {
+        "filename": "submission_combined18_24_leafwise32_depth8_full_train_oof.csv",
+        "sha256": "e8c6d0e28346775130f8ac1e0e10dd6aa795ebe1abb266f54747b92b2063d027",
+        "rows": 109379,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ],
+        "ids_sha256": "01594ee521daf9f1e470ebcf5c887699b2103bc3d0346701c685308a304c318d",
+        "predictions_sha256": "5cc18a68611da6b24b19046716fced50af8d75174fdbaececf07ac3ca4d82d0d",
+        "positive_predictions": 14912,
+        "negative_predictions": 94467
+      },
+      "expected_threshold": 0.21131493361511805,
+      "report_scope": "Full-training calibration; AIcrowd feedback is external evidence",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_combined18_24_leafwise32_depth8",
+      "expected_features": 297,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    },
+    {
+      "id": "cal_phase14",
+      "kind": "calibration",
+      "recipe": "configs/experiments/final_phase14_validation.json",
+      "backend": "phase14",
+      "expected": {
+        "accuracy": 0.8767549941335121,
+        "precision": 0.3685091743119266,
+        "recall": 0.5545125107851596,
+        "f1": 0.44276954874267993,
+        "specificity": 0.9079656371172616,
+        "balanced_accuracy": 0.7312390739512107
+      },
+      "expected_threshold": 0.2106169795070252,
+      "expected_submission": {
+        "local_path": "results/submission_phase14_full_train_oof_20261012.csv",
+        "sha256": "8583daf81f7afb378eef3eafdfefd988ce85f78de8d58d38cd8ca39e1faa0df1",
+        "rows": 109379,
+        "positive_predictions": 14746,
+        "negative_predictions": 94633,
+        "header": [
+          "Id",
+          "Prediction"
+        ],
+        "label_domain": [
+          -1,
+          1
+        ]
+      },
+      "historical_record": "results/eda/final_phase14_submission.json",
+      "report_scope": "Full-training calibration",
+      "in_pdf": true,
+      "command": "python -m tools.reproduce_report run --experiment cal_phase14",
+      "expected_features": 295,
+      "report_location": "Full-training calibration table or response-count paragraph"
+    }
+  ],
+  "descriptive_claims": {
+    "command": "python -m tools.reproduce_report data",
+    "output": "data_claims.json",
+    "claims": [
+      "training/test dimensions",
+      "class prevalence",
+      "raw blank fraction",
+      "fixed development/validation split",
+      "cleaning nonresponse and zero counts",
+      "HAREHAB1 raw/valid/positive counts"
+    ]
+  },
+  "paired_claims": {
+    "command": "Run raw321, phase14 and phase34; intervals regenerated automatically",
+    "output": "paired_comparisons.json",
+    "claims": [
+      "cleaned-minus-raw F1 and paired interval",
+      "corrected-minus-historical F1, TP/FP differences and paired interval"
+    ]
+  }
+}

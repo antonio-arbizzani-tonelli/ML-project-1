@@ -4,6 +4,11 @@ The submission report is [FINAL_REPORT.pdf](FINAL_REPORT.pdf), with editable
 [LaTeX source](FINAL_REPORT.tex). These supporting notes retain the protocols,
 experimental comparisons and provenance behind the two-page report.
 
+The [fresh-checkout reproduction guide](REPRODUCIBILITY.md) provides the current
+entry point for every reported experiment, including regenerated controls and
+historical median-fill baselines. Original commands later in these notes retain
+their historical provenance and are not prerequisites for that entry point.
+
 The final project configuration selects **`combined18_24_features256`**:
 NumPy histogram gradient boosting with the Phase 18 diet representation,
 Phase 24 restricted imputation and 256 candidate features per node. The team

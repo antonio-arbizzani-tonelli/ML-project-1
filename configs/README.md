@@ -1,5 +1,14 @@
 # Configuration and reproduction catalog
 
+For every report comparison from a clean checkout and official CSVs, use
+`python -m tools.reproduce_report run --experiment report --require-complete`.
+The [report catalog](report_experiments.json) maps each claim to a command,
+configuration, backend and historical target; the
+[reproduction guide](../docs/REPRODUCIBILITY.md) explains validation and outputs.
+This new runner regenerates controls and intermediate artifacts and explicitly
+preserves historical median-fill baselines. It does not require the original
+local archives described for legacy drivers in the table below.
+
 [final_model.json](final_model.json) is the single executable definition of the
 selected full-data model. Its evidence is in the
 [submission record](../results/eda/final_combined18_24_submission.json).
