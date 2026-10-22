@@ -39,7 +39,7 @@ class TestPromisingCandidateSubmissions(unittest.TestCase):
         )).astype(np.float32)
         self.test = self.train[[15, 2, 25, 4, 18, 11, 24, 7, 29, 16, 35, 0]].copy()
         self.train_ids = np.arange(1, 37, dtype=np.int64)
-        self.test_ids = np.array([115, 102, 125, 104, 118, 111, 124, 107, 129, 116, 135, 100])
+        self.test_ids = np.array([115, 102, 125, 104, 118, 111, 124, 107, 129, 116, 135, 100], dtype=np.int64)
         raw = self.root / "data/raw/dataset"
         cache = self.root / "data/processed"
         raw.mkdir(parents=True)
