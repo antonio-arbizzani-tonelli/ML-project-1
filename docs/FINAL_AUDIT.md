@@ -5,13 +5,29 @@ procedures for repeating it. The selected model, required methods, numerical
 sources, configuration/metadata and report PDF/LaTeX are unchanged. The 114
 historical execution records retain their original bytes and indexed hashes.
 
+## Cache and EDA instruction corrections on 22 October 2026
+
+After the execution checks below, `run.py` was updated to require per-split
+CSV/array SHA-256 receipts before reusing feature caches. Missing, partial,
+modified or obsolete caches are rejected without deleting existing files.
+The EDA instructions now distinguish the current descriptive-count command
+from the detailed historical workflow and its archived prerequisites.
+
+These changes were reviewed statically. No project commands, tests, training or
+experiments were run for this correction. The pipeline integrity receipt records
+the new loader hash and retains its earlier hash as historical provenance;
+the checks below describe the earlier tested commit, not this loader revision.
+Model algorithms, preprocessing, settings, historical records and report
+PDF/LaTeX remain unchanged.
+
 ## Independent checks on 22 October 2026
 
 Validation used a real shallow Git clone, initially containing only published
 files and the four official CSVs, without previous models, numeric caches,
 predictions or local source snapshots. The tested source commit is
 [`f0741b0`](https://github.com/antonio-arbizzani-tonelli/ML-project-1/commit/f0741b0f137cf34bc5da0eef8c09aa7f32c0d14e).
-Subsequent delivery changes only organize documentation and validation receipts.
+The immediate delivery commit `0e161d7` only organized documentation and validation
+receipts. The later cache-loader correction is described separately above.
 
 - **271 project tests passed**, without failures, errors or skips (184.659 seconds),
   using Python 3.9.13 / NumPy 1.23.1 / Matplotlib 3.6.3 on Windows. Matplotlib's

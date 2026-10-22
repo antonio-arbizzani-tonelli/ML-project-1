@@ -2,14 +2,16 @@
 
 The default configuration reproduces the current reference pipeline. Raw CSV
 files are converted to local NumPy caches on the first run; later runs reuse
-those caches after validating their shape and row IDs.
+them only when receipts match the CSV contents, cached arrays and feature order.
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
+import os
 import time
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -93,31 +95,102 @@ def _cache_paths(cache_dir: Path, split: str) -> tuple[Path, Path]:
     return cache_dir / f"x_{split}_float32.npy", cache_dir / f"id_{split}_int64.npy"
 
 
+def _file_sha256(path: Path) -> str:
+    """Hash large CSVs and caches without loading them into memory."""
+
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _write_cache_receipt(path: Path, receipt: Mapping[str, Any]) -> None:
+    """Publish the receipt only after both cache files have been written."""
+
+    candidate = path.with_name(path.name + "." + os.urandom(8).hex() + ".tmp")
+    temporary = None
+    try:
+        with candidate.open("x", encoding="utf-8", newline="\n") as handle:
+            temporary = candidate
+            json.dump(receipt, handle, indent=2, allow_nan=False)
+            handle.write("\n")
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def _ensure_feature_cache(
     csv_path: Path,
     cache_dir: Path,
     split: str,
     expected_names: Sequence[str] | None = None,
 ) -> tuple[Path, Path, list[str]]:
-    """Build missing caches and validate existing caches against the CSV header."""
+    """Build new caches, or reject caches without matching source/file receipts."""
 
     feature_path, id_path = _cache_paths(cache_dir, split)
+    receipt_path = cache_dir / f"x_{split}_cache.json"
     feature_names = _feature_header(csv_path)
     if expected_names is not None and list(expected_names) != feature_names:
         raise ValueError(
             f"{csv_path.name} feature names or order differ from x_train.csv."
         )
-    if feature_path.is_file() and id_path.is_file():
+    source_sha256 = _file_sha256(csv_path)
+
+    def invalid_cache(reason: str) -> ValueError:
+        return ValueError(
+            f"Cannot reuse {split} feature cache in {cache_dir}: {reason}. "
+            "Use a new cache directory (--cache-dir, or --output-dir for the report runner) "
+            "to rebuild it from the current CSVs. "
+            "Existing cache files have not been removed."
+        )
+
+    paths = (feature_path, id_path, receipt_path)
+    if any(path.exists() for path in paths):
+        if not all(path.is_file() for path in paths):
+            raise invalid_cache("incomplete cache or missing source receipt")
+        try:
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        except (ValueError, UnicodeError) as exc:
+            raise invalid_cache("invalid source receipt") from exc
+        if not isinstance(receipt, dict) or receipt.get("schema_version") != 1:
+            raise invalid_cache("unsupported source receipt")
+        if receipt.get("csv_sha256") != source_sha256:
+            raise invalid_cache("source CSV contents changed")
+        if receipt.get("feature_names") != feature_names:
+            raise invalid_cache("feature names or order changed")
+        expected_files = {
+            feature_path.name: _file_sha256(feature_path),
+            id_path.name: _file_sha256(id_path),
+        }
+        if receipt.get("files") != expected_files:
+            raise invalid_cache("cached array contents changed")
         features = np.load(feature_path, mmap_mode="r")
         ids = np.load(id_path, mmap_mode="r")
-        if features.ndim != 2 or features.shape != (ids.size, len(feature_names)):
-            raise ValueError(f"Cached {split} arrays do not match {csv_path.name}.")
+        if (ids.ndim != 1 or ids.dtype != np.dtype("int64")
+                or features.dtype != np.dtype("float32")
+                or features.shape != (ids.size, len(feature_names))
+                or receipt.get("shape") != list(features.shape)):
+            raise invalid_cache("cached array schema differs from the receipt")
         return feature_path, id_path, feature_names
 
     cache_dir.mkdir(parents=True, exist_ok=True)
     ids, features, parsed_names = _read_feature_csv(csv_path)
+    if parsed_names != feature_names or _file_sha256(csv_path) != source_sha256:
+        raise ValueError(f"{csv_path.name} changed while preparing its cache; retry with stable input files.")
     np.save(feature_path, features)
     np.save(id_path, ids)
+    _write_cache_receipt(receipt_path, {
+        "schema_version": 1,
+        "csv_sha256": source_sha256,
+        "feature_names": parsed_names,
+        "shape": list(features.shape),
+        "files": {
+            feature_path.name: _file_sha256(feature_path),
+            id_path.name: _file_sha256(id_path),
+        },
+    })
     return feature_path, id_path, parsed_names
 
 

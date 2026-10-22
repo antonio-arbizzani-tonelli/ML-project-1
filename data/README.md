@@ -18,7 +18,13 @@ python -m tools.prepare_data
 ```
 
 The utility validates schemas and ID alignment, then stores arrays under
-`data/processed/`. `run.py` uses the same loaders for full training.
+`data/processed/`. `run.py` uses the same loaders for full training. Each feature
+split has an `x_train_cache.json` or `x_test_cache.json` receipt recording the
+source CSV SHA-256, feature order, dimensions and hashes of the feature/ID arrays.
 
-When changing feature CSV values, use a new `--cache-dir`, including when
-IDs and shape stay the same. Raw data and caches are local files ignored by Git.
+Reusing a cache checks those hashes, including when IDs and shape stay the same.
+Changed CSVs, modified arrays, partial caches and older caches without receipts
+are rejected with instructions to choose a new `--cache-dir`; no existing data
+is deleted or silently replaced. New cache directories must contain neither
+feature arrays nor receipts from an earlier run. Raw data, caches and receipts
+are local files ignored by Git at the default locations.

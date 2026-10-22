@@ -101,6 +101,10 @@ pipeline integrity receipt and repository verifier. Linear/MLP
 studies can be rerun after interruption; completed tree fits are shared across
 identical controls and the ensemble.
 
+The shared feature loader also requires per-split CSV/array receipts. Output
+directories prepared before that safeguard must be replaced by a new
+`--output-dir`; existing unreceipted caches are not silently adopted or deleted.
+
 Each new record identifies its scope and original comparison target. Full runs
 compare all available metrics with an absolute tolerance of1e-6, check calibration
 thresholds and the original CSV hash/count when available. This tolerance detects

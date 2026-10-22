@@ -1,8 +1,8 @@
 """Prepare official CSV caches for CV without training a model.
 
 Run from the repository root with python -m tools.prepare_data.
-Use a new cache directory when changing any feature CSV: existing feature
-caches are checked for dimensions and IDs, not for changes to every value.
+Existing feature caches require matching CSV/array SHA-256 receipts. Changed,
+partial or older unreceipted caches are rejected; choose a new --cache-dir.
 """
 
 from __future__ import annotations

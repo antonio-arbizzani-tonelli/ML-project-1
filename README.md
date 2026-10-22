@@ -46,8 +46,11 @@ The [submission record](results/eda/final_combined18_24_submission.json) retains
 calibration, input/source hashes and the selected CSV SHA-256. Replay during the
 release audit reproduced that CSV exactly; full training was not repeated.
 
-Caches are created under `data/processed/`. Use a new `--cache-dir` after changing
-feature values. Add `--checkpoint results/final_model.pkl` to save the fitted model.
+Caches are created under `data/processed/`, with per-split receipts tying the
+feature arrays to the CSV SHA-256, feature order and array hashes. Changed inputs,
+modified arrays, incomplete caches and older caches without receipts are rejected.
+Use a new `--cache-dir` to rebuild them; existing files are never deleted automatically.
+Add `--checkpoint results/final_model.pkl` to save the fitted model.
 CSV output uses the course helper in `helpers.py`, with explicit UTF-8 and LF.
 
 ## Report evidence and optional reproduction

@@ -22,3 +22,6 @@ that every referenced file or local checkpoint exists in this smaller checkout.
 The [configuration guide](../configs/README.md) distinguishes fresh execution
 from replay requiring original local artifacts. Numerical sources, selected
 configuration and report PDF/LaTeX remain byte-identical to the archived release.
+The `run.py` cache loader was subsequently hardened with CSV/array receipts;
+its updated source hash is recorded separately in the current pipeline integrity
+receipt. This administrative change has not been used to rerun historical results.

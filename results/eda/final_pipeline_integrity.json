@@ -1,11 +1,20 @@
 {
   "schema_version": 1,
   "reference_commit": "d491f15211dd63d5a6888acae75e90a82b39ea4f",
-  "purpose": "Freeze the selected pipeline, report and compact outcomes while pruning unrelated development material. No training or numerical result changes.",
+  "purpose": "Protect the selected numerical pipeline, current loader, report and compact outcomes. Loader-only changes after the reference release are identified separately; no training or numerical result changes.",
   "byte_policy": "Preserve numerical sources and frozen CRLF recipes exactly. For Git-normalized text only, CRLF is normalized to LF before SHA-256.",
+  "post_reference_changes": [
+    {
+      "path": "run.py",
+      "previous_sha256": "791336cb9b57166d339ba5029d771fc73baddffa643bb292e9dc1f93fa36da52",
+      "date": "2026-10-22",
+      "scope": "Bind feature caches to CSV/array SHA-256 receipts; reject missing, partial or obsolete caches without deleting them.",
+      "validation": "Static review only; no project commands, tests, training or experiments were run for this change. Earlier execution evidence applies to the earlier loader."
+    }
+  ],
   "files": {
     "run.py": {
-      "sha256": "791336cb9b57166d339ba5029d771fc73baddffa643bb292e9dc1f93fa36da52",
+      "sha256": "45a8e34968f27d115f4eac722249075057d8f1a5f59859b12ca561b889d02b6f",
       "newline_policy": "lf"
     },
     "helpers.py": {

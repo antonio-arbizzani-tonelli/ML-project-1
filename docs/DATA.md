@@ -44,11 +44,22 @@ are in the [supporting report](FINAL_REPORT.md).
 representation. The [archive](ARCHIVE.md) preserves detailed per-column audits
 and rejected intermediate representations.
 
-For a fresh statistical analysis with official data and the canonical metadata:
+To regenerate the report's descriptive counts from official CSVs, the current
+report runner provides a separate data-only command (no model fitting):
 
 ```bash
-python -m src.analyze_dataset data/raw/dataset configs/feature_metadata.json results/reproduction/dataset_analysis --cache-dir data/processed
+python -m tools.reproduce_report data --output-dir results/reproduction/dataset_counts
 ```
 
-This regenerates detailed outputs locally; the compact published summary remains
-a copy of the original measured aggregate fields.
+It writes `full/data_claims.json` and prepared caches below the chosen output
+directory; see the [reproduction guide](REPRODUCIBILITY.md). This covers the
+reported counts rather than regenerating every historical EDA table and figure.
+The compact published summary remains a copy of the original measured fields.
+
+The detailed `src.analyze_dataset` workflow is retained for historical analysis.
+It requires a dataset audit and a feature registry in their original schemas,
+in addition to the official CSVs, an output directory and a cache directory.
+The compact metadata and published summaries are not substitutes for those
+inputs. Recover the complete prerequisite artifacts and their generation tools
+from the [development archive](ARCHIVE.md) before using that legacy workflow;
+it is not a standalone fresh-checkout command in the current package.
