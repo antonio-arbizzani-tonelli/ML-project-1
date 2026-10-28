@@ -24,6 +24,20 @@
       "date": "2026-10-22",
       "scope": "Regenerated the two-page PDF from the clarified LaTeX source; scientific results unchanged.",
       "validation": "Successful local LaTeX compilation; two pages confirmed by PDF reading and both pages visually inspected. No local project tests, training or experiments were run."
+    },
+    {
+      "path": "docs/FINAL_REPORT.tex",
+      "previous_sha256": "8e6b532f84835f4222ea7df3732cbf2462a12b403b5b2ece566a573ac7ffd3a1",
+      "date": "2026-10-28",
+      "scope": "Add team Rockets and the three authors' SCIPER identifiers to the report header.",
+      "validation": "Successful two-pass LaTeX compilation; two-page PDF, author/team text and unchanged scientific text verified; both pages visually inspected and repository integrity verified. No training or scientific experiments rerun."
+    },
+    {
+      "path": "docs/FINAL_REPORT.pdf",
+      "previous_sha256": "4583b9b6083dd8ff82aad3daffb5dd4976ed899b6d53b5ef07231409751e9b90",
+      "date": "2026-10-28",
+      "scope": "Regenerate the two-page PDF with team Rockets and the three authors' SCIPER identifiers.",
+      "validation": "Successful two-pass LaTeX compilation; two-page PDF, author/team text and unchanged scientific text verified; both pages visually inspected and repository integrity verified. No training or scientific experiments rerun."
     }
   ],
   "files": {
@@ -72,11 +86,11 @@
       "newline_policy": "preserve"
     },
     "docs/FINAL_REPORT.pdf": {
-      "sha256": "4583b9b6083dd8ff82aad3daffb5dd4976ed899b6d53b5ef07231409751e9b90",
+      "sha256": "e59dad6dce86002509f8abe3cbffb808bd76f58c9dd4ee8e6ab25d40e36e086c",
       "newline_policy": "preserve"
     },
     "docs/FINAL_REPORT.tex": {
-      "sha256": "8e6b532f84835f4222ea7df3732cbf2462a12b403b5b2ece566a573ac7ffd3a1",
+      "sha256": "d3a6feaacb123ef9cff23b110d98979985c39defb3ec50b9528114b3e8778515",
       "newline_policy": "lf"
     },
     "results/eda/final_combined18_24_submission.json": {

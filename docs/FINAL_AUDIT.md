@@ -6,6 +6,17 @@ sources and configuration/metadata are unchanged. The report has the editorial
 clarifications described below; its scientific results are unchanged. The 114
 historical execution records retain their original bytes and indexed hashes.
 
+## Team identification on 28 October 2026
+
+The report header and supporting notes now identify team **Rockets** and list
+Antonio Arbizzani Tonelli (SCIPER 437237), Alessia Meroni (SCIPER 434137) and
+Luca Sabatini (SCIPER 437387).
+
+The LaTeX source was compiled twice. The resulting PDF has two pages, both
+visually inspected; its text after the header matches the preceding PDF.
+The report fingerprints were updated and the repository integrity check passed.
+This change did not rerun training or scientific experiments.
+
 ## Report detail clarification on 22 October 2026
 
 The two-page report now specifies the MLP preprocessing, architecture, optimizer,

@@ -1,5 +1,10 @@
 # Classifying reported cardiovascular disease: supporting evidence
 
+**Team: Rockets**
+
+Antonio Arbizzani Tonelli (SCIPER 437237), Alessia Meroni (SCIPER 434137),
+Luca Sabatini (SCIPER 437387).
+
 The submission report is [FINAL_REPORT.pdf](FINAL_REPORT.pdf), with editable
 [LaTeX source](FINAL_REPORT.tex). These supporting notes retain the protocols,
 experimental comparisons and provenance behind the two-page report.
